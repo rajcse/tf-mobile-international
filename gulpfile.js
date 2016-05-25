@@ -72,7 +72,7 @@ for (var i = 0; i < vendorLibs.length; i++) {
 		b.external(vendorLibs[i].expose);
 	}
 }
-	
+
 b = watchify(b, {ignoreWatch: true});
 
 b.on('update', bundle);
@@ -86,6 +86,22 @@ function bundle(){
 			.pipe(gulp.dest(buildDir))
 			.pipe(notify(function(file){return 'App JS Updated'}));
 }
+
+gulp.task('vendor-dev', function(){
+	var b = browserify({
+			transform: [
+				'browserify-shim'
+			]
+		});
+
+	b.require(vendorLibs);
+
+	return b.bundle().on('error', handleError)
+		.pipe(source('js/vendor.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest(buildDir))
+		.pipe(notify(function(file){return 'Dev Vendor JS Compiled'}));
+});
 
 gulp.task('vendor', function(){
 	var b = browserify({
@@ -113,4 +129,3 @@ gulp.task('default', function(){
 
 	console.log('\033[36m Watching Assets\033[39m');
 });
-
