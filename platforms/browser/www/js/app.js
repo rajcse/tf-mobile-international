@@ -1,10 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);exports["default"]={search:function(e){_dispatcher2["default"].dispatch({actionType:"SEARCH",criteria:e})},updateSearchCriteria:function(e){_dispatcher2["default"].dispatch({actionType:"UPDATE_CRITERIA",updates:e})}};
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);exports["default"]={search:function(e){_dispatcher2["default"].dispatch({actionType:"SEARCH",criteria:e})},updateSearchCriteria:function(e){_dispatcher2["default"].dispatch({actionType:"UPDATE_CRITERIA",updates:e})},login:function(e){_dispatcher2["default"].dispatch({actionType:"LOGIN",criteria:e})}};
 
 },{"../dispatcher":14}],2:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,r,a){return r&&e(t.prototype,r),a&&e(t,a),t}}(),_config=require("./config"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactDom=require("react-dom"),_reactDom2=_interopRequireDefault(_reactDom),_reactRouter=require("react-router"),_tfActions=require("./actions/tfActions"),_tfActions2=_interopRequireDefault(_tfActions),_Header=require("./components/Header"),_Header2=_interopRequireDefault(_Header),_Navigation=require("./components/Navigation"),_Navigation2=_interopRequireDefault(_Navigation),_Login=require("./components/Login"),_Login2=_interopRequireDefault(_Login),_Dashboard=require("./components/Dashboard"),_Dashboard2=_interopRequireDefault(_Dashboard),_Search=require("./components/Search"),_Search2=_interopRequireDefault(_Search),_Support=require("./components/Support"),_Support2=_interopRequireDefault(_Support),_Account=require("./components/Account"),_Account2=_interopRequireDefault(_Account),_resultsStore=require("./stores/resultsStore"),_resultsStore2=_interopRequireDefault(_resultsStore),styles={app:{padding:"60px 10px"}},TfApp=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.state={search:{results:null,loaded:!1,searching:!1,criteria:{firstName:"",lastName:"",state:"ALL"}},user:null},r.onResultsChange=function(){r.setState({search:{results:_resultsStore2["default"].getAllResults(),loaded:_resultsStore2["default"].isLoaded(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()}})},r}return _inherits(t,e),_createClass(t,[{key:"componentDidMount",value:function(){_resultsStore2["default"].addChangeListener(this.onResultsChange)}},{key:"componentWillUnmount",value:function(){_resultsStore2["default"].removeChangeListener(this.onResultsChange)}},{key:"render",value:function(){return!this.state.user&&this.state.user?_react2["default"].createElement(_Login2["default"],null):_react2["default"].createElement("div",{style:styles.app},_react2["default"].createElement(_Header2["default"],null),_react2["default"].cloneElement(this.props.children,{appState:this.state}),_react2["default"].createElement(_Navigation2["default"],null))}}]),t}(_react.Component);window.initializeApp=function(){_reactDom2["default"].render(_react2["default"].createElement(_reactRouter.Router,{history:_reactRouter.hashHistory},_react2["default"].createElement(_reactRouter.Route,{path:"/",component:TfApp},_react2["default"].createElement(_reactRouter.IndexRoute,{component:_Dashboard2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/search",component:_Search2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/support",component:_Support2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/account",component:_Account2["default"]})),_react2["default"].createElement(_reactRouter.Route,{path:"/login",component:_Login2["default"]})),document.querySelector("#app"))};
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("./config"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactDom=require("react-dom"),_reactDom2=_interopRequireDefault(_reactDom),_reactRouter=require("react-router"),_tfActions=require("./actions/tfActions"),_tfActions2=_interopRequireDefault(_tfActions),_Header=require("./components/Header"),_Header2=_interopRequireDefault(_Header),_Navigation=require("./components/Navigation"),_Navigation2=_interopRequireDefault(_Navigation),_Login=require("./components/Login"),_Login2=_interopRequireDefault(_Login),_Dashboard=require("./components/Dashboard"),_Dashboard2=_interopRequireDefault(_Dashboard),_Search=require("./components/Search"),_Search2=_interopRequireDefault(_Search),_Support=require("./components/Support"),_Support2=_interopRequireDefault(_Support),_Account=require("./components/Account"),_Account2=_interopRequireDefault(_Account),_resultsStore=require("./stores/resultsStore"),_resultsStore2=_interopRequireDefault(_resultsStore),styles={app:{padding:"60px 10px"}},TfApp=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.state={search:{results:null,loaded:!1,searching:!1,criteria:{firstName:"",lastName:"",state:"ALL"}},user:null},r.onResultsChange=function(){r.setState({search:{results:_resultsStore2["default"].getAllResults(),loaded:_resultsStore2["default"].isLoaded(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()}})},r}return _inherits(t,e),_createClass(t,[{key:"componentDidMount",value:function(){_resultsStore2["default"].addChangeListener(this.onResultsChange)}},{key:"componentWillUnmount",value:function(){_resultsStore2["default"].removeChangeListener(this.onResultsChange)}},{key:"render",value:function(){return console.log(localStorage.getItem("jwt")),localStorage.getItem("jwt")?_react2["default"].createElement("div",{style:styles.app},_react2["default"].createElement(_Header2["default"],null),_react2["default"].cloneElement(this.props.children,{appState:this.state}),_react2["default"].createElement(_Navigation2["default"],null)):_react2["default"].createElement(_Login2["default"],null)}}]),t}(_react.Component);window.initializeApp=function(){_reactDom2["default"].render(_react2["default"].createElement(_reactRouter.Router,{history:_reactRouter.hashHistory},_react2["default"].createElement(_reactRouter.Route,{path:"/",component:TfApp},_react2["default"].createElement(_reactRouter.IndexRoute,{component:_Dashboard2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/search",component:_Search2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/support",component:_Support2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/account",component:_Account2["default"]})),_react2["default"].createElement(_reactRouter.Route,{path:"/login",component:_Login2["default"]})),document.querySelector("#app"))};
 
-},{"./actions/tfActions":1,"./components/Account":3,"./components/Dashboard":4,"./components/Header":5,"./components/Login":6,"./components/Navigation":7,"./components/Search":10,"./components/Support":12,"./config":13,"./stores/resultsStore":15,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":70}],3:[function(require,module,exports){
+},{"./actions/tfActions":1,"./components/Account":3,"./components/Dashboard":4,"./components/Header":5,"./components/Login":6,"./components/Navigation":7,"./components/Search":10,"./components/Support":12,"./config":13,"./stores/resultsStore":16,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":71}],3:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("div",null,"ACCOUNT PAGE!!!")}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
 },{"../config.js":13,"lodash":"lodash","react":"react"}],4:[function(require,module,exports){
@@ -14,12 +14,12 @@
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),Header=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("header",{style:styles.header},_react2["default"].createElement("img",{style:styles.logo,src:"/img/tf-logo-white.png"}))}}]),t}(_react.Component);exports["default"]=Header;var styles={header:{backgroundColor:_config2["default"].themeStyles.brandGreen,padding:"10px 0",height:20,position:"fixed",top:0,left:0,width:"100%",zIndex:99999},logo:{display:"block",margin:"0 auto",width:140}};
 
 },{"../config.js":13,"react":"react"}],6:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_Navigation=require("./Navigation"),_Navigation2=_interopRequireDefault(_Navigation),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("div",null,"LOGIN PAGE!!!")}}]),t}(_react.Component);exports["default"]=Support;var styles={};
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_tfActions=require("../actions/tfActions"),_tfActions2=_interopRequireDefault(_tfActions),_loginStore=require("../stores/loginStore.js"),_loginStore2=_interopRequireDefault(_loginStore),Login=function(e){function t(e){_classCallCheck(this,t);var n=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return n.state={email:"",password:""},n.doLogin=n.doLogin.bind(n),n}return _inherits(t,e),_createClass(t,[{key:"doLogin",value:function(){_tfActions2["default"].login({email:this.state.email,password:this.state.password})}},{key:"handleChange",value:function(e,t){var n={};n[e]=t.target.value,this.setState(n)}},{key:"render",value:function(){return _react2["default"].createElement("div",null,_react2["default"].createElement("input",{type:"text",placeholder:"Email Address",defaultValue:this.state.email,style:styles.textInput,name:"email",onChange:this.handleChange.bind(this,"email")}),_react2["default"].createElement("input",{type:"text",placeholder:"Password",defaultValue:this.state.password,style:styles.textInput,name:"password",onChange:this.handleChange.bind(this,"password")}),_react2["default"].createElement("button",{style:styles.button,onClick:this.doLogin},"Login"))}}]),t}(_react.Component);exports["default"]=Login;var styles={};
 
-},{"../config.js":13,"./Navigation":7,"lodash":"lodash","react":"react"}],7:[function(require,module,exports){
+},{"../actions/tfActions":1,"../config.js":13,"../stores/loginStore.js":15,"lodash":"lodash","react":"react"}],7:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,r,a){return r&&e(t.prototype,r),a&&e(t,a),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),Navigation=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("nav",{style:styles.navigation},_react2["default"].createElement("ul",{style:styles.navBar},_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.IndexLink,{to:"/",activeStyle:styles.active},"H")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/search",activeStyle:styles.active},"S")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/support",activeStyle:styles.active},"C")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/account",activeStyle:styles.active},"A"))))}}]),t}(_react.Component);exports["default"]=Navigation;var styles={navigation:{backgroundColor:_config2["default"].themeStyles.brandWhite,padding:"15px 0",position:"fixed",bottom:0,left:0,width:"100%",height:50,boxSizing:"border-box",borderTop:"1px solid "+_config2["default"].themeStyles.brandGray,zIndex:99999},navBar:{listStyle:"none",margin:0,padding:0},navItem:{display:"block","float":"left",width:"25%",boxSizing:"border-box",padding:"0 10px",textAlign:"center"},active:{backgroundColor:_config2["default"].themeStyles.brandSlate}};
 
-},{"../config.js":13,"react":"react","react-router":70}],8:[function(require,module,exports){
+},{"../config.js":13,"react":"react","react-router":71}],8:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),PersonRow=function(e){var r=e.locations?e.locations[0].address.display:"";return _react2["default"].createElement("li",null,e.names[0].first," ",e.names[0].last," - ",r)};exports["default"]=PersonRow;var styles={};
 
 },{"../config.js":13,"react":"react"}],9:[function(require,module,exports){
@@ -41,9 +41,12 @@
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _flux=require("flux");exports["default"]=new _flux.Dispatcher;
 
 },{"flux":"flux"}],15:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function serialize(e,t){var n=[];for(var r in e)if(e.hasOwnProperty(r)){var o=t?t+"["+r+"]":r,i=e[r];n.push("object"==("undefined"==typeof i?"undefined":_typeof(i))?serialize(i,o):encodeURIComponent(o)+"="+encodeURIComponent(i))}return n.join("&")}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),_reactRouter=require("react-router");require("isomorphic-fetch"),require("es6-promise").polyfill();var CHANGE_EVENT="change",_jwt=[],_loaded=!1,_searching=!1,_criteria={},LoginStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getJWT",value:function(){return _jwt}},{key:"isLoaded",value:function(){return _loaded}},{key:"isSearching",value:function(){return _searching}},{key:"getCriteria",value:function(){return _criteria}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}},{key:"fetchData",value:function(){var e=this;console.log("asd"),fetch(_config2["default"].API_ROOT+"/login/?"+serialize(_criteria)).then(function(e){return e}).then(function(t){_jwt=t,_searching=!1,_loaded=!0,localStorage.setItem("jwt",t),console.log(t.json()),e.emitChange(),document.location.href="/"})["catch"](function(e){console.warn(e)})}}]),t}(_events.EventEmitter),loginStore=new LoginStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case"LOGIN":_criteria=e.criteria,_loaded=!1,_searching=!0,loginStore.emitChange(),loginStore.fetchData()}}),exports["default"]=loginStore;
+
+},{"../config.js":13,"../dispatcher":14,"es6-promise":20,"events":"events","isomorphic-fetch":39,"lodash":"lodash","react-router":71}],16:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function serialize(e,t){var r=[];for(var n in e)if(e.hasOwnProperty(n)){var o=t?t+"["+n+"]":n,i=e[n];r.push("object"==("undefined"==typeof i?"undefined":_typeof(i))?serialize(i,o):encodeURIComponent(o)+"="+encodeURIComponent(i))}return r.join("&")}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);require("isomorphic-fetch"),require("es6-promise").polyfill();var CHANGE_EVENT="change",_results=[],_loaded=!1,_searching=!1,_criteria={},ResultsStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getAllResults",value:function(){return _results}},{key:"isLoaded",value:function(){return _loaded}},{key:"isSearching",value:function(){return _searching}},{key:"getCriteria",value:function(){return _criteria}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}},{key:"fetchData",value:function(){var e=this;fetch(_config2["default"].API_ROOT+"/people/?"+serialize(_criteria)).then(function(e){return e.json()}).then(function(t){_results=t.people,_searching=!1,_loaded=!0,e.emitChange()})}}]),t}(_events.EventEmitter),resultsStore=new ResultsStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case"SEARCH":_criteria=e.criteria,_loaded=!1,_searching=!0,resultsStore.emitChange(),resultsStore.fetchData();break;case"UPDATE_CRITERIA":_criteria[e.updates.field]=e.updates.value,resultsStore.emitChange()}}),exports["default"]=resultsStore;
 
-},{"../config.js":13,"../dispatcher":14,"es6-promise":19,"events":"events","isomorphic-fetch":38,"lodash":"lodash"}],16:[function(require,module,exports){
+},{"../config.js":13,"../dispatcher":14,"es6-promise":20,"events":"events","isomorphic-fetch":39,"lodash":"lodash"}],17:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -139,7 +142,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":17,"./lib/keys.js":18}],17:[function(require,module,exports){
+},{"./lib/is_arguments.js":18,"./lib/keys.js":19}],18:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -161,7 +164,7 @@ function unsupported(object){
     false;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -172,7 +175,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -1136,7 +1139,7 @@ function shim (obj) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":39}],20:[function(require,module,exports){
+},{"_process":40}],21:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1168,7 +1171,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1227,7 +1230,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -1304,7 +1307,7 @@ function readState(key) {
 }
 }).call(this,require('_process'))
 
-},{"_process":39,"warning":79}],23:[function(require,module,exports){
+},{"_process":40,"warning":80}],24:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1380,13 +1383,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1437,7 +1440,7 @@ function parsePath(path) {
 }
 }).call(this,require('_process'))
 
-},{"_process":39,"warning":79}],26:[function(require,module,exports){
+},{"_process":40,"warning":80}],27:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1617,7 +1620,7 @@ exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":20,"./DOMStateStorage":22,"./DOMUtils":23,"./ExecutionEnvironment":24,"./PathUtils":25,"./createDOMHistory":27,"_process":39,"invariant":37}],27:[function(require,module,exports){
+},{"./Actions":21,"./DOMStateStorage":23,"./DOMUtils":24,"./ExecutionEnvironment":25,"./PathUtils":26,"./createDOMHistory":28,"_process":40,"invariant":38}],28:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1661,7 +1664,7 @@ exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./DOMUtils":23,"./ExecutionEnvironment":24,"./createHistory":29,"_process":39,"invariant":37}],28:[function(require,module,exports){
+},{"./DOMUtils":24,"./ExecutionEnvironment":25,"./createHistory":30,"_process":40,"invariant":38}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1911,7 +1914,7 @@ exports['default'] = createHashHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":20,"./DOMStateStorage":22,"./DOMUtils":23,"./ExecutionEnvironment":24,"./PathUtils":25,"./createDOMHistory":27,"_process":39,"invariant":37,"warning":79}],29:[function(require,module,exports){
+},{"./Actions":21,"./DOMStateStorage":23,"./DOMUtils":24,"./ExecutionEnvironment":25,"./PathUtils":26,"./createDOMHistory":28,"_process":40,"invariant":38,"warning":80}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2203,7 +2206,7 @@ exports['default'] = createHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":20,"./AsyncUtils":21,"./PathUtils":25,"./createLocation":30,"./deprecate":32,"./runTransitionHook":33,"_process":39,"deep-equal":16,"warning":79}],30:[function(require,module,exports){
+},{"./Actions":21,"./AsyncUtils":22,"./PathUtils":26,"./createLocation":31,"./deprecate":33,"./runTransitionHook":34,"_process":40,"deep-equal":17,"warning":80}],31:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2258,7 +2261,7 @@ exports['default'] = createLocation;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":20,"./PathUtils":25,"_process":39,"warning":79}],31:[function(require,module,exports){
+},{"./Actions":21,"./PathUtils":26,"_process":40,"warning":80}],32:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2416,7 +2419,7 @@ exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":20,"./PathUtils":25,"./createHistory":29,"_process":39,"invariant":37,"warning":79}],32:[function(require,module,exports){
+},{"./Actions":21,"./PathUtils":26,"./createHistory":30,"_process":40,"invariant":38,"warning":80}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2439,7 +2442,7 @@ exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":39,"warning":79}],33:[function(require,module,exports){
+},{"_process":40,"warning":80}],34:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2467,7 +2470,7 @@ exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":39,"warning":79}],34:[function(require,module,exports){
+},{"_process":40,"warning":80}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2629,7 +2632,7 @@ exports['default'] = useBasename;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./ExecutionEnvironment":24,"./PathUtils":25,"./deprecate":32,"./runTransitionHook":33,"_process":39,"warning":79}],35:[function(require,module,exports){
+},{"./ExecutionEnvironment":25,"./PathUtils":26,"./deprecate":33,"./runTransitionHook":34,"_process":40,"warning":80}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2809,7 +2812,7 @@ exports['default'] = useQueries;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PathUtils":25,"./deprecate":32,"./runTransitionHook":33,"_process":39,"query-string":40,"warning":79}],36:[function(require,module,exports){
+},{"./PathUtils":26,"./deprecate":33,"./runTransitionHook":34,"_process":40,"query-string":41,"warning":80}],37:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -2853,7 +2856,8 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
     return targetComponent;
 };
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
+(function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -2877,7 +2881,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
  */
 
 var invariant = function(condition, format, a, b, c, d, e, f) {
-  if ("development" !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
     }
@@ -2906,7 +2910,9 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],38:[function(require,module,exports){
+}).call(this,require('_process'))
+
+},{"_process":40}],39:[function(require,module,exports){
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
@@ -2914,7 +2920,7 @@ module.exports = invariant;
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":80}],39:[function(require,module,exports){
+},{"whatwg-fetch":81}],40:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -3010,7 +3016,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 
@@ -3078,7 +3084,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":78}],41:[function(require,module,exports){
+},{"strict-uri-encode":79}],42:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3167,7 +3173,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3200,7 +3206,7 @@ exports.default = History;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./routerWarning":74,"_process":39}],43:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./routerWarning":75,"_process":40}],44:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3229,7 +3235,7 @@ var IndexLink = _react2.default.createClass({
 
 exports.default = IndexLink;
 module.exports = exports['default'];
-},{"./Link":48,"react":"react"}],44:[function(require,module,exports){
+},{"./Link":49,"react":"react"}],45:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3296,7 +3302,7 @@ exports.default = IndexRedirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./Redirect":51,"./routerWarning":74,"_process":39,"invariant":37,"react":"react"}],45:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./Redirect":52,"./routerWarning":75,"_process":40,"invariant":38,"react":"react"}],46:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3360,7 +3366,7 @@ exports.default = IndexRoute;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./RouteUtils":54,"./routerWarning":74,"_process":39,"invariant":37,"react":"react"}],46:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./RouteUtils":55,"./routerWarning":75,"_process":40,"invariant":38,"react":"react"}],47:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3393,7 +3399,7 @@ var component = exports.component = oneOfType([func, string]);
 var components = exports.components = oneOfType([component, object]);
 var route = exports.route = oneOfType([object, element]);
 var routes = exports.routes = oneOfType([route, arrayOf(route)]);
-},{"react":"react"}],47:[function(require,module,exports){
+},{"react":"react"}],48:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3465,7 +3471,7 @@ exports.default = Lifecycle;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":74,"_process":39,"invariant":37,"react":"react"}],48:[function(require,module,exports){
+},{"./routerWarning":75,"_process":40,"invariant":38,"react":"react"}],49:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3642,7 +3648,7 @@ exports.default = Link;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PropTypes":50,"./routerWarning":74,"_process":39,"react":"react"}],49:[function(require,module,exports){
+},{"./PropTypes":51,"./routerWarning":75,"_process":40,"react":"react"}],50:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3858,7 +3864,7 @@ function formatPattern(pattern, params) {
 }
 }).call(this,require('_process'))
 
-},{"_process":39,"invariant":37}],50:[function(require,module,exports){
+},{"_process":40,"invariant":38}],51:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3963,7 +3969,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = defaultExport;
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./deprecateObjectProperties":66,"./routerWarning":74,"_process":39,"react":"react"}],51:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./deprecateObjectProperties":67,"./routerWarning":75,"_process":40,"react":"react"}],52:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4069,7 +4075,7 @@ exports.default = Redirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./PatternUtils":49,"./RouteUtils":54,"_process":39,"invariant":37,"react":"react"}],52:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./PatternUtils":50,"./RouteUtils":55,"_process":40,"invariant":38,"react":"react"}],53:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4130,7 +4136,7 @@ exports.default = Route;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./RouteUtils":54,"_process":39,"invariant":37,"react":"react"}],53:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./RouteUtils":55,"_process":40,"invariant":38,"react":"react"}],54:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4179,7 +4185,7 @@ exports.default = RouteContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":74,"_process":39,"react":"react"}],54:[function(require,module,exports){
+},{"./routerWarning":75,"_process":40,"react":"react"}],55:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4295,7 +4301,7 @@ function createRoutes(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./routerWarning":74,"_process":39,"react":"react"}],55:[function(require,module,exports){
+},{"./routerWarning":75,"_process":40,"react":"react"}],56:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4507,7 +4513,7 @@ exports.default = Router;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":46,"./RouteUtils":54,"./RouterContext":56,"./RouterUtils":57,"./createTransitionManager":65,"./routerWarning":74,"_process":39,"history/lib/createHashHistory":28,"history/lib/useQueries":35,"react":"react"}],56:[function(require,module,exports){
+},{"./InternalPropTypes":47,"./RouteUtils":55,"./RouterContext":57,"./RouterUtils":58,"./createTransitionManager":66,"./routerWarning":75,"_process":40,"history/lib/createHashHistory":29,"history/lib/useQueries":36,"react":"react"}],57:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4667,7 +4673,7 @@ exports.default = RouterContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":54,"./deprecateObjectProperties":66,"./getRouteParams":68,"./routerWarning":74,"_process":39,"invariant":37,"react":"react"}],57:[function(require,module,exports){
+},{"./RouteUtils":55,"./deprecateObjectProperties":67,"./getRouteParams":69,"./routerWarning":75,"_process":40,"invariant":38,"react":"react"}],58:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4703,7 +4709,7 @@ function createRoutingHistory(history, transitionManager) {
 }
 }).call(this,require('_process'))
 
-},{"./deprecateObjectProperties":66,"_process":39}],58:[function(require,module,exports){
+},{"./deprecateObjectProperties":67,"_process":40}],59:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4737,7 +4743,7 @@ exports.default = RoutingContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouterContext":56,"./routerWarning":74,"_process":39,"react":"react"}],59:[function(require,module,exports){
+},{"./RouterContext":57,"./routerWarning":75,"_process":40,"react":"react"}],60:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4863,7 +4869,7 @@ function runLeaveHooks(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":41,"./routerWarning":74,"_process":39}],60:[function(require,module,exports){
+},{"./AsyncUtils":42,"./routerWarning":75,"_process":40}],61:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4914,7 +4920,7 @@ exports.default = function () {
 };
 
 module.exports = exports['default'];
-},{"./RouterContext":56,"react":"react"}],61:[function(require,module,exports){
+},{"./RouterContext":57,"react":"react"}],62:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4931,7 +4937,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createBrowserHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":64,"history/lib/createBrowserHistory":26}],62:[function(require,module,exports){
+},{"./createRouterHistory":65,"history/lib/createBrowserHistory":27}],63:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5009,7 +5015,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports.default = computeChangedRoutes;
 module.exports = exports['default'];
-},{"./PatternUtils":49}],63:[function(require,module,exports){
+},{"./PatternUtils":50}],64:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5042,7 +5048,7 @@ function createMemoryHistory(options) {
   return history;
 }
 module.exports = exports['default'];
-},{"history/lib/createMemoryHistory":31,"history/lib/useBasename":34,"history/lib/useQueries":35}],64:[function(require,module,exports){
+},{"history/lib/createMemoryHistory":32,"history/lib/useBasename":35,"history/lib/useQueries":36}],65:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5062,7 +5068,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 module.exports = exports['default'];
-},{"./useRouterHistory":75}],65:[function(require,module,exports){
+},{"./useRouterHistory":76}],66:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5373,7 +5379,7 @@ function createTransitionManager(history, routes) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./TransitionUtils":59,"./computeChangedRoutes":62,"./getComponents":67,"./isActive":71,"./matchRoutes":73,"./routerWarning":74,"_process":39,"history/lib/Actions":20}],66:[function(require,module,exports){
+},{"./TransitionUtils":60,"./computeChangedRoutes":63,"./getComponents":68,"./isActive":72,"./matchRoutes":74,"./routerWarning":75,"_process":40,"history/lib/Actions":21}],67:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5452,7 +5458,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = deprecateObjectProperties;
 }).call(this,require('_process'))
 
-},{"./routerWarning":74,"_process":39}],67:[function(require,module,exports){
+},{"./routerWarning":75,"_process":40}],68:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5535,7 +5541,7 @@ exports.default = getComponents;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":41,"./deprecateObjectProperties":66,"./routerWarning":74,"_process":39}],68:[function(require,module,exports){
+},{"./AsyncUtils":42,"./deprecateObjectProperties":67,"./routerWarning":75,"_process":40}],69:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5564,7 +5570,7 @@ function getRouteParams(route, params) {
 
 exports.default = getRouteParams;
 module.exports = exports['default'];
-},{"./PatternUtils":49}],69:[function(require,module,exports){
+},{"./PatternUtils":50}],70:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5581,7 +5587,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":64,"history/lib/createHashHistory":28}],70:[function(require,module,exports){
+},{"./createRouterHistory":65,"history/lib/createHashHistory":29}],71:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5738,7 +5744,7 @@ exports.applyRouterMiddleware = _applyRouterMiddleware3.default;
 exports.browserHistory = _browserHistory3.default;
 exports.hashHistory = _hashHistory3.default;
 exports.createMemoryHistory = _createMemoryHistory3.default;
-},{"./History":42,"./IndexLink":43,"./IndexRedirect":44,"./IndexRoute":45,"./Lifecycle":47,"./Link":48,"./PatternUtils":49,"./PropTypes":50,"./Redirect":51,"./Route":52,"./RouteContext":53,"./RouteUtils":54,"./Router":55,"./RouterContext":56,"./RoutingContext":58,"./applyRouterMiddleware":60,"./browserHistory":61,"./createMemoryHistory":63,"./hashHistory":69,"./match":72,"./useRouterHistory":75,"./useRoutes":76,"./withRouter":77}],71:[function(require,module,exports){
+},{"./History":43,"./IndexLink":44,"./IndexRedirect":45,"./IndexRoute":46,"./Lifecycle":48,"./Link":49,"./PatternUtils":50,"./PropTypes":51,"./Redirect":52,"./Route":53,"./RouteContext":54,"./RouteUtils":55,"./Router":56,"./RouterContext":57,"./RoutingContext":59,"./applyRouterMiddleware":61,"./browserHistory":62,"./createMemoryHistory":64,"./hashHistory":70,"./match":73,"./useRouterHistory":76,"./useRoutes":77,"./withRouter":78}],72:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5891,7 +5897,7 @@ function isActive(_ref, indexOnly, currentLocation, routes, params) {
   return queryIsActive(query, currentLocation.query);
 }
 module.exports = exports['default'];
-},{"./PatternUtils":49}],72:[function(require,module,exports){
+},{"./PatternUtils":50}],73:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5976,7 +5982,7 @@ exports.default = match;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":54,"./RouterUtils":57,"./createMemoryHistory":63,"./createTransitionManager":65,"_process":39,"invariant":37}],73:[function(require,module,exports){
+},{"./RouteUtils":55,"./RouterUtils":58,"./createMemoryHistory":64,"./createTransitionManager":66,"_process":40,"invariant":38}],74:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6213,7 +6219,7 @@ function matchRoutes(routes, location, callback, remainingPathname) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":41,"./PatternUtils":49,"./RouteUtils":54,"./routerWarning":74,"_process":39}],74:[function(require,module,exports){
+},{"./AsyncUtils":42,"./PatternUtils":50,"./RouteUtils":55,"./routerWarning":75,"_process":40}],75:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6250,7 +6256,7 @@ function routerWarning(falseToWarn, message) {
 function _resetWarned() {
   warned = {};
 }
-},{"warning":79}],75:[function(require,module,exports){
+},{"warning":80}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6274,7 +6280,7 @@ function useRouterHistory(createHistory) {
   };
 }
 module.exports = exports['default'];
-},{"history/lib/useBasename":34,"history/lib/useQueries":35}],76:[function(require,module,exports){
+},{"history/lib/useBasename":35,"history/lib/useQueries":36}],77:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6329,7 +6335,7 @@ exports.default = useRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./createTransitionManager":65,"./routerWarning":74,"_process":39,"history/lib/useQueries":35}],77:[function(require,module,exports){
+},{"./createTransitionManager":66,"./routerWarning":75,"_process":40,"history/lib/useQueries":36}],78:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6370,7 +6376,7 @@ function withRouter(WrappedComponent) {
   return (0, _hoistNonReactStatics2.default)(WithRouter, WrappedComponent);
 }
 module.exports = exports['default'];
-},{"./PropTypes":50,"hoist-non-react-statics":36,"react":"react"}],78:[function(require,module,exports){
+},{"./PropTypes":51,"hoist-non-react-statics":37,"react":"react"}],79:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -6378,7 +6384,8 @@ module.exports = function (str) {
 	});
 };
 
-},{}],79:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
+(function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6399,7 +6406,7 @@ module.exports = function (str) {
 
 var warning = function() {};
 
-if ("development" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   warning = function(condition, format, args) {
     var len = arguments.length;
     args = new Array(len > 2 ? len - 2 : 0);
@@ -6440,7 +6447,9 @@ if ("development" !== 'production') {
 
 module.exports = warning;
 
-},{}],80:[function(require,module,exports){
+}).call(this,require('_process'))
+
+},{"_process":40}],81:[function(require,module,exports){
 (function(self) {
   'use strict';
 
