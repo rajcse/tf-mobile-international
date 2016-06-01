@@ -73,9 +73,12 @@ for (var i = 0; i < vendorLibs.length; i++) {
 	}
 }
 
-b = watchify(b, {ignoreWatch: true});
+function bWatch() {
+	b = watchify(b, {ignoreWatch: true});
 
-b.on('update', bundle);
+	b.on('update', bundle);
+}
+
 
 function bundle(){
 	return b.bundle()
@@ -121,8 +124,12 @@ gulp.task('vendor', function(){
 		.pipe(notify(function(file){return 'Vendor JS Compiled'}));
 });
 
+gulp.task('build', ['styles'], bundle);
+gulp.task('build-css', ['styles']);
+gulp.task('build-js', bundle);
 
 gulp.task('default', function(){
+	bWatch();
 	bundle();
 	gulp.watch(sourceDir + 'less/*.less', ['styles']);
 	// gulp.watch(sourceDir + '**.html', ['html']);
