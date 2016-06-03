@@ -1,70 +1,73 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);exports["default"]={receiveSearchResults:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_SEARCH_RESULTS,results:e})},receiveRecordId:function(e,t){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_RECORD_ID,recordId:e,reportType:t})},receiveReport:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_REPORT,report:e})},receiveUser:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_USER,user:e})}};
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);exports["default"]={receiveSearchResults:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_SEARCH_RESULTS,results:e})},receiveRecordId:function(e,t){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_RECORD_ID,recordId:e,reportType:t})},receiveReport:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_REPORT,report:e})},receiveUser:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_USER,user:e})},receiveUsage:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.RECEIVE_USAGE,usage:e})}};
 
-},{"../config":16,"../constants/pubRecConstants":17,"../dispatcher":18}],2:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),_PubRecAPI=require("../utils/PubRecAPI"),_PubRecAPI2=_interopRequireDefault(_PubRecAPI);exports["default"]={search:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.SEARCH,criteria:e}),_PubRecAPI2["default"].search(e)},clearSearchResults:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_SEARCH_RESULTS})},updateSearchCriteria:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.UPDATE_CRITERIA,updates:e})},fetchRecordId:function(e,t){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_RECORD_ID,recordData:e,reportType:t}),_PubRecAPI2["default"].fetchRecordId(e,t)},clearNavigation:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_NAVIGATION})},fetchReport:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_REPORT,criteria:e}),_PubRecAPI2["default"].fetchReport(e)},checkLocalUser:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CHECK_LOCAL_USER}),_PubRecAPI2["default"].checkLocalUser()},login:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGIN,credentials:e}),_PubRecAPI2["default"].login(e)},logout:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGOUT}),_PubRecAPI2["default"].logout()}};
+},{"../config":17,"../constants/pubRecConstants":18,"../dispatcher":19}],2:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),_PubRecAPI=require("../utils/PubRecAPI"),_PubRecAPI2=_interopRequireDefault(_PubRecAPI);exports["default"]={search:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.SEARCH,criteria:e}),_PubRecAPI2["default"].search(e)},clearSearchResults:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_SEARCH_RESULTS})},updateSearchCriteria:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.UPDATE_CRITERIA,updates:e})},fetchRecordId:function(e,t){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_RECORD_ID,recordData:e,reportType:t}),_PubRecAPI2["default"].fetchRecordId(e,t)},clearNavigation:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_NAVIGATION})},fetchReport:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_REPORT,criteria:e}),_PubRecAPI2["default"].fetchReport(e)},checkLocalUser:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CHECK_LOCAL_USER}),_PubRecAPI2["default"].checkLocalUser()},login:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGIN,credentials:e}),_PubRecAPI2["default"].login(e)},logout:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGOUT}),_PubRecAPI2["default"].logout()},getUsage:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.GET_USAGE}),_PubRecAPI2["default"].getUsage(e)}};
 
-},{"../config":16,"../constants/pubRecConstants":17,"../dispatcher":18,"../utils/PubRecAPI":22}],3:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("./config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("./constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactDom=require("react-dom"),_reactDom2=_interopRequireDefault(_reactDom),_reactRouter=require("react-router"),_viewActions=require("./actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_Header=require("./components/Header"),_Header2=_interopRequireDefault(_Header),_Navigation=require("./components/Navigation"),_Navigation2=_interopRequireDefault(_Navigation),_Login=require("./components/Login"),_Login2=_interopRequireDefault(_Login),_Dashboard=require("./components/Dashboard"),_Dashboard2=_interopRequireDefault(_Dashboard),_Search=require("./components/Search"),_Search2=_interopRequireDefault(_Search),_Support=require("./components/Support"),_Support2=_interopRequireDefault(_Support),_Account=require("./components/Account"),_Account2=_interopRequireDefault(_Account),_Report=require("./components/Report"),_Report2=_interopRequireDefault(_Report),_resultsStore=require("./stores/resultsStore"),_resultsStore2=_interopRequireDefault(_resultsStore),_userStore=require("./stores/userStore"),_userStore2=_interopRequireDefault(_userStore),styles={app:{padding:"70px 10px 60px"}},TfApp=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return _viewActions2["default"].clearSearchResults(),_viewActions2["default"].checkLocalUser(),r.state={search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()},user:_userStore2["default"].getUser()},r.onResultsChange=r.onResultsChange.bind(r),r.onUserChange=r.onUserChange.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"onResultsChange",value:function(){this.setState({search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()}})}},{key:"onUserChange",value:function(){this.setState({user:_userStore2["default"].getUser()})}},{key:"componentWillMount",value:function(){_userStore2["default"].addChangeListener(this.onUserChange),_resultsStore2["default"].addChangeListener(this.onResultsChange)}},{key:"componentWillUnmount",value:function(){_userStore2["default"].removeChangeListener(this.onUserChange),_resultsStore2["default"].removeChangeListener(this.onResultsChange)}},{key:"render",value:function(){return _userStore2["default"].isLoggedIn()?_react2["default"].createElement("div",{style:styles.app},_react2["default"].createElement(_Header2["default"],null),_react2["default"].cloneElement(this.props.children,{appState:this.state}),_react2["default"].createElement(_Navigation2["default"],null)):_react2["default"].createElement(_Login2["default"],null)}}]),t}(_react.Component);window.initializeApp=function(){_reactDom2["default"].render(_react2["default"].createElement(_reactRouter.Router,{history:_reactRouter.hashHistory},_react2["default"].createElement(_reactRouter.Route,{path:"/",component:TfApp},_react2["default"].createElement(_reactRouter.IndexRoute,{component:_Dashboard2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/search",component:_Search2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/support",component:_Support2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/account",component:_Account2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/:reportType(/:recordId)",component:_Report2["default"]}))),document.querySelector("#app"))};
+},{"../config":17,"../constants/pubRecConstants":18,"../dispatcher":19,"../utils/PubRecAPI":23}],3:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("./config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("./constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactDom=require("react-dom"),_reactDom2=_interopRequireDefault(_reactDom),_reactRouter=require("react-router"),_viewActions=require("./actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_Header=require("./components/Header"),_Header2=_interopRequireDefault(_Header),_Navigation=require("./components/Navigation"),_Navigation2=_interopRequireDefault(_Navigation),_Login=require("./components/Login"),_Login2=_interopRequireDefault(_Login),_Dashboard=require("./components/Dashboard"),_Dashboard2=_interopRequireDefault(_Dashboard),_Search=require("./components/Search"),_Search2=_interopRequireDefault(_Search),_Support=require("./components/Support"),_Support2=_interopRequireDefault(_Support),_Account=require("./components/Account"),_Account2=_interopRequireDefault(_Account),_Report=require("./components/Report"),_Report2=_interopRequireDefault(_Report),_resultsStore=require("./stores/resultsStore"),_resultsStore2=_interopRequireDefault(_resultsStore),_userStore=require("./stores/userStore"),_userStore2=_interopRequireDefault(_userStore),styles={app:{padding:"70px 10px 60px"}},TfApp=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return _viewActions2["default"].clearSearchResults(),_viewActions2["default"].checkLocalUser(),r.state={search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()},user:_userStore2["default"].getUser(),usage:_userStore2["default"].getUsage()},r.onResultsChange=r.onResultsChange.bind(r),r.onUserChange=r.onUserChange.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"onResultsChange",value:function(){this.setState({search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()}})}},{key:"onUserChange",value:function(){this.setState({user:_userStore2["default"].getUser(),usage:_userStore2["default"].getUsage()})}},{key:"componentWillMount",value:function(){_userStore2["default"].addChangeListener(this.onUserChange),_resultsStore2["default"].addChangeListener(this.onResultsChange)}},{key:"componentWillUnmount",value:function(){_userStore2["default"].removeChangeListener(this.onUserChange),_resultsStore2["default"].removeChangeListener(this.onResultsChange)}},{key:"render",value:function(){return _userStore2["default"].isLoggedIn()?_react2["default"].createElement("div",{style:styles.app},_react2["default"].createElement(_Header2["default"],null),_react2["default"].cloneElement(this.props.children,{appState:this.state}),_react2["default"].createElement(_Navigation2["default"],null)):_react2["default"].createElement(_Login2["default"],null)}}]),t}(_react.Component);window.initializeApp=function(){_reactDom2["default"].render(_react2["default"].createElement(_reactRouter.Router,{history:_reactRouter.hashHistory},_react2["default"].createElement(_reactRouter.Route,{path:"/",component:TfApp},_react2["default"].createElement(_reactRouter.IndexRoute,{component:_Dashboard2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/search",component:_Search2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/support",component:_Support2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/account",component:_Account2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/:reportType(/:recordId)",component:_Report2["default"]}))),document.querySelector("#app"))};
 
-},{"./actions/viewActions":2,"./components/Account":4,"./components/Dashboard":5,"./components/Header":6,"./components/Login":7,"./components/Navigation":8,"./components/Report":10,"./components/Search":12,"./components/Support":14,"./config":16,"./constants/pubRecConstants":17,"./stores/resultsStore":20,"./stores/userStore":21,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":77}],4:[function(require,module,exports){
+},{"./actions/viewActions":2,"./components/Account":4,"./components/Dashboard":5,"./components/Header":7,"./components/Login":8,"./components/Navigation":9,"./components/Report":11,"./components/Search":13,"./components/Support":15,"./config":17,"./constants/pubRecConstants":18,"./stores/resultsStore":21,"./stores/userStore":22,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":78}],4:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),Support=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.doLogout=r.doLogout.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"doLogout",value:function(){_viewActions2["default"].logout()}},{key:"render",value:function(){return _react2["default"].createElement("div",null,"ACCOUNT PAGE!!!",_react2["default"].createElement("br",null),_react2["default"].createElement("button",{onClick:this.doLogout},"Logout"))}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
-},{"../actions/viewActions":2,"../config.js":16,"lodash":"lodash","react":"react"}],5:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("div",null,"DASHBOARD PAGE!!!",_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/8fa0274d-9c15-4595-9367-c8e1ab595087"},"Go to Joe's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/51070b95-0216-4c80-b790-887fb3e6ebf7"},"Go to Brian's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+Date.now()},"Go to a broken/unseen report"))}}]),t}(_react.Component);exports["default"]=Support;var styles={};
+},{"../actions/viewActions":2,"../config.js":17,"lodash":"lodash","react":"react"}],5:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(e[o]=r[o])}return e},_createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_userStore=require("../stores/userStore"),_userStore2=_interopRequireDefault(_userStore),_DashboardRow=require("./DashboardRow"),_DashboardRow2=_interopRequireDefault(_DashboardRow),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"componentWillMount",value:function(){_viewActions2["default"].getUsage(this.props.appState.user.id)}},{key:"render",value:function(){return _react2["default"].createElement("div",null,"DASHBOARD PAGE!!!",_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/8fa0274d-9c15-4595-9367-c8e1ab595087"},"Go to Joe's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/51070b95-0216-4c80-b790-887fb3e6ebf7"},"Go to Brian's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+Date.now()},"Go to a broken/unseen report"),_react2["default"].createElement("ul",null,this.props.appState.usage.map(function(e){return _react2["default"].createElement(_DashboardRow2["default"],_extends({key:JSON.stringify(e.data.id)},e))})))}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
-},{"../config.js":16,"lodash":"lodash","react":"react","react-router":77}],6:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"../stores/userStore":22,"./DashboardRow":6,"lodash":"lodash","react":"react","react-router":78}],6:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),DashboardRow=function(e){return _react2["default"].createElement("li",null,_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+e.id[2]},e.data.name.first," ",e.data.name.last))};exports["default"]=DashboardRow;var styles={};
+
+},{"../config.js":17,"react":"react","react-router":78}],7:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),Header=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("header",{style:styles.header},_react2["default"].createElement("img",{style:styles.logo,src:"img/tf-logo-white.png"}))}}]),t}(_react.Component);exports["default"]=Header;var styles={header:{backgroundColor:_config2["default"].themeStyles.brandGreen,padding:"20px 0 10px",height:20,position:"fixed",top:0,left:0,width:"100%",zIndex:99999},logo:{display:"block",margin:"0 auto",width:140,height:19}};
 
-},{"../config.js":16,"react":"react"}],7:[function(require,module,exports){
+},{"../config.js":17,"react":"react"}],8:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),Login=function(e){function t(e){_classCallCheck(this,t);var n=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return n.state={email:"",password:""},n.doLogin=n.doLogin.bind(n),n.handleChange=n.handleChange.bind(n),n}return _inherits(t,e),_createClass(t,[{key:"doLogin",value:function(){_viewActions2["default"].login(this.state)}},{key:"handleChange",value:function(e){var t={};t[e.target.name]=e.target.value,this.setState(t)}},{key:"render",value:function(){return _react2["default"].createElement("div",null,_react2["default"].createElement("input",{type:"text",placeholder:"Email Address",defaultValue:this.state.email,style:styles.textInput,name:"email",onChange:this.handleChange}),_react2["default"].createElement("input",{type:"password",placeholder:"Password",defaultValue:this.state.password,style:styles.textInput,name:"password",onChange:this.handleChange}),_react2["default"].createElement("button",{style:styles.button,onClick:this.doLogin},"Login"))}}]),t}(_react.Component);exports["default"]=Login;var styles={};
 
-},{"../actions/viewActions":2,"../config.js":16,"lodash":"lodash","react":"react"}],8:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"lodash":"lodash","react":"react"}],9:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),Navigation=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("nav",{style:styles.navigation},_react2["default"].createElement("ul",{style:styles.navBar},_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.IndexLink,{to:"/",style:styles.link,activeStyle:styles.active},"H")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/search",style:styles.link,activeStyle:styles.active},"S")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/support",style:styles.link,activeStyle:styles.active},"C")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/account",style:styles.link,activeStyle:styles.active},"A"))))}}]),t}(_react.Component);exports["default"]=Navigation;var styles={navigation:{backgroundColor:_config2["default"].themeStyles.brandWhite,padding:"15px 0",position:"fixed",bottom:0,left:0,width:"100%",height:50,boxSizing:"border-box",borderTop:"1px solid "+_config2["default"].themeStyles.brandGray,zIndex:99999},navBar:{listStyle:"none",margin:0,padding:0},navItem:{display:"block","float":"left",width:"25%",boxSizing:"border-box",padding:"0 10px",textAlign:"center"},link:{color:_config2["default"].themeStyles.brandBlack},active:{color:_config2["default"].themeStyles.brandBlue,textShadow:"0 0 3px "+_config2["default"].themeStyles.brandBlue}};
 
-},{"../config.js":16,"react":"react","react-router":77}],9:[function(require,module,exports){
+},{"../config.js":17,"react":"react","react-router":78}],10:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_TeaserLink=require("./TeaserLink"),_TeaserLink2=_interopRequireDefault(_TeaserLink),PersonRow=function(e){var r=e.locations?e.locations[0].address.display:"";return _react2["default"].createElement("li",null,e.names[0].first," ",e.names[0].last," - ",r,_react2["default"].createElement(_TeaserLink2["default"],{person:e,reportType:_config2["default"].constants.reportTypes.PERSON,buttonText:"Open Report"}))};exports["default"]=PersonRow;var styles={};
 
-},{"../config.js":16,"./TeaserLink":15,"react":"react"}],10:[function(require,module,exports){
+},{"../config.js":17,"./TeaserLink":16,"react":"react"}],11:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_reportStore=require("../stores/reportStore"),_reportStore2=_interopRequireDefault(_reportStore),Report=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.state={report:null,isLoading:!1},r.onReportChange=r.onReportChange.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"onReportChange",value:function(){console.log("report change triggered"),this.setState({report:_reportStore2["default"].getCurrentReport(),isLoading:!1})}},{key:"componentWillMount",value:function(){_reportStore2["default"].addChangeListener(this.onReportChange),_viewActions2["default"].fetchReport({reportType:this.props.params.reportType,recordId:this.props.params.recordId})}},{key:"componentWillReceiveProps",value:function(e){console.log("componentWillReceiveProps"),e.params.reportType===this.props.params.reportType&&e.params.recordId===this.props.params.recordId||(this.setState({isLoading:!0}),_viewActions2["default"].fetchReport({reportType:e.params.reportType,recordId:e.params.recordId}))}},{key:"componentWillUnmount",value:function(){_reportStore2["default"].removeChangeListener(this.onReportChange)}},{key:"render",value:function(){return console.log("report rendering"),console.log(this.state.report),this.state.report?this.state.isLoading?_react2["default"].createElement("div",{style:styles.loading},_react2["default"].createElement("div",{style:styles.loader},_react2["default"].createElement("div",{style:styles.loadingText},"LOADING...")),_react2["default"].createElement(PersonReport,{person:this.state.report})):_react2["default"].createElement("div",null,_react2["default"].createElement(PersonReport,{person:this.state.report})):_react2["default"].createElement("div",null,"Fetching Record ID: ",this.props.params.recordId," ...")}}]),t}(_react.Component);exports["default"]=Report;var PersonReport=function(e){var t=e.person,r=(e.person.reportMeta.isPremium,[]);return r.push(_react2["default"].createElement(PersonalSection,{key:"report-section-"+Math.ceil(1e4*Math.random()),person:t})),_react2["default"].createElement("div",null,_react2["default"].createElement("p",null,t.names[0].first," ",t.names[0].last," - ",t.reportMeta.recordId,_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/8fa0274d-9c15-4595-9367-c8e1ab595087"},"Go to Joe's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/51070b95-0216-4c80-b790-887fb3e6ebf7"},"Go to Brian's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+Date.now()},"Go to a broken/unseen report")),_react2["default"].createElement("h1",null,"Report Data"),r)},PersonalSection=function(e){var t=e.person,r=t.names[0],o=t.names.slice(1);return _react2["default"].createElement("section",{style:styles.personalSection},_react2["default"].createElement("h3",null,"Personal Data"),_react2["default"].createElement(PersonalSectionRow,{rowLabel:"Name",key:"name-"+Math.ceil(1e5*Math.random()),rowContent:r.first+" "+r.middle+" "+r.last}),_react2["default"].createElement(PersonalSectionRowSeparator,null),o.map(function(e){return _react2["default"].createElement(PersonalSectionRow,{rowLabel:"Alias",key:"alias-"+Math.ceil(1e5*Math.random()),rowContent:e.first+" "+e.middle+" "+e.last})}))},PersonalSectionRow=function(e){return _react2["default"].createElement("div",null,e.rowLabel,": ",e.rowContent)},PersonalSectionRowSeparator=function(e){return _react2["default"].createElement("hr",null)},styles={loading:{position:"relative"},loader:{position:"fixed",top:0,left:0,right:0,bottom:0,backgroundColor:"rgba(0, 0, 0, .5)"},loadingText:{position:"absolute",top:"50%",width:"100%",textAlign:"center",textTransform:"uppercase",transform:"translateY(-50%)",fontSize:"20px"},personalSection:{}};
 
-},{"../actions/viewActions":2,"../config.js":16,"../constants/pubRecConstants":17,"../stores/reportStore":19,"lodash":"lodash","react":"react","react-router":77}],11:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"../constants/pubRecConstants":18,"../stores/reportStore":20,"lodash":"lodash","react":"react","react-router":78}],12:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t)Object.prototype.hasOwnProperty.call(t,n)&&(e[n]=t[n])}return e},_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_PersonRow=require("./PersonRow"),_PersonRow2=_interopRequireDefault(_PersonRow),ResultsList=function(e){return _react2["default"].createElement("ul",{id:"results"},e.results.map(function(e){return _react2["default"].createElement(_PersonRow2["default"],_extends({key:e["@search_pointer"]},e))}))};exports["default"]=ResultsList;var styles={};
 
-},{"../config.js":16,"./PersonRow":9,"react":"react"}],12:[function(require,module,exports){
+},{"../config.js":17,"./PersonRow":10,"react":"react"}],13:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,r,a){return r&&e(t.prototype,r),a&&e(t,a),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_SearchForm=require("./SearchForm"),_SearchForm2=_interopRequireDefault(_SearchForm),_ResultsList=require("./ResultsList"),_ResultsList2=_interopRequireDefault(_ResultsList),Search=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){var e=this.props.appState.search;return e.searching?_react2["default"].createElement("div",null,_react2["default"].createElement(_SearchForm2["default"],{firstName:e.criteria.firstName,lastName:e.criteria.lastName,state:e.criteria.state}),_react2["default"].createElement("p",null,"We are currently searching for ",e.criteria.firstName," ",e.criteria.lastName," in ",e.criteria.state)):e.results?_react2["default"].createElement("div",null,_react2["default"].createElement(_SearchForm2["default"],{firstName:e.criteria.firstName,lastName:e.criteria.lastName,state:e.criteria.state}),_react2["default"].createElement(_ResultsList2["default"],{results:e.results})):_react2["default"].createElement("div",null,_react2["default"].createElement(_SearchForm2["default"],{firstName:e.criteria.firstName,lastName:e.criteria.lastName,state:e.criteria.state}))}}]),t}(_react.Component);exports["default"]=Search;var styles={};
 
-},{"../config.js":16,"./ResultsList":11,"./SearchForm":13,"lodash":"lodash","react":"react"}],13:[function(require,module,exports){
+},{"../config.js":17,"./ResultsList":12,"./SearchForm":14,"lodash":"lodash","react":"react"}],14:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var a=0;a<t.length;a++){var r=t[a];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,a,r){return a&&e(t.prototype,a),r&&e(t,r),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),SearchForm=function(e){function t(e){_classCallCheck(this,t);var a=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return a.doSearch=a.doSearch.bind(a),a}return _inherits(t,e),_createClass(t,[{key:"handleInputChange",value:function(e){_viewActions2["default"].updateSearchCriteria({field:e.target.name,value:e.target.value})}},{key:"doSearch",value:function(){_viewActions2["default"].search({firstName:this.props.firstName,lastName:this.props.lastName,state:this.props.state})}},{key:"render",value:function(){return _react2["default"].createElement("div",null,_react2["default"].createElement("input",{type:"text",placeholder:"First Name",defaultValue:this.props.firstName,style:styles.textInput,onBlur:this.handleInputChange,name:"firstName"}),_react2["default"].createElement("input",{type:"text",placeholder:"Last Name",defaultValue:this.props.lastName,style:styles.textInput,onBlur:this.handleInputChange,name:"lastName"}),_react2["default"].createElement("select",{name:"state",defaultValue:this.props.state,onChange:this.handleInputChange,style:styles.select},_react2["default"].createElement("option",{value:"ALL"},"All"),_react2["default"].createElement("option",{value:"CA"},"California")),_react2["default"].createElement("button",{style:styles.button,onClick:this.doSearch},"Search"))}}]),t}(_react.Component);exports["default"]=SearchForm;var styles={button:{fontWeight:"bold",width:"100%",padding:"15px 0",fontSize:18},textInput:{height:40,padding:5,"float":"left",width:"50%"},select:{clear:"both",width:"100%",height:40}};
 
-},{"../actions/viewActions":2,"../config.js":16,"lodash":"lodash","react":"react"}],14:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"lodash":"lodash","react":"react"}],15:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("div",null,"SUPPORT PAGE!!!")}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
-},{"../config.js":16,"lodash":"lodash","react":"react"}],15:[function(require,module,exports){
+},{"../config.js":17,"lodash":"lodash","react":"react"}],16:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),TeaserLink=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.selectTeaser=r.selectTeaser.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"createPersonRecord",value:function(){var e=this.props.person,t={pointer:e["@search_pointer"],lexis_id:e["@id"],name:{first:null,last:null,middle:null,raw:null,suffix:null,type:null},location:{address:{street:null,street2:null,city:null,state:null,zip_code:null}},dobs:{date:null,date_range:null},dods:{date:null,date_range:null}};return e.names&&(t.name={first:e.names[0].first,last:e.names[0].last,middle:e.names[0].middle,raw:e.names[0].raw,suffix:e.names[0].suffix,type:e.names[0].type}),e.locations&&(t.location.address={street:e.locations[0].address.street,street2:e.locations[0].address.street2,city:e.locations[0].address.city,state:e.locations[0].address.state,zip_code:e.locations[0].address.zip_code}),e.dobs&&(t.dobs={date:e.dobs[0].date,date_range:e.dobs[0].date_range}),e.dods&&(t.dods={date:e.dods[0].date,date_range:e.dods[0].date_range}),t}},{key:"selectTeaser",value:function(){var e=void 0;switch(this.props.reportType){case _pubRecConstants2["default"].reportTypes.PERSON:e=this.createPersonRecord()}_viewActions2["default"].fetchRecordId(e,this.props.reportType)}},{key:"render",value:function(){return _react2["default"].createElement("button",{onClick:this.selectTeaser},this.props.buttonText)}}]),t}(_react.Component);exports["default"]=TeaserLink;var styles={};
 
-},{"../actions/viewActions":2,"../config.js":16,"../constants/pubRecConstants":17,"lodash":"lodash","react":"react"}],16:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"../constants/pubRecConstants":18,"lodash":"lodash","react":"react"}],17:[function(require,module,exports){
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={API_ROOT:"http://www.api.truthfinder.app.public-records.local.tcg.io",themeStyles:{brandBlue:"#209DD2",brandGreen:"#57bf93",brandYellow:"#ffd20a",brandBlack:"#3e3e3e",brandWhite:"#fff",brandGray:"#e1e1e1",brandSlate:"#607d8b"},constants:{actions:{SEARCH:"SEARCH",UPDATE_CRITERIA:"UPDATE_CRITERIA",ADD_RECORD:"ADD_RECORD",CLEAR_NAVIGATION:"CLEAR_NAVIGATION",FETCH_REPORT:"FETCH_REPORT",LOGIN:"LOGIN",LOGOUT:"LOGOUT"},reportTypes:{PERSON:"people",PHONE:"phones",LOCATION:"locations"}}};
 
-},{}],17:[function(require,module,exports){
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={actions:{SEARCH:"SEARCH",RECEIVE_SEARCH_RESULTS:"RECEIVE_SEARCH_RESULTS",UPDATE_CRITERIA:"UPDATE_CRITERIA",FETCH_RECORD_ID:"FETCH_RECORD_ID",RECEIVE_RECORD_ID:"RECEIVE_RECORD_ID",CLEAR_NAVIGATION:"CLEAR_NAVIGATION",FETCH_REPORT:"FETCH_REPORT",RECEIVE_REPORT:"RECEIVE_REPORT",LOGIN:"LOGIN",RECEIVE_USER:"RECEIVE_USER",LOGOUT:"LOGOUT"},reportTypes:{PERSON:"people",PHONE:"phones",LOCATION:"locations"}};
-
 },{}],18:[function(require,module,exports){
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={actions:{SEARCH:"SEARCH",RECEIVE_SEARCH_RESULTS:"RECEIVE_SEARCH_RESULTS",UPDATE_CRITERIA:"UPDATE_CRITERIA",FETCH_RECORD_ID:"FETCH_RECORD_ID",RECEIVE_RECORD_ID:"RECEIVE_RECORD_ID",CLEAR_NAVIGATION:"CLEAR_NAVIGATION",FETCH_REPORT:"FETCH_REPORT",RECEIVE_REPORT:"RECEIVE_REPORT",LOGIN:"LOGIN",RECEIVE_USER:"RECEIVE_USER",LOGOUT:"LOGOUT",RECEIVE_USAGE:"RECEIVE_USAGE"},reportTypes:{PERSON:"people",PHONE:"phones",LOCATION:"locations"}};
+
+},{}],19:[function(require,module,exports){
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _flux=require("flux");exports["default"]=new _flux.Dispatcher;
 
-},{"flux":"flux"}],19:[function(require,module,exports){
+},{"flux":"flux"}],20:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_events=require("events"),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);require("isomorphic-fetch"),require("es6-promise").polyfill();var CHANGE_EVENT="change",_reportHistory=[],_errors=null,ReportStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getCurrentReport",value:function(){return _reportHistory[_reportHistory.length-1]||null}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),reportStore=new ReportStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_REPORT:var t=_lodash2["default"].findIndex(_reportHistory,{reportMeta:{recordId:e.report.reportMeta.recordId}});t>=0&&_reportHistory.splice(t,1)[0],_reportHistory.push(e.report),_reportHistory.length>10&&_reportHistory.shift(),reportStore.emitChange();break;case _pubRecConstants2["default"].actions.FETCH_RECORD_ID:break;case _pubRecConstants2["default"].actions.RECEIVE_RECORD_ID:console.log(e.recordId),console.log(e.reportType)}}),exports["default"]=reportStore;
 
-},{"../config.js":16,"../constants/pubRecConstants":17,"../dispatcher":18,"es6-promise":26,"events":"events","isomorphic-fetch":45,"lodash":"lodash"}],20:[function(require,module,exports){
+},{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"es6-promise":27,"events":"events","isomorphic-fetch":46,"lodash":"lodash"}],21:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),CHANGE_EVENT="change",_results=[],_criteria={},_searching=!1,ResultsStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getAllResults",value:function(){return _results}},{key:"getCriteria",value:function(){return _criteria}},{key:"isSearching",value:function(){return _searching}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),resultsStore=new ResultsStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.UPDATE_CRITERIA:_criteria[e.updates.field]=e.updates.value,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.SEARCH:_searching=!0,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.CLEAR_SEARCH_RESULTS:_results=[],_criteria={},_searching=!1,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.RECEIVE_SEARCH_RESULTS:_searching=!1,_results=e.results,resultsStore.emitChange()}}),exports["default"]=resultsStore;
 
-},{"../config.js":16,"../constants/pubRecConstants":17,"../dispatcher":18,"events":"events","lodash":"lodash"}],21:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),CHANGE_EVENT="change",_user=null,_usage=[],UserStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getUser",value:function(){return _user}},{key:"isLoggedIn",value:function(){return null!==_user}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),userStore=new UserStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_USER:_user=e.user,userStore.emitChange();break;case _pubRecConstants2["default"].actions.LOGOUT:_user=null,_usage=[],userStore.emitChange()}}),exports["default"]=userStore;
+},{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"events":"events","lodash":"lodash"}],22:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),CHANGE_EVENT="change",_user=null,_usage=[],UserStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getUser",value:function(){return _user}},{key:"getUsage",value:function(){return _usage}},{key:"isLoggedIn",value:function(){return null!==_user}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),userStore=new UserStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_USER:_user=e.user,userStore.emitChange();break;case _pubRecConstants2["default"].actions.RECEIVE_USAGE:console.log(e.usage),_usage=e.usage,userStore.emitChange();break;case _pubRecConstants2["default"].actions.LOGOUT:_user=null,_usage=[],userStore.emitChange()}}),exports["default"]=userStore;
 
-},{"../config.js":16,"../constants/pubRecConstants":17,"../dispatcher":18,"events":"events","lodash":"lodash"}],22:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function serialize(e,t){var n=[];for(var o in e)if(e.hasOwnProperty(o)){var r=t?t+"["+o+"]":o,c=e[o];n.push("object"==("undefined"==typeof c?"undefined":_typeof(c))?serialize(c,r):encodeURIComponent(r)+"="+encodeURIComponent(c))}return n.join("&")}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash);require("isomorphic-fetch");var _pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_serverActions=require("../actions/serverActions"),_serverActions2=_interopRequireDefault(_serverActions);require("es6-promise").polyfill();var _jwt=null,PubRecAPI=function(){function e(){_classCallCheck(this,e)}return _createClass(e,[{key:"search",value:function(e){fetch(_config2["default"].API_ROOT+"/people/?"+serialize(e)).then(function(e){return e.json()}).then(function(e){_serverActions2["default"].receiveSearchResults(e.people)})}},{key:"fetchRecordId",value:function(e,t){fetch(_config2["default"].API_ROOT+"/person?jwt="+_jwt,{headers:{"Content-Type":"application/json"},method:"POST",body:JSON.stringify({person:e})}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveRecordId(e.recordId,t):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"checkLocalUser",value:function(){console.log("Checking for local user");var e=window.localStorage.getItem("user");if(e)try{e=JSON.parse(e),_jwt=e.jwt,_serverActions2["default"].receiveUser(e)}catch(t){}}},{key:"login",value:function(e){fetch(_config2["default"].API_ROOT+"/login",{headers:{"Content-Type":"application/x-www-form-urlencoded"},method:"POST",body:serialize(e)}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?(_jwt=e.user.jwt,window.localStorage.setItem("user",JSON.stringify(e.user)),_serverActions2["default"].receiveUser(e.user)):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"logout",value:function(){_jwt=null,window.localStorage.removeItem("user"),window.localStorage.removeItem("usage")}},{key:"fetchReport",value:function(e){fetch(_config2["default"].API_ROOT+"/people/"+e.recordId+"?jwt="+_jwt).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveReport(e.report):console.log(e.errors)})["catch"](function(e){console.error(e)})}}]),e}(),pubRecAPI=new PubRecAPI;exports["default"]=pubRecAPI;
+},{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"events":"events","lodash":"lodash"}],23:[function(require,module,exports){
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function serialize(e,t){var n=[];for(var o in e)if(e.hasOwnProperty(o)){var r=t?t+"["+o+"]":o,s=e[o];n.push("object"==("undefined"==typeof s?"undefined":_typeof(s))?serialize(s,r):encodeURIComponent(r)+"="+encodeURIComponent(s))}return n.join("&")}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash);require("isomorphic-fetch");var _pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_serverActions=require("../actions/serverActions"),_serverActions2=_interopRequireDefault(_serverActions);require("es6-promise").polyfill();var _jwt=null,PubRecAPI=function(){function e(){_classCallCheck(this,e)}return _createClass(e,[{key:"search",value:function(e){fetch(_config2["default"].API_ROOT+"/people/?"+serialize(e)).then(function(e){return e.json()}).then(function(e){_serverActions2["default"].receiveSearchResults(e.people)})}},{key:"fetchRecordId",value:function(e,t){fetch(_config2["default"].API_ROOT+"/person",{headers:{"Content-Type":"application/json",Authorization:"Bearer "+_jwt},method:"POST",body:JSON.stringify({person:e})}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveRecordId(e.recordId,t):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"checkLocalUser",value:function(){console.log("Checking for local user");var e=window.localStorage.getItem("user");if(e)try{e=JSON.parse(e),_jwt=e.jwt,_serverActions2["default"].receiveUser(e)}catch(t){}}},{key:"login",value:function(e){fetch(_config2["default"].API_ROOT+"/login",{headers:{"Content-Type":"application/x-www-form-urlencoded"},method:"POST",body:serialize(e)}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?(_jwt=e.user.jwt,window.localStorage.setItem("user",JSON.stringify(e.user)),_serverActions2["default"].receiveUser(e.user)):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"logout",value:function(){_jwt=null,window.localStorage.removeItem("user"),window.localStorage.removeItem("usage")}},{key:"fetchReport",value:function(e){fetch(_config2["default"].API_ROOT+"/people/"+e.recordId,{Authorization:"Bearer "+_jwt}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveReport(e.report):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"getUsage",value:function(e){fetch(_config2["default"].API_ROOT+"/users/"+e+"/usage?jwt="+_jwt,{headers:{"Content-Type":"application/x-www-form-urlencoded"}}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?(console.log("asgfadsf"),_serverActions2["default"].receiveUsage(e.records),window.localStorage.setItem("usage",JSON.stringify(e.records))):_errors=e.errors})["catch"](function(e){console.error(e)})}}]),e}(),pubRecAPI=new PubRecAPI;exports["default"]=pubRecAPI;
 
-},{"../actions/serverActions":1,"../config.js":16,"../constants/pubRecConstants":17,"es6-promise":26,"isomorphic-fetch":45,"lodash":"lodash"}],23:[function(require,module,exports){
+},{"../actions/serverActions":1,"../config.js":17,"../constants/pubRecConstants":18,"es6-promise":27,"isomorphic-fetch":46,"lodash":"lodash"}],24:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -160,7 +163,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":24,"./lib/keys.js":25}],24:[function(require,module,exports){
+},{"./lib/is_arguments.js":25,"./lib/keys.js":26}],25:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -182,7 +185,7 @@ function unsupported(object){
     false;
 };
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -193,7 +196,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -1157,7 +1160,7 @@ function shim (obj) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":46}],27:[function(require,module,exports){
+},{"_process":47}],28:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1189,7 +1192,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1248,7 +1251,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -1325,7 +1328,7 @@ function readState(key) {
 }
 }).call(this,require('_process'))
 
-},{"_process":46,"warning":86}],30:[function(require,module,exports){
+},{"_process":47,"warning":87}],31:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1401,13 +1404,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1458,7 +1461,7 @@ function parsePath(path) {
 }
 }).call(this,require('_process'))
 
-},{"_process":46,"warning":86}],33:[function(require,module,exports){
+},{"_process":47,"warning":87}],34:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1638,7 +1641,7 @@ exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":27,"./DOMStateStorage":29,"./DOMUtils":30,"./ExecutionEnvironment":31,"./PathUtils":32,"./createDOMHistory":34,"_process":46,"invariant":44}],34:[function(require,module,exports){
+},{"./Actions":28,"./DOMStateStorage":30,"./DOMUtils":31,"./ExecutionEnvironment":32,"./PathUtils":33,"./createDOMHistory":35,"_process":47,"invariant":45}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1682,7 +1685,7 @@ exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./DOMUtils":30,"./ExecutionEnvironment":31,"./createHistory":36,"_process":46,"invariant":44}],35:[function(require,module,exports){
+},{"./DOMUtils":31,"./ExecutionEnvironment":32,"./createHistory":37,"_process":47,"invariant":45}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1932,7 +1935,7 @@ exports['default'] = createHashHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":27,"./DOMStateStorage":29,"./DOMUtils":30,"./ExecutionEnvironment":31,"./PathUtils":32,"./createDOMHistory":34,"_process":46,"invariant":44,"warning":86}],36:[function(require,module,exports){
+},{"./Actions":28,"./DOMStateStorage":30,"./DOMUtils":31,"./ExecutionEnvironment":32,"./PathUtils":33,"./createDOMHistory":35,"_process":47,"invariant":45,"warning":87}],37:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2224,7 +2227,7 @@ exports['default'] = createHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":27,"./AsyncUtils":28,"./PathUtils":32,"./createLocation":37,"./deprecate":39,"./runTransitionHook":40,"_process":46,"deep-equal":23,"warning":86}],37:[function(require,module,exports){
+},{"./Actions":28,"./AsyncUtils":29,"./PathUtils":33,"./createLocation":38,"./deprecate":40,"./runTransitionHook":41,"_process":47,"deep-equal":24,"warning":87}],38:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2279,7 +2282,7 @@ exports['default'] = createLocation;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":27,"./PathUtils":32,"_process":46,"warning":86}],38:[function(require,module,exports){
+},{"./Actions":28,"./PathUtils":33,"_process":47,"warning":87}],39:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2437,7 +2440,7 @@ exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":27,"./PathUtils":32,"./createHistory":36,"_process":46,"invariant":44,"warning":86}],39:[function(require,module,exports){
+},{"./Actions":28,"./PathUtils":33,"./createHistory":37,"_process":47,"invariant":45,"warning":87}],40:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2460,7 +2463,7 @@ exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":46,"warning":86}],40:[function(require,module,exports){
+},{"_process":47,"warning":87}],41:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2488,7 +2491,7 @@ exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":46,"warning":86}],41:[function(require,module,exports){
+},{"_process":47,"warning":87}],42:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2650,7 +2653,7 @@ exports['default'] = useBasename;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./ExecutionEnvironment":31,"./PathUtils":32,"./deprecate":39,"./runTransitionHook":40,"_process":46,"warning":86}],42:[function(require,module,exports){
+},{"./ExecutionEnvironment":32,"./PathUtils":33,"./deprecate":40,"./runTransitionHook":41,"_process":47,"warning":87}],43:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2830,7 +2833,7 @@ exports['default'] = useQueries;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PathUtils":32,"./deprecate":39,"./runTransitionHook":40,"_process":46,"query-string":47,"warning":86}],43:[function(require,module,exports){
+},{"./PathUtils":33,"./deprecate":40,"./runTransitionHook":41,"_process":47,"query-string":48,"warning":87}],44:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -2874,7 +2877,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
     return targetComponent;
 };
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -2927,7 +2930,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
@@ -2935,7 +2938,7 @@ module.exports = invariant;
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":87}],46:[function(require,module,exports){
+},{"whatwg-fetch":88}],47:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -3031,7 +3034,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 
@@ -3099,7 +3102,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":85}],48:[function(require,module,exports){
+},{"strict-uri-encode":86}],49:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3188,7 +3191,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3221,7 +3224,7 @@ exports.default = History;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./routerWarning":81,"_process":46}],50:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./routerWarning":82,"_process":47}],51:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3250,7 +3253,7 @@ var IndexLink = _react2.default.createClass({
 
 exports.default = IndexLink;
 module.exports = exports['default'];
-},{"./Link":55,"react":"react"}],51:[function(require,module,exports){
+},{"./Link":56,"react":"react"}],52:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3317,7 +3320,7 @@ exports.default = IndexRedirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./Redirect":58,"./routerWarning":81,"_process":46,"invariant":44,"react":"react"}],52:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./Redirect":59,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],53:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3381,7 +3384,7 @@ exports.default = IndexRoute;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./RouteUtils":61,"./routerWarning":81,"_process":46,"invariant":44,"react":"react"}],53:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],54:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3414,7 +3417,7 @@ var component = exports.component = oneOfType([func, string]);
 var components = exports.components = oneOfType([component, object]);
 var route = exports.route = oneOfType([object, element]);
 var routes = exports.routes = oneOfType([route, arrayOf(route)]);
-},{"react":"react"}],54:[function(require,module,exports){
+},{"react":"react"}],55:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3486,7 +3489,7 @@ exports.default = Lifecycle;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":81,"_process":46,"invariant":44,"react":"react"}],55:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],56:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3663,7 +3666,7 @@ exports.default = Link;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PropTypes":57,"./routerWarning":81,"_process":46,"react":"react"}],56:[function(require,module,exports){
+},{"./PropTypes":58,"./routerWarning":82,"_process":47,"react":"react"}],57:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3879,7 +3882,7 @@ function formatPattern(pattern, params) {
 }
 }).call(this,require('_process'))
 
-},{"_process":46,"invariant":44}],57:[function(require,module,exports){
+},{"_process":47,"invariant":45}],58:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3984,7 +3987,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = defaultExport;
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./deprecateObjectProperties":73,"./routerWarning":81,"_process":46,"react":"react"}],58:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./deprecateObjectProperties":74,"./routerWarning":82,"_process":47,"react":"react"}],59:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4090,7 +4093,7 @@ exports.default = Redirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./PatternUtils":56,"./RouteUtils":61,"_process":46,"invariant":44,"react":"react"}],59:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./PatternUtils":57,"./RouteUtils":62,"_process":47,"invariant":45,"react":"react"}],60:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4151,7 +4154,7 @@ exports.default = Route;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./RouteUtils":61,"_process":46,"invariant":44,"react":"react"}],60:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"_process":47,"invariant":45,"react":"react"}],61:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4200,7 +4203,7 @@ exports.default = RouteContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":81,"_process":46,"react":"react"}],61:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"react":"react"}],62:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4316,7 +4319,7 @@ function createRoutes(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./routerWarning":81,"_process":46,"react":"react"}],62:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"react":"react"}],63:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4528,7 +4531,7 @@ exports.default = Router;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":53,"./RouteUtils":61,"./RouterContext":63,"./RouterUtils":64,"./createTransitionManager":72,"./routerWarning":81,"_process":46,"history/lib/createHashHistory":35,"history/lib/useQueries":42,"react":"react"}],63:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"./RouterContext":64,"./RouterUtils":65,"./createTransitionManager":73,"./routerWarning":82,"_process":47,"history/lib/createHashHistory":36,"history/lib/useQueries":43,"react":"react"}],64:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4688,7 +4691,7 @@ exports.default = RouterContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":61,"./deprecateObjectProperties":73,"./getRouteParams":75,"./routerWarning":81,"_process":46,"invariant":44,"react":"react"}],64:[function(require,module,exports){
+},{"./RouteUtils":62,"./deprecateObjectProperties":74,"./getRouteParams":76,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],65:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4724,7 +4727,7 @@ function createRoutingHistory(history, transitionManager) {
 }
 }).call(this,require('_process'))
 
-},{"./deprecateObjectProperties":73,"_process":46}],65:[function(require,module,exports){
+},{"./deprecateObjectProperties":74,"_process":47}],66:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4758,7 +4761,7 @@ exports.default = RoutingContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouterContext":63,"./routerWarning":81,"_process":46,"react":"react"}],66:[function(require,module,exports){
+},{"./RouterContext":64,"./routerWarning":82,"_process":47,"react":"react"}],67:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4884,7 +4887,7 @@ function runLeaveHooks(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":48,"./routerWarning":81,"_process":46}],67:[function(require,module,exports){
+},{"./AsyncUtils":49,"./routerWarning":82,"_process":47}],68:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4935,7 +4938,7 @@ exports.default = function () {
 };
 
 module.exports = exports['default'];
-},{"./RouterContext":63,"react":"react"}],68:[function(require,module,exports){
+},{"./RouterContext":64,"react":"react"}],69:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4952,7 +4955,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createBrowserHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":71,"history/lib/createBrowserHistory":33}],69:[function(require,module,exports){
+},{"./createRouterHistory":72,"history/lib/createBrowserHistory":34}],70:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5030,7 +5033,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports.default = computeChangedRoutes;
 module.exports = exports['default'];
-},{"./PatternUtils":56}],70:[function(require,module,exports){
+},{"./PatternUtils":57}],71:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5063,7 +5066,7 @@ function createMemoryHistory(options) {
   return history;
 }
 module.exports = exports['default'];
-},{"history/lib/createMemoryHistory":38,"history/lib/useBasename":41,"history/lib/useQueries":42}],71:[function(require,module,exports){
+},{"history/lib/createMemoryHistory":39,"history/lib/useBasename":42,"history/lib/useQueries":43}],72:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5083,7 +5086,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 module.exports = exports['default'];
-},{"./useRouterHistory":82}],72:[function(require,module,exports){
+},{"./useRouterHistory":83}],73:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5394,7 +5397,7 @@ function createTransitionManager(history, routes) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./TransitionUtils":66,"./computeChangedRoutes":69,"./getComponents":74,"./isActive":78,"./matchRoutes":80,"./routerWarning":81,"_process":46,"history/lib/Actions":27}],73:[function(require,module,exports){
+},{"./TransitionUtils":67,"./computeChangedRoutes":70,"./getComponents":75,"./isActive":79,"./matchRoutes":81,"./routerWarning":82,"_process":47,"history/lib/Actions":28}],74:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5473,7 +5476,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = deprecateObjectProperties;
 }).call(this,require('_process'))
 
-},{"./routerWarning":81,"_process":46}],74:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47}],75:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5556,7 +5559,7 @@ exports.default = getComponents;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":48,"./deprecateObjectProperties":73,"./routerWarning":81,"_process":46}],75:[function(require,module,exports){
+},{"./AsyncUtils":49,"./deprecateObjectProperties":74,"./routerWarning":82,"_process":47}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5585,7 +5588,7 @@ function getRouteParams(route, params) {
 
 exports.default = getRouteParams;
 module.exports = exports['default'];
-},{"./PatternUtils":56}],76:[function(require,module,exports){
+},{"./PatternUtils":57}],77:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5602,7 +5605,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":71,"history/lib/createHashHistory":35}],77:[function(require,module,exports){
+},{"./createRouterHistory":72,"history/lib/createHashHistory":36}],78:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5759,7 +5762,7 @@ exports.applyRouterMiddleware = _applyRouterMiddleware3.default;
 exports.browserHistory = _browserHistory3.default;
 exports.hashHistory = _hashHistory3.default;
 exports.createMemoryHistory = _createMemoryHistory3.default;
-},{"./History":49,"./IndexLink":50,"./IndexRedirect":51,"./IndexRoute":52,"./Lifecycle":54,"./Link":55,"./PatternUtils":56,"./PropTypes":57,"./Redirect":58,"./Route":59,"./RouteContext":60,"./RouteUtils":61,"./Router":62,"./RouterContext":63,"./RoutingContext":65,"./applyRouterMiddleware":67,"./browserHistory":68,"./createMemoryHistory":70,"./hashHistory":76,"./match":79,"./useRouterHistory":82,"./useRoutes":83,"./withRouter":84}],78:[function(require,module,exports){
+},{"./History":50,"./IndexLink":51,"./IndexRedirect":52,"./IndexRoute":53,"./Lifecycle":55,"./Link":56,"./PatternUtils":57,"./PropTypes":58,"./Redirect":59,"./Route":60,"./RouteContext":61,"./RouteUtils":62,"./Router":63,"./RouterContext":64,"./RoutingContext":66,"./applyRouterMiddleware":68,"./browserHistory":69,"./createMemoryHistory":71,"./hashHistory":77,"./match":80,"./useRouterHistory":83,"./useRoutes":84,"./withRouter":85}],79:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5912,7 +5915,7 @@ function isActive(_ref, indexOnly, currentLocation, routes, params) {
   return queryIsActive(query, currentLocation.query);
 }
 module.exports = exports['default'];
-},{"./PatternUtils":56}],79:[function(require,module,exports){
+},{"./PatternUtils":57}],80:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5997,7 +6000,7 @@ exports.default = match;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":61,"./RouterUtils":64,"./createMemoryHistory":70,"./createTransitionManager":72,"_process":46,"invariant":44}],80:[function(require,module,exports){
+},{"./RouteUtils":62,"./RouterUtils":65,"./createMemoryHistory":71,"./createTransitionManager":73,"_process":47,"invariant":45}],81:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6234,7 +6237,7 @@ function matchRoutes(routes, location, callback, remainingPathname) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":48,"./PatternUtils":56,"./RouteUtils":61,"./routerWarning":81,"_process":46}],81:[function(require,module,exports){
+},{"./AsyncUtils":49,"./PatternUtils":57,"./RouteUtils":62,"./routerWarning":82,"_process":47}],82:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6271,7 +6274,7 @@ function routerWarning(falseToWarn, message) {
 function _resetWarned() {
   warned = {};
 }
-},{"warning":86}],82:[function(require,module,exports){
+},{"warning":87}],83:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6295,7 +6298,7 @@ function useRouterHistory(createHistory) {
   };
 }
 module.exports = exports['default'];
-},{"history/lib/useBasename":41,"history/lib/useQueries":42}],83:[function(require,module,exports){
+},{"history/lib/useBasename":42,"history/lib/useQueries":43}],84:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6350,7 +6353,7 @@ exports.default = useRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./createTransitionManager":72,"./routerWarning":81,"_process":46,"history/lib/useQueries":42}],84:[function(require,module,exports){
+},{"./createTransitionManager":73,"./routerWarning":82,"_process":47,"history/lib/useQueries":43}],85:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6391,7 +6394,7 @@ function withRouter(WrappedComponent) {
   return (0, _hoistNonReactStatics2.default)(WithRouter, WrappedComponent);
 }
 module.exports = exports['default'];
-},{"./PropTypes":57,"hoist-non-react-statics":43,"react":"react"}],85:[function(require,module,exports){
+},{"./PropTypes":58,"hoist-non-react-statics":44,"react":"react"}],86:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -6399,7 +6402,7 @@ module.exports = function (str) {
 	});
 };
 
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6461,7 +6464,7 @@ if ("development" !== 'production') {
 
 module.exports = warning;
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 (function(self) {
   'use strict';
 
