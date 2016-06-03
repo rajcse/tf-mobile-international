@@ -4,19 +4,19 @@
 },{"../config":17,"../constants/pubRecConstants":18,"../dispatcher":19}],2:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),_PubRecAPI=require("../utils/PubRecAPI"),_PubRecAPI2=_interopRequireDefault(_PubRecAPI);exports["default"]={search:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.SEARCH,criteria:e}),_PubRecAPI2["default"].search(e)},clearSearchResults:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_SEARCH_RESULTS})},updateSearchCriteria:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.UPDATE_CRITERIA,updates:e})},fetchRecordId:function(e,t){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_RECORD_ID,recordData:e,reportType:t}),_PubRecAPI2["default"].fetchRecordId(e,t)},clearNavigation:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CLEAR_NAVIGATION})},fetchReport:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.FETCH_REPORT,criteria:e}),_PubRecAPI2["default"].fetchReport(e)},checkLocalUser:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.CHECK_LOCAL_USER}),_PubRecAPI2["default"].checkLocalUser()},login:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGIN,credentials:e}),_PubRecAPI2["default"].login(e)},logout:function(){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.LOGOUT}),_PubRecAPI2["default"].logout()},getUsage:function(e){_dispatcher2["default"].dispatch({actionType:_pubRecConstants2["default"].actions.GET_USAGE}),_PubRecAPI2["default"].getUsage(e)}};
 
-},{"../config":17,"../constants/pubRecConstants":18,"../dispatcher":19,"../utils/PubRecAPI":24}],3:[function(require,module,exports){
+},{"../config":17,"../constants/pubRecConstants":18,"../dispatcher":19,"../utils/PubRecAPI":23}],3:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("./config"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("./constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactDom=require("react-dom"),_reactDom2=_interopRequireDefault(_reactDom),_reactRouter=require("react-router"),_viewActions=require("./actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_Header=require("./components/Header"),_Header2=_interopRequireDefault(_Header),_Navigation=require("./components/Navigation"),_Navigation2=_interopRequireDefault(_Navigation),_Login=require("./components/Login"),_Login2=_interopRequireDefault(_Login),_Dashboard=require("./components/Dashboard"),_Dashboard2=_interopRequireDefault(_Dashboard),_Search=require("./components/Search"),_Search2=_interopRequireDefault(_Search),_Support=require("./components/Support"),_Support2=_interopRequireDefault(_Support),_Account=require("./components/Account"),_Account2=_interopRequireDefault(_Account),_Report=require("./components/Report"),_Report2=_interopRequireDefault(_Report),_resultsStore=require("./stores/resultsStore"),_resultsStore2=_interopRequireDefault(_resultsStore),_userStore=require("./stores/userStore"),_userStore2=_interopRequireDefault(_userStore),styles={app:{padding:"70px 10px 60px"}},TfApp=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return _viewActions2["default"].clearSearchResults(),_viewActions2["default"].checkLocalUser(),r.state={search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()},user:_userStore2["default"].getUser(),usage:_userStore2["default"].getUsage()},r.onResultsChange=r.onResultsChange.bind(r),r.onUserChange=r.onUserChange.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"onResultsChange",value:function(){this.setState({search:{results:_resultsStore2["default"].getAllResults(),searching:_resultsStore2["default"].isSearching(),criteria:_resultsStore2["default"].getCriteria()}})}},{key:"onUserChange",value:function(){this.setState({user:_userStore2["default"].getUser(),usage:_userStore2["default"].getUsage()})}},{key:"componentWillMount",value:function(){_userStore2["default"].addChangeListener(this.onUserChange),_resultsStore2["default"].addChangeListener(this.onResultsChange)}},{key:"componentWillUnmount",value:function(){_userStore2["default"].removeChangeListener(this.onUserChange),_resultsStore2["default"].removeChangeListener(this.onResultsChange)}},{key:"render",value:function(){return _userStore2["default"].isLoggedIn()?_react2["default"].createElement("div",{style:styles.app},_react2["default"].createElement(_Header2["default"],null),_react2["default"].cloneElement(this.props.children,{appState:this.state}),_react2["default"].createElement(_Navigation2["default"],null)):_react2["default"].createElement(_Login2["default"],null)}}]),t}(_react.Component);window.initializeApp=function(){_reactDom2["default"].render(_react2["default"].createElement(_reactRouter.Router,{history:_reactRouter.hashHistory},_react2["default"].createElement(_reactRouter.Route,{path:"/",component:TfApp},_react2["default"].createElement(_reactRouter.IndexRoute,{component:_Dashboard2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/search",component:_Search2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/support",component:_Support2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/account",component:_Account2["default"]}),_react2["default"].createElement(_reactRouter.Route,{path:"/:reportType(/:recordId)",component:_Report2["default"]}))),document.querySelector("#app"))};
 
-},{"./actions/viewActions":2,"./components/Account":4,"./components/Dashboard":5,"./components/Header":7,"./components/Login":8,"./components/Navigation":9,"./components/Report":11,"./components/Search":13,"./components/Support":15,"./config":17,"./constants/pubRecConstants":18,"./stores/resultsStore":21,"./stores/userStore":22,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":79}],4:[function(require,module,exports){
+},{"./actions/viewActions":2,"./components/Account":4,"./components/Dashboard":5,"./components/Header":7,"./components/Login":8,"./components/Navigation":9,"./components/Report":11,"./components/Search":13,"./components/Support":15,"./config":17,"./constants/pubRecConstants":18,"./stores/resultsStore":21,"./stores/userStore":22,"lodash":"lodash","react":"react","react-dom":"react-dom","react-router":78}],4:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),Support=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.doLogout=r.doLogout.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"doLogout",value:function(){_viewActions2["default"].logout()}},{key:"render",value:function(){return _react2["default"].createElement("div",null,"ACCOUNT PAGE!!!",_react2["default"].createElement("br",null),_react2["default"].createElement("button",{onClick:this.doLogout},"Logout"))}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
 },{"../actions/viewActions":2,"../config.js":17,"lodash":"lodash","react":"react"}],5:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(e[o]=r[o])}return e},_createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_userStore=require("../stores/userStore"),_userStore2=_interopRequireDefault(_userStore),_DashboardRow=require("./DashboardRow"),_DashboardRow2=_interopRequireDefault(_DashboardRow),Support=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"componentWillMount",value:function(){_viewActions2["default"].getUsage(this.props.appState.user.id)}},{key:"render",value:function(){return _react2["default"].createElement("div",null,"DASHBOARD",_react2["default"].createElement("ul",null,this.props.appState.usage.map(function(e){return _react2["default"].createElement(_DashboardRow2["default"],_extends({key:JSON.stringify(e.data.id)},e))})))}}]),t}(_react.Component);exports["default"]=Support;var styles={};
 
-},{"../actions/viewActions":2,"../config.js":17,"../stores/userStore":22,"./DashboardRow":6,"lodash":"lodash","react":"react","react-router":79}],6:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"../stores/userStore":22,"./DashboardRow":6,"lodash":"lodash","react":"react","react-router":78}],6:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),DashboardRow=function(e){return _react2["default"].createElement("li",null,_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+e.id[2]},e.data.name.first," ",e.data.name.last))};exports["default"]=DashboardRow;var styles={};
 
-},{"../config.js":17,"react":"react","react-router":79}],7:[function(require,module,exports){
+},{"../config.js":17,"react":"react","react-router":78}],7:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),Header=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("header",{style:styles.header},_react2["default"].createElement("img",{style:styles.logo,src:"img/tf-logo-white.png"}))}}]),t}(_react.Component);exports["default"]=Header;var styles={header:{backgroundColor:_config2["default"].themeStyles.brandGreen,padding:"20px 0 10px",height:20,position:"fixed",top:0,left:0,width:"100%",zIndex:99999},logo:{display:"block",margin:"0 auto",width:140,height:19}};
 
 },{"../config.js":17,"react":"react"}],8:[function(require,module,exports){
@@ -25,13 +25,13 @@
 },{"../actions/viewActions":2,"../config.js":17,"lodash":"lodash","react":"react"}],9:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),Navigation=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"render",value:function(){return _react2["default"].createElement("nav",{style:styles.navigation},_react2["default"].createElement("ul",{style:styles.navBar},_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.IndexLink,{to:"/",style:styles.link,activeStyle:styles.active},"H")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/search",style:styles.link,activeStyle:styles.active},"S")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/support",style:styles.link,activeStyle:styles.active},"C")),_react2["default"].createElement("li",{style:styles.navItem},_react2["default"].createElement(_reactRouter.Link,{to:"/account",style:styles.link,activeStyle:styles.active},"A"))))}}]),t}(_react.Component);exports["default"]=Navigation;var styles={navigation:{backgroundColor:_config2["default"].themeStyles.brandWhite,padding:"15px 0",position:"fixed",bottom:0,left:0,width:"100%",height:50,boxSizing:"border-box",borderTop:"1px solid "+_config2["default"].themeStyles.brandGray,zIndex:99999},navBar:{listStyle:"none",margin:0,padding:0},navItem:{display:"block","float":"left",width:"25%",boxSizing:"border-box",padding:"0 10px",textAlign:"center"},link:{color:_config2["default"].themeStyles.brandBlack},active:{color:_config2["default"].themeStyles.brandBlue,textShadow:"0 0 3px "+_config2["default"].themeStyles.brandBlue}};
 
-},{"../config.js":17,"react":"react","react-router":79}],10:[function(require,module,exports){
+},{"../config.js":17,"react":"react","react-router":78}],10:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_TeaserLink=require("./TeaserLink"),_TeaserLink2=_interopRequireDefault(_TeaserLink),PersonRow=function(e){var r=e.locations?e.locations[0].address.display:"";return _react2["default"].createElement("li",null,e.names[0].first," ",e.names[0].last," - ",r,_react2["default"].createElement(_TeaserLink2["default"],{person:e,reportType:_config2["default"].constants.reportTypes.PERSON,buttonText:"Open Report"}))};exports["default"]=PersonRow;var styles={};
 
 },{"../config.js":17,"./TeaserLink":16,"react":"react"}],11:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_react=require("react"),_react2=_interopRequireDefault(_react),_reactRouter=require("react-router"),_viewActions=require("../actions/viewActions"),_viewActions2=_interopRequireDefault(_viewActions),_reportStore=require("../stores/reportStore"),_reportStore2=_interopRequireDefault(_reportStore),Report=function(e){function t(e){_classCallCheck(this,t);var r=_possibleConstructorReturn(this,Object.getPrototypeOf(t).call(this,e));return r.state={report:null,isLoading:!1},r.onReportChange=r.onReportChange.bind(r),r}return _inherits(t,e),_createClass(t,[{key:"onReportChange",value:function(){console.log("report change triggered"),this.setState({report:_reportStore2["default"].getCurrentReport(),isLoading:!1})}},{key:"componentWillMount",value:function(){_reportStore2["default"].addChangeListener(this.onReportChange),_viewActions2["default"].fetchReport({reportType:this.props.params.reportType,recordId:this.props.params.recordId})}},{key:"componentWillReceiveProps",value:function(e){console.log("componentWillReceiveProps"),e.params.reportType===this.props.params.reportType&&e.params.recordId===this.props.params.recordId||(this.setState({isLoading:!0}),_viewActions2["default"].fetchReport({reportType:e.params.reportType,recordId:e.params.recordId}))}},{key:"componentWillUnmount",value:function(){_reportStore2["default"].removeChangeListener(this.onReportChange)}},{key:"render",value:function(){return console.log("report rendering"),console.log(this.state.report),this.state.report?this.state.isLoading?_react2["default"].createElement("div",{style:styles.loading},_react2["default"].createElement("div",{style:styles.loader},_react2["default"].createElement("div",{style:styles.loadingText},"LOADING...")),_react2["default"].createElement(PersonReport,{person:this.state.report})):_react2["default"].createElement("div",null,_react2["default"].createElement(PersonReport,{person:this.state.report})):_react2["default"].createElement("div",null,"Fetching Record ID: ",this.props.params.recordId," ...")}}]),t}(_react.Component);exports["default"]=Report;var PersonReport=function(e){var t=e.person,r=(e.person.reportMeta.isPremium,[]);return r.push(_react2["default"].createElement(PersonalSection,{key:"report-section-"+Math.ceil(1e4*Math.random()),person:t})),_react2["default"].createElement("div",null,_react2["default"].createElement("p",null,t.names[0].first," ",t.names[0].last," - ",t.reportMeta.recordId,_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/8fa0274d-9c15-4595-9367-c8e1ab595087"},"Go to Joe's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/51070b95-0216-4c80-b790-887fb3e6ebf7"},"Go to Brian's report"),_react2["default"].createElement("br",null),_react2["default"].createElement(_reactRouter.Link,{to:"/people/"+Date.now()},"Go to a broken/unseen report")),_react2["default"].createElement("h1",null,"Report Data"),r)},PersonalSection=function(e){var t=e.person,r=t.names[0],o=t.names.slice(1);return _react2["default"].createElement("section",{style:styles.personalSection},_react2["default"].createElement("h3",null,"Personal Data"),_react2["default"].createElement(PersonalSectionRow,{rowLabel:"Name",key:"name-"+Math.ceil(1e5*Math.random()),rowContent:r.first+" "+r.middle+" "+r.last}),_react2["default"].createElement(PersonalSectionRowSeparator,null),o.map(function(e){return _react2["default"].createElement(PersonalSectionRow,{rowLabel:"Alias",key:"alias-"+Math.ceil(1e5*Math.random()),rowContent:e.first+" "+e.middle+" "+e.last})}))},PersonalSectionRow=function(e){return _react2["default"].createElement("div",null,e.rowLabel,": ",e.rowContent)},PersonalSectionRowSeparator=function(e){return _react2["default"].createElement("hr",null)},styles={loading:{position:"relative"},loader:{position:"fixed",top:0,left:0,right:0,bottom:0,backgroundColor:"rgba(0, 0, 0, .5)"},loadingText:{position:"absolute",top:"50%",width:"100%",textAlign:"center",textTransform:"uppercase",transform:"translateY(-50%)",fontSize:"20px"},personalSection:{}};
 
-},{"../actions/viewActions":2,"../config.js":17,"../constants/pubRecConstants":18,"../stores/reportStore":20,"lodash":"lodash","react":"react","react-router":79}],12:[function(require,module,exports){
+},{"../actions/viewActions":2,"../config.js":17,"../constants/pubRecConstants":18,"../stores/reportStore":20,"lodash":"lodash","react":"react","react-router":78}],12:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _extends=Object.assign||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var n in t)Object.prototype.hasOwnProperty.call(t,n)&&(e[n]=t[n])}return e},_config=require("../config.js"),_config2=_interopRequireDefault(_config),_react=require("react"),_react2=_interopRequireDefault(_react),_PersonRow=require("./PersonRow"),_PersonRow2=_interopRequireDefault(_PersonRow),ResultsList=function(e){return _react2["default"].createElement("ul",{id:"results"},e.results.map(function(e){return _react2["default"].createElement(_PersonRow2["default"],_extends({key:e["@search_pointer"]},e))}))};exports["default"]=ResultsList;var styles={};
 
 },{"../config.js":17,"./PersonRow":10,"react":"react"}],13:[function(require,module,exports){
@@ -56,22 +56,18 @@
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _flux=require("flux");exports["default"]=new _flux.Dispatcher;
 
 },{"flux":"flux"}],20:[function(require,module,exports){
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_events=require("events"),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);require("isomorphic-fetch");var _testPerson=require("../testPerson"),_testPerson2=_interopRequireDefault(_testPerson);require("es6-promise").polyfill();var CHANGE_EVENT="change",_reportHistory=[],_errors=null,ReportStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getCurrentReport",value:function(){return _reportHistory[_reportHistory.length-1]||null}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),reportStore=new ReportStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_REPORT:var t=_lodash2["default"].findIndex(_reportHistory,{reportMeta:{recordId:e.report.reportMeta.recordId}});t>=0&&_reportHistory.splice(t,1)[0],_reportHistory.push(e.report),_reportHistory.length>10&&_reportHistory.shift(),reportStore.emitChange();break;case _pubRecConstants2["default"].actions.FETCH_RECORD_ID:break;case _pubRecConstants2["default"].actions.RECEIVE_RECORD_ID:console.log(e.recordId),console.log(e.reportType)}}),exports["default"]=reportStore;
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var o=t[r];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,r,o){return r&&e(t.prototype,r),o&&e(t,o),t}}(),_events=require("events"),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher);require("isomorphic-fetch"),require("es6-promise").polyfill();var CHANGE_EVENT="change",_reportHistory=[],_errors=null,ReportStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getCurrentReport",value:function(){return _reportHistory[_reportHistory.length-1]||null}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),reportStore=new ReportStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_REPORT:var t=_lodash2["default"].findIndex(_reportHistory,{reportMeta:{recordId:e.report.reportMeta.recordId}});t>=0&&_reportHistory.splice(t,1)[0],_reportHistory.push(e.report),_reportHistory.length>10&&_reportHistory.shift(),reportStore.emitChange();break;case _pubRecConstants2["default"].actions.FETCH_RECORD_ID:break;case _pubRecConstants2["default"].actions.RECEIVE_RECORD_ID:console.log(e.recordId),console.log(e.reportType)}}),exports["default"]=reportStore;
 
-},{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"../testPerson":23,"es6-promise":28,"events":"events","isomorphic-fetch":47,"lodash":"lodash"}],21:[function(require,module,exports){
+},{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"es6-promise":27,"events":"events","isomorphic-fetch":46,"lodash":"lodash"}],21:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),CHANGE_EVENT="change",_results=[],_criteria={},_searching=!1,ResultsStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getAllResults",value:function(){return _results}},{key:"getCriteria",value:function(){return _criteria}},{key:"isSearching",value:function(){return _searching}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),resultsStore=new ResultsStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.UPDATE_CRITERIA:_criteria[e.updates.field]=e.updates.value,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.SEARCH:_searching=!0,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.CLEAR_SEARCH_RESULTS:_results=[],_criteria={},_searching=!1,resultsStore.emitChange();break;case _pubRecConstants2["default"].actions.RECEIVE_SEARCH_RESULTS:_searching=!1,_results=e.results,resultsStore.emitChange()}}),exports["default"]=resultsStore;
 
 },{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"events":"events","lodash":"lodash"}],22:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),_events=require("events"),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash),_dispatcher=require("../dispatcher"),_dispatcher2=_interopRequireDefault(_dispatcher),CHANGE_EVENT="change",_user=null,_usage=[],UserStore=function(e){function t(){return _classCallCheck(this,t),_possibleConstructorReturn(this,Object.getPrototypeOf(t).apply(this,arguments))}return _inherits(t,e),_createClass(t,[{key:"getUser",value:function(){return _user}},{key:"getUsage",value:function(){return _usage}},{key:"isLoggedIn",value:function(){return null!==_user}},{key:"emitChange",value:function(){this.emit(CHANGE_EVENT)}},{key:"addChangeListener",value:function(e){this.on(CHANGE_EVENT,e)}},{key:"removeChangeListener",value:function(e){this.removeListener(CHANGE_EVENT,e)}}]),t}(_events.EventEmitter),userStore=new UserStore;_dispatcher2["default"].register(function(e){switch(e.actionType){case _pubRecConstants2["default"].actions.RECEIVE_USER:_user=e.user,userStore.emitChange();break;case _pubRecConstants2["default"].actions.RECEIVE_USAGE:console.log(e.usage),_usage=e.usage,userStore.emitChange();break;case _pubRecConstants2["default"].actions.LOGOUT:_user=null,_usage=[],userStore.emitChange()}}),exports["default"]=userStore;
 
 },{"../config.js":17,"../constants/pubRecConstants":18,"../dispatcher":19,"events":"events","lodash":"lodash"}],23:[function(require,module,exports){
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic,local.person.lexis.email,local.person.lexis.teaser,pipl,local.person.npd.marriage,local.person.npd.criminal_records_name_state,local.person.bustedmugs.mugshot_search","@valid_since":{month:0,day:0,year:0},completeness:{counts:{"@id":1,"@provider_ids":3,"@search_pointer":0,accidents:0,additional_records:0,aircrafts:0,associates:0,available_criminal_records:0,bankruptcies:0,best_info:0,comp_person:0,concealed_weapon_id:0,consumer_snapshot:0,controlled_substances:0,corporate_affiliations:0,country:0,criminal_conviction_id:0,criminal_records:1,date_first_seen:1,date_last_cohabit:0,date_last_seen:1,dating_profiles:0,death_county:0,death_state:0,death_verification_code:0,divorces:1,dobs:2,dods:0,driver_licenses:0,educations:0,emails:1,ethnicity:0,faa_certifications:0,faa_licenses:0,firearm_explosives:0,foreclosures:0,gender:1,hunting_fishing_licenses:0,images:1,imposters:0,jobs:8,language:0,liens_judgments:0,locations:4,marriages:2,meta:1,names:2,notices_of_defaults:0,people_at_works:0,phones:1,possible_persons:0,possible_student_records:0,probability:0,professional_licenses:0,properties:0,providers:0,related_persons:5,relationships:0,sanctions:0,sexual_offender_id:0,sexual_offenses:0,source_sections:0,sources:8,ssn_info:0,subject_ssn_indicator:0,superior_liens:0,type:1,ucc_filings:0,urls:1,user_ids:0,usernames:0,vehicles:0,voter_registrations:0,watercrafts:0,weapon_permits:0,websites:0},scores:{naive:.3320227173438183}},type:"subject","@id":"043814721055","@provider_ids":[{id:"043814721055",provider:"local.person.lexis.basic"},{id:"043814721055",provider:"lexis"},{id:"823d2178-cc1f-490d-9877-0fcbfa64bb1e",provider:"pipl"}],"@search_pointer":"4:eJyKVsrKT1XSUQKitNKitMSifAgHDRmYGFsYmpgbGRqYmirFAgIAAP__VOELiA==",date_first_seen:{date:null,date_range:{start:{month:2,day:1,year:2004},end:{month:2,day:29,year:2004}}},date_last_seen:{date:null,date_range:{start:{month:12,day:1,year:2015},end:{month:12,day:31,year:2015}}},dobs:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date:{month:6,day:25,year:1985},date_range:null,age:30,zodiac:{sign:"cancer",overview:"Coupled Cancers will feel the effects of amorous Venus between now and October 28. Sure, you want to connect on an intellectual level, but allow for some intimate explorations to fire things up between the sheets. Single? Try something new! Though you're not one to have a booty-buddy, now might be time for a no-strings attached fling. For now, it could be much more satisfying than you've ever allowed yourself to believe.\n       ",personality:"Cancer is a water sign, symbolized by the crab. This is a nurturing, sensitive sign who enjoys the creature comforts of home. Many Cancers have a fierce domestic streak and enjoy staying home, surrounded by loved ones. This sign honors tradition and strives to uphold family values. However, Cancers are ruled by the temperamental Moon, and their moods can change at a momentâ??s notice. But, this sensitivity also makes them extremely empathetic. When you need a friend, turn to an understanding Cancer. ",description:"",date_range:"Jun 21 - Jul 22",horoscope:{horoscope:"",date:{month:5,day:26,year:2016},content:"A seemingly trivial issue seems to get harder and harder as the day goes on. You can’t quite figure out what’s what, but you can probably get some help if you ask the right person."}}},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.email","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date:{month:6,day:21,year:1985},date_range:null,age:0,zodiac:{sign:"cancer",overview:"Coupled Cancers will feel the effects of amorous Venus between now and October 28. Sure, you want to connect on an intellectual level, but allow for some intimate explorations to fire things up between the sheets. Single? Try something new! Though you're not one to have a booty-buddy, now might be time for a no-strings attached fling. For now, it could be much more satisfying than you've ever allowed yourself to believe.\n       ",personality:"Cancer is a water sign, symbolized by the crab. This is a nurturing, sensitive sign who enjoys the creature comforts of home. Many Cancers have a fierce domestic streak and enjoy staying home, surrounded by loved ones. This sign honors tradition and strives to uphold family values. However, Cancers are ruled by the temperamental Moon, and their moods can change at a momentâ??s notice. But, this sensitivity also makes them extremely empathetic. When you need a friend, turn to an understanding Cancer. ",description:"",date_range:"Jun 21 - Jul 22",horoscope:{horoscope:"",date:{month:5,day:26,year:2016},content:"A seemingly trivial issue seems to get harder and harder as the day goes on. You can’t quite figure out what’s what, but you can probably get some help if you ask the right person."}}}],dods:null,gender:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"Male"},ethnicity:null,language:null,country:null,locations:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date_first_seen:{date:null,date_range:{start:{month:2,day:1,year:2004},end:{month:2,day:29,year:2004}}},date_last_seen:{date:null,date_range:{start:{month:12,day:1,year:2015},end:{month:12,day:31,year:2015}}},shared:null,residents:null,properties:null,verified:null,"@search_pointer":"4:eJyKVrIwNlLwzcxJTC_KL05UcC5R0lFyzijNSVQIyywuSQTxEnMy0_KL8jLBHEcgYWloaWgApC0MDIyBFFw3SB6k39hIz8zUwMQMyNQ1NDTXMzA2NDFRigUEAAD__4y9HF0=",address:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"832 Milagrosa Ct\nChula Vista, CA 91910-8003",type:"Street; address contains a valid primary number range.",usage:"Residential",country:"US",county:"San Diego",county_fips:"06073",congressional_district:"51",city:"Chula Vista",state:"California",state_code:"CA",street:"832 Milagrosa Ct",street_post_direction:"",street_pre_direction:"",street_name:"Milagrosa",street_suffix:"Ct",street1:"832 Milagrosa Ct",street2:"",street_number:"832",unit_number:"",zip_code:"91910",zip4:"8003",ZipType:"Standard",po_box:"",unit_designation:"",is_deliverable:!0,is_receiving_mail:!0,coordinates:{latitude:32.65046,longitude:-117.03144,accuracy:"Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)"},time_zone:"Pacific",utc_offset:-8,dst:!0,active:!0,high_risk_indicators:null,dpv:{match_code:"Confirmed; entire address was DPV confirmed deliverable.",footnotes:"City/state/ZIP + street are all valid. ZIP+4 matched; confirmed entire address; address is valid. ",cmra:!1,vacant:!1},date_last_seen:{date:{month:12,day:31,year:2015},date_range:null},date_first_seen:{date:{month:2,day:1,year:2004},date_range:null}},crime:null,sex_offenders:null,sex_offenders_count:35,criminals:null,census:null,forecast:null,nearby_persons:null,neighbors:null,historical_neighbors:null,LocationID:"",top_cities:null,zip_codes:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date_first_seen:{date:null,date_range:{start:{month:1,day:1,year:2013},end:{month:12,day:31,year:2013}}},date_last_seen:{date:null,date_range:{start:{month:3,day:1,year:2016},end:{month:3,day:31,year:2016}}},shared:null,residents:null,properties:null,verified:null,"@search_pointer":"4:eJyKVjI0MjJV8CzOScxLUXAsS1UIzcssUTAzMFPSUQpOzFNwyUxNzweynRNzMtPyi_IyE0EcRyBhaWRoYAikzU3NjYEUxAggA2gIkDQ20jM3NDA2BTJ1DQ3N9QxNjYHKYgEBAAD__7dcHGQ=",address:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"1225 Island Ave Unit 606\nSan Diego, CA 92101-7573",type:"High-rise; address contains apartment or building sub-units.",usage:"Residential",country:"US",county:"San Diego",county_fips:"06073",congressional_district:"52",city:"San Diego",state:"California",state_code:"CA",street:"1225 Island Ave Unit 606",street_post_direction:"",street_pre_direction:"",street_name:"Island",street_suffix:"Ave",street1:"1225 Island Ave",street2:"Unit 606",street_number:"1225",unit_number:"606",zip_code:"92101",zip4:"7573",ZipType:"Standard",po_box:"",unit_designation:"Unit",is_deliverable:!0,is_receiving_mail:!0,coordinates:{latitude:32.71035,longitude:-117.15373,accuracy:"Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)"},time_zone:"Pacific",utc_offset:-8,dst:!0,active:!0,high_risk_indicators:null,dpv:{match_code:"Confirmed; entire address was DPV confirmed deliverable.",footnotes:"City/state/ZIP + street are all valid. ZIP+4 matched; confirmed entire address; address is valid. ",cmra:!1,vacant:!1},date_last_seen:{date:{month:3,day:31,year:2016},date_range:null},date_first_seen:{date:{month:1,day:1,year:2013},date_range:null}},crime:null,sex_offenders:null,sex_offenders_count:78,criminals:null,census:null,forecast:null,nearby_persons:null,neighbors:null,historical_neighbors:null,LocationID:"",top_cities:null,zip_codes:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date_first_seen:{date:null,date_range:{start:{month:1,day:1,year:2010},end:{month:12,day:31,year:2010}}},date_last_seen:{date:null,date_range:{start:{month:11,day:1,year:2014},end:{month:11,day:30,year:2014}}},shared:null,residents:null,properties:null,verified:null,"@search_pointer":"4:eJyKVjIxMzBQ8EnMzc8rUQguUTA0MlXSUQpOzFNwyUxNzweynRNzMtPyi_IyE0EcRyBhaWRoYAmkjU2NQBREM0gXiDA20rMwMDI2BzJ1DQ3N9YyMTS3MlGIBAQAA___DPxok",address:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"4600 Lamont St 125\nSan Diego, CA 92109-3529",type:"High-rise; address contains apartment or building sub-units.",usage:"Residential",country:"US",county:"San Diego",county_fips:"06073",congressional_district:"52",city:"San Diego",state:"California",state_code:"CA",street:"4600 Lamont St 125",street_post_direction:"",street_pre_direction:"",street_name:"Lamont",street_suffix:"St",street1:"4600 Lamont St",street2:"125",street_number:"4600",unit_number:"125125",zip_code:"92109",zip4:"3529",ZipType:"Standard",po_box:"",unit_designation:"",is_deliverable:!0,is_receiving_mail:!0,coordinates:{latitude:32.80237,longitude:-117.23586,accuracy:"Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)"},time_zone:"Pacific",utc_offset:-8,dst:!0,active:!0,high_risk_indicators:null,dpv:{match_code:"Confirmed By Dropping Secondary; address was DPV confirmed by dropping secondary info (apartment, suite, etc.).",footnotes:"City/state/ZIP + street are all valid. Confirmed address by dropping secondary (apartment, suite, etc.) information. ",cmra:!1,vacant:!1},date_last_seen:{date:{month:11,day:30,year:2014},date_range:null},date_first_seen:{date:{month:1,day:1,year:2010},date_range:null}},crime:null,sex_offenders:null,sex_offenders_count:12,criminals:null,census:null,forecast:null,nearby_persons:null,neighbors:null,historical_neighbors:null,LocationID:"",top_cities:null,zip_codes:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.email","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date_first_seen:null,date_last_seen:null,shared:null,residents:null,properties:null,verified:null,"@search_pointer":"4:eJyKVjI0MzBUcE0sylEITywqSs1TcClS0lHyyc9LV3BKTUzOAHKcE3My0_KL8jITQRxHIGFpYGFoCqRNDA0NgBSSdiAPbICxsZ65hYWpJZCpa2hooWdoaGlorBQLCAAA___VHBzw",address:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.email","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"1601 Earl Warren Dr\nLong Beach, CA 90815-4110",type:"Street; address contains a valid primary number range.",usage:"Commercial",country:"US",county:"Los Angeles",county_fips:"06037",congressional_district:"47",city:"Long Beach",state:"California",state_code:"CA",street:"1601 Earl Warren Dr",street_post_direction:"",street_pre_direction:"",street_name:"Earl Warren",street_suffix:"Dr",street1:"1601 Earl Warren Dr",street2:"",street_number:"1601",unit_number:"",zip_code:"90815",zip4:"4110",ZipType:"Standard",po_box:"",unit_designation:"",is_deliverable:!0,is_receiving_mail:!0,coordinates:{latitude:33.78859,longitude:-118.11913,accuracy:"Accurate to a 9-digit ZIP Code level (most precise but NOT rooftop level)"},time_zone:"Pacific",utc_offset:-8,dst:!0,active:!0,high_risk_indicators:null,dpv:{match_code:"Confirmed; entire address was DPV confirmed deliverable.",footnotes:"City/state/ZIP + street are all valid. ZIP+4 matched; confirmed entire address; address is valid. ",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null},crime:null,sex_offenders:null,sex_offenders_count:7,criminals:null,census:null,forecast:null,nearby_persons:null,neighbors:null,historical_neighbors:null,LocationID:"",top_cities:null,zip_codes:null}],educations:null,emails:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.email,pipl,pipl,pipl,pipl,pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},address:"ipod@modbikes.com",address_md5:"",disposable:!1,email_provider:!1,website:"HTTP://WWW.DAILYPRESS.COM/",login_date:{month:10,day:15,year:2003}}],images:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},source_url:"http://www.linkedin.com/pub/joe-furfaro/3a/007/712",token:"0ta0H6wdnzqYExIZlimDaqnQpKkpf-U5-clzArHz9X_1f3yokOAHp9CkNKh4ffMPpGb1XaGpqUaysmyHco818oSjx9R8SAY0TuHqSP3cJ3aiqgiHzbr8TAfuchg1YzvE9vZtS-kuWGlCiOUzny7zCGAHsTbE1WJKD5nA09vJS5wGY_5XJ-X_",thumbnail_token:"3H8Hh5AktpzdsrosmSyw9-s4feXv64kOKYMY0sc-8JmLl5dGPvnK1S2OdxcQigvJlNoLsRNIe3P755f6DxuuM92CYypyWsolE2NWnc3RDgScq_GVv2HAFNdRst8wv6EU_Ea6LASY4ptyCJ__2IiL6DVR3nEmrbf9XFwhJgQ9Ep2ceKz-7xUwoOg_E9NSeNaevOy-zmp5KHZe6Y68_DbIhUVJzOhZmD7D-7CYqY-KAKRS_T2dhfBj-PDTVWnnU-smAvM1D2EHBb8ekHdfWDOnJhVNmYipHOdCXSXYLZhgP7pJ1x5yr48i3ezU975KxfhlpqNQm65CIKruinQm2R-benTZiI5gO84eZqL5qYuF4c9Lgyuo9Sa0_6Ac1EGQh3ltO4TlTZoSmbRRTQiMHTwGeCzGwNZC05VoBXa3N1sHuE4liUmwJj4Cfw==",url:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/215/10d/108f7bb.jpg",TypeName:""}],jobs:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},title:"Graphic Designer/Web Developer, Co-Founder/Owner",organization:"Mr. Stache, Photographer",industry:"Graphic Design",date_range:{start:null,end:null},display:"Graphic Designer/Web Developer, Co-Founder/Owner at Mr. Stache, Photographer"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Front End Developer",organization:"The Control Group Media Company, Inc.",industry:"",date_range:{start:null,end:null},display:"Front End Developer at The Control Group Media Company, Inc. (since 2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},title:"Front End Development Team Lead",organization:"The Control Group Media Company, Inc.",industry:"",date_range:{start:null,end:null},display:"Front End Development Team Lead at The Control Group Media Company, Inc. (since 2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Go-to-Guy",organization:"Ultra Design Agency",industry:"",date_range:{start:{month:1,day:1,year:2012},end:{month:2,day:1,year:2013}},display:"Go-to-Guy at Ultra Design Agency (2012-2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:10,year:2013},completeness:{counts:null,scores:null},title:"Co-Founder/Owner",organization:"Mr. Stache",industry:"Graphic Design",date_range:{start:null,end:null},display:"Co-Founder/Owner at Mr. Stache (since 2011)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Project Engineer",organization:"Largo Concrete Inc.",industry:"",date_range:{start:{month:9,day:1,year:2010},end:{month:10,day:1,year:2011}},display:"Project Engineer at Largo Concrete Inc. (2010-2011)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Project Engineer",organization:"Snyder Langston",industry:"",date_range:{start:{month:6,day:1,year:2007},end:{month:10,day:1,year:2009}},display:"Project Engineer at Snyder Langston (2007-2009)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Graphic/Web Designer, Co-Founder/Owner",organization:"Mr. Stache, Photographer",industry:"",date_range:{start:null,end:null},display:"Graphic/Web Designer, Co-Founder/Owner at Mr. Stache, Photographer"}],faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"J",last:"Furfaro",prefix:"Mr",suffix:"",raw:"",display:"Joseph J Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.email","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"(619) 482-2064",number:"6194822064",iso_country:"US",formatted:{national:6194822064,e164_number:"+16194822064",international:"+1 619-482-2064",rfc3966:"tel:+1-619-482-2064",extension:"",country_code:1,country_region_iso:"US"},"@search_pointer":"",line_type:"Landline",listing_types:[],extension:"",carrier:"AT&T California",do_not_call:null,is_prepaid:null,is_connected:null,reputation:{spam_score:0,spam_index:0,level:0,details:null},listing_name:"FURFARO JOSEPH",phone_region:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"",type:"",usage:"",country:"",county:"",county_fips:"",congressional_district:"",city:"CHULA VISTA",state:"CA",state_code:"",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"91910",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:32.642526844845,longitude:-117.076307217357,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null},is_old:!1,name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.basic","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"",middle:"",last:"",prefix:"",suffix:"",raw:"FURFARO JOSEPH",display:"",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},date_first_seen:null,date_last_seen:null,high_risk_indicators:null,is_valid:null,phone_contact_score:0,phone_to_name:null,subscriber_name:"",warnings:null,subscriber_gender:"",is_commercial:null}],urls:[{inferred:!1,included_with:"",confidence:1,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:1},completeness:{counts:null,scores:null},source_id:"5013376cd23a12034c4fa1db48a5801a",name:"10Digits.us",category:"contact_details",domain:"10digits.us",url:"http://10digits.us/n/Joe_Furfaro/Sheridan_OR/9657fb687544a1cc9dd40c640adcccc2"}],usernames:null,user_ids:null,websites:null,relationships:null,related_persons:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"relative","@id":"113521617269","@provider_ids":null,"@search_pointer":"4:eJyKVlLSUfIFYrfSorTEonwgS8FXAcFBQ4aGxqZGhmaG5kZmlkqxgAAAAP__zDMN3Q==",date_first_seen:null,date_last_seen:null,dobs:null,dods:null,gender:null,ethnicity:null,language:null,country:null,locations:null,educations:null,emails:null,images:null,jobs:null,faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"",middle:"M",last:"Furfaro",prefix:"",suffix:"",raw:"",display:" M Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:null,urls:null,usernames:null,user_ids:null,websites:null,relationships:null,related_persons:null,possible_persons:null,bankruptcies:null,controlled_substances:null,sources:null,available_criminal_records:-1,criminal_records:null,marriages:null,divorces:null,additional_records:null,dating_profiles:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"relative","@id":"000875578742","@provider_ids":null,"@search_pointer":"4:eJyKVvLKL04tyFDSUQoDYrfSorTEonwgCyKsEKaAEEJDBgYGFuampuYW5iZGSrGAAAAA__8DFxLK",date_first_seen:null,date_last_seen:null,dobs:null,dods:null,gender:null,ethnicity:null,language:null,country:null,locations:null,educations:null,emails:null,images:null,jobs:null,faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"V",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph V Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:null,urls:null,usernames:null,user_ids:null,websites:null,relationships:null,related_persons:null,possible_persons:null,bankruptcies:null,controlled_substances:null,sources:null,available_criminal_records:null,criminal_records:null,marriages:null,divorces:null,additional_records:null,dating_profiles:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"relative","@id":"000875083791","@provider_ids":null,"@search_pointer":"4:eJyKVgrKTM5ILEpR0lFyAWK30qK0xKJ8IAsqruCigBBDQwYGBhbmpgYWxuaWhkqxgAAAAP__K_ETSQ==",date_first_seen:null,date_last_seen:null,dobs:null,dods:null,gender:null,ethnicity:null,language:null,country:null,locations:null,educations:null,emails:null,images:null,jobs:null,faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Richard",middle:"D",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Richard D Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:null,urls:null,usernames:null,user_ids:null,websites:null,relationships:null,related_persons:null,possible_persons:null,bankruptcies:null,controlled_substances:null,sources:null,available_criminal_records:0,criminal_records:null,marriages:null,divorces:null,additional_records:null,dating_profiles:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"relative","@id":"000875942593","@provider_ids":null,"@search_pointer":"4:eJyKVgpOzEspSlTSUfIFYrfSorTEonwgCyKs4KuAEEJDBgYGFuamliZGppbGSrGAAAAA___4WRKX",date_first_seen:null,date_last_seen:null,dobs:null,dods:null,gender:null,ethnicity:null,language:null,country:null,locations:null,educations:null,emails:null,images:null,jobs:null,faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Sandra",middle:"M",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Sandra M Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:null,urls:null,usernames:null,user_ids:null,websites:null,relationships:null,related_persons:null,possible_persons:null,bankruptcies:null,controlled_substances:null,sources:null,available_criminal_records:0,criminal_records:null,marriages:null,divorces:null,additional_records:null,dating_profiles:null},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"relative","@id":"000875942193","@provider_ids":null,"@search_pointer":"4:eJyKVgpOzEspSlTSUXIEYrfSorTEonwgCyKs4KiAEEJDBgYGFuamliZGhpbGSrGAAAAA___zcRJ7",date_first_seen:null,date_last_seen:null,dobs:null,dods:null,gender:null,ethnicity:null,language:null,country:null,locations:null,educations:null,emails:null,images:null,jobs:null,faa_licenses:null,names:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.lexis.teaser","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Sandra",middle:"A",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Sandra A Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],phones:null,urls:null,usernames:null,user_ids:null,websites:null,relationships:null,related_persons:null,possible_persons:null,bankruptcies:null,controlled_substances:null,sources:null,available_criminal_records:0,criminal_records:null,marriages:null,divorces:null,additional_records:null,dating_profiles:null}],possible_persons:null,bankruptcies:null,controlled_substances:null,sources:[{inferred:!1,included_with:"",confidence:1,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"USA Contacts",category:"contact_details",domain:"","@origin_url":"",names:[{inferred:!1,included_with:"",confidence:1,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:1,year:2014},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:[{inferred:!1,included_with:"",confidence:1,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:1,year:2014},completeness:{counts:null,scores:null},display:"(503) 949-3514",number:"5039493514",iso_country:"US",formatted:{national:5039493514,e164_number:"+15039493514",international:"+1 503-949-3514",rfc3966:"tel:+1-503-949-3514",extension:"",country_code:1,country_region_iso:"US"},"@search_pointer":"",line_type:"",listing_types:null,extension:"",carrier:"",do_not_call:null,is_prepaid:null,is_connected:null,reputation:{spam_score:0,spam_index:0,level:0,details:null},phone_region:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},display:"",type:"",usage:"",country:"",county:"",county_fips:"",congressional_district:"",city:"",state:"",state_code:"",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null},is_old:!1,date_first_seen:null,date_last_seen:null,high_risk_indicators:null,is_valid:null,phone_contact_score:0,phone_to_name:null,subscriber_name:"",warnings:null,subscriber_gender:"",is_commercial:null}],gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:1,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:1,year:2014},completeness:{counts:null,scores:null},display:"1601 Earl Warren Dr. N211\nSheridan, OR 97378",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Sheridan",state:"Oregon",state_code:"OR",street:"1601 Earl Warren Dr. N211",street_post_direction:"",street_pre_direction:"",street_name:"Earl Warren Dr. N211",street_suffix:"",street1:"1601 Earl Warren Dr. N211",street2:"",street_number:"1601",unit_number:"",zip_code:"97378",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:null,images:null,tags:null,urls:null},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"LinkedIn",category:"professional_and_business",domain:"linkedin.com","@origin_url":"http://www.linkedin.com/pub/joe-furfaro/3a/007/712",names:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:10,year:2013},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},display:"San Diego, CA",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"San Diego",state:"California",state_code:"CA",street:"",street_post_direction:"",street_pre_direction:"",
-street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},title:"Graphic Designer/Web Developer, Co-Founder/Owner",organization:"Mr. Stache, Photographer",industry:"Graphic Design",date_range:{start:null,end:null},display:"Graphic Designer/Web Developer, Co-Founder/Owner at Mr. Stache, Photographer"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Front End Developer",organization:"The Control Group Media Company, Inc.",industry:"",date_range:{start:null,end:null},display:"Front End Developer at The Control Group Media Company, Inc. (since 2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},title:"Front End Development Team Lead",organization:"The Control Group Media Company, Inc.",industry:"",date_range:{start:null,end:null},display:"Front End Development Team Lead at The Control Group Media Company, Inc. (since 2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Go-to-Guy",organization:"Ultra Design Agency",industry:"",date_range:{start:{month:1,day:1,year:2012},end:{month:2,day:1,year:2013}},display:"Go-to-Guy at Ultra Design Agency (2012-2013)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:10,year:2013},completeness:{counts:null,scores:null},title:"Co-Founder/Owner",organization:"Mr. Stache",industry:"Graphic Design",date_range:{start:null,end:null},display:"Co-Founder/Owner at Mr. Stache (since 2011)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Project Engineer",organization:"Largo Concrete Inc.",industry:"",date_range:{start:{month:9,day:1,year:2010},end:{month:10,day:1,year:2011}},display:"Project Engineer at Largo Concrete Inc. (2010-2011)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Project Engineer",organization:"Snyder Langston",industry:"",date_range:{start:{month:6,day:1,year:2007},end:{month:10,day:1,year:2009}},display:"Project Engineer at Snyder Langston (2007-2009)"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},title:"Graphic/Web Designer, Co-Founder/Owner",organization:"Mr. Stache, Photographer",industry:"",date_range:{start:null,end:null},display:"Graphic/Web Designer, Co-Founder/Owner at Mr. Stache, Photographer"}],educations:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:12,day:10,year:2013},completeness:{counts:null,scores:null},start:{month:1,day:1,year:2003},end:{month:12,day:31,year:2008},degree:"Bachelor of Science - Construction Engineering Management",display:"Bachelor of Science - Construction Engineering Management from California State University-Long Beach (2003-2008)",school:"California State University-Long Beach"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},start:{month:1,day:1,year:1999},end:{month:12,day:31,year:2003},degree:"",display:"University of San Diego High School (1999-2003)",school:"University of San Diego High School"}],relationships:null,user_ids:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"3a/7/712@linkedin"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"137368382@linkedin"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"#7120073a@linkedin"}],images:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:5,year:2015},completeness:{counts:null,scores:null},source_url:"http://www.linkedin.com/pub/joe-furfaro/3a/007/712",token:"0ta0H6wdnzqYExIZlimDaqnQpKkpf-U5-clzArHz9X_1f3yokOAHp9CkNKh4ffMPpGb1XaGpqUaysmyHco818oSjx9R8SAY0TuHqSP3cJ3aiqgiHzbr8TAfuchg1YzvE9vZtS-kuWGlCiOUzny7zCGAHsTbE1WJKD5nA09vJS5wGY_5XJ-X_",thumbnail_token:"3H8Hh5AktpzdsrosmSyw9-s4feXv64kOKYMY0sc-8JmLl5dGPvnK1S2OdxcQigvJlNoLsRNIe3P755f6DxuuM92CYypyWsolE2NWnc3RDgScq_GVv2HAFNdRst8wv6EU_Ea6LASY4ptyCJ__2IiL6DVR3nEmrbf9XFwhJgQ9Ep2ceKz-7xUwoOg_E9NSeNaevOy-zmp5KHZe6Y68_DbIhUVJzOhZmD7D-7CYqY-KAKRS_T2dhfBj-PDTVWnnU-smAvM1D2EHBb8ekHdfWDOnJhVNmYipHOdCXSXYLZhgP7pJ1x5yr48i3ezU975KxfhlpqNQm65CIKruinQm2R-benTZiI5gO84eZqL5qYuF4c9Lgyuo9Sa0_6Ac1EGQh3ltO4TlTZoSmbRRTQiMHTwGeCzGwNZC05VoBXa3N1sHuE4liUmwJj4Cfw==",url:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/215/10d/108f7bb.jpg",TypeName:""}],tags:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Web Development"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Photoshop"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Illustrator"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Digital Photography"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Wordpress"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Project Management"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"HTML 5"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"CSS3"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"jQuery"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"PHP"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Screen Printing"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Aperture"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Mac OS X"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Construction Estimating"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Project Engineering"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Construction Management"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Logo Design"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Graphics"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Adobe Creative Suite"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"CSS"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"JavaScript"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"skill",content:"Website Development"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"group",content:"Founders Under 40"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"group",content:"Legit Entrepreneurs Network"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"group",content:"Screen Printers Unite & Grow"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},"@classification":"livepreview",content:"Joe Furfaro. Graphic/Web Designer, Co-Founder/Owner at Mr. Stache, Photographer. Greater San Diego Area. |. Graphic Design. Co-Founder/Owner at Mr Stache. Go-to-Guy at Ultra Design Agency (Sole Proprietorship), Project Engineer at Largo Concrete Inc. Project Engineer at Snyder Langston. California State University-Long Beach. I'm the kid that asked \"why?\" in your high school Math class. Never one to accept anything without reason, I strive to better my skills with every project. In the world of web design and development, what worked yesterday will be accomplished more beautifully and efficiently tomorrow. My strong desire to always improve upon any given solution keeps me at the forefront of development standards, and one step ahead of the design trends. I'm a firm believer of reinventing the wheel - just because it's been done doesn't mean it shouldn't be done again. On development only projects, designers will hear me say \"I'll figure it out\" far more often than \"You can't do that\", which allows them an open world of design possibilities that sets clients' websites above the rest. My strongest fields are those that merge both right and left brain thinking, so it's of no coincidence that my professional services are web design/development, and photography. Specialties: Pixel perfect web design/development, cost/project management, creative problem solving, lifestyle/editorial photography"}],urls:[{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},source_id:"",name:"",category:"personal_profiles",domain:"joefurfaro.com",url:"http://www.joefurfaro.com"},{inferred:!1,included_with:"",confidence:.99683,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:1,year:2014},completeness:{counts:null,scores:null},source_id:"",name:"",category:"personal_profiles",domain:"mrstachedesign.com",url:"http://www.mrstachedesign.com"}]},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"USA Auto Owners",category:"contact_details",domain:"","@origin_url":"",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:2,year:2013},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:2,year:2013},completeness:{counts:null,scores:null},display:"1121 Crandon Boulevard E506\nKey Biscayne, FL 33149",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Key Biscayne",state:"Florida",state_code:"FL",street:"1121 Crandon Boulevard E506",street_post_direction:"",street_pre_direction:"",street_name:"Crandon Boulevard",street_suffix:"",street1:"1121 Crandon Boulevard",street2:"E506",street_number:"1121",unit_number:"E506",zip_code:"33149",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:null,images:null,tags:null,urls:null},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"USA Auto Owners",category:"contact_details",domain:"","@origin_url":"",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:2,year:2013},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"V",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph V Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:2,year:2013},completeness:{counts:null,scores:null},display:"1121 Crandon Boulevard E506\nKey Biscayne, FL 33149",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Key Biscayne",state:"Florida",state_code:"FL",street:"1121 Crandon Boulevard E506",street_post_direction:"",street_pre_direction:"",street_name:"Crandon Boulevard",street_suffix:"",street1:"1121 Crandon Boulevard",street2:"E506",street_number:"1121",unit_number:"E506",zip_code:"33149",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:null,images:null,tags:null,urls:null},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"Amazon",category:"personal_profiles",domain:"amazon.com","@origin_url":"http://www.amazon.com/gp/pdp/profile/A301MN1RFO8RSS/",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:9,day:30,year:2009},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:9,day:30,year:2009},completeness:{counts:null,scores:null},display:"Chula Vista, CA",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Chula Vista",state:"California",state_code:"CA",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:null,images:null,tags:null,urls:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:4,day:27,year:2010},completeness:{counts:null,scores:null},source_id:"",name:"",category:"personal_profiles",domain:"amazon.com",url:"http://www.amazon.com/wishlist/YV7YCE6XJ8PC"}]},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"Infospace",category:"contact_details",domain:"kevdb.infospace.com","@origin_url":"http://kevdb.infospace.com/home/white-pages/kevdb?showrec=21202951res-us&OTMPL=/white-pages/details.htm",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:3,day:8,year:2008},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"V",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph V Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:3,day:8,year:2008},completeness:{counts:null,scores:null},display:"Key Biscayne, FL 33149",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Key Biscayne",state:"Florida",state_code:"FL",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"33149",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:null,images:null,tags:null,urls:null},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"hi5",category:"personal_profiles",domain:"hi5.com","@origin_url":"http://www.hi5.com/friend/p96039145--profile--html",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:20,year:2009},completeness:{counts:null,scores:null},type:"alias",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:10,day:20,year:2009},completeness:{counts:null,scores:null},display:"Chula Vista, CA",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Chula Vista",state:"California",state_code:"CA",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"96039145@hi5"}],images:null,tags:null,urls:null},{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},name:"Tagged",category:"personal_profiles",domain:"tagged.com","@origin_url":"http://www.tagged.com/mypage.html?uid=27371461",names:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:18,year:2008},completeness:{counts:null,scores:null},type:"",first:"Joe",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joe Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}}],emails:null,usernames:null,phones:null,gender:null,dob:null,language:null,ethnicity:null,origin_countries:null,addresses:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:18,year:2008},completeness:{counts:null,scores:null},display:"Chula Vista, CA",type:"",usage:"",country:"US",county:"",county_fips:"",congressional_district:"",city:"Chula Vista",state:"California",state_code:"CA",street:"",street_post_direction:"",street_pre_direction:"",street_name:"",street_suffix:"",street1:"",street2:"",street_number:"",unit_number:"",zip_code:"",zip4:"",ZipType:"",po_box:"",unit_designation:"",is_deliverable:!1,is_receiving_mail:!1,coordinates:{latitude:null,longitude:null,accuracy:""},time_zone:"",utc_offset:0,dst:!1,active:!1,high_risk_indicators:null,dpv:{match_code:"",footnotes:"",cmra:!1,vacant:!1},date_last_seen:null,date_first_seen:null}],jobs:null,educations:null,relationships:null,user_ids:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},content:"27371461@tagged"}],images:null,tags:null,urls:[{inferred:!1,included_with:"",confidence:.69797,score:0,criteria:null,"@provider":"pipl","@valid_since":{month:1,day:18,year:2008},completeness:{counts:null,scores:null},source_id:"",name:"",category:"personal_profiles",domain:"tagged.com",url:"http://www.tagged.com/photo_gallery.html?uid=27371461"}]}],available_criminal_records:null,criminal_records:[{inferred:!1,included_with:"",confidence:0,score:.5,criteria:null,"@provider":"NPD","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},date_last_seen:null,matching_fields:{city:!1,data_source_state:!0,dob:!1,first:!0,last:!0,middle:!0,state:!1,zip_code:!1},offender_id:"",case_number:"08807LNFurfaro",county_of_origin:"",doc_number:"",case_filing_date:{month:9,day:5,year:2009},eyes:"",hair:"",height:"",weight:"",race:"",sex:"",skin:"",data_source:"Orangecaview",data_source_name:"CA Orange Superior Court",data_source_state:"CA",ssn:"",unique_id:"",state_of_birth:"",state_of_origin:"",status:"",address:null,name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"James",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph James Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},dob:null,case_type_description:"",akas:null,offenses:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"NPD","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},adjudication_withheld:"",case_number:"08807LNFurfaro",case_type:"",case_type_description:"",count:"",county:"",description:"Citation",maximum_term:"",minimum_term:"",number_counts:"",offense_date:null,offense_type:"",sentence:"",sentence_length_description:"",sentence_date:null,incarceration_date:null,appeal:null,arrest:null,court:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},case_number:"",costs:"",description:"Ca Orange Superior Court",disposition:"",disposition_date:{month:9,day:15,year:2009},fine:"",level:"",offense:"",plea:"",statute:"",suspended_fine:"",conviction_date:null,conviction_place:""},court_sentence:null,ncic_code:"",charge_category:"Criminal/traffic"}],prison_sentences:null,parole_sentences:null,activities:null,mugshots:null,military_service:"",generation:"",dob_aka:null,scars_marks_tattoos:null}],marriages:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.npd.marriage","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},person1_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"C",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph C Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},person2_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Delores",middle:"E",last:"Branch",prefix:"",suffix:"",raw:"",display:"Delores E Branch",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},state:"CT",county:"",date:{month:9,day:4,year:1993}},{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.npd.marriage","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},person1_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"C",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph C Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},person2_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Patricia",middle:"D",last:"Moore",prefix:"",suffix:"",raw:"",display:"Patricia D Moore",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},state:"CA",county:"Orange",date:{month:3,day:5,year:1971}}],divorces:[{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"local.person.npd.marriage","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},person1_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Joseph",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Joseph Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},person2_name:{inferred:!1,included_with:"",confidence:0,score:0,criteria:null,"@provider":"","@valid_since":{month:0,day:0,year:0},completeness:{counts:null,scores:null},type:"",first:"Marie",middle:"",last:"Furfaro",prefix:"",suffix:"",raw:"",display:"Marie Furfaro",name_checks:null,first_meta:{possible_misspelling:!1,type:"",origin:"",usage:""}},state:"FL",county:"Marion",date:{month:1,day:30,year:1998},decree_type:"",docket_number:""}],additional_records:null,dating_profiles:null};
-
-},{}],24:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function serialize(e,t){var o=[];for(var n in e)if(e.hasOwnProperty(n)){var r=t?t+"["+n+"]":n,s=e[n];o.push("object"==("undefined"==typeof s?"undefined":_typeof(s))?serialize(s,r):encodeURIComponent(r)+"="+encodeURIComponent(s))}return o.join("&")}Object.defineProperty(exports,"__esModule",{value:!0});var _createClass=function(){function e(e,t){for(var o=0;o<t.length;o++){var n=t[o];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,o,n){return o&&e(t.prototype,o),n&&e(t,n),t}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e},_lodash=require("lodash"),_lodash2=_interopRequireDefault(_lodash);require("isomorphic-fetch");var _pubRecConstants=require("../constants/pubRecConstants"),_pubRecConstants2=_interopRequireDefault(_pubRecConstants),_config=require("../config.js"),_config2=_interopRequireDefault(_config),_serverActions=require("../actions/serverActions"),_serverActions2=_interopRequireDefault(_serverActions);require("es6-promise").polyfill();var _jwt=null,PubRecAPI=function(){function e(){_classCallCheck(this,e)}return _createClass(e,[{key:"search",value:function(e){fetch(_config2["default"].API_ROOT+"/people/?"+serialize(e)).then(function(e){return e.json()}).then(function(e){_serverActions2["default"].receiveSearchResults(e.people)})}},{key:"fetchRecordId",value:function(e,t){fetch(_config2["default"].API_ROOT+"/person",{headers:{"Content-Type":"application/json",Authorization:"Bearer "+_jwt},method:"POST",body:JSON.stringify({person:e})}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveRecordId(e.recordId,t):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"checkLocalUser",value:function(){console.log("Checking for local user");var e=window.localStorage.getItem("user");if(e)try{e=JSON.parse(e),_jwt=e.jwt,_serverActions2["default"].receiveUser(e)}catch(t){}}},{key:"login",value:function(e){fetch(_config2["default"].API_ROOT+"/login",{headers:{"Content-Type":"application/x-www-form-urlencoded"},method:"POST",body:serialize(e)}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?(_jwt=e.user.jwt,window.localStorage.setItem("user",JSON.stringify(e.user)),_serverActions2["default"].receiveUser(e.user)):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"logout",value:function(){_jwt=null,window.localStorage.removeItem("user"),window.localStorage.removeItem("usage")}},{key:"fetchReport",value:function(e){fetch(_config2["default"].API_ROOT+"/people/"+e.recordId,{Authorization:"Bearer "+_jwt}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?_serverActions2["default"].receiveReport(e.report):console.log(e.errors)})["catch"](function(e){console.error(e)})}},{key:"getUsage",value:function(e){fetch(_config2["default"].API_ROOT+"/users/"+e+"/usage",{headers:{"Content-Type":"application/x-www-form-urlencoded",Authorization:"Bearer "+_jwt}}).then(function(e){if("application/json"!==e.headers.get("Content-Type")){var t=new Error(e.statusText);throw t.response=e,t}return e}).then(function(e){return e.json()}).then(function(e){e.success?(console.log("asgfadsf"),_serverActions2["default"].receiveUsage(e.records),window.localStorage.setItem("usage",JSON.stringify(e.records))):_errors=e.errors})["catch"](function(e){console.error(e)})}}]),e}(),pubRecAPI=new PubRecAPI;exports["default"]=pubRecAPI;
 
-},{"../actions/serverActions":1,"../config.js":17,"../constants/pubRecConstants":18,"es6-promise":28,"isomorphic-fetch":47,"lodash":"lodash"}],25:[function(require,module,exports){
+},{"../actions/serverActions":1,"../config.js":17,"../constants/pubRecConstants":18,"es6-promise":27,"isomorphic-fetch":46,"lodash":"lodash"}],24:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -167,7 +163,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":26,"./lib/keys.js":27}],26:[function(require,module,exports){
+},{"./lib/is_arguments.js":25,"./lib/keys.js":26}],25:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -189,7 +185,7 @@ function unsupported(object){
     false;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -200,7 +196,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -1164,7 +1160,7 @@ function shim (obj) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":48}],29:[function(require,module,exports){
+},{"_process":47}],28:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1196,7 +1192,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],30:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1255,7 +1251,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -1332,7 +1328,7 @@ function readState(key) {
 }
 }).call(this,require('_process'))
 
-},{"_process":48,"warning":88}],32:[function(require,module,exports){
+},{"_process":47,"warning":87}],31:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1408,13 +1404,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],33:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],34:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1465,7 +1461,7 @@ function parsePath(path) {
 }
 }).call(this,require('_process'))
 
-},{"_process":48,"warning":88}],35:[function(require,module,exports){
+},{"_process":47,"warning":87}],34:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1645,7 +1641,7 @@ exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":29,"./DOMStateStorage":31,"./DOMUtils":32,"./ExecutionEnvironment":33,"./PathUtils":34,"./createDOMHistory":36,"_process":48,"invariant":46}],36:[function(require,module,exports){
+},{"./Actions":28,"./DOMStateStorage":30,"./DOMUtils":31,"./ExecutionEnvironment":32,"./PathUtils":33,"./createDOMHistory":35,"_process":47,"invariant":45}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1689,7 +1685,7 @@ exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./DOMUtils":32,"./ExecutionEnvironment":33,"./createHistory":38,"_process":48,"invariant":46}],37:[function(require,module,exports){
+},{"./DOMUtils":31,"./ExecutionEnvironment":32,"./createHistory":37,"_process":47,"invariant":45}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1939,7 +1935,7 @@ exports['default'] = createHashHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":29,"./DOMStateStorage":31,"./DOMUtils":32,"./ExecutionEnvironment":33,"./PathUtils":34,"./createDOMHistory":36,"_process":48,"invariant":46,"warning":88}],38:[function(require,module,exports){
+},{"./Actions":28,"./DOMStateStorage":30,"./DOMUtils":31,"./ExecutionEnvironment":32,"./PathUtils":33,"./createDOMHistory":35,"_process":47,"invariant":45,"warning":87}],37:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2231,7 +2227,7 @@ exports['default'] = createHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":29,"./AsyncUtils":30,"./PathUtils":34,"./createLocation":39,"./deprecate":41,"./runTransitionHook":42,"_process":48,"deep-equal":25,"warning":88}],39:[function(require,module,exports){
+},{"./Actions":28,"./AsyncUtils":29,"./PathUtils":33,"./createLocation":38,"./deprecate":40,"./runTransitionHook":41,"_process":47,"deep-equal":24,"warning":87}],38:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2286,7 +2282,7 @@ exports['default'] = createLocation;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":29,"./PathUtils":34,"_process":48,"warning":88}],40:[function(require,module,exports){
+},{"./Actions":28,"./PathUtils":33,"_process":47,"warning":87}],39:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2444,7 +2440,7 @@ exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":29,"./PathUtils":34,"./createHistory":38,"_process":48,"invariant":46,"warning":88}],41:[function(require,module,exports){
+},{"./Actions":28,"./PathUtils":33,"./createHistory":37,"_process":47,"invariant":45,"warning":87}],40:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2467,7 +2463,7 @@ exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":48,"warning":88}],42:[function(require,module,exports){
+},{"_process":47,"warning":87}],41:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2495,7 +2491,7 @@ exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":48,"warning":88}],43:[function(require,module,exports){
+},{"_process":47,"warning":87}],42:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2657,7 +2653,7 @@ exports['default'] = useBasename;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./ExecutionEnvironment":33,"./PathUtils":34,"./deprecate":41,"./runTransitionHook":42,"_process":48,"warning":88}],44:[function(require,module,exports){
+},{"./ExecutionEnvironment":32,"./PathUtils":33,"./deprecate":40,"./runTransitionHook":41,"_process":47,"warning":87}],43:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2837,7 +2833,7 @@ exports['default'] = useQueries;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PathUtils":34,"./deprecate":41,"./runTransitionHook":42,"_process":48,"query-string":49,"warning":88}],45:[function(require,module,exports){
+},{"./PathUtils":33,"./deprecate":40,"./runTransitionHook":41,"_process":47,"query-string":48,"warning":87}],44:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -2881,8 +2877,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
     return targetComponent;
 };
 
-},{}],46:[function(require,module,exports){
-(function (process){
+},{}],45:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -2906,7 +2901,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
  */
 
 var invariant = function(condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
+  if ("development" !== 'production') {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
     }
@@ -2935,9 +2930,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-}).call(this,require('_process'))
-
-},{"_process":48}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
@@ -2945,7 +2938,7 @@ module.exports = invariant;
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":89}],48:[function(require,module,exports){
+},{"whatwg-fetch":88}],47:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -3041,7 +3034,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],49:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 
@@ -3109,7 +3102,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":87}],50:[function(require,module,exports){
+},{"strict-uri-encode":86}],49:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3198,7 +3191,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3231,7 +3224,7 @@ exports.default = History;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./routerWarning":83,"_process":48}],52:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./routerWarning":82,"_process":47}],51:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3260,7 +3253,7 @@ var IndexLink = _react2.default.createClass({
 
 exports.default = IndexLink;
 module.exports = exports['default'];
-},{"./Link":57,"react":"react"}],53:[function(require,module,exports){
+},{"./Link":56,"react":"react"}],52:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3327,7 +3320,7 @@ exports.default = IndexRedirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./Redirect":60,"./routerWarning":83,"_process":48,"invariant":46,"react":"react"}],54:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./Redirect":59,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],53:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3391,7 +3384,7 @@ exports.default = IndexRoute;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./RouteUtils":63,"./routerWarning":83,"_process":48,"invariant":46,"react":"react"}],55:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],54:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3424,7 +3417,7 @@ var component = exports.component = oneOfType([func, string]);
 var components = exports.components = oneOfType([component, object]);
 var route = exports.route = oneOfType([object, element]);
 var routes = exports.routes = oneOfType([route, arrayOf(route)]);
-},{"react":"react"}],56:[function(require,module,exports){
+},{"react":"react"}],55:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3496,7 +3489,7 @@ exports.default = Lifecycle;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":83,"_process":48,"invariant":46,"react":"react"}],57:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],56:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3673,7 +3666,7 @@ exports.default = Link;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./PropTypes":59,"./routerWarning":83,"_process":48,"react":"react"}],58:[function(require,module,exports){
+},{"./PropTypes":58,"./routerWarning":82,"_process":47,"react":"react"}],57:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3889,7 +3882,7 @@ function formatPattern(pattern, params) {
 }
 }).call(this,require('_process'))
 
-},{"_process":48,"invariant":46}],59:[function(require,module,exports){
+},{"_process":47,"invariant":45}],58:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3994,7 +3987,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = defaultExport;
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./deprecateObjectProperties":75,"./routerWarning":83,"_process":48,"react":"react"}],60:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./deprecateObjectProperties":74,"./routerWarning":82,"_process":47,"react":"react"}],59:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4100,7 +4093,7 @@ exports.default = Redirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./PatternUtils":58,"./RouteUtils":63,"_process":48,"invariant":46,"react":"react"}],61:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./PatternUtils":57,"./RouteUtils":62,"_process":47,"invariant":45,"react":"react"}],60:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4161,7 +4154,7 @@ exports.default = Route;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./RouteUtils":63,"_process":48,"invariant":46,"react":"react"}],62:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"_process":47,"invariant":45,"react":"react"}],61:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4210,7 +4203,7 @@ exports.default = RouteContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./routerWarning":83,"_process":48,"react":"react"}],63:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"react":"react"}],62:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4326,7 +4319,7 @@ function createRoutes(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./routerWarning":83,"_process":48,"react":"react"}],64:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47,"react":"react"}],63:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4538,7 +4531,7 @@ exports.default = Router;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./InternalPropTypes":55,"./RouteUtils":63,"./RouterContext":65,"./RouterUtils":66,"./createTransitionManager":74,"./routerWarning":83,"_process":48,"history/lib/createHashHistory":37,"history/lib/useQueries":44,"react":"react"}],65:[function(require,module,exports){
+},{"./InternalPropTypes":54,"./RouteUtils":62,"./RouterContext":64,"./RouterUtils":65,"./createTransitionManager":73,"./routerWarning":82,"_process":47,"history/lib/createHashHistory":36,"history/lib/useQueries":43,"react":"react"}],64:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4698,7 +4691,7 @@ exports.default = RouterContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":63,"./deprecateObjectProperties":75,"./getRouteParams":77,"./routerWarning":83,"_process":48,"invariant":46,"react":"react"}],66:[function(require,module,exports){
+},{"./RouteUtils":62,"./deprecateObjectProperties":74,"./getRouteParams":76,"./routerWarning":82,"_process":47,"invariant":45,"react":"react"}],65:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4734,7 +4727,7 @@ function createRoutingHistory(history, transitionManager) {
 }
 }).call(this,require('_process'))
 
-},{"./deprecateObjectProperties":75,"_process":48}],67:[function(require,module,exports){
+},{"./deprecateObjectProperties":74,"_process":47}],66:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4768,7 +4761,7 @@ exports.default = RoutingContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouterContext":65,"./routerWarning":83,"_process":48,"react":"react"}],68:[function(require,module,exports){
+},{"./RouterContext":64,"./routerWarning":82,"_process":47,"react":"react"}],67:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4894,7 +4887,7 @@ function runLeaveHooks(routes) {
 }
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":50,"./routerWarning":83,"_process":48}],69:[function(require,module,exports){
+},{"./AsyncUtils":49,"./routerWarning":82,"_process":47}],68:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4945,7 +4938,7 @@ exports.default = function () {
 };
 
 module.exports = exports['default'];
-},{"./RouterContext":65,"react":"react"}],70:[function(require,module,exports){
+},{"./RouterContext":64,"react":"react"}],69:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4962,7 +4955,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createBrowserHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":73,"history/lib/createBrowserHistory":35}],71:[function(require,module,exports){
+},{"./createRouterHistory":72,"history/lib/createBrowserHistory":34}],70:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5040,7 +5033,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports.default = computeChangedRoutes;
 module.exports = exports['default'];
-},{"./PatternUtils":58}],72:[function(require,module,exports){
+},{"./PatternUtils":57}],71:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5073,7 +5066,7 @@ function createMemoryHistory(options) {
   return history;
 }
 module.exports = exports['default'];
-},{"history/lib/createMemoryHistory":40,"history/lib/useBasename":43,"history/lib/useQueries":44}],73:[function(require,module,exports){
+},{"history/lib/createMemoryHistory":39,"history/lib/useBasename":42,"history/lib/useQueries":43}],72:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5093,7 +5086,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 module.exports = exports['default'];
-},{"./useRouterHistory":84}],74:[function(require,module,exports){
+},{"./useRouterHistory":83}],73:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5404,7 +5397,7 @@ function createTransitionManager(history, routes) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./TransitionUtils":68,"./computeChangedRoutes":71,"./getComponents":76,"./isActive":80,"./matchRoutes":82,"./routerWarning":83,"_process":48,"history/lib/Actions":29}],75:[function(require,module,exports){
+},{"./TransitionUtils":67,"./computeChangedRoutes":70,"./getComponents":75,"./isActive":79,"./matchRoutes":81,"./routerWarning":82,"_process":47,"history/lib/Actions":28}],74:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5483,7 +5476,7 @@ if (process.env.NODE_ENV !== 'production') {
 exports.default = deprecateObjectProperties;
 }).call(this,require('_process'))
 
-},{"./routerWarning":83,"_process":48}],76:[function(require,module,exports){
+},{"./routerWarning":82,"_process":47}],75:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -5566,7 +5559,7 @@ exports.default = getComponents;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":50,"./deprecateObjectProperties":75,"./routerWarning":83,"_process":48}],77:[function(require,module,exports){
+},{"./AsyncUtils":49,"./deprecateObjectProperties":74,"./routerWarning":82,"_process":47}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5595,7 +5588,7 @@ function getRouteParams(route, params) {
 
 exports.default = getRouteParams;
 module.exports = exports['default'];
-},{"./PatternUtils":58}],78:[function(require,module,exports){
+},{"./PatternUtils":57}],77:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5612,7 +5605,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":73,"history/lib/createHashHistory":37}],79:[function(require,module,exports){
+},{"./createRouterHistory":72,"history/lib/createHashHistory":36}],78:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5769,7 +5762,7 @@ exports.applyRouterMiddleware = _applyRouterMiddleware3.default;
 exports.browserHistory = _browserHistory3.default;
 exports.hashHistory = _hashHistory3.default;
 exports.createMemoryHistory = _createMemoryHistory3.default;
-},{"./History":51,"./IndexLink":52,"./IndexRedirect":53,"./IndexRoute":54,"./Lifecycle":56,"./Link":57,"./PatternUtils":58,"./PropTypes":59,"./Redirect":60,"./Route":61,"./RouteContext":62,"./RouteUtils":63,"./Router":64,"./RouterContext":65,"./RoutingContext":67,"./applyRouterMiddleware":69,"./browserHistory":70,"./createMemoryHistory":72,"./hashHistory":78,"./match":81,"./useRouterHistory":84,"./useRoutes":85,"./withRouter":86}],80:[function(require,module,exports){
+},{"./History":50,"./IndexLink":51,"./IndexRedirect":52,"./IndexRoute":53,"./Lifecycle":55,"./Link":56,"./PatternUtils":57,"./PropTypes":58,"./Redirect":59,"./Route":60,"./RouteContext":61,"./RouteUtils":62,"./Router":63,"./RouterContext":64,"./RoutingContext":66,"./applyRouterMiddleware":68,"./browserHistory":69,"./createMemoryHistory":71,"./hashHistory":77,"./match":80,"./useRouterHistory":83,"./useRoutes":84,"./withRouter":85}],79:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5922,7 +5915,7 @@ function isActive(_ref, indexOnly, currentLocation, routes, params) {
   return queryIsActive(query, currentLocation.query);
 }
 module.exports = exports['default'];
-},{"./PatternUtils":58}],81:[function(require,module,exports){
+},{"./PatternUtils":57}],80:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6007,7 +6000,7 @@ exports.default = match;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./RouteUtils":63,"./RouterUtils":66,"./createMemoryHistory":72,"./createTransitionManager":74,"_process":48,"invariant":46}],82:[function(require,module,exports){
+},{"./RouteUtils":62,"./RouterUtils":65,"./createMemoryHistory":71,"./createTransitionManager":73,"_process":47,"invariant":45}],81:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6244,7 +6237,7 @@ function matchRoutes(routes, location, callback, remainingPathname) {
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./AsyncUtils":50,"./PatternUtils":58,"./RouteUtils":63,"./routerWarning":83,"_process":48}],83:[function(require,module,exports){
+},{"./AsyncUtils":49,"./PatternUtils":57,"./RouteUtils":62,"./routerWarning":82,"_process":47}],82:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6281,7 +6274,7 @@ function routerWarning(falseToWarn, message) {
 function _resetWarned() {
   warned = {};
 }
-},{"warning":88}],84:[function(require,module,exports){
+},{"warning":87}],83:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6305,7 +6298,7 @@ function useRouterHistory(createHistory) {
   };
 }
 module.exports = exports['default'];
-},{"history/lib/useBasename":43,"history/lib/useQueries":44}],85:[function(require,module,exports){
+},{"history/lib/useBasename":42,"history/lib/useQueries":43}],84:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6360,7 +6353,7 @@ exports.default = useRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./createTransitionManager":74,"./routerWarning":83,"_process":48,"history/lib/useQueries":44}],86:[function(require,module,exports){
+},{"./createTransitionManager":73,"./routerWarning":82,"_process":47,"history/lib/useQueries":43}],85:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6401,7 +6394,7 @@ function withRouter(WrappedComponent) {
   return (0, _hoistNonReactStatics2.default)(WithRouter, WrappedComponent);
 }
 module.exports = exports['default'];
-},{"./PropTypes":59,"hoist-non-react-statics":45,"react":"react"}],87:[function(require,module,exports){
+},{"./PropTypes":58,"hoist-non-react-statics":44,"react":"react"}],86:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -6409,8 +6402,7 @@ module.exports = function (str) {
 	});
 };
 
-},{}],88:[function(require,module,exports){
-(function (process){
+},{}],87:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6431,7 +6423,7 @@ module.exports = function (str) {
 
 var warning = function() {};
 
-if (process.env.NODE_ENV !== 'production') {
+if ("development" !== 'production') {
   warning = function(condition, format, args) {
     var len = arguments.length;
     args = new Array(len > 2 ? len - 2 : 0);
@@ -6472,9 +6464,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 
-}).call(this,require('_process'))
-
-},{"_process":48}],89:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 (function(self) {
   'use strict';
 
