@@ -130,7 +130,7 @@ gulp.task('vendor', function(){
 		.pipe(notify(function(file){return 'Vendor JS Compiled'}));
 });
 
-gulp.task('build', ['styles'], bundle);
+gulp.task('build', ['styles', 'html', 'images', 'vendor'], bundle);
 gulp.task('build-css', ['styles']);
 gulp.task('build-js', bundle);
 
@@ -138,7 +138,8 @@ gulp.task('default', function(){
 	bWatch();
 	bundle();
 	gulp.watch(sourceDir + 'less/*.less', ['styles']);
-	// gulp.watch(sourceDir + '**.html', ['html']);
+	gulp.watch(sourceDir + '**.html', ['html']);
+	gulp.watch(sourceDir + 'img/**', ['images']);
 
 	console.log('\033[36m Watching Assets\033[39m');
 });
