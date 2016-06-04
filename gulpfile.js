@@ -44,13 +44,19 @@ gulp.task('styles', function(){
 		.pipe(notify(function(file){return 'CSS Compiled'}));
 });
 
-// gulp.task('html', function(){
-// 	return gulp.src(sourceDir + '**.html')
-// 		.pipe(changed(buildDir))
-// 		.pipe(gulp.dest(buildDir))
-// 		.pipe(notify(function(file){return 'HTML Updated'}))
-// 		.pipe(livereload({ auto: false }));
-// });
+gulp.task('html', function(){
+	return gulp.src(sourceDir + '**.html')
+		.pipe(changed(buildDir))
+		.pipe(gulp.dest(buildDir))
+		.pipe(notify(function(file){return 'HTML Updated'}));
+});
+
+gulp.task('images', function(){
+	return gulp.src(sourceDir + 'img/**')
+		.pipe(changed(buildDir))
+		.pipe(gulp.dest(buildDir + 'img'))
+		.pipe(notify(function(file){return 'Images Updated'}));
+});
 
 var b = browserify({
 			entries: sourceDir + 'scripts/app.js',
