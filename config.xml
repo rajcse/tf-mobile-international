@@ -30,7 +30,7 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-    <icon src="icon.png" />
+    <icon src="www/img/icon.png" />
     <platform name="ios">
         <icon height="57" platform="ios" src="www/img/system/icon/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/img/system/icon/ios/icon@2x.png" width="114" />
