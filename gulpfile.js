@@ -19,7 +19,8 @@ var path = require('path'),
 		'react',
 		'react-dom',
 		'flux',
-		'events'
+		'events',
+		'jwt-decode'
 	],
 	mapfile = 'js/app.js.map';
 
