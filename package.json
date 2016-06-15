@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "TruthFinder Mobile App",
   "author": "The Control Group",
+  "private": true,
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
