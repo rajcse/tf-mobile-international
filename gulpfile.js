@@ -18,8 +18,10 @@ var path = require('path'),
 		'lodash',
 		'react',
 		'react-dom',
+		'react-router',
 		'flux',
 		'events',
+		'whatwg-fetch',
 		'jwt-decode'
 	],
 	mapfile = 'js/app.js.map';
