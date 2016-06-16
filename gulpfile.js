@@ -71,6 +71,7 @@ var b = browserify({
 			packageCache: {}
 		})
 		.transform('babelify', {presets: ['es2015', 'react']})
+		.transform('folderify')
 		.transform('uglifyify');
 
 // Mark all the vendor libraries as external dependencies
