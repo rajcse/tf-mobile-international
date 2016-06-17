@@ -59,6 +59,9 @@
         <splash height="960" platform="ios" src="www/img/system/screen/ios/Default@2x~iphone.png" width="640" />
         <splash height="480" platform="ios" src="www/img/system/screen/ios/Default~iphone.png" width="320" />
     </platform>
+    <platform name="browser">
+        <preference name="ShowSplashScreen" value="false" />
+    </platform>
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
