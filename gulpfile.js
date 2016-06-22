@@ -72,7 +72,7 @@ var b = browserify({
 			cache: {},
 			packageCache: {}
 		})
-		.transform('babelify', {presets: ['es2015', 'react']})
+		.transform('babelify', {presets: ['es2015', 'react'], plugins: ['babel-plugin-transform-object-rest-spread']})
 		.transform('folderify')
 		.transform('uglifyify');
 
