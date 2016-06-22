@@ -1,0 +1,46 @@
+#search-form {
+    button {
+        font-weight: 700;
+        width: 100%;
+        padding: 15px 0;
+        font-size: 18px;
+    }
+}
+
+ul#results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li.person {
+        box-shadow: 0 0 8px -2px @brand-gray;
+        margin-bottom: 10px;
+        
+        > div.teaser-link {
+            padding: 20px;
+            position: relative;
+            
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                transform: rotate(45deg) translateY(-50%);
+                width: 10px;
+                height: 10px;
+                border: 1px solid @brand-gray;
+                border-left: none;
+                border-bottom: none;
+                top: 50%;
+                right: 20px;
+            }
+        }
+        
+        h3 {
+            margin: 0;
+        }
+        
+        p {
+            margin: 0;
+        }
+    }
+}
