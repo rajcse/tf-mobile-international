@@ -68,7 +68,7 @@ var b = browserify({
 			extensions: ['.jsx'],
 			debug: true,
 			paths: ['./node_modules'],
-			plugin: [watchify],
+			// plugin: [watchify],
 			cache: {},
 			packageCache: {}
 		})
@@ -86,13 +86,13 @@ for (var i = 0; i < vendorLibs.length; i++) {
 }
 
 function bWatch() {
-	b = watchify(b, {ignoreWatch: true});
-
+	b.plugin(watchify, {ignoreWatch: true});
+	
 	b.on('update', bundle);
 }
 
 
-function bundle(){
+function bundle(){	
 	return b.bundle()
 			.on('error', handleError)
 			.pipe(exorcist(path.join(__dirname, buildDir, mapfile)))
