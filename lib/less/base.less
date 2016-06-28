@@ -203,7 +203,6 @@ input[type="radio"] {
 				margin-left: 1em;
 			}
 		}
-
 	}
 
 	&:checked {
@@ -263,6 +262,62 @@ button {
         &:hover,
         &:active {
             box-shadow: inset 0 0 0 2px @brand-white;
+        }
+    }
+}
+
+ul.pill-selector {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    
+    li {
+        position: relative;
+        float: left;
+        height: 20px;
+        box-sizing: border-box;
+        padding: 0 5px;
+        border: 1px solid @brand-green;
+        line-height: 18px;
+        
+        &:not(:last-child) {
+            border-right: none;
+        }
+        
+        &:first-child {
+            border-radius: 3px 0 0 3px;   
+        }
+        
+        &:last-child {
+            border-radius: 0 3px 3px 0;
+        }
+    }
+    
+    input[type="radio"] {
+        + label {
+            padding: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            line-height: inherit;
+            background: @brand-white;
+            color: @brand-green;
+            
+            &:before,
+            &:after {
+                display: none;
+            }
+        } 
+        
+        &:checked {
+            + label {
+                background: @brand-green;
+                color: @brand-white;
+            }
         }
     }
 }
