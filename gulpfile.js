@@ -137,6 +137,7 @@ gulp.task('vendor', function(){
 });
 
 gulp.task('build', ['styles', 'html', 'images', 'vendor'], bundle);
+gulp.task('build-dev', ['styles', 'html', 'images', 'vendor-dev'], bundle);
 gulp.task('build-css', ['styles']);
 gulp.task('build-js', bundle);
 
