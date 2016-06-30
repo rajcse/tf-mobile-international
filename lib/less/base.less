@@ -17,12 +17,12 @@ body {
 }
 
 h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0px;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
 }
 
 a {
@@ -32,7 +32,7 @@ a {
 }
 
 p {
-    font-size: 0.875em; // 14px
+    font-size: 14px;
 	line-height: 1.4em;
 }
 
@@ -43,14 +43,16 @@ input[type='email'],
 input[type='number'],
 select  {
     -webkit-appearance: none;
-	border-radius: 0.1875em; // 3px
+	border-radius: @input-border-radius;
 	box-shadow: none;
     box-sizing: border-box;
-	border: 1px solid lighten(@brand-black, 40%);
+	border: 1px solid @brand-gray;
 	background: @brand-white;
 	color: @text-color;
-	font: 1.125em @body; // 18px
+	font: 18px @body;
     transition: transform 200ms;
+    height: 44px; // Default to easily touchable size
+    padding: 5px 20px;
 
 	&:focus {
 		outline: 0;
@@ -64,14 +66,14 @@ select  {
 }
 
 select {
-	padding: 0 0.8333333333333334em; /* 15/18 */
-	padding-right: 1.3888888888888888em; /* 25/18 */
-	background: url('/img/ui/arrows-select.png') @brand-white right .55555em center no-repeat; /* 10/18 */
+	padding: 0 15px;
+	padding-right: 25px;
+	background: url('/img/ui/arrows-select.png') @brand-white right 10px center no-repeat;
 	cursor: pointer;
 
 	&:focus {
 		outline: none;
-		box-shadow: 0 0 0.2222222222222222em 0.05555555555555555em @brand-blue; /* 4/18 */ /* 1/18 */
+		box-shadow: 0 0 4px 1px @brand-blue;
 	}
 }
 
@@ -251,7 +253,7 @@ button {
 	&:active {
 		transition: none;
 		outline: 0;
-		box-shadow: 0 0 6px -1px fade(@brand-black, 20%);
+		background: lighten(@brand-green, 10%);
 	}
 
 	&:disabled {

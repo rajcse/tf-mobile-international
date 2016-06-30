@@ -1,10 +1,38 @@
-#search-form {
+#search-form {    
+    .pill-selector {
+        margin-bottom: 10px;    
+    }
+    
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    select {
+        width: 100%;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        border-top: none;
+        border-radius: 0 0 @input-border-radius @input-border-radius;
+    }
+    
     button {
         font-weight: 700;
         width: 100%;
         padding: 15px 0;
         font-size: 18px;
     }
+    
+    .error-message {
+        color: @brand-error;
+        margin: 0;        
+    }
+    
+    #person-search {
+        input {
+            border-radius: @input-border-radius @input-border-radius 0 0;
+        }
+    }  
 }
 
 ul#results {
