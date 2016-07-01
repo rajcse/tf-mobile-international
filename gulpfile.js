@@ -87,12 +87,21 @@ for (var i = 0; i < vendorLibs.length; i++) {
 
 function bWatch() {
 	b.plugin(watchify, {ignoreWatch: true});
-	
 	b.on('update', bundle);
+	bundle();
 }
 
+gulp.task('add-config', function(){
+	// Require the appropriate config based on environment
+	if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'qa') {
+		b.require('./lib/scripts/config.js', {expose: 'config'});
+	} else {
+		b.require('./lib/scripts/config-dev.js', {expose: 'config'});
+	}
+});
 
-function bundle(){	
+function bundle(){
+	
 	return b.bundle()
 			.on('error', handleError)
 			.pipe(exorcist(path.join(__dirname, buildDir, mapfile)))
@@ -101,6 +110,11 @@ function bundle(){
 			.pipe(gulp.dest(buildDir))
 			.pipe(notify(function(file){return 'App JS Updated'}));
 }
+
+// Task that will set the environment to production priod to any build tasks
+gulp.task('set-production', function(){
+	return process.env.NODE_ENV = 'production';
+});
 
 gulp.task('vendor-dev', function(){
 	var b = browserify({
@@ -136,14 +150,13 @@ gulp.task('vendor', function(){
 		.pipe(notify(function(file){return 'Vendor JS Compiled'}));
 });
 
-gulp.task('build', ['styles', 'html', 'images', 'vendor'], bundle);
-gulp.task('build-dev', ['styles', 'html', 'images', 'vendor-dev'], bundle);
-gulp.task('build-css', ['styles']);
-gulp.task('build-js', bundle);
+gulp.task('build', ['set-production', 'add-config', 'styles', 'html', 'images', 'vendor'], bundle);
+gulp.task('build-dev', ['add-config', 'styles', 'html', 'images', 'vendor-dev'], bundle);
+gulp.task('build-css', ['set-production', 'styles']);
+gulp.task('build-js', ['set-production', 'add-config', 'vendor'], bundle);
 
-gulp.task('default', function(){
+gulp.task('default', ['add-config'], function(){
 	bWatch();
-	bundle();
 	gulp.watch(sourceDir + 'less/*.less', ['styles']);
 	gulp.watch(sourceDir + '**.html', ['html']);
 	gulp.watch(sourceDir + 'img/**', ['images']);
