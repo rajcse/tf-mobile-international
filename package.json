@@ -36,5 +36,9 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
     "whatwg-fetch": "^1.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "uuid": "^2.0.2"
   }
 }
