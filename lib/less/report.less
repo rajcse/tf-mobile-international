@@ -1,22 +1,136 @@
-// These need to be namespaced by a context (ie - nested under an ID like #personal etc.)
-// section {
-// 	background-color: @brand-gray;
-// }
-// 
-// div{
-// 	padding: 5px 5px 5px 5px;
-// }
-// 
-// h1,h2,h3,h4{
-// 	padding: 5px 5px 5px 5px;
-// 	background-color: @brand-green;
-// 
-// }
-// 
-// p.value{
-// 	float: right;
-// }
-// 
-// p.label{
-// 	float: left;
-// }
+// NOTE: These need to be namespaced by a context (ie - nested under an ID like #personal etc.)
+
+.widget {
+	padding: @padding-all;
+	padding-top: 0;
+	margin: 15px 0;
+	background: @brand-white;
+	box-shadow: 0 0 8px -2px @brand-gray;
+	border-radius: @input-border-radius;
+	overflow: hidden;
+
+	> h2 {
+		background: @brand-green;
+		color: @brand-white;
+		padding: @padding-all;
+		margin: 0 -15px;
+	}
+
+	h4 {
+		width: 40%;
+		float: left;
+		display: inline-block;
+		color: @headline-color;
+		margin-bottom: 1em;
+		font-weight: 300;
+	}
+
+	.row {
+		.clearfix();
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid @divider-color;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		ul {
+			text-align: right;
+			float: left;
+
+			li {
+				font-size: 18px;
+				margin-bottom: 10px;
+
+				strong {
+					display: block;
+					color: @headline-color;
+					font-weight: 300;
+					font-size: 14px;
+				}
+			}
+
+			&.jobs {
+				width: 100%;
+				text-align: left;
+
+				li {
+
+				}
+			}
+		}
+	}
+
+	.simple {
+		.clearfix();
+
+		p {
+			width: 60%;
+			float: left;
+			display: inline-block;
+			text-align: right;
+			font-size: 18px;
+		}
+	}
+
+	.simple-column {
+		.clearfix();
+
+		ul {
+			width: 60%;
+		}
+	}
+
+	.photos {
+		.clearfix();
+
+		ul {
+			width: 100%;
+
+			li {
+				width: 22%;
+				margin: 15px 1.5%;
+				height: 70px;
+				float: left;
+				border-radius: @input-border-radius;
+				overflow: hidden;
+				background: @brand-gray;
+
+				img {
+					width: 100%;
+					height: auto;
+					min-height: 50px;
+				}
+			}
+		}
+	}
+}
+
+.table {
+
+	table {
+		border: none;
+
+		thead {
+			text-align: left;
+
+			tr {
+				font-size: 14px;
+				color: @headline-color;
+
+				th {
+					font-weight: 300;
+				}
+			}
+		}
+
+		tbody {
+			text-transform: capitalize;
+		}
+	}
+
+	h4 {
+		width: 100%;
+	}
+}

@@ -12,8 +12,11 @@
 @brand-slate: #607d8b;
 @brand-error: #f00;
 
+@divider-color: lighten(@brand-gray, 5%);
+
 // Text Color
 @text-color: #3e3e3e;
+@headline-color: lighten(@text-color, 25%);
 
 // Links
 @link-color: @brand-green;
@@ -24,8 +27,23 @@
 @headline: sans-serif;
 @serif: serif;
 
+// Sizing
+@padding-all: 15px;
+@padding-side: 0 15px;
+
 // Misc
 @input-border-radius: 3px;
+
+// Mixins
+.clearfix() {
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
 
 @import 'base';
 @import 'header';
