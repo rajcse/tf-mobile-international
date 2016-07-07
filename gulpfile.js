@@ -15,16 +15,18 @@ var path = require('path'),
 	sourceDir = 'lib/',
 	buildDir = 'www/',
 	vendorLibs = [
+		'classnames',
+		'events',
+		'flux',
+		'jwt-decode',
 		'lodash',
 		'react',
 		'react-dom',
 		'react-router',
 		'react-addons-css-transition-group',
-		'react-tap-event-plugin',
-		'flux',
-		'events',
-		'whatwg-fetch',
-		'jwt-decode'
+		'react-tap-event-plugin',		
+		'uuid',
+		'whatwg-fetch'
 	],
 	mapfile = 'js/app.js.map';
 

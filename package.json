@@ -11,6 +11,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "browserify-shim": "^3.8.12",
+    "classnames": "^2.2.5",
     "exorcist": "^0.4.0",
     "flux": "^2.1.1",
     "folderify": "^1.2.1",
@@ -32,13 +33,10 @@
     "react-tap-event-plugin": "^1.0.0",
     "reactify": "^1.1.1",
     "uglifyify": "^3.0.1",
+    "uuid": "^2.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
     "whatwg-fetch": "^1.0.0"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "uuid": "^2.0.2"
   }
 }
