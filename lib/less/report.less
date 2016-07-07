@@ -55,63 +55,80 @@
 		.label {
 			width: 40%;
 			float: left;
-			font-weight: 300;
+
+			h4 {
+				font-weight: 300;
+			}
+		}
+
+		.content {
+			width: 60%;
+			float: left;
+			text-align: right;
+
+			p {
+				font-size: 18px;
+			}
+
+			ul {
+				margin: .175em 0 0;
+				padding: 0;
+				list-style: none;
+
+				li {
+					font-size: 18px;
+					padding-bottom: 10px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid @divider-color;
+
+					&:last-child {
+						border: none;
+						margin-bottom: 0;
+						padding-bottom: 0;
+					}
+
+					span {
+						padding-right: 1em;
+					}
+
+					strong {
+						color: @headline-color;
+					}
+
+					small {
+						text-transform: capitalize;
+					}
+				}
+			}
+
+			&.content-full {
+				width: 100%;
+				text-align: left;
+			}
 		}
 
 		.row {
 			.clearfix();
 			padding-top: 10px;
 			padding-bottom: 10px;
-			border-bottom: 1px solid @divider-color;
+			position: relative;
+
+			&:before {
+				content: "";
+				display: block;
+				left: -15px;
+				right: -15px;
+				bottom: 0;
+				position: absolute;
+				width: 768px;
+				height: 1px;
+				background: @divider-color;
+			}
 
 			&:last-child {
-				border-bottom: none;
-			}
-
-			ul {
-				text-align: right;
-				float: left;
-
-				li {
-					font-size: 18px;
-					margin-bottom: 10px;
-
-					strong {
-						display: block;
-						color: @headline-color;
-						font-weight: 300;
-						font-size: 14px;
-					}
+				&:before {
+					display: none;
 				}
-
-				&.jobs {
-					width: 100%;
-					text-align: left;
-
-					li {
-
-					}
-				}
-			}
-		}
-
-		.simple {
-			.clearfix();
-
-			p {
-				width: 60%;
-				float: left;
-				display: inline-block;
-				text-align: right;
-				font-size: 18px;
-			}
-		}
-
-		.simple-column {
-			.clearfix();
-
-			ul {
-				width: 60%;
 			}
 		}
 
@@ -125,7 +142,7 @@
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
-				justify-content: center;
+				justify-content: left;
 				align-items: flex-start;
 				align-content: flex-start;
 
@@ -134,8 +151,8 @@
 					border-radius: @input-border-radius * 2;
 					overflow: hidden;
 					background: @brand-gray;
-					max-width: 150px;
-					max-height: 150px;
+					max-width: 120px;
+					max-height: 120px;
 
 					img {
 						width: 100%;
@@ -169,6 +186,10 @@
 				text-transform: capitalize;
 
 				tr {
+					padding-bottom: 10px;
+					margin-bottom: 10px;
+					border-bottom: 1px solid @divider-color;
+
 					td {
 						padding-right: 10px;
 					}
