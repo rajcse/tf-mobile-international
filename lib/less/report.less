@@ -65,6 +65,27 @@
 			}
 		}
 
+		&#contact {
+			.btn-link {
+				top: -5px;
+				position: relative;
+			}
+		}
+
+		&#location {
+			h4 {
+				color: @text-color;
+				font-weight: 400;
+				margin-bottom: 1em;
+			}
+
+			.label {
+				small {
+					color: @headline-color;
+				}
+			}
+		}
+
 		.content {
 			width: 60%;
 			float: left;
@@ -79,11 +100,23 @@
 				padding: 0;
 				list-style: none;
 
+				&.aliases {
+					li {
+						padding: 0;
+						border: none;
+					}
+				}
+
 				li {
 					font-size: 18px;
-					padding-bottom: 10px;
+					padding-top: 15px;
+					padding-bottom: 15px;
 					margin-bottom: 10px;
 					border-bottom: 1px solid @divider-color;
+
+					&:first-child {
+						padding-top: 0;
+					}
 
 					&:last-child {
 						border: none;
@@ -179,6 +212,7 @@
 					background: @brand-gray;
 					width: 100px;
 					height: 100px;
+					padding: 0;
 
 					img {
 						width: 100%;
