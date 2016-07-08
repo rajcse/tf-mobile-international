@@ -30,6 +30,20 @@
     </plugin>
 
     <icon src="www/img/icon.png" />
+    <platform name="android">
+        <icon density="ldpi" src="www/img/system/icon/android/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="www/img/system/icon/android/drawable-hdpi-icon.png" />
+        <icon density="hdpi" src="www/img/system/icon/android/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="www/img/system/icon/android/drawable-hdpi-icon.png" />
+        <icon density="xxhdpi" src="www/img/system/icon/android/drawable-hdpi-icon.png" />
+        <icon density="xxxhdpi" src="www/img/system/icon/android/drawable-hdpi-icon.png" />
+        <splash density="port-ldpi" src="www/img/system/screen/android/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="www/img/system/screen/android/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="www/img/system/screen/android/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="www/img/system/screen/android/drawable-port-hdpi-screen.png" />
+        <splash density="port-xxhdpi" src="www/img/system/screen/android/drawable-port-hdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="www/img/system/screen/android/drawable-port-hdpi-screen.png" />
+    </platform>
     <platform name="ios">
         <icon height="57" platform="ios" src="www/img/system/icon/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/img/system/icon/ios/icon@2x.png" width="114" />
