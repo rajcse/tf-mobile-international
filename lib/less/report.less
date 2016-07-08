@@ -59,6 +59,10 @@
 			h4 {
 				font-weight: 300;
 			}
+
+			&.label-full {
+				width: 100%;
+			}
 		}
 
 		.content {
@@ -132,6 +136,27 @@
 			}
 		}
 
+		.locations {
+			.location-details {
+				width: 60%;
+				margin-right: 5%;
+				float: left;
+			}
+
+			.location-map {
+				width: 35%;
+				border-radius: @input-border-radius;
+				overflow: hidden;
+				box-shadow: 0 0 8px -2px @brand-gray;
+
+				img {
+					width: 100%;
+					height: auto;
+					display: block;
+				}
+			}
+		}
+
 		.photos {
 			.clearfix();
 
@@ -148,11 +173,12 @@
 
 				li {
 					margin: .5em auto;
+					padding-bottom: 0;
 					border-radius: @input-border-radius * 2;
 					overflow: hidden;
 					background: @brand-gray;
-					max-width: 120px;
-					max-height: 120px;
+					width: 100px;
+					height: 100px;
 
 					img {
 						width: 100%;
