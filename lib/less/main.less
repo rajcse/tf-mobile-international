@@ -12,6 +12,14 @@
 @brand-slate: #607d8b;
 @brand-error: #f00;
 
+// Social colors
+@social-facebook: #3b5998;
+@social-linkedin: #0077B5;
+@social-pinterest: #C92228;
+@social-google: #d34836;
+@social-youtube: #e52d27;
+@social-twitter: #4099FF;
+
 @divider-color: lighten(@brand-gray, 5%);
 
 // Text Color
@@ -43,6 +51,22 @@
     clear: both;
     visibility: hidden;
   }
+}
+
+.leftIcon(@icon: '') {
+    padding-left: 45px;
+
+    &:before {
+        position: absolute;
+        left: 15px;
+        width: 15px;
+        height: 20px;
+        background-image: url(@icon);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+    }
 }
 
 @import 'base';
