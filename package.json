@@ -13,8 +13,6 @@
     "browserify-shim": "^3.8.12",
     "classnames": "^2.2.5",
     "exorcist": "^0.4.0",
-    "flax": "^0.6.1",
-    "flax-devtools": "^0.2.4",
     "flux": "^2.1.1",
     "folderify": "^1.2.1",
     "gulp": "^3.9.1",
