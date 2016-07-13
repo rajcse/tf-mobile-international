@@ -6,15 +6,15 @@ nav#main-navigation {
     width: 100%;
     height: 50px;
     box-sizing: border-box;
-    z-index: 99999;
-    
+    z-index: 1000;
+
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         height: 100%;
-        
+
         li {
             position: relative;
             display: block;
@@ -23,7 +23,7 @@ nav#main-navigation {
             height: 100%;
             box-sizing: border-box;
             text-align: center;
-            
+
             a {
                 display: block;
                 border-top: 1px solid @brand-gray;
@@ -35,7 +35,7 @@ nav#main-navigation {
                 height: 100%;
                 padding: 10px;
                 color: @brand-black;
-                
+
                 span {
                     display: block;
                     position: absolute;
@@ -44,12 +44,12 @@ nav#main-navigation {
                     width: 100%;
                     font-size: 10px;
                 }
-                
+
                 &.active-nav {
                     background: @brand-blue;
                     border-color: @brand-blue;
-                    color: @brand-white;  
-                    
+                    color: @brand-white;
+
                     svg.nav {
                         .cls-1 {
                             fill: @brand-white;
@@ -57,7 +57,7 @@ nav#main-navigation {
                     }
                 }
             }
-            
+
             object {
                 display: block;
                 margin: 0 auto;
