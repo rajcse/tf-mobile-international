@@ -33,7 +33,6 @@
     "react-router": "^2.4.1",
     "react-tap-event-plugin": "^1.0.0",
     "reactify": "^1.1.1",
-    "remotedev": "^0.1.2",
     "uglifyify": "^3.0.1",
     "uuid": "^2.0.2",
     "vinyl-buffer": "^1.0.0",
