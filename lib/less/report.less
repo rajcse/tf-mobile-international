@@ -52,6 +52,11 @@
 			margin: 0 -15px;
 		}
 
+		.sub-title {
+			padding: @padding-all;
+			margin: 0 -15px;
+		}
+
 		.label {
 			width: 40%;
 			float: left;
@@ -133,6 +138,8 @@
 		}
 
 		&#criminal {
+			padding-bottom: 0;
+
 			.matching-records {
 				margin: 0;
 				padding: 0;
@@ -164,21 +171,76 @@
 			.criminal-results {
 				.clearfix();
 
+				.sub-title {
+					padding-left: 30px;
+					padding-right: 30px;
+					margin: 0 -15px;
+					text-align: center;
+				}
+
+				.btn-criminal {
+					margin: 15px auto;
+					display: block;
+				}
+
+				.title {
+					padding-left: 45px;
+					padding-right: 30px;
+
+					.criminal-icon {
+						background-image: url('../img/ui/handcuffs.svg');
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: 20px auto;
+						display: inline-block;
+						content: '';
+						width: 20px;
+						height: 20px;
+						margin-right: 1em;
+						position: relative;
+						top: 5px;
+					}
+				}
+
+				.row {
+					background: @brand-white;
+					margin: 15px;
+					padding: 15px 15px 0;
+					border-radius: @input-border-radius * 2;
+					overflow: hidden;
+
+					&:before {
+						display: none;
+					}
+				}
+
 				&.most-likely {
-					h3 {
-						background: @brand-error;
+					background: lighten(@brand-error, 45%);
+					margin-left: -15px;
+					margin-right: -15px;
+
+					.title {
+						background: darken(@brand-error, 5%);
 					}
 				}
 
 				&.likely {
-					h3 {
-						background: @brand-yellow;
+					background: lighten(@brand-yellow, 45%);
+					margin-left: -15px;
+					margin-right: -15px;
+
+					.title {
+						background: darken(@brand-yellow, 5%);
 					}
 				}
 
 				&.least-likely {
-					h3 {
-						background: @brand-slate;
+					background: lighten(@brand-slate, 45%);
+					margin-left: -15px;
+					margin-right: -15px;
+
+					.title {
+						background: darken(@brand-slate, 5%);
 					}
 				}
 			}
