@@ -70,6 +70,14 @@
 			}
 		}
 
+		&.multi-widget {
+			background: lighten(@brand-slate, 45%);
+
+			h4.title {
+				background: @brand-slate;
+			}
+		}
+
 		.row-footer {
 			background: @brand-gray;
 			padding: 15px;
@@ -293,6 +301,16 @@
 			}
 		}
 
+		.content-image {
+			margin: 1em auto;
+			max-width: 250px;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+
 		.content {
 			width: 60%;
 			float: left;
@@ -300,6 +318,15 @@
 
 			p {
 				font-size: 18px;
+			}
+
+			.note {
+				padding: 1em;
+				border: 1px solid @brand-gray;
+				font-size: .875em;
+				margin-top: 1em;
+				color: @headline-color;
+				text-align: center;
 			}
 
 			ul {
@@ -446,6 +473,13 @@
 			&:last-child {
 				&:before {
 					display: none;
+				}
+			}
+
+			&.default-column {
+				p, h3 {
+					text-align: center;
+					color: @headline-color;
 				}
 			}
 		}
