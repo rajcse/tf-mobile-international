@@ -1,5 +1,25 @@
 // NOTE: These need to be namespaced by a context (ie - nested under an ID like #personal etc.)
 
+#report-loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: @brand-white;
+	
+	p {
+		margin: 0;
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		text-align: center;
+		text-transform: uppercase;
+		transform: translateY(-50%);
+		font-size: 20px;
+	}
+}
+
 // The main report container has an id of report, so anything inside of it can be easily namespaced here
 #report {
 	line-height: 1.4em;
