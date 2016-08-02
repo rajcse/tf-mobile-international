@@ -236,11 +236,12 @@ input[type="radio"] {
 	}
 }
 
-button, .btn {
+button, 
+.btn {
 	appearance: none;
 	-webkit-font-smoothing: antialiased;
 	font: 700 0.875em @body;   /* 14/16 */
-	background: @brand-green;
+	background: @brand-blue;
 	border-radius: 2px;
 	border: none;
 	color: @brand-white;
@@ -256,7 +257,7 @@ button, .btn {
 	&:active {
 		transition: none;
 		outline: 0;
-		background: lighten(@brand-green, 10%);
+		background: lighten(@brand-blue, 10%);
 	}
 
 	&:disabled {
@@ -314,7 +315,7 @@ ul.pill-selector {
 		height: 30px;
 		box-sizing: border-box;
 		padding: 0 5px;
-		border: 1px solid @brand-green;
+		border: 1px solid @brand-blue;
 		line-height: 28px;
 
 		&:not(:last-child) {
@@ -341,7 +342,7 @@ ul.pill-selector {
 			font-size: 14px;
 			line-height: inherit;
 			background: @brand-white;
-			color: @brand-green;
+			color: @brand-blue;
 
 			&:before,
 			&:after {
@@ -351,7 +352,7 @@ ul.pill-selector {
 
 		&:checked {
 			+ label {
-				background: @brand-green;
+				background: @brand-blue;
 				color: @brand-white;
 			}
 		}
