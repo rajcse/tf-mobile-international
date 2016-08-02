@@ -12,6 +12,10 @@ body {
 	background: lighten(@brand-gray, 10%);
 	line-height: 1.4;
 	box-sizing: border-box;
+
+	&.modal-open {
+		overflow: hidden;
+	}
 }
 
 /* Landscape layout (with min-width) */
@@ -277,6 +281,22 @@ button, .btn {
 
 		&:focus, &:active {
 			background: @brand-blue;
+			color: @brand-white;
+		}
+	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
 			color: @brand-white;
 		}
 	}
