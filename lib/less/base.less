@@ -280,6 +280,22 @@ button, .btn {
 			color: @brand-white;
 		}
 	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
+			color: @brand-white;
+		}
+	}
 }
 
 ul.pill-selector {
