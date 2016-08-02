@@ -20,6 +20,52 @@
 	}
 }
 
+// Progress Bars
+.progress {
+	position: relative;
+	background-color: #57bf93;
+	height: 10px;
+	width: 100%;
+	margin: 10px 0;
+	border-radius: 8px;
+	clear: both;
+
+	.animate {
+		content: "";
+	  position: absolute;
+	  overflow: hidden;
+	  top: 0;
+	  left: 0;
+	  bottom: 0;
+	  right: 0;
+	  z-index: 1;
+	  animation: progress 2s linear infinite;
+	  background: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+	  background-size: 55px 55px;
+	  width: 100%;
+	}
+}
+
+@keyframes progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes slidein {
+  from {
+    margin-top: 300%;
+  }
+
+  to {
+    margin-top: 0%;
+  }
+}
+
 // The main report container has an id of report, so anything inside of it can be easily namespaced here
 #report {
 	line-height: 1.4em;
@@ -64,12 +110,17 @@
 		box-shadow: 0 0 8px -2px @brand-gray;
 		border-radius: @input-border-radius;
 		overflow: hidden;
+		display: flex;
+		align-items: baseline;
+		flex-flow: row wrap;
+		justify-content: space-around;
 
 		.title {
 			background: @brand-green;
 			color: @brand-white;
 			padding: @padding-all;
 			margin: 0 -15px;
+			flex: 1 100%;
 		}
 
 		.sub-title {
@@ -78,15 +129,16 @@
 		}
 
 		.label {
-			width: 40%;
-			float: left;
+			flex: 1 auto;
+			order: 1;
+			align-self: flex-start;
 
 			h4 {
 				font-weight: 300;
 			}
 
 			&.label-full {
-				width: 100%;
+				flex: none;
 			}
 		}
 
@@ -178,7 +230,7 @@
 					color: @brand-slate;
 					display: inline-block;
 					padding: 5px 10px;
-					border-radius: @input-border-radius * 2;
+					border-radius: @input-border-radius;
 					margin: .25em .5em;
 					text-transform: capitalize;
 					font-size: .875em;
@@ -193,10 +245,12 @@
 			.row-content {
 				padding-top: 10px;
 				padding-bottom: 10px;
+				display: inline-flex;
 				.clearfix();
 			}
 
 			.criminal-results {
+				padding-top: 0;
 				.clearfix();
 
 				.sub-title {
@@ -219,8 +273,7 @@
 				}
 
 				.title {
-					padding-left: 45px;
-					padding-right: 30px;
+					margin-bottom: 10px;
 
 					.criminal-icon {
 						background-image: url('../img/ui/handcuffs.svg');
@@ -237,22 +290,18 @@
 					}
 				}
 
-				.row {
+				.criminal {
 					background: @brand-white;
 					margin: 15px 0;
 					padding: 15px 15px 0;
-					border-radius: @input-border-radius * 2;
+					border-radius: @input-border-radius;
 					overflow: hidden;
-
-					&:before {
-						display: none;
-					}
 				}
 
 				&.most-likely {
-					background: lighten(@brand-error, 45%);
-					margin-left: -15px;
-					margin-right: -15px;
+					.criminal {
+						background: lighten(@brand-error, 45%);
+					}
 
 					.title {
 						background: darken(@brand-error, 5%);
@@ -260,9 +309,9 @@
 				}
 
 				&.likely {
-					background: lighten(@brand-yellow, 45%);
-					margin-left: -15px;
-					margin-right: -15px;
+					.criminal {
+						background: lighten(@brand-yellow, 45%);
+					}
 
 					.title {
 						background: darken(@brand-yellow, 5%);
@@ -270,9 +319,9 @@
 				}
 
 				&.least-likely {
-					background: lighten(@brand-slate, 45%);
-					margin-left: -15px;
-					margin-right: -15px;
+					.criminal {
+						background: lighten(@brand-slate, 45%);
+					}
 
 					.title {
 						background: darken(@brand-slate, 5%);
@@ -281,24 +330,19 @@
 			}
 
 			.criminal-photo {
-				width: 35%;
-				margin-right: 5%;
-				border-radius: 3px;
-				overflow: hidden;
-				box-shadow: 0 0 8px -2px @brand-gray;
-				float: left;
+				flex: 1;
 				margin-bottom: 1em;
 
 				img {
 					width: 100%;
 					height: auto;
 					display: block;
+					border-radius: 4px;
 				}
 			}
 
 			.criminal-details {
-				width: 60%;
-				float: left;
+				flex: 2;
 				text-align: right;
 
 				.btn-link {
@@ -332,8 +376,8 @@
 		}
 
 		.content {
-			width: 60%;
-			float: left;
+			flex: 3;
+			order: 2;
 			text-align: right;
 
 			p {
@@ -368,7 +412,7 @@
 					> li {
 						margin: .5em auto;
 						padding-bottom: 0;
-						border-radius: @input-border-radius * 2;
+						border-radius: @input-border-radius;
 						overflow: hidden;
 						background: @brand-gray;
 						width: 100px;
@@ -428,7 +472,7 @@
 					}
 				}
 
-				&.aliases {
+				&.no-space {
 					li {
 						padding: 0;
 						border: none;
@@ -463,12 +507,17 @@
 					small {
 						text-transform: capitalize;
 					}
+
+					p {
+						word-wrap: break-word;
+					}
 				}
 			}
 
 			&.content-full {
-				width: 100%;
+				flex: none;
 				text-align: left;
+				max-width: 100%;
 			}
 		}
 
@@ -477,6 +526,15 @@
 			padding-top: 10px;
 			padding-bottom: 10px;
 			position: relative;
+			width: 100%;
+			display: inline-flex;
+
+			&.simple-column {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				flex-basis: auto;
+			}
 
 			&:before {
 				content: "";
@@ -505,10 +563,75 @@
 		}
 
 		.locations {
+			display: inline-flex;
+			flex-direction: column;
+
+			.content {
+				display: flex;
+				flex-flow: row wrap;
+			}
+
 			.location-details {
-				width: 60%;
-				margin-right: 5%;
-				float: left;
+				flex: 2;
+				padding-right: 15px;
+				margin: 10px auto;
+			}
+
+			.location-actions {
+				flex: 1 100%;
+			}
+
+			.location-modal {
+				position: fixed;
+				overflow: scroll;
+				top: 0;
+				padding: 55px 15px;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: block;
+				flex: none;
+				background: @brand-white;
+				transition: all 1s ease;
+				z-index: 1000;
+				animation-duration: 1s;
+			  animation-name: slidein;
+				box-sizing: border-box;
+
+				.title {
+					.btn-link {
+						background: @brand-blue;
+						color: @brand-white;
+						font-size: 14px;
+						margin: 0;
+						position: relative;
+						top: -5px;
+					}
+				}
+			}
+
+			.location-info {
+				.details {
+					margin-top: 10px;
+					display: inline-flex;
+					width: 100%;
+
+					.thumbnail {
+						max-width: 100px;
+						flex: 1 auto;
+
+						img {
+							width: 100%;
+							border-radius: @input-border-radius;
+							box-shadow: 0 0 8px -2px @brand-gray;
+						}
+					}
+
+					.actions {
+						flex: 3 auto;
+						text-align: right;
+					}
+				}
 			}
 
 			.location-warning {
@@ -517,15 +640,15 @@
 			}
 
 			.location-map {
-				width: 35%;
-				border-radius: @input-border-radius;
+				flex: 1;
 				overflow: hidden;
-				box-shadow: 0 0 8px -2px @brand-gray;
 
 				img {
 					width: 100%;
 					height: auto;
 					display: block;
+					box-shadow: 0 0 8px -2px @brand-gray;
+					border-radius: @input-border-radius;
 				}
 			}
 		}
@@ -598,7 +721,7 @@
 
 			img {
 				width: 100%;
-				border-radius: @input-border-radius * 2;
+				border-radius: @input-border-radius;
 			}
 		}
 
