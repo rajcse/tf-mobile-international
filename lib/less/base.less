@@ -64,6 +64,10 @@ select  {
 	&:active {
 		transform: scale(1.02);
 	}
+	
+	&:disabled {
+		color: @brand-gray;
+	}
 }
 
 select {
@@ -74,7 +78,7 @@ select {
 	&:focus {
 		outline: none;
 		box-shadow: 0 0 4px 1px @brand-blue;
-	}
+	}	
 }
 
 input[type="checkbox"] {
