@@ -548,6 +548,46 @@
 			}
 		}
 
+		.aligned-row {
+			.clearfix();
+			padding-top: 10px;
+			padding-bottom: 10px;
+			width: 100%;
+			display: inline-flex;
+
+			&.simple-column {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				flex-basis: auto;
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				left: -15px;
+				right: -15px;
+				bottom: 0;
+				position: absolute;
+				width: 768px;
+				height: 1px;
+				background: @divider-color;
+			}
+
+			&:last-child {
+				&:before {
+					display: none;
+				}
+			}
+
+			&.default-column {
+				p, h3 {
+					text-align: center;
+					color: @headline-color;
+				}
+			}
+		}
+
 		.locations {
 			display: inline-flex;
 			flex-direction: column;
