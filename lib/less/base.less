@@ -9,7 +9,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font: 100% @body;
 	color: @text-color;
-	background: lighten(@brand-gray, 10%);
+	background: @brand-gray;
 	line-height: 1.4;
 	box-sizing: border-box;
 
@@ -369,10 +369,10 @@ ul.pill-selector {
 	li {
 		position: relative;
 		float: left;
-		height: 30px;
+		height: 32px;
 		box-sizing: border-box;
 		padding: 0 5px;
-		line-height: 28px;
+		line-height: 32px;
 
 		&:not(:last-child) {
 			input[type="radio"] {
@@ -382,9 +382,10 @@ ul.pill-selector {
 			}
 		}
 
-		&:first-child {
+		&:first-child {			
 			input[type="radio"] {
 				+ label {
+					left: 0; // Don't create a fake margin
 					border-radius: 3px 0 0 3px;
 				}
 			}
@@ -395,6 +396,12 @@ ul.pill-selector {
 				+ label {
 					border-radius: 0 3px 3px 0;
 				}
+				
+				&:checked {
+					+ label {
+						right: 0; // No need to move to the right when selected
+					}
+				}
 			}
 		}
 	}
@@ -402,16 +409,18 @@ ul.pill-selector {
 	input[type="radio"] {
 		+ label {
 			box-sizing: border-box;
-			border: 1px solid @brand-blue;
 			padding: 0;
 			position: absolute;
-			left: 0;
+			left: 1px; // For fake margins
+			right: 0;
 			top: 0;
-			width: 100%;
+			bottom: 0;
 			text-align: center;
-			font-size: 14px;
+			text-transform: uppercase;
+			font-weight: 600;
+			font-size: 13px;
 			line-height: inherit;
-			background: @brand-white;
+			background: @brand-gray;
 			color: @brand-blue;
 
 			&:before,
@@ -422,7 +431,9 @@ ul.pill-selector {
 
 		&:checked {
 			+ label {
-				background: @brand-blue;
+				left: 0;
+				right: -1px; // For removing fake margin to the right
+				background: @brand-green;
 				color: @brand-white;
 			}
 			
@@ -445,7 +456,7 @@ ul.pill-selector {
 }
 
 #app {
-	padding: 75px 10px 60px;
+	padding: 55px 10px 60px;
 }
 
 .pull-right {
