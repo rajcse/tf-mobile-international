@@ -6,8 +6,10 @@ var path = require('path'),
 	exorcist = require('exorcist'),
 	changed = require('gulp-changed'),
 	less = require('gulp-less'),
+	serve = require('gulp-serve'),
 	minifyCss = require('gulp-minify-css'),
 	autoprefix = require('gulp-autoprefixer'),
+	lrload = require('livereactload'),
 	nodeNotifier = require('node-notifier'),
 	notify = require('gulp-notify'),
 	source = require('vinyl-source-stream'),
@@ -68,53 +70,109 @@ gulp.task('images', function(){
 		.pipe(notify(function(file){return 'Images Updated'}));
 });
 
-var b = browserify({
-			entries: sourceDir + 'scripts/app.js',
-			extensions: ['.jsx'],
-			debug: true,
-			paths: ['./node_modules'],
-			// plugin: [watchify],
-			cache: {},
-			packageCache: {}
-		})
-		.transform('babelify', {presets: ['es2015', 'react'], plugins: ['babel-plugin-transform-object-rest-spread']})
-		.transform('folderify')
-		.transform('uglifyify');
+function devBundler(watch, live) {
+	var bPlugins = [];
+	
+	if(watch) bPlugins.push([watchify, {ignoreWatch: true}]);
+	if(live) bPlugins.push(lrload);
+	
+	var b = browserify({
+				entries: sourceDir + 'scripts/app.js',
+				debug: process.env.NODE_ENV !== 'production',
+				plugin: bPlugins,
+				cache: {},
+				packageCache: {}
+			})
+			.transform('babelify', {
+				presets: ['es2015', 'react'],
+				plugins: live ? ['transform-object-rest-spread', ["react-transform",
+                    {
+                        "transforms": [{
+                            "transform": "livereactload/babel-transform",
+                            "imports": ["react"]
+                        }]
+                    }
+                ]] : ['transform-object-rest-spread']
+			})
+			.transform('folderify')
+			.transform('uglifyify');
 
-// Mark all the vendor libraries as external dependencies
-for (var i = 0; i < vendorLibs.length; i++) {
-	if(typeof vendorLibs[i] === 'string') {
-		b.external(vendorLibs[i]);
-	} else {
-		b.external(vendorLibs[i].expose);
+	// Mark all the vendor libraries as external dependencies
+	for (var i = 0; i < vendorLibs.length; i++) {
+		if(typeof vendorLibs[i] === 'string') {
+			b.external(vendorLibs[i]);
+		} else {
+			b.external(vendorLibs[i].expose);
+		}
 	}
-}
-
-function bWatch() {
-	b.plugin(watchify, {ignoreWatch: true});
-	b.on('update', bundle);
-	bundle();
-}
-
-gulp.task('add-config', function(){
+	
 	// Require the appropriate config based on environment
 	if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'qa') {
 		b.require('./lib/scripts/config.js', {expose: 'config'});
 	} else {
 		b.require('./lib/scripts/config-dev.js', {expose: 'config'});
 	}
-});
-
-function bundle(){
 	
-	return b.bundle()
-			.on('error', handleError)
-			.pipe(exorcist(path.join(__dirname, buildDir, mapfile)))
+	if(watch) b.on('update', rebundle);
+	
+	b.on('error', handleError);
+	
+	rebundle();
+	
+	function rebundle(){
+		var bundle = b.bundle();
+		
+		if(!live) bundle = bundle.pipe(exorcist(path.join(__dirname, buildDir, mapfile)));
+		
+		return bundle.pipe(source('js/app.js'))
+				.pipe(buffer())
+				.pipe(gulp.dest(buildDir))
+				.pipe(notify(function(file){return 'App JS Updated'}));
+	}
+}
+
+function bundle() {	
+	var b = browserify({
+				entries: sourceDir + 'scripts/app.js',
+				debug: process.env.NODE_ENV !== 'production',
+				plugin: [],
+				cache: {},
+				packageCache: {}
+			})
+			.transform('babelify', {
+				presets: ['es2015', 'react'],
+				plugins: ['transform-object-rest-spread']
+			})
+			.transform('folderify')
+			.transform('uglifyify');
+
+	// Mark all the vendor libraries as external dependencies
+	for (var i = 0; i < vendorLibs.length; i++) {
+		if(typeof vendorLibs[i] === 'string') {
+			b.external(vendorLibs[i]);
+		} else {
+			b.external(vendorLibs[i].expose);
+		}
+	}
+	
+	// Require the appropriate config based on environment
+	if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'qa') {
+		b.require('./lib/scripts/config.js', {expose: 'config'});
+	} else {
+		b.require('./lib/scripts/config-dev.js', {expose: 'config'});
+	}
+	
+	b = b.bundle();
+		
+	if(process.env.NODE_ENV !== 'production') b = b.pipe(exorcist(path.join(__dirname, buildDir, mapfile)));
+		
+	return b.on('error', handleError)
 			.pipe(source('js/app.js'))
 			.pipe(buffer())
 			.pipe(gulp.dest(buildDir))
 			.pipe(notify(function(file){return 'App JS Updated'}));
 }
+
 
 // Task that will set the environment to production priod to any build tasks
 gulp.task('set-production', function(){
@@ -155,13 +213,25 @@ gulp.task('vendor', function(){
 		.pipe(notify(function(file){return 'Vendor JS Compiled'}));
 });
 
-gulp.task('build', ['set-production', 'add-config', 'styles', 'html', 'images', 'vendor'], bundle);
-gulp.task('build-dev', ['add-config', 'styles', 'html', 'images', 'vendor-dev'], bundle);
+gulp.task('build', ['set-production', 'styles', 'html', 'images', 'vendor'], bundle);
+gulp.task('build-dev', ['styles', 'html', 'images', 'vendor-dev'], bundle);
 gulp.task('build-css', ['set-production', 'styles']);
-gulp.task('build-js', ['set-production', 'add-config', 'vendor'], bundle);
+gulp.task('build-js', ['set-production', 'vendor'], bundle);
 
-gulp.task('default', ['add-config'], function(){
-	bWatch();
+gulp.task('live', function(){
+	devBundler(true, true);
+	serve('www')();
+	
+	gulp.watch(sourceDir + 'less/*.less', ['styles']);
+	gulp.watch(sourceDir + '**.html', ['html']);
+	gulp.watch(sourceDir + 'img/**', ['images']);
+
+	console.log('\033[36m Watching Assets\033[39m');
+});
+
+gulp.task('default', function(){
+	devBundler(true);
+	
 	gulp.watch(sourceDir + 'less/*.less', ['styles']);
 	gulp.watch(sourceDir + '**.html', ['html']);
 	gulp.watch(sourceDir + 'img/**', ['images']);
