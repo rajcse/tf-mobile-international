@@ -1,21 +1,28 @@
 #search-form {
     margin-bottom: 20px;
-      
-    .pill-selector {
-        margin-bottom: 10px;    
+    
+    .search-type-selector {
+        margin: 0 -10px;
+        padding: 15px 10px 10px;
+        background: @brand-white;
+        margin-bottom: 15px;
     }
     
+    .controls {        
+        label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+    }    
+        
     input {
         width: 100%;
-        margin-bottom: 10px;
     }
     
     select {
         width: 100%;
-        margin-top: -10px;
-        margin-bottom: 10px;
-        border-top: none;
-        border-radius: 0 0 @input-border-radius @input-border-radius;
     }
     
     .loader {
@@ -25,11 +32,9 @@
     }
     
     button {
-        font-weight: 700;
         width: 100%;
         padding: 15px 0;
         font-size: 18px;
-        // height: 48px;        
     }
     
     .error-message {
@@ -38,10 +43,36 @@
     }
     
     #person-search {
+        .row {
+            overflow: hidden;
+            margin: 0 -.25em 15px;
+            
+            .controls {
+                padding: 0 .25em;
+                box-sizing: border-box;
+                float: left;
+                
+                &:first-child {
+                    width: 75%;
+                }
+                
+                &:last-child {
+                    width: 25%;
+                }
+            }
+        }
+        
         input {
             border-radius: @input-border-radius @input-border-radius 0 0;
         }
-    }  
+    }
+    
+    #phone-search,
+    #email-search {
+        .controls {
+            margin-bottom: 15px;
+        }
+    }
 }
 
 ul#results {

@@ -7,6 +7,7 @@ var path = require('path'),
 	changed = require('gulp-changed'),
 	less = require('gulp-less'),
 	serve = require('gulp-serve'),
+	livereload = require('gulp-livereload'),
 	minifyCss = require('gulp-minify-css'),
 	autoprefix = require('gulp-autoprefixer'),
 	lrload = require('livereactload'),
@@ -54,6 +55,16 @@ gulp.task('styles', function(){
 		.pipe(minifyCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
 		.pipe(gulp.dest(buildDir + 'css/'))
 		.pipe(notify(function(file){return 'CSS Compiled'}));
+});
+
+gulp.task('styles-live', function(){
+	return gulp.src(sourceDir + 'less/main.less')
+		.pipe(less().on('error', handleError))
+		.pipe(autoprefix({browsers: ['last 2 versions', 'not ie <= 8']}))
+		.pipe(minifyCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
+		.pipe(gulp.dest(buildDir + 'css/'))
+		.pipe(notify(function(file){return 'CSS Compiled'}))
+		.pipe(livereload({ auto: false }));
 });
 
 gulp.task('html', function(){
@@ -222,7 +233,9 @@ gulp.task('live', function(){
 	devBundler(true, true);
 	serve('www')();
 	
-	gulp.watch(sourceDir + 'less/*.less', ['styles']);
+	livereload.listen();
+	
+	gulp.watch(sourceDir + 'less/*.less', ['styles-live']);
 	gulp.watch(sourceDir + '**.html', ['html']);
 	gulp.watch(sourceDir + 'img/**', ['images']);
 
