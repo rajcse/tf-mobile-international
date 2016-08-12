@@ -441,7 +441,6 @@ ul.pill-selector {
 			
 			&:disabled {
 				+ label {
-					border-color: @brand-gray;
 					background: @brand-gray;
 					color: @brand-white;
 				}
@@ -450,7 +449,8 @@ ul.pill-selector {
 		
 		&:disabled {
 			+ label {
-				border-color: @brand-gray;
+				border: 1px solid @brand-gray;
+				background: @brand-white;
 				color: @brand-gray;
 			}
 		}		
