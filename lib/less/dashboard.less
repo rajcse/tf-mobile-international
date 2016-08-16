@@ -1,19 +1,48 @@
 #dashboard {
-
-    ul#report-history {
+    h6 {
+        text-transform: uppercase;
+        font-weight: 400;
+        margin: 0;
+        margin-bottom: 10px;    
+    }
+    
+    #record-filter {
+        margin: 0 -10px;
+        padding: 15px 10px 10px;
+        background: @brand-white;
+        margin-bottom: 15px;
+        
+        h5 {
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+    }
+    
+    ul#record-history {
         list-style: none;
         margin: 0;
         padding: 0;
 
         li.history-item {
-            box-shadow: 0 0 8px -2px @brand-gray;
+            box-shadow: 0 0 8px 0px @brand-gray;
+            border-radius: @input-border-radius;
             background: @brand-white;
             margin-bottom: 10px;
 
             h3 {
-                margin: 0;
+                color: @brand-blue;
+                font-size: 20px;
+                margin: 0;                
             }
-
+            
+            span.age {
+                font-weight: 400;    
+            }
+            
             p {
                 margin: 0;
             }
@@ -31,13 +60,14 @@
                     transform: rotate(45deg) translateY(-50%);
                     width: 10px;
                     height: 10px;
-                    border: 1px solid @brand-gray;
+                    border: 2px solid @brand-blue;
                     border-left: none;
                     border-bottom: none;
                     top: 50%;
                     right: 20px;
                 }
             }
+            
             .dashboard-person-item-premium {
                 border-color: yellow;
                 border-style: solid;
