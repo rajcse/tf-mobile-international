@@ -30,7 +30,7 @@ var path = require('path'),
 		'react-dom',
 		'react-router',
 		'react-addons-css-transition-group',
-		'react-tap-event-plugin',		
+		'react-tap-event-plugin',
 		'uuid',
 		'whatwg-fetch'
 	],
@@ -83,10 +83,10 @@ gulp.task('images', function(){
 
 function devBundler(watch, live) {
 	var bPlugins = [];
-	
+
 	if(watch) bPlugins.push([watchify, {ignoreWatch: true}]);
 	if(live) bPlugins.push(lrload);
-	
+
 	var b = browserify({
 				entries: sourceDir + 'scripts/app.js',
 				debug: process.env.NODE_ENV !== 'production',
@@ -116,25 +116,25 @@ function devBundler(watch, live) {
 			b.external(vendorLibs[i].expose);
 		}
 	}
-	
+
 	// Require the appropriate config based on environment
 	if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'qa') {
 		b.require('./lib/scripts/config.js', {expose: 'config'});
 	} else {
 		b.require('./lib/scripts/config-dev.js', {expose: 'config'});
 	}
-	
+
 	if(watch) b.on('update', rebundle);
-	
+
 	b.on('error', handleError);
-	
+
 	rebundle();
-	
+
 	function rebundle(){
 		var bundle = b.bundle();
-		
+
 		if(!live) bundle = bundle.pipe(exorcist(path.join(__dirname, buildDir, mapfile)));
-		
+
 		return bundle.pipe(source('js/app.js'))
 				.pipe(buffer())
 				.pipe(gulp.dest(buildDir))
@@ -142,7 +142,7 @@ function devBundler(watch, live) {
 	}
 }
 
-function bundle() {	
+function bundle() {
 	var b = browserify({
 				entries: sourceDir + 'scripts/app.js',
 				debug: process.env.NODE_ENV !== 'production',
@@ -165,18 +165,18 @@ function bundle() {
 			b.external(vendorLibs[i].expose);
 		}
 	}
-	
+
 	// Require the appropriate config based on environment
 	if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'qa') {
 		b.require('./lib/scripts/config.js', {expose: 'config'});
 	} else {
 		b.require('./lib/scripts/config-dev.js', {expose: 'config'});
 	}
-	
+
 	b = b.bundle();
-		
+
 	if(process.env.NODE_ENV !== 'production') b = b.pipe(exorcist(path.join(__dirname, buildDir, mapfile)));
-		
+
 	return b.on('error', handleError)
 			.pipe(source('js/app.js'))
 			.pipe(buffer())
@@ -232,9 +232,9 @@ gulp.task('build-js', ['set-production', 'vendor'], bundle);
 gulp.task('live', function(){
 	devBundler(true, true);
 	serve('www')();
-	
+
 	livereload.listen();
-	
+
 	gulp.watch(sourceDir + 'less/*.less', ['styles-live']);
 	gulp.watch(sourceDir + '**.html', ['html']);
 	gulp.watch(sourceDir + 'img/**', ['images']);
@@ -244,7 +244,7 @@ gulp.task('live', function(){
 
 gulp.task('default', function(){
 	devBundler(true);
-	
+
 	gulp.watch(sourceDir + 'less/*.less', ['styles']);
 	gulp.watch(sourceDir + '**.html', ['html']);
 	gulp.watch(sourceDir + 'img/**', ['images']);
