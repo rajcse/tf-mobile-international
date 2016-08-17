@@ -58,7 +58,6 @@
     
     .error-message {
         color: @brand-error;
-        margin: 0;        
     }
     
     #person-search {
@@ -146,5 +145,19 @@ ul#results {
         p {
             margin: 0;
         }
+    }
+}
+
+#no-results {
+    height: 210px;
+    width: 210px;
+    margin: 40px auto 0;
+    background: lighten(@brand-gray, 10%);
+    border-radius: 50%;
+    
+    p {
+        margin: 0;
+        line-height: 210px;
+        text-align: center;
     }
 }
