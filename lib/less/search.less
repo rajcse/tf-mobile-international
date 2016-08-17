@@ -1,3 +1,28 @@
+#search {
+    .searching-text {
+        margin-top: 80px;
+        height: 100vh;
+        
+        h5 {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        
+        p {
+            text-align: center;
+            font-size: 18px;
+            padding: 0 40px;
+        }
+        
+        .loader {
+            display: block;
+            margin: 0 auto;
+            width: 35px;
+        }    
+    }
+}
+
 #search-form {
     margin-bottom: 20px;
     
@@ -24,22 +49,15 @@
     select {
         width: 100%;
     }
-    
-    .loader {
-        display: block;
-        margin: 0 auto;
-        height: 51px;        
-    }
-    
+        
     button {
         width: 100%;
         padding: 15px 0;
-        font-size: 18px;
+        font-size: 18px;        
     }
     
     .error-message {
         color: @brand-error;
-        margin: 0;        
     }
     
     #person-search {
@@ -127,5 +145,19 @@ ul#results {
         p {
             margin: 0;
         }
+    }
+}
+
+#no-results {
+    height: 210px;
+    width: 210px;
+    margin: 40px auto 0;
+    background: lighten(@brand-gray, 10%);
+    border-radius: 50%;
+    
+    p {
+        margin: 0;
+        line-height: 210px;
+        text-align: center;
     }
 }
