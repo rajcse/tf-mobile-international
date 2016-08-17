@@ -8,7 +8,7 @@ var path = require('path'),
 	less = require('gulp-less'),
 	serve = require('gulp-serve'),
 	livereload = require('gulp-livereload'),
-	minifyCss = require('gulp-minify-css'),
+	cleanCss = require('gulp-clean-css'),
 	autoprefix = require('gulp-autoprefixer'),
 	lrload = require('livereactload'),
 	nodeNotifier = require('node-notifier'),
@@ -53,7 +53,7 @@ gulp.task('styles', function(){
 	return gulp.src(sourceDir + 'less/main.less')
 		.pipe(less().on('error', handleError))
 		.pipe(autoprefix({browsers: ['last 2 versions', 'not ie <= 8']}))
-		.pipe(minifyCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
+		.pipe(cleanCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
 		.pipe(gulp.dest(buildDir + 'css/'))
 		.pipe(notify(function(file){return 'CSS Compiled'}));
 });
@@ -62,7 +62,7 @@ gulp.task('styles-live', function(){
 	return gulp.src(sourceDir + 'less/main.less')
 		.pipe(less().on('error', handleError))
 		.pipe(autoprefix({browsers: ['last 2 versions', 'not ie <= 8']}))
-		.pipe(minifyCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
+		.pipe(cleanCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
 		.pipe(gulp.dest(buildDir + 'css/'))
 		.pipe(notify(function(file){return 'CSS Compiled'}))
 		.pipe(livereload({ auto: false }));

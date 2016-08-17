@@ -28,9 +28,7 @@
         padding: 0;
 
         li.history-item {
-            box-shadow: 0 0 8px 0px @brand-gray;
-            border-radius: @input-border-radius;
-            background: @brand-white;
+            
             margin-bottom: 10px;
 
             h3 {
@@ -50,8 +48,11 @@
             a {
                 display: block;
                 position: relative;
+                border-radius: @input-border-radius;
+                background: @brand-white;
                 padding: 20px;
                 color: @text-color;
+                transition: background-color 200ms;
 
                 &:after {
                     content: '';
@@ -66,11 +67,17 @@
                     top: 50%;
                     right: 20px;
                 }
+                
+                &:active {
+                    transition: none;
+                    background: lighten(@brand-blue, 50%);
+                }
             }
-            .premium {
-                border-color: yellow;
-                border-style: solid;
-                padding: 10px;
+            
+            &.premium {
+                a {
+                    border: 2px solid @brand-yellow;
+                }
             }
         }
     }
