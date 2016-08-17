@@ -27,6 +27,14 @@
 		box-shadow: 0 0 8px -2px @brand-gray;
 		display: block;
 	}
+
+	.owl-wrapper-outer {
+		overflow: visible;
+	}
+
+	.owl-item {
+		z-index: 1001;
+	}
 }
 
 .report-header {
@@ -132,7 +140,7 @@
 		line-height: 1em;
 	}
 
-	h4 {
+	h4, .h4 {
 		font-size: 16px;
 		line-height: 25px;
 	}
@@ -148,7 +156,6 @@
 		background: @brand-white;
 		box-shadow: 0 0 8px -2px @brand-gray;
 		border-radius: @input-border-radius;
-		overflow: hidden;
 
 		.title {
 			background: @brand-green;
@@ -281,82 +288,19 @@
 			}
 
 			.criminal-results {
-				padding-top: 0;
 				.clearfix();
 
-				.sub-title {
-					padding-left: 30px;
-					padding-right: 30px;
-					margin: 0 -15px;
-					text-align: center;
+				.owl-item {
+					overflow: visible;
 				}
 
-				.btn-criminal {
-					margin: 15px auto;
-					display: block;
-				}
-
-				> .criminal {
-					&.row {
-						margin-left: 15px;
-						margin-right: 15px;
-					}
-				}
-
-				.title {
-					margin-bottom: 10px;
-
-					.criminal-icon {
-						background-image: url('../img/ui/handcuffs.svg');
-						background-repeat: no-repeat;
-						background-position: center;
-						background-size: 20px auto;
-						display: inline-block;
-						content: '';
-						width: 20px;
-						height: 20px;
-						margin-right: 1em;
-						position: relative;
-						top: 5px;
-					}
-				}
-
-				.criminal {
+				.criminal-card {
+					padding: 1em;
 					background: @brand-white;
-					margin: 15px 0;
-					padding: 15px 15px 0;
-					border-radius: @input-border-radius;
-					overflow: hidden;
-				}
-
-				&.most-likely {
-					.criminal {
-						background: lighten(@brand-error, 45%);
-					}
-
-					.title {
-						background: darken(@brand-error, 5%);
-					}
-				}
-
-				&.likely {
-					.criminal {
-						background: lighten(@brand-yellow, 45%);
-					}
-
-					.title {
-						background: darken(@brand-yellow, 5%);
-					}
-				}
-
-				&.least-likely {
-					.criminal {
-						background: lighten(@brand-slate, 45%);
-					}
-
-					.title {
-						background: darken(@brand-slate, 5%);
-					}
+					border: 1px solid @divider-color;
+					box-shadow: 0 3px 6px rgba(0,0,0,.25);
+					width: 155px;
+					text-align: center;
 				}
 			}
 
@@ -565,18 +509,6 @@
 				.inline {
 					margin-right: 2.1875em; /* 35/16 */
 				}
-			}
-
-			&:before {
-				content: "";
-				display: block;
-				left: -15px;
-				right: -15px;
-				bottom: 0;
-				position: absolute;
-				width: 768px;
-				height: 1px;
-				background: @divider-color;
 			}
 
 			&:last-child {
