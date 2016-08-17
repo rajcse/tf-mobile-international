@@ -83,7 +83,9 @@ ul#results {
     li.person,
     li.phone,
     li.email {
-        box-shadow: 0 0 8px -2px @brand-gray;
+        background: @brand-white;
+        border-radius: @input-border-radius;
+        box-shadow: 0 0 8px 0 @brand-gray;
         margin-bottom: 10px;
         
         > a.teaser-link {
@@ -99,7 +101,7 @@ ul#results {
                 transform: rotate(45deg) translateY(-50%);
                 width: 10px;
                 height: 10px;
-                border: 1px solid @brand-gray;
+                border: 2px solid @brand-blue;
                 border-left: none;
                 border-bottom: none;
                 top: 50%;
@@ -108,7 +110,13 @@ ul#results {
         }
         
         h3 {
-            margin: 0;
+            color: @brand-blue;
+            font-size: 20px;
+            margin: 0;                
+        }
+        
+        span.age {
+            font-weight: 400;    
         }
         
         p {
