@@ -32,6 +32,7 @@ var path = require('path'),
 		'react-owl-carousel',
 		'react-router',
 		'react-tap-event-plugin',
+		'scroll-js',
 		'uuid',
 		'whatwg-fetch'
 	],
