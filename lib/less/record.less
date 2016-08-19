@@ -90,19 +90,6 @@
 	display: inline-flex;
 	margin-top: 1em;
 
-	.offender-thumbnail {
-		width: 70px;
-		min-width: 70px;
-		height: 70px;
-		margin-right: 1em;
-		clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-
-		img {
-			width: 100%;
-			min-height: 100%;
-		}
-	}
-
 	.offender-details {
 		h2 {
 			margin-bottom: 0;
@@ -115,6 +102,34 @@
 		.btn {
 			margin-top: 0;
 		}
+	}
+}
+
+.offender-thumbnail {
+	width: 70px;
+	min-width: 70px;
+	height: 70px;
+	margin-right: 1em;
+	clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+
+	img {
+		width: 100%;
+		min-height: 100%;
+	}
+}
+
+.offender-header {
+	background: #ED5858;
+	margin-left: -10px;
+	margin-right: -10px;
+	display: flex;
+	height: 120px;
+	justify-content: center;
+	align-items: center;
+
+	.offender-name {
+		color: @brand-white;
+		max-width: 200px;
 	}
 }
 
@@ -473,6 +488,11 @@
 
 			.inline {
 				margin-right: 2.1875em; /* 35/16 */
+			}
+
+			.inline-half {
+				margin-right: 0;
+				width: 50%;
 			}
 
 			ul {
