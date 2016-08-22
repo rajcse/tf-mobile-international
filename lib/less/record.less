@@ -146,6 +146,23 @@
 	}
 }
 
+.offender-matches {
+	> p {
+		display: inline-block;
+		padding: .25em .5em;
+		font-size: 12px;
+		background: #EDEDED;
+		margin-right: .5em;
+		border-radius: 4px;
+		margin-bottom: .25em;
+		margin-top: .25em;
+
+		&.offender-no-match {
+			text-decoration: line-through;
+		}
+	}
+}
+
 .report-header {
 	background: @brand-blue;
 	display: flex;
