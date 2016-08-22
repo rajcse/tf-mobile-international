@@ -1,6 +1,5 @@
 var path = require('path'),
 	gulp = require('gulp'),
-	connect = require('gulp-connect'),
 	browserify = require('browserify'),
 	watchify = require('watchify'),
 	uglify = require('gulp-uglify'),
