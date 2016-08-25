@@ -357,6 +357,18 @@
 				box-shadow: 0 3px 6px rgba(0,0,0,.25);
 				width: 155px;
 				text-align: center;
+
+				&.most-likely-match {
+					border-left: 10px solid @brand-error;
+				}
+
+				&.likely-match {
+					border-left: 10px solid @brand-yellow;
+				}
+
+				&.least-likely-match {
+					border-left: 10px solid @brand-green;
+				}
 			}
 		}
 
