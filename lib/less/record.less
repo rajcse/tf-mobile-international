@@ -274,11 +274,23 @@
 		flex: 1 100%;
 		border-top-left-radius: @input-border-radius;
 		border-top-right-radius: @input-border-radius;
+		transition: top .5s ease;
+		top: 0;
 	}
 
 	.sub-title {
 		padding: @padding-all;
 		margin: 0 -15px;
+	}
+
+	// Sticky Head
+	div.sticky {
+		top: 55px !important;
+		width: 100% !important;
+		left: 0 !important;
+		text-align: center;
+		z-index: 100;
+		transition: top .5s ease;
 	}
 
 	.label {
