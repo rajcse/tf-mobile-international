@@ -46,6 +46,7 @@
     "react-owl-carousel": "^0.14.0",
     "react-proxy": "^1.1.8",
     "react-router": "^2.4.1",
+    "react-sticky": "^5.0.4",
     "react-tap-event-plugin": "^1.0.0",
     "reactify": "^1.1.1",
     "scroll-js": "^1.1.1",
