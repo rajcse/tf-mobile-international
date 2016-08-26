@@ -172,10 +172,12 @@
 	margin-left: -10px;
 	margin-right: -10px;
 	height: 120px;
+	box-shadow: inset 0 5px 5px rgba(0,0,0,.25);
 
 	h1 {
 		max-width: 220px;
 	}
+
 	.report-thumbnail {
 		 margin: auto 1em auto auto;
 		 background: rgba(255,255,255,.4);
@@ -893,5 +895,44 @@
 }
 
 .premium {
-	border: 2px solid @brand-yellow;
+	.title, &.report-header, &.history-item {
+		border: none;
+		background: #c39511!important;
+		background: linear-gradient(75deg, #c39511 0%,#eab114 51%,#d2a127 51%,#cb9b25 100%)!important;
+
+		a, h3 {
+			color: @brand-white!important;
+		}
+
+		a:after {
+			border-color: @brand-white!important;
+		}
+	}
+
+	.sticky {
+		.title {
+			&:before {
+				position: absolute;
+				right: 35px;
+				top: 10px;
+			}
+		}
+	}
+
+	.title {
+		position: relative;
+		&:before {
+			background-image: url('../img/ui/premium-icon.svg');
+			background-size: auto;
+			background-repeat: no-repeat;
+			background-position: center;
+			display: block;
+			content: '';
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			right: 5px;
+			top: 10px;
+		}
+	}
 }
