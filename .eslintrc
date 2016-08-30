@@ -1,0 +1,81 @@
+{
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "jsx": true,
+    "classes": true,
+    "modules": true,
+    "experimentalObjectRestSpread": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "process": false,
+    "require": false,
+    "define": false,
+    "console": false,
+    "React": true,
+  },
+  "rules": {
+    "jsx-quotes": [2, "prefer-double"],
+    "comma-dangle": 0,
+    "indent": ["error", "tab"],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "strict": [2, "never"],
+    "eol-last": [0],
+    "no-mixed-requires": [0],
+    "no-underscore-dangle": [0],
+    no-mixed-spaces-and-tabs: ["error", "smart-tabs"],
+    "no-bitwise": 2,
+    "camelcase": 2,
+    "eqeqeq": 2,
+    "wrap-iife": [2, "inside"],
+    "no-use-before-define": [2, "nofunc"],
+    "no-case-declarations": 0,
+    "no-caller": 2,
+    "no-undef": 2,
+    "new-cap": [2, {"capIsNewExceptions": ["Server", "Router", "Ajv"]}],
+    "react/jsx-no-duplicate-props": [0, { "ignoreCase": false }],
+    "react/jsx-no-literals": 0,
+    "react/jsx-no-undef": 2,
+    "react/jsx-pascal-case": 2,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/no-danger": 0,
+    "react/no-direct-mutation-state": 0,
+    "react/no-is-mounted": 2,
+    "react/no-multi-comp": [2, { "ignoreStateless": true }],
+    "react/no-set-state": 0,
+    "react/no-string-refs": 0,
+    "react/no-unknown-property": 2,
+    "react/prefer-es6-class": [2, "always"],
+    "react/prop-types": [2, { "ignore": [], "customValidators": [] }],
+    "react/require-extension": [0, { "extensions": [".jsx"] }],
+    "react/self-closing-comp": 2,
+    "react/sort-comp": [2, {
+      "order": [
+        "static-methods",
+        "lifecycle",
+        "/^on.+$/",
+        "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
+        "everything-else",
+        "/^render.+$/",
+        "render"
+      ],
+    }],
+    "react/jsx-wrap-multilines": [2, {
+      "declaration": true,
+      "assignment": true,
+      "return": true
+    }],
+    "react/jsx-equals-spacing": [2, "never"],
+    "react/jsx-indent": [2, 'tab'],
+    "react/react-in-jsx-scope": 2,
+  },
+  "plugins": [
+    "react"
+  ]
+}

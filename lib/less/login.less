@@ -31,22 +31,21 @@
     
     button {
         display: block;
-        background: @brand-blue;
         width: 100%;
         box-sizing: border-box;
         font-size: 1em;
         margin: 15px auto 0;
         padding: 18px 0;
-        
-        &:active {
-            background: lighten(@brand-blue, 20%);
-        }
     }
     
     .loader {
         width: 30px;
         display: block;
         margin: 25px auto 0;
+        
+        rect {
+            fill: #fff !important;
+        }
     }
     
     .error-message {

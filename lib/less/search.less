@@ -1,38 +1,92 @@
-#search-form {    
-    .pill-selector {
-        margin-bottom: 10px;    
+#search {
+    .searching-text {
+        margin-top: 80px;
+        height: 100vh;
+        
+        h5 {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        
+        p {
+            text-align: center;
+            font-size: 18px;
+            padding: 0 40px;
+        }
+        
+        .loader {
+            display: block;
+            margin: 0 auto;
+            width: 35px;
+        }    
+    }
+}
+
+#search-form {
+    margin-bottom: 20px;
+    
+    .search-type-selector {
+        margin: 0 -10px;
+        padding: 15px 10px 10px;
+        background: @brand-white;
+        margin-bottom: 15px;
     }
     
+    .controls {        
+        label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+    }    
+        
     input {
         width: 100%;
-        margin-bottom: 10px;
     }
     
     select {
         width: 100%;
-        margin-top: -10px;
-        margin-bottom: 10px;
-        border-top: none;
-        border-radius: 0 0 @input-border-radius @input-border-radius;
     }
-    
+        
     button {
-        font-weight: 700;
         width: 100%;
         padding: 15px 0;
-        font-size: 18px;
+        font-size: 18px;        
     }
     
     .error-message {
         color: @brand-error;
-        margin: 0;        
     }
     
     #person-search {
-        input {
-            border-radius: @input-border-radius @input-border-radius 0 0;
+        .row {
+            overflow: hidden;
+            margin: 0 -.25em 15px;
+            
+            .controls {
+                padding: 0 .25em;
+                box-sizing: border-box;
+                float: left;
+                
+                &:first-child {
+                    width: 75%;
+                }
+                
+                &:last-child {
+                    width: 25%;
+                }
+            }
+        }        
+    }
+    
+    #phone-search,
+    #email-search {
+        .controls {
+            margin-bottom: 15px;
         }
-    }  
+    }
 }
 
 ul#results {
@@ -40,15 +94,19 @@ ul#results {
     padding: 0;
     margin: 0;
     
-    li.person {
-        box-shadow: 0 0 8px -2px @brand-gray;
+    li.person,
+    li.phone,
+    li.email {        
         margin-bottom: 10px;
         
         > a.teaser-link {
+            background: @brand-white;
+            border-radius: @input-border-radius;
             display: block;
             color: @text-color;
             padding: 20px;
             position: relative;
+            transition: background-color 200ms;
             
             &:after {
                 content: '';
@@ -57,20 +115,45 @@ ul#results {
                 transform: rotate(45deg) translateY(-50%);
                 width: 10px;
                 height: 10px;
-                border: 1px solid @brand-gray;
+                border: 2px solid @brand-blue;
                 border-left: none;
                 border-bottom: none;
                 top: 50%;
                 right: 20px;
             }
+            
+            &:active {
+                transition: none;
+                background: lighten(@brand-blue, 50%);
+            }
         }
         
         h3 {
-            margin: 0;
+            color: @brand-blue;
+            font-size: 20px;
+            margin: 0;                
+        }
+        
+        span.age {
+            font-weight: 400;    
         }
         
         p {
             margin: 0;
         }
+    }
+}
+
+#no-results {
+    height: 210px;
+    width: 210px;
+    margin: 40px auto 0;
+    background: lighten(@brand-gray, 10%);
+    border-radius: 50%;
+    
+    p {
+        margin: 0;
+        line-height: 210px;
+        text-align: center;
     }
 }

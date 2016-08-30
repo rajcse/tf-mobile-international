@@ -9,9 +9,13 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font: 100% @body;
 	color: @text-color;
-	background: lighten(@brand-gray, 10%);
+	background: @brand-gray;
 	line-height: 1.4;
 	box-sizing: border-box;
+
+	&.modal-open {
+		overflow: hidden;
+	}
 }
 
 /* Landscape layout (with min-width) */
@@ -20,13 +24,37 @@ body {
 }
 
 a {
-	color: @brand-blue;
+	color: @link-color;
 	text-decoration: none;
 }
 
 p {
-    font-size: 16px;
+	font-size: 16px;
 	line-height: 1.4;
+}
+
+hr {
+	border: 1px solid @divider-color;
+}
+
+h1, h2, h3, h4, h5 {
+	padding: 0;
+	margin: 0;
+}
+
+h2, .h2 {
+	font-size: 20px;
+	line-height: 1em;
+}
+
+h3, .h3 {
+	font-size: 18px;
+	line-height: 1em;
+}
+
+h4, .h4 {
+	font-size: 16px;
+	line-height: 25px;
 }
 
 small {
@@ -60,17 +88,21 @@ select  {
 	&:active {
 		transform: scale(1.02);
 	}
+
+	&:disabled {
+		color: @brand-gray;
+	}
 }
 
 select {
-	padding: 0 15px;
+	padding: 0 10px;
 	padding-right: 25px;
 	background: url('../img/ui/arrows-select.png') @brand-white right 10px center no-repeat;
-	cursor: pointer;
 
 	&:focus {
 		outline: none;
-		box-shadow: 0 0 4px 1px @brand-blue;
+		box-shadow: inset 0 0 2px 0 lighten(@brand-blue, 5%);
+		border-color: lighten(@brand-blue, 5%);
 	}
 }
 
@@ -82,7 +114,6 @@ input[type="checkbox"] {
 		display: block;
 		border-radius: 2px;
 		font: 500 0.875em @body; // 14px
-		cursor: pointer;
 		line-height: 1em;
 		padding: .8em 1em;
 		padding-right: 1.7857em;
@@ -145,7 +176,6 @@ input[type="radio"] {
 		position: relative;
 		display: block;
 		font: 500 0.875em @body; // 14px
-		cursor: pointer;
 		line-height: 1em;
 		padding: .8em 1em;
 		user-select: none;
@@ -218,7 +248,6 @@ input[type="radio"] {
 	&:disabled {
 		+ label {
 			color: fade(@brand-black, 40%);
-			cursor: no-drop;
 
 			&:before {
 				border-color: fade(@brand-black, 40%);
@@ -232,11 +261,72 @@ input[type="radio"] {
 	}
 }
 
-button, .btn {
+button,
+button[type="submit"],
+button[type="search"] {
+	appearance: none;
+	-webkit-font-smoothing: antialiased;
+	font: 400 0.875em @body;   /* 14/16 */
+	background: @brand-blue;
+	border-radius: @input-border-radius;
+	border: none;
+	color: @brand-white;
+	text-align: center;
+	text-transform: uppercase;
+	transition: background-color 500ms, box-shadow 600ms;
+
+	&:focus {
+		outline: 0;
+	}
+
+	&:active {
+		transition: none;
+		outline: 0;
+		background: lighten(@brand-blue, 10%);
+	}
+
+	&:disabled {
+		background: darken(@brand-gray, 10%);
+	}
+
+	&.btn-link {
+		color: @brand-blue;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-blue;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-blue;
+			color: @brand-white;
+		}
+	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
+			color: @brand-white;
+		}
+	}
+}
+
+.btn {
 	appearance: none;
 	-webkit-font-smoothing: antialiased;
 	font: 700 0.875em @body;   /* 14/16 */
-	background: @brand-green;
+	background: @brand-blue;
 	border-radius: 2px;
 	border: none;
 	color: @brand-white;
@@ -252,7 +342,7 @@ button, .btn {
 	&:active {
 		transition: none;
 		outline: 0;
-		background: lighten(@brand-green, 10%);
+		background: lighten(@brand-blue, 10%);
 	}
 
 	&:disabled {
@@ -280,6 +370,22 @@ button, .btn {
 			color: @brand-white;
 		}
 	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
+			color: @brand-white;
+		}
+	}
 }
 
 ul.pill-selector {
@@ -291,37 +397,59 @@ ul.pill-selector {
 	li {
 		position: relative;
 		float: left;
-		height: 20px;
+		height: 32px;
 		box-sizing: border-box;
 		padding: 0 5px;
-		border: 1px solid @brand-green;
-		line-height: 18px;
+		line-height: 32px;
 
 		&:not(:last-child) {
-			border-right: none;
+			input[type="radio"] {
+				+ label {
+					border-right: none;
+				}
+			}
 		}
 
 		&:first-child {
-			border-radius: 3px 0 0 3px;
+			input[type="radio"] {
+				+ label {
+					left: 0; // Don't create a fake margin
+					border-radius: 3px 0 0 3px;
+				}
+			}
 		}
 
 		&:last-child {
-			border-radius: 0 3px 3px 0;
+			input[type="radio"] {
+				+ label {
+					border-radius: 0 3px 3px 0;
+				}
+
+				&:checked {
+					+ label {
+						right: 0; // No need to move to the right when selected
+					}
+				}
+			}
 		}
 	}
 
 	input[type="radio"] {
 		+ label {
+			box-sizing: border-box;
 			padding: 0;
 			position: absolute;
-			left: 0;
+			left: 1px; // For fake margins
+			right: 0;
 			top: 0;
-			width: 100%;
+			bottom: 0;
 			text-align: center;
-			font-size: 14px;
+			text-transform: uppercase;
+			font-weight: 600;
+			font-size: 13px;
 			line-height: inherit;
-			background: @brand-white;
-			color: @brand-green;
+			background: @brand-gray;
+			color: @brand-blue;
 
 			&:before,
 			&:after {
@@ -331,15 +459,34 @@ ul.pill-selector {
 
 		&:checked {
 			+ label {
+				left: 0;
+				right: -1px; // For removing fake margin to the right
 				background: @brand-green;
 				color: @brand-white;
+			}
+
+			&:disabled {
+				+ label {
+					background: @brand-gray;
+					color: @brand-white;
+				}
+			}
+		}
+
+		&:disabled {
+			+ label {
+				border: 1px solid @brand-gray;
+				background: @brand-white;
+				color: @brand-gray;
 			}
 		}
 	}
 }
 
 #app {
-	padding: 75px 10px 60px;
+	padding: 55px 10px 60px;
+		overflow-x: hidden;
+	// padding-top: 70px; // Padding for iOS, should be conditionally added in the build
 }
 
 .pull-right {
