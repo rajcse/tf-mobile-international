@@ -696,6 +696,19 @@
 		.location-map {
 			flex: 1;
 			overflow: hidden;
+			text-align: center;
+
+			> div {
+				position: relative;
+
+				object {
+					position: absolute;
+					top: 40%;
+					left: 0;
+					right: 0;
+					margin: 0 auto;
+				}
+			}
 
 			img {
 				width: 100%;
@@ -708,7 +721,6 @@
 			&.no-map {
 				background: @brand-gray;
 				padding: 15px;
-				text-align: center;
 
 				small {
 					display: block;
