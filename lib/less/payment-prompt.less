@@ -12,7 +12,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 80%;
+        width: 90%;
         transform: translate(-50%, -50%);
         border-radius: @input-border-radius;
         
@@ -25,15 +25,31 @@
         
     	p {
     		margin: 1em;
-            font-size: 14px;
+            font-size: 16px;
+            &.intro {
+                font-weight:700;
+            }
     	}
         
         .confirm {
             text-align: center;
             margin-bottom: 1em;
-            
-            button.cancel {
-                margin-right: 5px;
+            button.continue {
+                font-size:20px;
+                width:80%;
+                padding:15px;
+                font-weight:700;
+                span {
+                    font-size:12px;
+                    display: block;
+                    font-weight:400;
+                }
+            }
+            a.cancel {
+                font-size:18px;
+                text-decoration: underline;
+                display:block;
+                margin-top:20px;
             }
         }
     }
