@@ -3,6 +3,7 @@ node_modules/
 /plugins
 resources/signing
 /www
+/_DEV
 
 # OS generated files #
 ######################
