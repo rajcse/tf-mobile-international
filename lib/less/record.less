@@ -964,7 +964,7 @@
 }
 
 .premium {
-	.title, &.report-header, &.history-item {
+	.title, &.report-header {
 		border: none;
 		background: #c39511!important;
 		background: linear-gradient(75deg, #c39511 0%,#eab114 51%,#d2a127 51%,#cb9b25 100%)!important;
@@ -975,6 +975,25 @@
 
 		a:after {
 			border-color: @brand-white!important;
+		}
+	}
+
+	&.history-item {
+		position: relative;
+		background: @brand-white;
+		overflow: hidden;
+
+		&:after {
+			content: "";
+		  position: absolute;
+		  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eab114), to(#c39511));
+		  background-image: -webkit-linear-gradient(#eab114, #c39511);
+		  background-image: -moz-linear-gradient(#eab114, #c39511);
+		  background-image: -o-linear-gradient(#eab114, #c39511);
+		  background-image: linear-gradient(#eab114, #c39511);
+		  top: 0;
+		  bottom: 0;
+		  width: 6px;
 		}
 	}
 
