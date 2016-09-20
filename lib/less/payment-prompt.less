@@ -6,21 +6,23 @@
 	bottom: 0;
 	background-color: rgba(0, 0, 0, .8);
     z-index: 99999;
+    overflow-y: scroll;
     	
     .modal {
         background: @brand-white;
         position: absolute;
-        top: 50%;
+        top: 20px;
         left: 50%;
         width: 90%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
         border-radius: @input-border-radius;
         
         h3 {
             margin: 0 0 .5em;
             padding: .5em 1em;
             background: @brand-green;
-            color: @brand-white
+            color: @brand-white;
+            line-height:22px;
         }
         
     	p {
@@ -38,15 +40,15 @@
     	}
 
         ul {
+            overflow: hidden;
             list-style: none;
-            //margin-left:20px;
+            padding-left:0;
             li {
+                float:left;
+                width:40%;
                 font-size:12px;
                 font-weight:600;
-                //background: url('../img/ui/premium-star-icon.svg');
-                //background-size:10px;
-                //background-repeat:no-repeat;
-                //background-position-y:50%;
+                margin-bottom:5px;
                 padding-left:20px;
             }
         }
