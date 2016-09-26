@@ -54,7 +54,7 @@ function handleError(err) {
 gulp.task('styles', function(){
 	return gulp.src(sourceDir + 'less/main.less')
 		.pipe(less().on('error', handleError))
-		.pipe(autoprefix({browsers: ['last 2 versions', 'not ie <= 8']}))
+		.pipe(autoprefix({browsers: ['last 2 versions', 'last 4 Android versions', 'not ie <= 8']}))
 		.pipe(cleanCss({keepSpecialComments: 0, processImport: false}).on('error', handleError))
 		.pipe(gulp.dest(buildDir + 'css/'))
 		.pipe(notify(function(file){return 'CSS Compiled'}));
