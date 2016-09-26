@@ -20,6 +20,7 @@ var path = require('path'),
 	vendorLibs = [
 		'classnames',
 		'chart.js',
+		'es6-promise',
 		'events',
 		'flux',
 		'jwt-decode',
