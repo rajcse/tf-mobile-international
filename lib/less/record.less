@@ -369,6 +369,11 @@
 		}
 
 		.criminal-results {
+			.match-row {
+				border-bottom: 1px solid @brand-gray;
+				padding-bottom:1.25em;
+			}
+
 			.clearfix();
 
 			.owl-item {
@@ -378,21 +383,21 @@
 			.criminal-card {
 				padding: 1em;
 				background: @brand-white;
-				border: 1px solid @divider-color;
 				box-shadow: 0 3px 6px rgba(0,0,0,.25);
 				width: 155px;
 				text-align: center;
+				border-radius: 5px;
 
-				&.most-likely-match {
-					border-left: 10px solid @brand-error;
+				&.likely {
+					border-top: 10px solid @brand-error;
 				}
 
-				&.likely-match {
-					border-left: 10px solid @brand-yellow;
+				&.possible {
+					border-top: 10px solid @brand-yellow;
 				}
 
-				&.least-likely-match {
-					border-left: 10px solid @brand-green;
+				&.unlikely {
+					border-top: 10px solid darken(@brand-gray, 10%);
 				}
 			}
 		}
