@@ -394,6 +394,38 @@
 			.match-row {
 				border-bottom: 1px solid @brand-gray;
 				padding-bottom:1.25em;
+				padding-top: 5px;
+				margin-bottom:10px;
+				h4 {
+					line-height: normal;
+					margin-bottom:15px;
+					&:before {
+						content:"";
+						display:inline-block;
+						height:10px;
+						width:10px;
+						border-radius:2px;
+						margin-right: 10px;
+					}
+
+					&.likely {
+						&:before {
+							background-color:@brand-green;
+						}
+					}
+
+					&.possible {
+						&:before {
+							background-color:@brand-orange;
+						}
+					}
+
+					&.least-likely {
+						&:before {
+							background-color:darken(@brand-gray, 10%);
+						}
+					}
+				}
 			}
 
 			.clearfix();
@@ -411,15 +443,15 @@
 				border-radius: 5px;
 
 				&.likely {
-					border-top: 10px solid @brand-error;
+					border-top: 6px solid @brand-green;
 				}
 
 				&.possible {
-					border-top: 10px solid @brand-yellow;
+					border-top: 6px solid @brand-orange;
 				}
 
 				&.least-likely {
-					border-top: 10px solid darken(@brand-gray, 10%);
+					border-top: 6px solid darken(@brand-gray, 10%);
 				}
 
 				p {
