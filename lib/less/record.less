@@ -167,11 +167,6 @@
 	}
 }
 
-.offense-detail {
-	padding-top:1em;
-	border-top:1px solid @brand-gray;
-}
-
 .offender-matches {
 	> p {
 		display: inline-block;
@@ -347,6 +342,19 @@
 			text-transform: uppercase;
 			font-weight: 400;
 			margin-bottom: 1em;
+		}
+	}
+
+	.offense-detail {
+		padding-top:1em;
+		border-top:1px solid @brand-gray;
+		.content {
+			ul {
+				margin: 0 0 1em 0;
+				li {
+					margin: 0 0 .25em 0;
+				}
+			}
 		}
 	}
 
