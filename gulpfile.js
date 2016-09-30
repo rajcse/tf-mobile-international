@@ -129,12 +129,10 @@ function devBundler(watch, live) {
 
 	if(watch) b.on('update', rebundle);
 
-	b.on('error', handleError);
-
 	rebundle();
 
 	function rebundle(){
-		var bundle = b.bundle();
+		var bundle = b.bundle().on('error', handleError);
 
 		if(!live) bundle = bundle.pipe(exorcist(path.join(__dirname, buildDir, mapfile)));
 
