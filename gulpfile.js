@@ -108,8 +108,8 @@ function devBundler(watch, live) {
                     }
                 ]] : ['transform-object-rest-spread']
 			})
-			.transform('folderify')
-			.transform('uglifyify');
+			.transform('folderify');
+			//.transform('uglifyify');
 
 	// Mark all the vendor libraries as external dependencies
 	for (var i = 0; i < vendorLibs.length; i++) {
