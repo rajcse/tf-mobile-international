@@ -298,15 +298,69 @@ button[type="search"] {
 		background: darken(@brand-gray, 10%);
 	}
 
+	&.btn-location {
+		background: @brand-blue;
+		color: @brand-white;
+		text-align: left;
+		border: none;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 0;
+		width: 100%;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+
+		&.with-arrow {
+			padding-right: 2em;
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				height: 7px;
+				width: 7px;
+				border: 2px solid @brand-white;
+				border-top: none;
+				border-right: none;
+				transform: rotate(225deg);
+			}
+
+			&:focus, &:active {
+				border-color: 2px solid @brand-white;
+			}
+		}
+	}
+
 	&.btn-link {
 		color: @brand-blue;
 		background: transparent;
-		font: 400 1em @body;
 		text-align: left;
 		border: 1px solid @brand-blue;
 		padding: 5px 10px;
 		position: relative;
 		margin-bottom: 10px;
+
+		&.with-arrow {
+			padding-right: 2em;
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				height: 7px;
+				width: 7px;
+				border: 2px solid @brand-blue;
+				border-top: none;
+				border-right: none;
+				transform: rotate(225deg);
+			}
+
+			&:focus, &:active {
+				border-color: 2px solid @brand-white;
+			}
+		}
 
 		&:focus, &:active {
 			background: @brand-blue;
@@ -317,7 +371,6 @@ button[type="search"] {
 	&.btn-danger {
 		color: @brand-error;
 		background: transparent;
-		font: 400 1em @body;
 		text-align: left;
 		border: 1px solid @brand-error;
 		padding: 5px 10px;
@@ -334,7 +387,7 @@ button[type="search"] {
 .btn {
 	appearance: none;
 	-webkit-font-smoothing: antialiased;
-	font: 700 0.875em @body;   /* 14/16 */
+	font: 400 14px @body;   /* 14/16 */
 	background: @brand-blue;
 	border-radius: 2px;
 	border: none;
@@ -343,6 +396,7 @@ button[type="search"] {
 	transition: background-color 500ms, box-shadow 600ms;
 	margin-top: .5em;
 	display: inline-block;
+	text-transform: uppercase;
 
 	&:focus {
 		outline: 0;
@@ -367,7 +421,6 @@ button[type="search"] {
 	&.btn-link {
 		color: @brand-blue;
 		background: transparent;
-		font: 400 1em @body;
 		text-align: left;
 		border: 1px solid @brand-blue;
 		padding: 5px 10px;
