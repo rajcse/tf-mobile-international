@@ -324,6 +324,24 @@
 			font-size: 0.75em; /* 12/16 */
 			color: darken(@brand-gray, 35%);
 		}
+
+		h3.subsection-title {
+			display: inline-block;
+			padding: 5px 84px 5px 15px;
+			margin-left: -15px;
+			background: darken(@brand-gray,10%);
+			color: @brand-white;
+			font-size:14px;
+			font-weight: bold;
+			text-transform: uppercase;
+			&.premium {
+				background-color:@brand-orange;
+				background-image: url('../img/ui/premium-icon-small.svg');
+	            background-size:10px;
+	            background-repeat:no-repeat;
+	            background-position: right 15px top 5px;
+			}
+		}
 	}
 
 	&.multi-widget {
@@ -483,6 +501,39 @@
 
 			.btn-link {
 				margin-top: 1em;
+			}
+		}
+	}
+
+	&#licenses {
+
+		.license-group {
+			margin-bottom:10px;
+		}
+		
+		.faa-certificate-group {
+			margin:10px 0 20px;
+			background:lighten(@brand-gray, 5%);
+			padding: 20px 20px 5px;
+
+			h3 {
+				font-size: 14px;
+				text-transform: uppercase;
+			}
+			.faa-certificate {
+				border-bottom: 1px solid @brand-gray;
+				&:last-of-type {
+					border-bottom:none;
+				}
+			}
+		}
+
+		.license-individual {
+			border-bottom: 1px solid darken(@brand-gray, 10%);
+			margin-bottom:5px;
+			padding-bottom: 5px;
+			&:last-of-type {
+				border-bottom:none;
 			}
 		}
 	}
