@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="31px" viewBox="0 0 22 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FB7468" offset="0%"></stop>
+            <stop stop-color="#F3443C" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="map-location">
+            <g id="group">
+                <g id="Group" transform="translate(0.000000, 1.000000)">
+                    <path d="M11,-2.30926389e-14 C8.21457606,-0.00212465687 5.54262533,1.10343987 3.5730326,3.0730326 C1.60343987,5.04262533 0.497875343,7.71457606 0.5,10.5 C0.5,18.375 11,30 11,30 C11,30 21.5,18.375 21.5,10.5 C21.5021247,7.71457606 20.3965601,5.04262533 18.4269674,3.0730326 C16.4573747,1.10343987 13.7854239,-0.00212465687 11,-2.50910404e-14 L11,-2.30926389e-14 Z" id="path" stroke="#B73830" fill="url(#linearGradient-1)"></path>
+                    <circle id="ellipse-12" fill="#5A1410" cx="11" cy="10" r="4"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
