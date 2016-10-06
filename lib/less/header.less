@@ -4,21 +4,21 @@ header {
     background-color: @brand-white;
     box-shadow: 0 -2px 12px 0 @shadow-color;
     // padding-top: 15px; // Padding for iOS, should be conditionally added in the build
-    height: 55px; 
+    height: 55px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 99999;
-    
+    z-index: 1001;
+
     h1 {
         margin: 0;
         text-align: center;
         text-transform: uppercase;
         line-height: 55px;
-        font-size: 18px; 
+        font-size: 18px;
     }
-    
+
     span {
         display: block;
         position: absolute;
@@ -26,7 +26,7 @@ header {
         bottom: 8px; // This keeps it anchored properly when iOS padding is added
         height: 40px;
         width: 40px;
-        
+
         &:before {
             content: '';
             display: block;
@@ -41,7 +41,7 @@ header {
             transform: rotate(45deg);
         }
     }
-    
+
     .logo {
         display: block;
         margin: 17px auto 0;
