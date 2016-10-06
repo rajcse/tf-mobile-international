@@ -1,11 +1,10 @@
 #dashboard {
 
     #dashboard-filter {
-        width: 100%;
-    }
-
-    select {
-        padding: 0 25px 0 25px;
+        max-width: 80%;
+        min-width: 60%;
+        float: right;
+        border: 0px;
     }
 
     h6 {
@@ -21,7 +20,14 @@
         margin-top: 15px;
         border-radius: 3px;
         box-shadow: 0 5px 10px -2px rgba(0,0,0,.16);
-  -webkit-box-shadow: 0 5px 10px -2px rgba(0,0,0,.16);
+        -webkit-box-shadow: 0 5px 10px -2px rgba(0,0,0,.16);
+        label {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 44px;
+            margin-left: 20px;
+            color: @brand-blue;
+        }
 
         h5 {
             text-transform: uppercase;
