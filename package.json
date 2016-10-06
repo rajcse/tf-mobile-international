@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "react-addons-css-transition-group": "^15.3.2",
+    "react-router-scroll": "^0.3.2",
     "react-router-transition": "0.0.6"
   }
 }
