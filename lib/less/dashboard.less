@@ -5,6 +5,7 @@
         min-width: 60%;
         float: right;
         border: 0px;
+        background: '';
     }
 
     h6 {
@@ -19,6 +20,7 @@
         background: @brand-white;
         margin-top: 15px;
         border-radius: 3px;
+        position: relative;
         box-shadow: 0 5px 10px -2px rgba(0,0,0,.16);
         -webkit-box-shadow: 0 5px 10px -2px rgba(0,0,0,.16);
         label {
@@ -29,6 +31,20 @@
             color: @brand-blue;
         }
 
+        &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                transform: rotate(134deg) translateY(-50%);
+                width: 10px;
+                height: 10px;
+                border: 2px solid @brand-blue;
+                border-left: none;
+                border-bottom: none;
+                right: 30px;
+                top: 80px;
+                z-index: 1;
+            }
         h5 {
             text-transform: uppercase;
             font-size: 16px;
@@ -37,6 +53,7 @@
             margin: 0;
             margin-bottom: 10px;
         }
+
     }
 
     ul#record-history {
