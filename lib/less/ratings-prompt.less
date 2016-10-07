@@ -1,0 +1,41 @@
+#ratings-prompt {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .8);
+    z-index: 99999;
+    	
+    .modal {
+        background: @brand-white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        transform: translate(-50%, -50%);
+        border-radius: @input-border-radius;
+        
+        h3 {
+            margin: 0 0 .5em;
+            padding: .5em 1em;
+            background: #209dd2;
+            color: @brand-white
+        }
+        
+    	p {
+    		margin: 1em;
+            font-size: 14px;
+    	}
+        
+        .confirm {
+            text-align: center;
+            margin-bottom: 1em;
+			
+			button {
+				font-size: 18px;
+				padding: 7px 25px;
+			}
+        }
+    }
+}
