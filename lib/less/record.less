@@ -344,6 +344,10 @@
 	            background-position: right 15px top 5px;
 			}
 		}
+
+		h3.record-title {
+			// leaving this here so that when we inevitably have to style this element it is put in the right place
+		}
 	}
 
 	&.multi-widget {
@@ -506,14 +510,14 @@
 			}
 		}
 	}
-	// TODO: these are all very similar styles and can be combined at some point
+	// TODO: these are all very similar styles and will be combined when I have time. - Brian 
 	&#licenses {
 
 		.license-group {
 			margin-bottom:10px;
 		}
 
-		.faa-certificate-group {
+		.subgroup {
 			margin:10px 0 20px;
 			background:lighten(@brand-gray, 5%);
 			padding: 20px 20px 5px;
@@ -522,7 +526,7 @@
 				font-size: 14px;
 				text-transform: uppercase;
 			}
-			.faa-certificate {
+			> div {
 				border-bottom: 1px solid @brand-gray;
 				&:last-of-type {
 					border-bottom:none;
@@ -552,6 +556,17 @@
 
 	}
 
+	&#businesses {
+		.business-individual {
+			border-bottom: 1px solid darken(@brand-gray, 10%);
+			margin-bottom:15px;
+			padding-bottom: 5px;
+			&:last-of-type {
+				border-bottom:none;
+			}
+		}
+	}
+
 	&#bankruptcies {
 		.bankruptcy-individual {
 			border-bottom: 1px solid darken(@brand-gray, 10%);
@@ -578,13 +593,6 @@
 				}
 			}
 		}
-
-		.label {
-			h3.subsection-title {
-				padding: 5px 35px 5px 15px;
-			}
-		}
-
 	}
 
 	&#liens {
@@ -613,13 +621,6 @@
 				}
 			}
 		}
-
-		.label {
-			h3.subsection-title {
-				padding: 5px 35px 5px 15px;
-			}
-		}
-
 	}
 
 	&#liens {
