@@ -50,7 +50,7 @@
 	img {
 		border-radius: 6px;
 		overflow: hidden;
-		box-shadow: 0 0 8px -2px @brand-gray;
+		box-shadow: 0 2px 2px 3px rgba(0,0,0,.15);
 		display: block;
 	}
 
@@ -561,7 +561,7 @@
 				border-bottom:none;
 			}
 		}
-		
+
 		.subgroup {
 			margin:10px 0 20px;
 			background:lighten(@brand-gray, 5%);
@@ -1096,7 +1096,7 @@
 		top: 0;
 		left: 0;
 		background: rgba(0,0,0,.85);
-		z-index: 1001;
+		z-index: 1002;
 		box-sizing: border-box;
 
 		.photo-close {
@@ -1121,6 +1121,25 @@
 			}
 		}
 
+		.photo-close {
+			background-image: url('../img/ui/close-photo.svg');
+			background-size: 30px auto;
+			background-repeat: no-repeat;
+			background-position: center;
+			content: '';
+			display: block;
+			width: auto;
+			height: 30px;
+			top: auto;
+			bottom: 15%;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			font-size: 13px;
+			text-align: center;
+			padding-top: 5em;
+		}
+
 		.photo-controller {
 			position: absolute;
 			top: 50%;
@@ -1130,7 +1149,7 @@
 
 			.control {
 				color: @brand-white;
-				background: @brand-green;
+				background: @brand-blue;
 				padding: 0;
 				margin: 0;
 				border-radius: 50%;
