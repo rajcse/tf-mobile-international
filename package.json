@@ -60,6 +60,7 @@
     "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
+    "numeral": "^1.5.3",
     "react-addons-css-transition-group": "^15.3.2",
     "react-router-scroll": "^0.3.2",
     "react-router-transition": "0.0.6"
