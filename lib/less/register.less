@@ -1,7 +1,7 @@
-#login {
-    position: fixed;
+#register {
+    position: absolute;
     background-color: @brand-green;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     left: 0;
     top: 0;
@@ -19,6 +19,7 @@
         font-weight: 700;
     }
 
+    input[type="text"],
     input[type="email"],
     input[type="password"] {
         display: block;
@@ -37,13 +38,7 @@
 
         display: block;
         width: 100%;
-        margin: 70px auto 60px;
-        transition: all .5 ease;
-
-        &.focused {
-          margin: 40px auto 30px;
-          transition: all .5 ease;
-        }
+        margin: 10px auto 40px;
     }
 
     button {
@@ -98,8 +93,20 @@
         }
     }
     
-    #not-a-member {
-        margin-top: 40px;
+    .legal-terms {
+        color: @brand-white;
+        font-size: 14px;
+        line-height: 1em;
+        text-align: justify;
+        
+        a {
+            color: @brand-white;
+            text-decoration: underline;
+        }
+    }
+    
+    #already-a-member {
+        margin-top: 20px;
         text-align: center;
         
         a {
