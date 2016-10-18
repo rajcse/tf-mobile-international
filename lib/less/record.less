@@ -331,7 +331,7 @@
 		&:last-of-type {
 			border-bottom:none;
 		}
-
+		// use this class to group document meta data, for example all the debtors on a bankruptcy record 
 		.subgroup {
 			margin:10px 0 20px;
 			background:lighten(@brand-gray, 5%);
@@ -345,6 +345,12 @@
 				border-bottom: 1px solid @brand-gray;
 				&:last-of-type {
 					border-bottom:none;
+				}
+			}
+			// Use this class when a subgroup doesn't contain data that's groups together by a loop. E.G Accidents->Accident Overview
+			&.subgroup-singular {
+				> div {
+					border:none;
 				}
 			}
 		}
@@ -551,6 +557,9 @@
 
 	&#accidents {
 		.vehicle {
+			h4 {
+				margin-top:15px;
+			}
 			border-bottom: 1px solid @brand-gray;
 			&:last-of-type {
 				border-bottom:none;
