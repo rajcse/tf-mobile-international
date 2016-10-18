@@ -331,7 +331,7 @@
 		&:last-of-type {
 			border-bottom:none;
 		}
-
+		// use this class to group document meta data, for example all the debtors on a bankruptcy record 
 		.subgroup {
 			margin:10px 0 20px;
 			background:lighten(@brand-gray, 5%);
@@ -346,6 +346,18 @@
 				&:last-of-type {
 					border-bottom:none;
 				}
+			}
+			// Use this class when a subgroup doesn't contain data that's groups together by a loop. E.G Accidents->Accident Overview
+			&.subgroup-singular {
+				> div {
+					border:none;
+				}
+			}
+			// Use this when you have an array of objects inside a subgroup that you need to loop through. (e.g. accents.vehicles.passengers)
+			.subgroup {
+				margin:0 0 20px 0;
+				padding:1px 15px;
+				background:lighten(@brand-gray, 3%);
 			}
 		}
 	}
@@ -541,34 +553,24 @@
 			}
 		}
 	}
-	// TODO: these are all very similar styles and will be combined when I have time. - Brian 
+
 	&#licenses {
 
 		.license-group {
 			margin-bottom:10px;
 		}
+	}
 
-		.subgroup {
-			margin:10px 0 20px;
-			background:lighten(@brand-gray, 5%);
-			padding: 20px 20px 5px;
-
-			h3 {
-				font-size: 14px;
-				text-transform: uppercase;
+	&#accidents {
+		.vehicle, .pedestrian {
+			>h4 {
+				margin-top:15px;
 			}
-			> div {
-				border-bottom: 1px solid @brand-gray;
-				&:last-of-type {
-					border-bottom:none;
-				}
+			h5 {
+				margin-top:10px;
+				font-size:15px;
 			}
-		}
-
-		.license-individual {
-			border-bottom: 1px solid darken(@brand-gray, 10%);
-			margin-bottom:5px;
-			padding-bottom: 5px;
+			border-bottom: 1px solid @brand-gray;
 			&:last-of-type {
 				border-bottom:none;
 			}
