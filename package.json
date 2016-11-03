@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "android": "cordova run android --release",
+    "android": "cordova run android",
     "android:build": "cordova build --release --buildConfig=./build.json android -- --gradleArg=-PcdvVersionCode=10006890",
     "build": "NODE_ENV=production webpack --display-error-details",
     "ios": "cordova run ios",
