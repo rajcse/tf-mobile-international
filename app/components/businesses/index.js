@@ -1,5 +1,4 @@
 import React from 'react';
-import uuid from 'uuid';
 import _ from 'lodash';
 import Sticky from 'react-stickynode';
 import constants from '../../constants/pubRecConstants';
@@ -7,7 +6,40 @@ import SimpleRow from '../shared/SimpleRow';
 import {STATES} from '../../utils/states';
 
 const Businesses = (props) => {
-	let { businesses } = props;
+	let {
+		businesses,
+		isPremium,
+		name,
+		showPremiumUpsell,
+		recordID
+	} = props;
+
+	if (!isPremium) {
+		return (
+			<section id="businesses" className="widget">
+				<Sticky>
+					<h2 className="title">Business Information</h2>
+				</Sticky>
+
+				<div className="document">
+					<div className="label">
+						<h4>Additional Info</h4>
+					</div>
+
+					<p>Some info is so sensitive we can only reveal it on a Per-Report Basis. Click the button below to have access to available business information on {name}.</p>
+
+					<p>
+						<button className="btn btn-block" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+					</p>
+				</div>
+			</section>
+		);
+	}
+
+	if (isPremium && businesses.length === 0) {
+		return null;
+	}
+
 	return (
 		<section id="businesses" className="widget premium">
 			<Sticky>
@@ -79,7 +111,11 @@ const Businesses = (props) => {
 };
 
 Businesses.propTypes = {
-	businesses: React.PropTypes.array.isRequired
+	businesses: React.PropTypes.array,
+	isPremium: React.PropTypes.bool,
+	name: React.PropTypes.string,
+	showPremiumUpsell: React.PropTypes.func,
+	recordID: React.PropTypes.string
 };
 
 export default Businesses;

@@ -647,6 +647,7 @@ class PubRecAPI {
 				if(responseData.success) {
 					//serverActions.redirectToRecord(user.id, recordId.recordId);
 					this.fetchRecord({recordId}, true).then(() => setTimeout(serverActions.purchaseSuccessful));
+					setTimeout(() => this.fetchAccountInfo(), 0);
 				} else {
 					console.error(responseData.errors);
 					setTimeout(() => serverActions.purchaseError(responseData.errors));
@@ -676,6 +677,7 @@ class PubRecAPI {
 						return console.log(JSON.stringify(responseData));
 					}
 					this.purchasePackage(packageData, true);
+					setTimeout(() => this.fetchAccountInfo(), 0);
 				})
 				.catch((err) => {
 					console.error(err);
@@ -692,6 +694,7 @@ class PubRecAPI {
 						return console.log(JSON.stringify(responseData));
 					}
 					this.purchasePackage(packageData, true);
+					setTimeout(() => this.fetchAccountInfo(), 0);
 				})
 				.catch((err) => {
 					console.error(err);
