@@ -1,0 +1,114 @@
+#payment-prompt {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .8);
+		z-index: 99999;
+		overflow-y: scroll;
+
+		.modal {
+				background: @brand-white;
+				position: absolute;
+				top: 20px;
+				left: 50%;
+				width: 90%;
+				transform: translateX(-50%);
+				border-radius: @input-border-radius;
+
+				&.modal-transparent {
+					text-align: center;
+					background: transparent;
+					color: @brand-white;
+					margin-top: 3em;
+
+					h3 {
+						background: transparent;
+						text-transform: uppercase;
+					}
+
+					svg {
+						width: 30px;
+					}
+				}
+
+				.icon-close {
+					background-image: url('/img/ui/close.svg');
+					background-repeat: no-repeat;
+					background-size: 14px auto;
+					background-position: center;
+					position: absolute;
+					right: 0px;
+					top: 0px;
+					padding: .825em;
+					width: 14px;
+					height: 14px;
+					display: block;
+				}
+
+				h3 {
+						margin: 0 0 .5em;
+						padding: .5em 1em;
+						background: @brand-green;
+						color: @brand-white;
+						line-height:22px;
+				}
+
+			p {
+				margin: 1em;
+						font-size: 16px;
+						&.intro {
+								font-weight:700;
+						}
+						&.includes {
+								font-size:14px;
+						}
+						span {
+								color:@brand-error;
+						}
+			}
+
+				ul {
+						overflow: hidden;
+						list-style: none;
+						padding-left:0;
+						li {
+								float:left;
+								width:40%;
+								font-size:12px;
+								font-weight:600;
+								margin-bottom:5px;
+								padding-left:20px;
+						}
+				}
+				.billing-details {
+						font-size:12px;
+				}
+				.confirm {
+						text-align: center;
+						margin-bottom: 1em;
+						button.continue {
+								font-size:20px;
+								width:80%;
+								padding:15px;
+								font-weight:700;
+								span {
+									font-size: 14px;
+									display: block;
+									font-weight: 400;
+									text-transform: uppercase;
+									color: @brand-white;
+								}
+						}
+						a.cancel {
+							font-size: 14px;
+							text-decoration: underline;
+							display:block;
+							margin-top:20px;
+							color: #979797;
+							font-weight: 700;
+						}
+				}
+		}
+}
