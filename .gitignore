@@ -2,8 +2,13 @@ node_modules/
 /platforms
 /plugins
 resources/signing
-/www
 /_DEV
+/res
+/.idea
+/www/app.js
+/www/vendor.bundle.js
+/www/app.js.map
+/www/vendor.bundle.js.map
 
 # OS generated files #
 ######################

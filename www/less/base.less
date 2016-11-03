@@ -1,0 +1,564 @@
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+	-webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+	-webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+	-webkit-font-smoothing: antialiased;
+	font: 100% @body;
+	color: @text-color;
+	background: @brand-gray;
+	line-height: 1.4;
+	box-sizing: border-box;
+
+	&.modal-open {
+		overflow: hidden;
+	}
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+
+}
+
+a {
+	color: @link-color;
+	text-decoration: none;
+}
+
+p {
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+hr {
+	border: 1px solid @divider-color;
+}
+
+h1, h2, h3, h4, h5 {
+	padding: 0;
+	margin: 0;
+}
+
+h2, .h2 {
+	font-size: 20px;
+	line-height: 1em;
+}
+
+h3, .h3 {
+	font-size: 18px;
+	line-height: 1em;
+}
+
+h4, .h4 {
+	font-size: 16px;
+	line-height: 25px;
+}
+
+small {
+	color: @headline-color;
+}
+
+input[type='text'],
+input[type='tel'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+select,
+textarea  {
+	-webkit-appearance: none;
+	border-radius: @input-border-radius;
+	box-shadow: none;
+	box-sizing: border-box;
+	border: 1px solid @brand-gray;
+	background: @brand-white;
+	color: @text-color;
+	font: 18px @body;
+	transition: transform 200ms;
+	height: 44px; // Default to easily touchable size
+	padding: 5px 20px;
+
+	&:focus {
+		outline: 0;
+		box-shadow: inset 0 0 2px 0 lighten(@brand-blue, 5%);
+		border-color: lighten(@brand-blue, 5%);
+	}
+
+	&:active {
+		transform: scale(1.02);
+	}
+
+	&:disabled {
+		color: @brand-gray;
+	}
+}
+
+textarea {
+	width: 100%;
+	max-width: 100%;
+	height: 110px;
+	min-height: 110px;
+	padding: 12px 15px;
+}
+
+select {
+	padding: 0 10px;
+	padding-right: 25px;
+	background: url('/img/ui/arrows-select.png') @brand-white right 10px center no-repeat;
+
+	&:focus {
+		outline: none;
+		box-shadow: inset 0 0 2px 0 lighten(@brand-blue, 5%);
+		border-color: lighten(@brand-blue, 5%);
+	}
+}
+
+input[type="checkbox"] {
+	display: none;
+
+	+ label {
+		position: relative;
+		display: block;
+		border-radius: 2px;
+		font: 500 0.875em @body; // 14px
+		line-height: 1em;
+		padding: .8em 1em;
+		padding-right: 1.7857em;
+		user-select: none;
+		transition: background-color 200ms;
+
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 2px;
+			border: 2px solid @brand-white;
+			right: 0;
+			top: .8em;
+			margin-right: 1em;
+			transition: background-color 300ms;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			height: 2px;
+			width: 7px;
+			border: 2px solid transparent;
+			border-left-color: @brand-black;
+			border-bottom-color: @brand-black;
+			transform: rotate(-45deg) scale(0);
+			right: 0;
+			margin-right: 1.08em;
+			top: 1em;
+			transition: transform 300ms;
+		}
+	}
+
+	&:checked {
+		+ label {
+			background-color: @brand-slate;
+
+			&:before {
+				background: @brand-white;
+				transition: none;
+			}
+
+			&:after {
+				transform: rotate(-45deg) scale(1);
+			}
+		}
+	}
+}
+
+
+input[type="radio"] {
+	display: none;
+
+	+ label {
+		position: relative;
+		display: block;
+		font: 500 0.875em @body; // 14px
+		line-height: 1em;
+		padding: .8em 1em;
+		user-select: none;
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			border: 1px solid @brand-blue;
+			top: .8em;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			height: 8px;
+			width: 8px;
+			border-radius: 50%;
+			background: @brand-blue;
+			transform: scale(0);
+			margin-top: 4px;
+			top: .8em;
+			transition: transform 300ms;
+		}
+
+		&.radio-right {
+			padding-right: 1.7857em;
+
+			&:before {
+				right: 0;
+				margin-right: 1em;
+			}
+
+			&:after {
+				right: 4px;
+				margin-right: 1em;
+			}
+		}
+
+		&.radio-left {
+			padding-left: 3.4em;
+
+			&:before {
+				left: 0;
+				margin-left: 1em;
+			}
+
+			&:after {
+				left: 4px;
+				margin-left: 1em;
+			}
+		}
+	}
+
+	&:checked {
+		+ label {
+			&:before {
+			}
+
+			&:after {
+				transform: scale(1);
+			}
+		}
+	}
+
+	&:disabled {
+		+ label {
+			color: fade(@brand-black, 40%);
+
+			&:before {
+				border-color: fade(@brand-black, 40%);
+			}
+
+			&:after {
+				transform: scale(.5);
+				background: fade(@brand-black, 40%);
+			}
+		}
+	}
+}
+
+button,
+button[type="submit"],
+button[type="search"] {
+	appearance: none;
+	-webkit-font-smoothing: antialiased;
+	font: 400 0.875em @body;   /* 14/16 */
+	background: @brand-blue;
+	border-radius: @input-border-radius;
+	border: none;
+	color: @brand-white;
+	text-align: center;
+	text-transform: uppercase;
+	transition: background-color 500ms, box-shadow 600ms;
+
+	&:focus {
+		outline: 0;
+	}
+
+	&:active {
+		transition: none;
+		outline: 0;
+		background: lighten(@brand-blue, 10%);
+	}
+
+	&:disabled {
+		background: darken(@brand-gray, 10%);
+	}
+
+	&.btn-location {
+		background: @brand-blue;
+		color: @brand-white;
+		text-align: left;
+		border: none;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 0;
+		width: 100%;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+
+		&.with-arrow {
+			padding-right: 2em;
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				height: 7px;
+				width: 7px;
+				border: 2px solid @brand-white;
+				border-top: none;
+				border-right: none;
+				transform: rotate(225deg);
+			}
+
+			&:focus, &:active {
+				border-color: 2px solid @brand-white;
+			}
+		}
+	}
+
+	&.btn-link {
+		color: @brand-blue;
+		background: transparent;
+		text-align: left;
+		border: 1px solid @brand-blue;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&.with-arrow {
+			padding-right: 2em;
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				right: 10px;
+				top: 9px;
+				height: 7px;
+				width: 7px;
+				border: 2px solid @brand-blue;
+				border-top: none;
+				border-right: none;
+				transform: rotate(225deg);
+			}
+
+			&:focus, &:active {
+				border-color: 2px solid @brand-white;
+			}
+		}
+
+		&:focus, &:active {
+			background: @brand-blue;
+			color: @brand-white;
+		}
+	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
+			color: @brand-white;
+		}
+	}
+}
+
+.btn {
+	appearance: none;
+	-webkit-font-smoothing: antialiased;
+	font: 400 14px @body;   /* 14/16 */
+	background: @brand-blue;
+	border-radius: 2px;
+	border: none;
+	color: @brand-white;
+	text-align: center;
+	transition: background-color 500ms, box-shadow 600ms;
+	margin-top: .5em;
+	display: inline-block;
+	text-transform: uppercase;
+
+	&:focus {
+		outline: 0;
+	}
+
+	&:active {
+		transition: none;
+		outline: 0;
+		background: lighten(@brand-blue, 10%);
+	}
+
+	&:disabled {
+		cursor: no-drop;
+		background: none;
+		box-shadow: inset 0 0 0 2px @brand-white;
+
+		&:active {
+			box-shadow: inset 0 0 0 2px @brand-white;
+		}
+	}
+
+	&.btn-link {
+		color: @brand-blue;
+		background: transparent;
+		text-align: left;
+		border: 1px solid @brand-blue;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-blue;
+			color: @brand-white;
+		}
+	}
+
+	&.btn-danger {
+		color: @brand-error;
+		background: transparent;
+		font: 400 1em @body;
+		text-align: left;
+		border: 1px solid @brand-error;
+		padding: 5px 10px;
+		position: relative;
+		margin-bottom: 10px;
+
+		&:focus, &:active {
+			background: @brand-error;
+			color: @brand-white;
+		}
+	}
+
+	&.btn-upgrade {
+		width:100%;
+		padding:20px 0;
+		font-size:20px;
+		margin-top:20px;
+	}
+}
+
+ul.pill-selector {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+
+	li {
+		position: relative;
+		float: left;
+		height: 32px;
+		box-sizing: border-box;
+		padding: 0 5px;
+		line-height: 32px;
+
+		&:not(:last-child) {
+			input[type="radio"] {
+				+ label {
+					border-right: none;
+				}
+			}
+		}
+
+		&:first-child {
+			input[type="radio"] {
+				+ label {
+					left: 0; // Don't create a fake margin
+					border-radius: 3px 0 0 3px;
+				}
+			}
+		}
+
+		&:last-child {
+			input[type="radio"] {
+				+ label {
+					border-radius: 0 3px 3px 0;
+				}
+
+				&:checked {
+					+ label {
+						right: 0; // No need to move to the right when selected
+					}
+				}
+			}
+		}
+	}
+
+	input[type="radio"] {
+		+ label {
+			box-sizing: border-box;
+			padding: 0;
+			position: absolute;
+			left: 1px; // For fake margins
+			right: 0;
+			top: 0;
+			bottom: 0;
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: 600;
+			font-size: 13px;
+			line-height: inherit;
+			background: @brand-gray;
+			color: @brand-blue;
+
+			&:before,
+			&:after {
+				display: none;
+			}
+		}
+
+		&:checked {
+			+ label {
+				left: 0;
+				right: -1px; // For removing fake margin to the right
+				background: @brand-green;
+				color: @brand-white;
+			}
+
+			&:disabled {
+				+ label {
+					background: @brand-gray;
+					color: @brand-white;
+				}
+			}
+		}
+
+		&:disabled {
+			+ label {
+				border: 1px solid @brand-gray;
+				background: @brand-white;
+				color: @brand-gray;
+			}
+		}
+	}
+}
+
+#app {
+	padding: 55px 10px 60px;
+		overflow-x: hidden;
+	// padding-top: 70px; // Padding for iOS, should be conditionally added in the build
+}
+
+.pull-right {
+	float: right;
+}
