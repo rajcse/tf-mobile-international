@@ -99,6 +99,13 @@ const Bankruptcies = (props) => {
 							title="Filer Type"
 						/> : null }
 
+					{bankrupt.filing_status ?
+						<SimpleRow
+							key={uuid.v4()}
+							content={_.capitalize(bankrupt.filing_status)}
+							title="Filing Status"
+						/> : null }
+
 					{bankrupt.filing_jurisdiction ?
 						<SimpleRow
 							key={uuid.v4()}
@@ -215,8 +222,8 @@ const Bankruptcies = (props) => {
 						<div className="subgroup">
 							<h3>Debtors</h3>
 							{_.map(bankrupt.debtors, (debtor) => {
-								let phone = debtor.phones ? debtor.phones[0].display : null;
-								let location = _.has(debtor, 'locations[0].address.display') ? debtor.locations[0].address.display : null;
+								let phone = _.get(debtor,'phones[0].display', null);
+								let location = _.get(debtor,'locations[0].address.display', null);
 
 								return (
 									<SimpleInline
@@ -233,18 +240,19 @@ const Bankruptcies = (props) => {
 						<div className="subgroup">
 							<h3>Attorneys</h3>
 							{_.map(bankrupt.attorneys, (attorney) => {
-								let phone = attorney.phones ? attorney.phones[0].display : null;
-								let location = _.has(attorney, 'locations[0].address.display') && attorney.locations[0].address.display ? attorney.locations[0].address.display : null;
-
-								if(_.has(attorney,'names[0].first') && !attorney.names[0].first) {
+								let phone = _.get(attorney,'phones[0].display', null);
+								let location = _.get(attorney, 'locations[0].address.display', null);
+								let email = _.get(attorney, 'emails[0].address', null);
+								let name = _.get(attorney,'names[0].first', '') + ' ' + _.get(attorney,'names[0].last', '');
+								if(!attorney.names) {
 									return true;
 								}
 
 								return (
 									<SimpleInline
 										key={uuid.v4()}
-										title={['Attorney', 'Attorney\'s Address', 'Attorney\'s Phone Number' ]}
-										contents={[`${attorney.names[0].first} ${attorney.names[0].last}`, location, phone]}
+										title={['Attorney', 'Attorney\'s Address', 'Attorney\'s Phone Number', 'Attorney\'s Email' ]}
+										contents={[name, location, phone, email]}
 									/>
 								);
 							})}
@@ -258,7 +266,7 @@ const Bankruptcies = (props) => {
 								let phone = trustee.phones ? trustee.phones[0].display : null;
 								let location = _.has(trustee, 'locations[0].address.display') && trustee.locations[0].address.display ? trustee.locations[0].address.display : null;
 
-								if(_.has(trustee, 'names[0].first') && !trustee.names[0].first) {
+								if(!trustee.names) {
 									return true;
 								}
 

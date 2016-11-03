@@ -50,10 +50,12 @@ const Businesses = (props) => {
 					<div className="label label-full">
 						<h3 className="document-title">{business.company_name}</h3>
 					</div>
-					<SimpleRow
-						content={business.name.first + ' ' + business.name.last}
-						title="Name"
-					/>
+					{ _.get(business,'name.first') ?
+						<SimpleRow
+							content={business.name.first + ' ' + business.name.last}
+							title="Name"
+						/> : null
+					}
 
 					{ business.corporation_number ?
 						<SimpleRow

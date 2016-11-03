@@ -17,45 +17,70 @@ const Associates = (props) => {
 		const age = calculateAge(date);
 
 		content.push(
-			<li key={i}>
-				<h4>{associate.names[0].display}</h4>
+			_.get(associate,'names[0].display') ?
+				<li key={i}>
+					<h4>{associate.names[0].display}</h4>
 
-				{ associate.available_criminal_records >= 1 ?
-					<p>
-						<small><strong>({associate.available_criminal_records}) </strong>
-							Possible Criminal Records
-						</small>
-					</p>
-				: null }
+					{ associate.available_criminal_records >= 1 ?
+						<p>
+							<small><strong>({associate.available_criminal_records}) </strong>
+								Possible Criminal Records
+							</small>
+						</p>
+					: null }
 
-				{ date ?
-					<SimpleInline
+					{ date ?
+						<SimpleInline
+							key={uuid.v4()}
+							title={['Date of Birth', 'Age']}
+							contents={[
+								`${constants.months[date.month]}, ${date.day} ${date.year}`,
+								age.display
+							]}
+							classes="inline-half"
+						/>
+					: null }
+
+					{ _.has(associate,'date_last_cohabit.date_range.end.month') ?
+						<SimpleRow
+							key={uuid.v4()}
+							title="Date Last Shared Address"
+							content={constants.months[associate.date_last_cohabit.date_range.end.month] + ', ' + associate.date_last_cohabit.date_range.end.day + ' ' + associate.date_last_cohabit.date_range.end.year}
+						/>
+					: null }
+
+					{ _.get(associate,'locations[0].address.display') ?
+						<SimpleRow
+							key={uuid.v4()}
+							title="Address"
+							content={associate.locations[0].address.display}
+						/>
+					: null }
+
+					{ _.get(associate,'phones[0].display') ?
+						<SimpleRow
+							key={uuid.v4()}
+							title="Phone Number"
+							content={associate.phones[0].display}
+						/>
+					: null }
+
+					{ _.get(associate,'emails[0].address') ?
+						<SimpleRow
+							key={uuid.v4()}
+							title="Email Address"
+							content={associate.emails[0].address}
+						/>
+					: null }
+
+					<TeaserLink
 						key={uuid.v4()}
-						title={['Date of Birth', 'Age']}
-						contents={[
-							`${constants.months[date.month]}, ${date.day} ${date.year}`,
-							age.display
-						]}
-						classes="inline-half"
-					/>
-				: null }
-
-				{ _.has(associate,'date_last_cohabit.date_range.end.month') ?
-					<SimpleRow
-						key={uuid.v4()}
-						title="Date Last Shared Address"
-						content={constants.months[associate.date_last_cohabit.date_range.end.month] + ', ' + associate.date_last_cohabit.date_range.end.day + ' ' + associate.date_last_cohabit.date_range.end.year}
-					/>
-				: null }
-
-				<TeaserLink
-					key={uuid.v4()}
-					teaser={associate}
-					classes="btn-link btn"
-					recordType={constants.recordTypes.PERSON}> View Person Report
-				</TeaserLink>
-				<hr/>
-			</li>
+						teaser={associate}
+						classes="btn-link btn"
+						recordType={constants.recordTypes.PERSON}> View Person Report
+					</TeaserLink>
+					<hr/>
+				</li> : null
 		);
 	});
 

@@ -9,41 +9,40 @@ const RelativesColumn = (props) => {
 	let { title, relatives, calculateAge } = props;
 
 	let content = [];
-
 	relatives.map((relative, i) => {
 		const location = _.head(relative.locations);
 		const dob = _.head(relative.dobs);
 		const date = !_.isUndefined(dob) && !_.isNull(dob.date) ? dob.date : null;
 		const age = calculateAge(date);
-
 		content.push(
-			<li key={i}>
-				<h4>{relative.names[0].display}</h4>
+			 _.get(relative,'names[0].display') ?
+				<li key={i}>
+					<h4>{relative.names[0].display}</h4>
 
-				{ relative.available_criminal_records > 0 ?
-					<p>
-						<small><strong>({relative.available_criminal_records}) </strong>
-							Possible Criminal Records
-						</small>
-					</p>
-				: null }
+					{ relative.available_criminal_records > 0 ?
+						<p>
+							<small><strong>({relative.available_criminal_records}) </strong>
+								Possible Criminal Records
+							</small>
+						</p>
+					: null }
 
-				{ !_.isUndefined(location) ?
-					<SimpleInline
-						key={uuid.v4()}
-						title={['Location', 'Age']}
-						contents={[`${location.address.city}, ${location.address.state}`, age.display] }
-						classes="inline-half"
-					/>
-				: null }
+					{ !_.isUndefined(location) ?
+						<SimpleInline
+							key={uuid.v4()}
+							title={['Location', 'Age']}
+							contents={[`${location.address.city}, ${location.address.state}`, age.display] }
+							classes="inline-half"
+						/>
+					: null }
 
-				<TeaserLink
-					teaser={relative}
-					classes="btn-link btn"
-					recordType={constants.recordTypes.PERSON}> View Person Report
-				</TeaserLink>
-				<hr/>
-			</li>
+					<TeaserLink
+						teaser={relative}
+						classes="btn-link btn"
+						recordType={constants.recordTypes.PERSON}> View Person Report
+					</TeaserLink>
+					<hr/>
+				</li> : null
 		);
 	});
 
