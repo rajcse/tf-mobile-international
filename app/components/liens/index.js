@@ -9,7 +9,7 @@ import * as libs from '../../utils/libs';
 
 function getFileDate(date) {
 	if(!date) {
-		return 'Lien or Judgement';
+		return 'Lien';
 	}
 
 	let formattedDate = constants.months[date.month] + ' ' + date.day + ' ' + date.year;
@@ -22,92 +22,53 @@ const Liens = (props) => {
 	return (
 		<section id="liens" className="widget premium">
 			<Sticky>
-				<h2 className="title">Liens And Judgements</h2>
+				<h2 className="title">Possible Liens</h2>
 			</Sticky>
 			{ liens.map((lien, index) => (
-				<div className="document lien-individual" key={index}>
+				<div className="document lien-individual" key={uuid.v4()}>
 					<div className="label label-full">
-						<h3 className="document-title">{getFileDate(lien.origin_filing_date)}</h3>
+						<h3 className="document-title">{getFileDate(lien.filing_date)}</h3>
 					</div>
 
-					{ lien.origin_filing_number ?
+					{ lien.courtcase_number ?
 						<h4 className="sub-title">
-							Filing # {lien.origin_filing_number}
+							Case # {lien.courtcase_number}
 						</h4>
 					: null }
 
-					{(lien.eviction) ?
+					{ lien.filing_type ?
+						<SimpleRow
+							content={lien.filing_type}
+							title="Filing Type"
+						/> : null
+					}
+
+					{ lien.total_lien_amount ?
+						<SimpleRow
+							content={libs._getFormattedCurrency(lien.total_lien_amount)}
+							title="Lien Amount"
+						/> : null
+					}
+
+					{ _.get(lien,'address.display') ?
 						<SimpleRow
 							key={`eviction-${uuid.v4()}`}
-							content={lien.eviction && lien.eviction.toLowerCase() === 'y' ? 'Yes' : 'No'}
-							title="Eviction"
+							content={lien.address.display}
+							title="Address"
 						/> : null
 					}
 
-					{(lien.case_number) ?
+					{ _.get(lien,'name.first') || _.get(lien,'name.last')?
 						<SimpleRow
-							content={lien.case_number}
-							title="Case Number"
+							content={`${_.get(lien,'name.first')} ${_.get(lien,'name.last')}`}
+							title="Debtor Name"
 						/> : null
 					}
 
-					{(lien.filing_status) ?
+					{ _.get(lien,'plaintiff_name.first') || _.get(lien,'plaintiff_name.last')?
 						<SimpleRow
-							key={`eviction-${uuid.v4()}`}
-							content={lien.filing_status}
-							title="Filing Status"
-						/> : null
-					}
-
-					{(lien.filing_jurisdiction_name) ?
-						<SimpleRow
-							content={lien.filing_jurisdiction_name}
-							title="Filing State"
-						/> : null
-					}
-
-					{(lien.amount) ?
-						<SimpleRow
-							key={`amount-${uuid.v4()}`}
-							content={libs._getFormattedCurrency(lien.amount)}
-							title="Amount"
-						/> : null
-					}
-					{(lien.legal_lot) ?
-						<SimpleRow
-							key={`legal_lot-${uuid.v4()}`}
-							content={lien.legal_lot}
-							title="Legal Lot"
-						/> : null
-					}
-					{(lien.legal_block) ?
-						<SimpleRow
-							key={`legal_block-${uuid.v4()}`}
-							content={lien.legal_block}
-							title="Legal Block"
-						/> : null
-					}
-
-					{(lien.tms_id) ?
-						<SimpleRow
-							key={`tms-${uuid.v4()}`}
-							content={lien.tms_id}
-							title="TMS ID"
-						/> : null
-					}
-					{(lien.company_name) ?
-						<SimpleRow
-							key={`company_name-${uuid.v4()}`}
-							content={lien.company_name}
-							title="Creditor"
-						/> : null
-					}
-
-					{(lien.multiple_defendant) ?
-						<SimpleRow
-							key={`defendant-${uuid.v4()}`}
-							content={lien.multiple_defendant ? 'Yes' : 'No'}
-							title="Multiple Defendants"
+							content={`${_.get(lien,'plaintiff_name.first')} ${_.get(lien,'plaintiff_name.last')}`}
+							title="Plaintiff Name"
 						/> : null
 					}
 
@@ -118,128 +79,41 @@ const Liens = (props) => {
 						/> : null
 					}
 
-					{ lien.filings ?
-						<div className="subgroup">
-							<h3>Filing Information</h3>
-							{ lien.filings.map((filing) => (
-								<div key={uuid.v4()}>
+					{ _.get(lien,'court.business_name') ?
+						<div className="subgroup subgroup-singular">
+							<h3>Court Information</h3>
 
-									{ filing.number ?
-										<SimpleRow
-											key={`filing-${uuid.v4()}`}
-											content={filing.number}
-											title="Filing Number"
-										/> : null
-									}
+								{ _.get(lien,'court.business_name') ?
+									<SimpleRow
+										content={lien.court.business_name}
+										title="Name"
+									/> : null
+								}
 
-									{(filing.type) ?
-										<SimpleRow
-											key={`filing_Type-${uuid.v4()}`}
-											content={filing.type}
-											title="Filing Type"
-										/> : null
-									}
+								{ _.get(lien,'court.address.display') ?
+									<SimpleRow
+										content={lien.court.address.display}
+										title="Address"
+									/> : null
+								}
 
-									{(filing.agency) ?
-										<SimpleRow
-											key={`filing_agency-${uuid.v4()}`}
-											content={filing.agency}
-											title="Filing Agency"
-										/> : null
-									}
+								{ _.get(lien,'court.court_id') ?
+									<SimpleRow
+										content={lien.court.court_id}
+										title="Court ID"
+									/> : null
+								}
 
-									{(filing.agency_county || filing.agency_state) ?
-										<SimpleRow
-											key={`filing_agency_location-${uuid.v4()}`}
-											content={filing.agency_county + ' ' + filing.agency_state}
-											title="Filing Agency Location"
-										/> : null
-									}
+								{ _.get(lien,'court.phone') ?
+									<SimpleRow
+										content={lien.court.phone}
+										title="Phone Number"
+									/> : null
+								}
 
-									{(filing.release_date) ?
-										<SimpleRow
-											key={`release-${uuid.v4()}`}
-											content={`${constants.months[filing.release_date.month]} ${filing.release_date.day}, ${filing.release_date.year}`}
-											title="Release Date"
-										/> : null
-									}
-
-									{(filing.judge_satisfied_date) ?
-										<SimpleRow
-											key={`release-${uuid.v4()}`}
-											content={`${constants.months[filing.judge_satisfied_date.month]} ${filing.judge_satisfied_date.day}, ${filing.judge_satisfied_date.year}`}
-											title="Judgement Satisfied"
-										/> : null
-									}
-								</div>
-							)) }
 						</div> : null
 					}
 
-					{ lien.debtors ?
-						<div className="subgroup">
-							<h3>Debtors</h3>
-							{ lien.debtors.map((debtor) => (
-								<div key={uuid.v4()}>
-									{(debtor.origin_name) ?
-										<SimpleRow
-											key={`debtor-origin_name-${uuid.v4()}`}
-											content={debtor.origin_name}
-											title="Name"
-										/> : null
-									}
-									{(debtor.unique_id) ?
-										<SimpleRow
-											key={`debtor-unique_id-${uuid.v4()}`}
-											content={debtor.unique_id}
-											title="ID"
-										/> : null
-									}
-									{(debtor.person_filter_id) ?
-										<SimpleRow
-											key={`debtor-person_filter_id-${uuid.v4()}`}
-											content={debtor.person_filter_id}
-											title="Person ID"
-										/> : null
-									}
-									{(_.has(debtor,'addresses[0]') && debtor.addresses[0]) ?
-										<SimpleRow
-											key={`debtor-addresse-${uuid.v4()}`}
-											content={`${debtor.addresses[0].street_number} ${debtor.addresses[0].street_pre_direction } ${debtor.addresses[0].street_name } ${debtor.addresses[0].street_suffix } ${debtor.addresses[0].unit_designation } ${debtor.addresses[0].unit_number } ${debtor.addresses[0].city } ${debtor.addresses[0].state } ${debtor.addresses[0].zip5 }`
-												}
-												title="Address"
-										/> : null
-									}
-									<hr/>
-								</div>
-							)) }
-						</div> : null
-					}
-
-					{ lien.creditors ?
-						<div className="subgroup">
-							<h3>Creditors</h3>
-							{ lien.creditors.map((creditor) => (
-								<div key={uuid.v4()}>
-									{(creditor.name) ?
-										<SimpleRow
-											key={`creditor-origin_name-${uuid.v4()}`}
-											content={creditor.name}
-											title="Name"
-										/> : null
-									}
-									{(_.has(creditor,'parsed_parties[0].person_filter_id')) ?
-										<SimpleRow
-											key={`creditor-person_filter_id-${uuid.v4()}`}
-											content={creditor.parsed_parties[0].person_filter_id}
-											title="Creditor ID"
-										/> : null
-									}
-
-								</div>
-							)) }
-						</div> : null
-					}
 				</div>
 			)) }
 		</section>

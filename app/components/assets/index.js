@@ -183,86 +183,85 @@ const Assets = (props) => {
 							/> : null
 						}
 						{ asset.deed ?
-							<div className="subgroup">
+							<div className="subgroup subgroup-singular">
 								<h3>Transaction Information</h3>
-								<div>
 
-									{ _.get(asset, 'deed.contract_date.date.month') ?
-										<SimpleRow
-											content={constants.months[asset.deed.contract_date.date.month] + ' ' + asset.deed.contract_date.date.day + ' ' + asset.deed.contract_date.date.year}
-											title="Contract Date"
-										/> : null
-									}
+								{ _.get(asset, 'deed.contract_date.date.month') ?
+									<SimpleRow
+										content={constants.months[asset.deed.contract_date.date.month] + ' ' + asset.deed.contract_date.date.day + ' ' + asset.deed.contract_date.date.year}
+										title="Contract Date"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.recording_date.date.month') ?
-										<SimpleRow
-											content={constants.months[asset.deed.recording_date.date.month] + ' ' + asset.deed.recording_date.date.day + ' ' + asset.deed.recording_date.date.year}
-											title="Deed Transfer Recording Date"
-										/> : null
-									}
+								{ _.get(asset, 'deed.recording_date.date.month') ?
+									<SimpleRow
+										content={constants.months[asset.deed.recording_date.date.month] + ' ' + asset.deed.recording_date.date.day + ' ' + asset.deed.recording_date.date.year}
+										title="Deed Transfer Recording Date"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.sales_price') ?
-										<SimpleRow
-											content={libs._getFormattedCurrency(asset.deed.sales_price)}
-											title="Sale Price"
-										/> : null
-									}
+								{ _.get(asset, 'deed.sales_price') ?
+									<SimpleRow
+										content={libs._getFormattedCurrency(asset.deed.sales_price)}
+										title="Sale Price"
+									/> : null
+								}
 
-									{ !_.get(asset, 'deed.sales_price') && _.get(asset,'assessment.sales_price') ?
-										<SimpleRow
-											content={libs._getFormattedCurrency(asset.assessment.sales_price)}
-											title="Sale Price"
-										/> : null
-									}
+								{ !_.get(asset, 'deed.sales_price') && _.get(asset,'assessment.sales_price') ?
+									<SimpleRow
+										content={libs._getFormattedCurrency(asset.assessment.sales_price)}
+										title="Sale Price"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.sales_price') && _.get(asset, 'deed.first_td_loan_amount') ?
-										<SimpleRow
-											content={libs._getFormattedCurrency(asset.deed.sales_price - asset.deed.first_td_loan_amount)}
-											title="Estimated Down Payment"
-										/> : null
-									}
+								{ _.get(asset, 'deed.sales_price') && _.get(asset, 'deed.first_td_loan_amount') ?
+									<SimpleRow
+										content={libs._getFormattedCurrency(asset.deed.sales_price - asset.deed.first_td_loan_amount)}
+										title="Estimated Down Payment"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.first_td_loan_type') && _.get(asset, 'deed.first_td_loan_amount') ?
-										<SimpleRow
-											content={asset.deed.first_td_loan_type}
-											title="Mortgage Type"
-										/> : null
-									}
+								{ _.get(asset, 'deed.first_td_loan_type') && _.get(asset, 'deed.first_td_loan_amount') ?
+									<SimpleRow
+										content={asset.deed.first_td_loan_type}
+										title="Mortgage Type"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.first_td_loan_amount') ?
-										<SimpleRow
-											content={libs._getFormattedCurrency(asset.deed.first_td_loan_amount)}
-											title="Mortage Amount"
-										/> : null
-									}
+								{ _.get(asset, 'deed.first_td_loan_amount') ?
+									<SimpleRow
+										content={libs._getFormattedCurrency(asset.deed.first_td_loan_amount)}
+										title="Mortage Amount"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.deed_source_property_record.mortgage_term') ?
-										<SimpleRow
-											content={asset.deed.deed_source_property_record.mortgage_term + ' ' + asset.deed.deed_source_property_record.mortgage_term_code_desc}
-											title="Mortgage Term"
-										/> : null
-									}
+								{ _.get(asset, 'deed.deed_source_property_record.mortgage_term') ?
+									<SimpleRow
+										content={asset.deed.deed_source_property_record.mortgage_term + ' ' + asset.deed.deed_source_property_record.mortgage_term_code_desc}
+										title="Mortgage Term"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.first_td_due_date.date.month') ?
-										<SimpleRow
-											content={constants.months[asset.deed.first_td_due_date.date.month] + ' ' + asset.deed.first_td_due_date.date.day + ' ' + asset.deed.first_td_due_date.date.year}
-											title="Date Loan Will Be Paid Off"
-										/> : null
-									}
+								{ _.get(asset, 'deed.first_td_due_date.date.month') ?
+									<SimpleRow
+										content={constants.months[asset.deed.first_td_due_date.date.month] + ' ' + asset.deed.first_td_due_date.date.day + ' ' + asset.deed.first_td_due_date.date.year}
+										title="Date Loan Will Be Paid Off"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.lender_info.name') ?
-										<SimpleRow
-											content={asset.deed.lender_info.name}
-											title="Lender Name"
-										/> : null
-									}
+								{ _.get(asset, 'deed.lender_info.name') ?
+									<SimpleRow
+										content={asset.deed.lender_info.name}
+										title="Lender Name"
+									/> : null
+								}
 
-									{ _.get(asset, 'deed.county_transfer_tax') ?
-										<SimpleRow
-											content={`$${asset.deed.county_transfer_tax}`}
-											title="County Transfer Tax Amount"
-										/> : null
-									}
+								{ _.get(asset, 'deed.county_transfer_tax') ?
+									<SimpleRow
+										content={`$${asset.deed.county_transfer_tax}`}
+										title="County Transfer Tax Amount"
+									/> : null
+								}
 
 									{ _.find(asset.entities, ['entity_type', 'Seller']) ?
 										<div className="subgroup" key={uuid.v4()}>

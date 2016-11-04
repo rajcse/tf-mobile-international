@@ -16,9 +16,14 @@ import LocationSection from './location';
 import SocialSection from './social';
 import Licenses from './licenses';
 import Businesses from './businesses';
+import CorporateFilings from './corporateFilings';
 import Assets from './assets';
+import CurrentProperties from './currentProperties';
 import Bankruptcies from './bankruptcies';
+import LiensJudgments from './liensJudgments';
 import Liens from './liens';
+import Judgments from './judgments';
+import Evictions from './evictions';
 import Imposters from './imposters';
 import Watercrafts from './watercrafts';
 import Associates from './associates';
@@ -142,9 +147,10 @@ class PersonRecord extends Component {
 					{/*               Premium Sections           */}
 					{ isPremium ?
 						<div>
-							{ _.isEmpty(record.reportData.associates) ? null :
+							{ _.isEmpty(record.reportData.associates) && _.isEmpty(record.reportData.possible_associates) ? null :
 								<Associates
 									associates={record.reportData.associates}
+									possibleAssociates={record.reportData.possible_associates}
 									calculateAge={libs.calculateAge}
 								/>
 							}
@@ -203,6 +209,13 @@ class PersonRecord extends Component {
 						/> : null }
 
 					{ isPremium ?
+						_.isEmpty(record.reportData.tu_corporate_filings) ? null :
+							<CorporateFilings
+								corporateFilings={record.reportData.tu_corporate_filings}
+							/>
+					: null }
+
+					{ isPremium ?
 						<Assets
 							assets={record.reportData.properties}
 							name={record.reportData.names[0].display}
@@ -210,6 +223,13 @@ class PersonRecord extends Component {
 							showPremiumUpsell={viewActions.showPremiumUpsell}
 							recordID={record.id[2]}
 						/>
+					: null }
+
+					{ isPremium ?
+						_.isEmpty(record.reportData.current_properties) ? null :
+							<CurrentProperties
+								currentProperties={record.reportData.current_properties}
+							/>
 					: null }
 
 					{ (!isPremium && appState.premiumAccess) ?
@@ -225,8 +245,24 @@ class PersonRecord extends Component {
 					{ isPremium ?
 						<div>
 							{ _.isEmpty(record.reportData.liens_judgments) ? null :
+								<LiensJudgments
+									liensJudgments={record.reportData.liens_judgments}
+								/>
+							}
+
+							{ _.isEmpty(record.reportData.liens_judgments) ? null :
 								<Liens
-									liens={record.reportData.liens_judgments}
+									liens={record.reportData.liens}
+								/>
+							}
+							{ _.isEmpty(record.reportData.judgments) ? null :
+								<Judgments
+									judgments={record.reportData.judgments}
+								/>
+							}
+							{ _.isEmpty(record.reportData.evictions) ? null :
+								<Evictions
+									evictions={record.reportData.evictions}
 								/>
 							}
 							{ _.isEmpty(record.reportData.watercrafts) ? null :
