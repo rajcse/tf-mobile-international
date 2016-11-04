@@ -188,7 +188,10 @@ class PersonRecord extends Component {
 						controlledSubstances={record.reportData.controlled_substances || []}
 						huntingFishingLicenses={record.reportData.hunting_fishing_licenses || []}
 						professionalLicenses={record.reportData.professional_licenses || []}
+						professionalLicensesTu={record.reportData.tu_professional_licenses || []}
 						weaponPermits={record.reportData.weapon_permits || []}
+						concealedWeaponPermitsTu={record.reportData.tu_concealed_weapon_permits || []}
+	                    huntingPermitsTu={record.reportData.tu_hunting_permits || []}
 					/>
 
 					{/*               Premium Sections           */}

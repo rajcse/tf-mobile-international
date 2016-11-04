@@ -50,19 +50,31 @@ const Businesses = (props) => {
 					<div className="label label-full">
 						<h3 className="document-title">{business.company_name}</h3>
 					</div>
+					
 					{ _.get(business,'name.first') ?
 						<SimpleRow
 							content={business.name.first + ' ' + business.name.last}
 							title="Name"
 						/> : null
 					}
+						
+					{ business.company_names && business.company_names.length &&
+						<SimpleRow
+							content={business.company_names[0].name}
+							title="Company Name"
+						/> }
 
-					{ business.corporation_number ?
+					{ business.corporation_number &&
 						<SimpleRow
 							content={business.corporation_number}
 							title="Corporation Number"
-						/> : null
-					}
+						/> }
+						
+					{ business.business_ids && business.business_ids.duns_number &&
+						<SimpleRow
+							content={business.business_ids.duns_number}
+							title="DUNS Number"
+						/> }
 
 					{ _.get(business, 'address.display') ?
 						<SimpleRow
@@ -87,14 +99,14 @@ const Businesses = (props) => {
 
 					{ _.get(business, 'record_date.month') ?
 						<SimpleRow
-							content={constants.months[business.record_date.month] + ', ' + business.record_date.day + ' ' + business.record_date.year}
+							content={`${constants.months[business.record_date.month]} ${business.record_date.day}, ${business.record_date.year}`}
 							title="Record Date"
 						/> : null
 					}
 
 					{ _.get(business, 'filing_date.month') ?
 						<SimpleRow
-							content={constants.months[business.filing_date.month] + ', ' + business.filing_date.day + ' ' + business.filing_date.year}
+							content={`${constants.months[business.filing_date.month]} ${business.filing_date.day}, ${business.filing_date.year}`}
 							title="Filing Date"
 						/> : null
 					}
