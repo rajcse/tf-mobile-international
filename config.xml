@@ -24,11 +24,11 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-    <!--<plugin name="com.phonegap.plugins.facebookconnect" spec="0.9.0" source="pgb">
+    <!-- <plugin name="com.phonegap.plugins.facebookconnect" spec="0.9.0" source="pgb">
         <param name="APP_ID" value="109396249535582" />
         <param name="APP_NAME" value="TruthFinder" />
-    </plugin>
-    <plugin name="cc.fovea.cordova.purchase" source="npm" version="6.0.0">
+    </plugin> -->
+    <!--<plugin name="cc.fovea.cordova.purchase" source="npm" version="6.0.0">
 
         <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngvlFjgwZ4FCpLchqsogG5/lKmyYF7xEVqBKTKFAop4rjrgQ4dOcxL0qvWpZlPJlwQ1OOOwCRSmPsaJ172OmBHo4wffZTbF82z8aEt3FO4Xs4S7M8WL2yXpsRo1NEiRpKDrDi7hpBkt5ZqBsTr6KlkUMiWqSkur9QAWwF0iU/Bhy/royJdiG9R9QhgfF752cYX4rMMHNcvuF5yid9Y/MCk6m7kyo6ufCxlQRubZuY77yvm+LJDOIjwUkvDGDlAgBNmWCSkgz+QRI"/>
     </plugin>-->
