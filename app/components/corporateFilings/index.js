@@ -6,127 +6,127 @@ import constants from '../../constants/pubRecConstants';
 import SimpleRow from '../shared/SimpleRow';
 import {STATES} from '../../utils/states';
 
-const BusinessesTu = (props) => {
-	let { businesses } = props;
+const CorporateFilings = (props) => {
+	let { corporateFilings } = props;
 	return (
-		<section id="businesses" className="widget premium">
+		<section id="corporate-filings" className="widget premium">
 			<Sticky>
-				<h2 className="title">Possible Businesses</h2>
+				<h2 className="title">Corporate Filings</h2>
 			</Sticky>
-			{ businesses.map((business, index) => (
-				<div className="document business-individual" key={index}>
+			{ corporateFilings.map((corporateFiling, index) => (
+				<div className="document corporate-filing-individual" key={index}>
 					<div className="label label-full">
-						<h3 className="document-title">{business.business_name}</h3>
+						<h3 className="document-title">{corporateFiling.business_name}</h3>
 					</div>
-					{ _.get(business,'name.first') ?
+					{ _.get(corporateFiling,'name.first') ?
 						<SimpleRow
-							content={business.name.first + ' ' + business.name.last}
+							content={corporateFiling.name.first + ' ' + corporateFiling.name.last}
 							title="Name"
 						/> : null
 					}
 
-					{ business.corporation_type ?
+					{ corporateFiling.corporation_type ?
 						<SimpleRow
-							content={business.corporation_type}
+							content={corporateFiling.corporation_type}
 							title="Corporation Type"
 						/> : null
 					}
 
-					{ business.registration_type ?
+					{ corporateFiling.registration_type ?
 						<SimpleRow
-							content={business.registration_type}
+							content={corporateFiling.registration_type}
 							title="Business Registration Type"
 						/> : null
 					}
 
-					{ _.get(business, 'incorporation_date.month') ?
+					{ _.get(corporateFiling, 'incorporation_date.month') ?
 						<SimpleRow
-							content={constants.months[business.incorporation_date.month] + ', ' + business.incorporation_date.day + ' ' + business.incorporation_date.year}
+							content={constants.months[corporateFiling.incorporation_date.month] + ', ' + corporateFiling.incorporation_date.day + ' ' + corporateFiling.incorporation_date.year}
 							title="Incorporation Date"
 						/> : null
 					}
 
-					{ business.business_duns_number ?
+					{ corporateFiling.business_duns_number ?
 						<SimpleRow
-							content={business.business_duns_number}
+							content={corporateFiling.business_duns_number}
 							title="Business ID"
 						/> : null
 					}
 
-					{ _.get(business, 'address.display') ?
+					{ _.get(corporateFiling, 'address.display') ?
 						<SimpleRow
-							content={business.address.display}
+							content={corporateFiling.address.display}
 							title="Address"
 						/> : null
 					}
 
-					{ business.address_type ?
+					{ corporateFiling.address_type ?
 						<SimpleRow
-							content={business.address_type}
+							content={corporateFiling.address_type}
 							title="Address Type"
 						/> : null
 					}
 
-					{ _.get(business, 'filing_date.month') ?
+					{ _.get(corporateFiling, 'filing_date.month') ?
 						<SimpleRow
-							content={constants.months[business.filing_date.month] + ', ' + business.filing_date.day + ' ' + business.filing_date.year}
+							content={constants.months[corporateFiling.filing_date.month] + ', ' + corporateFiling.filing_date.day + ' ' + corporateFiling.filing_date.year}
 							title="Filing Date"
 						/> : null
 					}
 
-					{ business.filing_number ?
+					{ corporateFiling.filing_number ?
 						<SimpleRow
-							content={business.filing_number}
+							content={corporateFiling.filing_number}
 							title="Filing Number"
 						/> : null
 					}
 
-					{ _.get(business, 'verification_date.month') ?
+					{ _.get(corporateFiling, 'verification_date.month') ?
 						<SimpleRow
-							content={constants.months[business.verification_date.month] + ', ' + business.verification_date.day + ' ' + business.verification_date.year}
+							content={constants.months[corporateFiling.verification_date.month] + ', ' + corporateFiling.verification_date.day + ' ' + corporateFiling.verification_date.year}
 							title="Verification Date"
 						/> : null
 					}
 
-					{ business.incorporation_state ?
+					{ corporateFiling.incorporation_state ?
 						<SimpleRow
-							content={STATES[business.incorporation_state.toUpperCase()]}
+							content={STATES[corporateFiling.incorporation_state.toUpperCase()]}
 							title="Incorporation State"
 						/> : null
 					}
 
-					{ business.tax_board_status ?
+					{ corporateFiling.tax_board_status ?
 						<SimpleRow
-							content={business.tax_board_status}
+							content={corporateFiling.tax_board_status}
 							title="Tax Board Status"
 						/> : null
 					}
 
-					{ business.sec_status ?
+					{ corporateFiling.sec_status ?
 						<SimpleRow
-							content={business.sec_status}
+							content={corporateFiling.sec_status}
 							title="SEC Status"
 						/> : null
 					}
 
-					{ _.get(business, 'sec_state_status_date.month') ?
+					{ _.get(corporateFiling, 'sec_state_status_date.month') ?
 						<SimpleRow
-							content={constants.months[business.sec_state_status_date.month] + ', ' + business.sec_state_status_date.day + ' ' + business.sec_state_status_date.year}
+							content={constants.months[corporateFiling.sec_state_status_date.month] + ', ' + corporateFiling.sec_state_status_date.day + ' ' + corporateFiling.sec_state_status_date.year}
 							title="SEC Status Date"
 						/> : null
 					}
 
-					{ business.misc_details ?
+					{ corporateFiling.misc_details ?
 						<SimpleRow
-							content={business.misc_details}
+							content={corporateFiling.misc_details}
 							title="Misc. Details"
 						/> : null
 					}
 
-					{business.business_contacts ?
+					{corporateFiling.business_contacts ?
 						<div className="subgroup">
 							<h3>Business Contacts</h3>
-							{_.map(business.business_contacts, (contact) => {
+							{_.map(corporateFiling.business_contacts, (contact) => {
 								let name = _.get(contact, 'names[0].display', null);
 								let title = _.get(contact, 'title', null);
 								let address = _.get(contact, 'locations[0].address.display', null);
@@ -159,10 +159,10 @@ const BusinessesTu = (props) => {
 						</div> : null 
 					}
 
-					{business.amendments ?
+					{corporateFiling.amendments ?
 						<div className="subgroup">
 							<h3>Amendments</h3>
-							{_.map(business.amendments, (amendment) => {
+							{_.map(corporateFiling.amendments, (amendment) => {
 								// amendment date isn't actually a date, more like a type
 								let type = _.get(amendment, 'amendment_date', null);
 								let date = _.get(amendment, 'filing_date.month', null);
@@ -202,8 +202,8 @@ const BusinessesTu = (props) => {
 	);
 };
 
-BusinessesTu.propTypes = {
-	businesses: React.PropTypes.array.isRequired
+CorporateFilings.propTypes = {
+	corporateFilings: React.PropTypes.array.isRequired
 };
 
-export default BusinessesTu;
+export default CorporateFilings;

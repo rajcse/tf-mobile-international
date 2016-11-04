@@ -49,8 +49,6 @@ const common = {
 		fs: false
 	},
 	module: {
-		exprContextRegExp: /$^/,
-		exprContextCritical: false,
 		loaders: [{
 			test: /\.jsx?$/,
 			loader: 'babel?cacheDirectory',
