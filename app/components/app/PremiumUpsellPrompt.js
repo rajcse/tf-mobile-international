@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import Loader from '../../components/shared/Loader';
+import pubRecAPI from '../../utils/PubRecAPI';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
@@ -14,6 +15,10 @@ class PremiumUpsellPrompt extends Component {
 
 		this.continueToPurchase = this.continueToPurchase.bind(this);
 		this.continueToUpgrade = this.continueToUpgrade.bind(this);
+	}
+
+	componentWillMount() {
+		pubRecAPI.fetchAccountInfo();
 	}
 
 	continueToPurchase() {
