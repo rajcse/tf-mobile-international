@@ -263,40 +263,39 @@ const Assets = (props) => {
 									/> : null
 								}
 
-									{ _.find(asset.entities, ['entity_type', 'Seller']) ?
-										<div className="subgroup" key={uuid.v4()}>
-											<h3>Sellers</h3>
-											{ _.find(asset.entities, ['entity_type', 'Seller']).original_names.map((name) => (
-												<div className="seller" key={uuid.v4()}>
-													{ name.name ?
-														<SimpleRow
-															content={name.name}
-															title="Seller"
-														/> : null
-													}
-												</div>
-											))}
-										</div> : null
-									}
+								{ _.find(asset.entities, ['entity_type', 'Seller']) ?
+									<div className="subgroup" key={uuid.v4()}>
+										<h3>Sellers</h3>
+										{ _.find(asset.entities, ['entity_type', 'Seller']).original_names.map((name) => (
+											<div className="seller" key={uuid.v4()}>
+												{ name.name ?
+													<SimpleRow
+														content={name.name}
+														title="Seller"
+													/> : null
+												}
+											</div>
+										))}
+									</div> : null
+								}
 
-									{ _.find(asset.entities, ['entity_type', 'Buyer']) ?
-										<div className="subgroup" key={uuid.v4()}>
-											<h3>Buyers</h3>
-											{ _.find(asset.entities, ['entity_type', 'Buyer']).original_names.map((name) => (
-												<div className="buyer" key={uuid.v4()}>
-													{ name.name ?
-														<SimpleRow
-															content={name.name}
-															title="Buyer"
-														/> : null
-													}
-												</div>
-											))}
-										</div> : null
-									}
-								</div>
-							</div> : null
-						}
+								{ _.find(asset.entities, ['entity_type', 'Buyer']) ?
+									<div className="subgroup" key={uuid.v4()}>
+										<h3>Buyers</h3>
+										{ _.find(asset.entities, ['entity_type', 'Buyer']).original_names.map((name) => (
+											<div className="buyer" key={uuid.v4()}>
+												{ name.name ?
+													<SimpleRow
+														content={name.name}
+														title="Buyer"
+													/> : null
+												}
+											</div>
+										))}
+									</div> : null
+								}
+							</div>
+						: null }
 
 						{ _.get(asset, 'assessment.recording_date.date.month') ?
 							<SimpleRow
