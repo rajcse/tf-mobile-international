@@ -18,7 +18,7 @@ Once the installation is complete, kindly follow the installation instructions t
 
 If successful your Android SDK Manager will open.
 
-For these current builds of Android we are running on version '5.1.1' and will require all relating Build-tools under "Tools" with revision 24.*.*
+For these current builds of Android we are running on version '5.1.1' and will require all relating Build-tools under "Tools" with revision 24.*.* and Android API 6.0 (23).
 
 ![](https://dl.dropboxusercontent.com/u/12648103/Screen%20Shot%202016-11-02%20at%205.13.50%20PM.png)
 
@@ -41,6 +41,11 @@ Install: `npm i -g yarn`
 Usage (Install dependencies): `yarn install`
 
 Usage (Add dependencies): `yarn add --dev package-name`
+
+### Cordova
+This is necessary to do local builds.
+
+Install: `npm i -g cordova`
 
 ## Development Environments
 This is app is designed to be tested on a wide range of devices and as such we have written a few short commands to help get you there.
