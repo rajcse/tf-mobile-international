@@ -1,6 +1,11 @@
 import _ from 'lodash';
 import moment from 'moment';
 
+// ucwords for JS!
+export function titleCase(str) {
+	return _.startCase(_.capitalize(str));
+}
+
 // Calculate the age of anyone given data
 export function calculateAge(birthday, deathday) {
 	let age = {

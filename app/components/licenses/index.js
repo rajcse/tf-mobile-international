@@ -4,6 +4,8 @@ import Sticky from 'react-stickynode';
 // Container Specific Component
 import DeaLicenses from './DeaLicenses';
 import WeaponPermits from './WeaponPermits';
+import ConcealedWeaponPermitsTu from './ConcealedWeaponPermitsTu';
+import HuntingPermitsTu from './HuntingPermitsTu';
 import FAALicenses from './FAALicenses';
 import HuntingFishingLicenses from './HuntingFishingLicenses';
 import ProfessionalLicenses from './ProfessionalLicenses';
@@ -16,11 +18,14 @@ const Licenses = (props) => {
 	let {
 		huntingFishingLicenses,
 		weaponPermits,
+		concealedWeaponPermitsTu,
+        huntingPermitsTu,
 		professionalLicenses,
+		professionalLicensesTu,
 		faaLicenses,
 		controlledSubstances
 	} = props;
-
+	
 	if (huntingFishingLicenses && huntingFishingLicenses.length) {
 		containsPremiumData = true;
 		content.push(
@@ -30,6 +35,16 @@ const Licenses = (props) => {
 			/>
 		);
 	}
+    
+	if (huntingPermitsTu && huntingPermitsTu.length) {
+		containsPremiumData = true;
+		content.push(
+			<HuntingPermitsTu
+				huntingPermitsTu={huntingPermitsTu}
+			/>
+		);
+	}
+	
 	if (weaponPermits && weaponPermits.length) {
 		containsPremiumData = true;
 		content.push(
@@ -39,16 +54,27 @@ const Licenses = (props) => {
 			/>
 		);
 	}
-	if (professionalLicenses && professionalLicenses.length) {
+	
+	if (concealedWeaponPermitsTu && concealedWeaponPermitsTu.length) {
+		containsPremiumData = true;
+		content.push(
+			<ConcealedWeaponPermitsTu
+				concealedWeaponPermitsTu={concealedWeaponPermitsTu}
+			/>
+		);
+	}
+	
+	if ((professionalLicenses && professionalLicenses.length) || (professionalLicensesTu && professionalLicensesTu.length)) {
 		containsPremiumData = true;
 		content.push(
 			<ProfessionalLicenses
 				key={'professionalLicenses-' + uuid.v4()}
 				professionalLicenses={professionalLicenses}
+				professionalLicensesTu={professionalLicensesTu}
 			/>
 		);
 	}
-
+	
 	if (faaLicenses && faaLicenses.length) {
 		content.push(
 			<FAALicenses
@@ -57,7 +83,7 @@ const Licenses = (props) => {
 			/>
 		);
 	}
-
+	
 	if (controlledSubstances && controlledSubstances.length) {
 		content.push(
 			<DeaLicenses
@@ -66,18 +92,18 @@ const Licenses = (props) => {
 			/>
 		);
 	}
-
+	
 	// Do not render component if it has no data
 	if (!content.length) {
 		return null;
 	}
-
+	
 	return(
 		<section id="licenses" className={containsPremiumData ? 'premium' + ' widget' : 'widget'}>
 			<Sticky>
 				<h2 className="title">Licenses</h2>
 			</Sticky>
-
+			
 			{content}
 		</section>
 	);
@@ -86,7 +112,10 @@ const Licenses = (props) => {
 Licenses.propTypes = {
 	huntingFishingLicenses: React.PropTypes.array.isRequired,
 	weaponPermits: React.PropTypes.array.isRequired,
+	concealedWeaponPermitsTu: React.PropTypes.array.isRequired,
+	huntingPermitsTu: React.PropTypes.array.isRequired,
 	professionalLicenses: React.PropTypes.array.isRequired,
+	professionalLicensesTu: React.PropTypes.array.isRequired,
 	faaLicenses: React.PropTypes.array.isRequired,
 	controlledSubstances: React.PropTypes.array.isRequired
 };
