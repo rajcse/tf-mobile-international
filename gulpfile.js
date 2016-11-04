@@ -234,7 +234,7 @@ gulp.task('live', function(){
 	devBundler(true, true);
 	serve('www')();
 
-	livereload.listen(3000);
+	livereload.listen();
 
 	gulp.watch(sourceDir + 'less/*.less', ['styles-live']);
 	gulp.watch(sourceDir + '**.html', ['html']);
