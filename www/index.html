@@ -18,7 +18,6 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <title>TruthFinder</title>
 </head>
 
@@ -29,16 +28,7 @@
   <script type="text/javascript" src="./vendor.bundle.js"></script>
   <script type="text/javascript" src="./app.js"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
-      if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-        document.addEventListener('deviceready',
-          window.initializeApp
-        , false);
-      } else {
-        window.initializeApp();
-        window.device = {};
-      }
-    });
+        document.addEventListener('deviceready', window.initializeApp, false);
   </script>
 </body>
 
