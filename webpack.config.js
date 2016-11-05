@@ -66,6 +66,9 @@ const common = {
 		}, {
 			test: /\.json$/,
 			loader: 'json-loader'
+		}, {
+			test: require.resolve('jquery'),
+			loader: 'expose?$!expose?jQuery'
 		}]
 	},
 	debug: true,
