@@ -39,6 +39,17 @@ window.initializeApp = function() {
 		</Router>,
 		document.querySelector('#app')
 	);
+	
+	/** 
+	 * Sets the app version as quickly as possible - this is async for reasons unknown, blame the plugin author
+	 */
+	if(window.cordova && window.cordova.getAppVersion) {
+		window.cordova.getAppVersion.getVersionNumber()
+			.then(version => window.appVersion = version);
+		
+		window.cordova.getAppVersion.getVersionCode()
+			.then(build => window.appBuild = build);
+	}
 };
 
 // Log all client errors - self contained VanillaJS, matches endpoint used in the funnel

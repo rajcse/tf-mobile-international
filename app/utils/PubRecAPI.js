@@ -112,7 +112,9 @@ function _makeRequest(path, options) {
 	let queryString = options.query ? '?' + _serialize(options.query) : '',
 		fetchOpts = {
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'App-Version': window.appVersion || '0.0.0',
+				'App-Build': window.appBuild || '0'
 			},
 			method: options.method || 'GET'
 		},
