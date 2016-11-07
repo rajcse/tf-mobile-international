@@ -78,9 +78,7 @@ export function calculateAge(birthday, deathday) {
 
 export function _getFormattedDate(reference) {
 	// Format birthdate/deathdate which may be coming from date/date_range.start
-	reference = _.isNull(reference.date) ?
-		_.isNull(reference.date_range) ? null : reference.date_range.start
-			: reference.date;
+	reference = _.get(reference, 'date') ? reference.date : _.get(reference, 'date_range') ? reference.date_range.start : null;
 
 	// Check if date/date_range information exist / If not return null date
 	if (_.isNull(reference) || _.isUndefined(reference)) {

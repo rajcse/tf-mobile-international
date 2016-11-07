@@ -8,14 +8,17 @@ import uuid from 'uuid';
 import Sticky from 'react-stickynode';
 
 const Associates = (props) => {
-	let { associates, possibleAssociates, calculateAge } = props;
+	let {
+		associates,
+		possibleAssociates,
+		calculateAge
+	} = props;
 	let content = [];
 	let allAssociates = associates.concat(possibleAssociates);
 
 	allAssociates.map((associate, i) => {
 		const dob = _.head(associate.dobs);
-		const date = !_.isUndefined(dob) && !_.isNull(dob.date) ? dob.date : null;
-		const age = calculateAge(date);
+		const age = _.get(dob, 'date') ? calculateAge(dob) : null;
 
 		content.push(
 			_.get(associate,'names[0].display') ?
@@ -30,14 +33,11 @@ const Associates = (props) => {
 						</p>
 					: null }
 
-					{ date ?
+					{ _.get(age, 'birthday') ?
 						<SimpleInline
 							key={uuid.v4()}
 							title={['Date of Birth', 'Age']}
-							contents={[
-								`${constants.months[date.month]}, ${date.day} ${date.year}`,
-								age.display
-							]}
+							contents={[age.birthday, age.display]}
 							classes="inline-half"
 						/>
 					: null }
@@ -104,6 +104,7 @@ const Associates = (props) => {
 // Validate props
 Associates.propTypes = {
 	associates: React.PropTypes.array.isRequired,
+	possibleAssociates: React.PropTypes.array,
 	calculateAge: React.PropTypes.func.isRequired
 };
 
