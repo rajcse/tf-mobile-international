@@ -38,7 +38,7 @@ Check out the [docs](https://yarnpkg.com/) and give it a try for yourself.
 
 Install: `npm i -g yarn`
 
-Usage (Install dependencies): `yarn install`
+Usage (Install dependencies): `yarn`
 
 Usage (Add dependencies): `yarn add --dev package-name`
 
@@ -52,7 +52,7 @@ This is app is designed to be tested on a wide range of devices and as such we h
 
 Before you start any form of development be sure to install all project dependencies using yarn.
 
-`yarn install`
+`yarn`
 
 ### Developing in the Browser ( Safari or Chrome only for now )
 This stack uses 'webpack-dev-server' to bundle and serve all project assets.
@@ -62,9 +62,7 @@ Start Server (Production): `npm run start:prod`
 
 This command checks the config file for environment variables, such as development vs production build, and starts a webpack server. Once the server has started visit `http://localhost:3000` from your preferred browser to view the app. Any changes made to the app while this command is running will trigger a 'rebundle' with webpack and update the app accordingly. If you wish to quit developing in the browser you may close webpack at anytime using the `CTRL + C` command in the same terminal window.
 
-In order for the app to initialize in your browser, you will need run `window.device` and `window.initializeApp()` from your console. Webpack will attempt to add these commands on browser environments. Kindly note that when developing in the browser with mobile views enabled, this will "trick" the app into thinking it is on a mobile device and may not work as intended - therefore always make sure that you are viewing the app in a browser environment.
-
-![](https://dl.dropboxusercontent.com/u/12648103/mac-phone.png)
+For development using the production config, you will need run `window.device` and `window.initializeApp()` from your console to initialize the app. The app self-initializes when using the development config.
 
 ### Testing / Debugging on Mobile Devices ( Android or iOS )
 Before any testing can begin we will need to prepare, compile and build the right files for each platform.
