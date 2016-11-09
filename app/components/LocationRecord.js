@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LocationSectionView from './Location';
+import LocationSectionView from './location';
 
 const LocationRecord = (props) => {
 

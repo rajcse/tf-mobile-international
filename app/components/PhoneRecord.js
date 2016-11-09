@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import Header from './shared/Header';
-import PersonalSectionView from './Personal';
-import ContactSectionView from './Contact';
-import LocationSectionView from './Location';
-import SocialSectionView from './Social';
+import PersonalSectionView from './personal';
+import ContactSectionView from './contact';
+import LocationSectionView from './location';
+import SocialSectionView from './social';
 import ReportHeader from './shared/ReportHeader';
 import constants from '../constants/pubRecConstants';
 import SearchLink from './SearchLink';

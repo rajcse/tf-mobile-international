@@ -5,10 +5,10 @@ import Header from './shared/Header';
 // Global Functions File
 import * as libs from '../utils/libs';
 
-import PersonalSectionView from './Personal';
-import ContactSectionView from './Contact';
-import LocationSectionView from './Location';
-import SocialSectionView from './Social';
+import PersonalSectionView from './personal';
+import ContactSectionView from './contact';
+import LocationSectionView from './location';
+import SocialSectionView from './social';
 import ReportHeader from './shared/ReportHeader';
 import constants from '../constants/pubRecConstants';
 import SearchLink from './SearchLink';

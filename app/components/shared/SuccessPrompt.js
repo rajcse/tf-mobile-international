@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg from '../../components/svg';
+import Svg from '../../components/Svg';
 
 function unBlurRecord() {
 	// Check that id exist
