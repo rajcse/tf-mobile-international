@@ -30,7 +30,6 @@ const common = {
 			'react-sticky',
 			'react-stickynode',
 			'react-tap-event-plugin',
-			'reactify',
 			'uuid',
 			'flux',
 			'jwt-decode',
