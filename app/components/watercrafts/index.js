@@ -16,12 +16,12 @@ const Watercrafts = (props) => {
 				<div className="document watercraft-individual" key={index}>
 					
 					{ _.get(watercraft, 'description.make') ?
-							<div className="label label-full">
-								<h3 className="document-title">{_.get(watercraft,'description.model_year') + ' ' + watercraft.description.make}</h3>
-							</div>
-						: null 
+						<div className="label label-full">
+							<h3 className="document-title">{_.get(watercraft,'description.model_year') + ' ' + watercraft.description.make}</h3>
+						</div>
+						: null
 					}
-					{ _.get(watercraft, 'description.model_year') && !_.get(watercraft, 'description.make')?
+					{ _.get(watercraft, 'description.model_year') && !_.get(watercraft, 'description.make') ?
 						<SimpleRow
 							key={`name-${uuid.v4()}`}
 							content={watercraft.description.model_year}

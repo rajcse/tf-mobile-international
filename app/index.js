@@ -20,7 +20,7 @@ import OffenderModal from './components/offender/modal';
 import CriminalModal from './components/criminal/modal';
 
 // Expose the kickoff method to Cordova
-window.initializeApp = function() {
+window.initializeApp = () => {
 	ReactDOM.render(
 		<Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
 			<Route path="/" component={PubRecApp}>
@@ -39,22 +39,22 @@ window.initializeApp = function() {
 		</Router>,
 		document.querySelector('#app')
 	);
-	
-	/** 
+
+	/**
 	 * Sets the app version as quickly as possible - this is async for reasons unknown, blame the plugin author
 	 */
 	if(window.cordova && window.cordova.getAppVersion) {
 		window.cordova.getAppVersion.getVersionNumber()
 			.then(version => window.appVersion = version);
-		
+
 		window.cordova.getAppVersion.getVersionCode()
 			.then(build => window.appBuild = build);
 	}
 };
 
 // Log all client errors - self contained VanillaJS, matches endpoint used in the funnel
-window.onerror = function(message, file, line, column, err) {
-	var httpRequest = new XMLHttpRequest(),
+window.onerror = (message, file, line, column, err) => {
+	let httpRequest = new XMLHttpRequest(),
 		data = 'message=' + encodeURIComponent(message) +
 							'&file=' + encodeURIComponent(file) +
 							'&line=' + encodeURIComponent(line) +
@@ -67,8 +67,7 @@ window.onerror = function(message, file, line, column, err) {
 	}
 
 	// Don't do anything - the user doesn't need to see this
-	httpRequest.onreadystatechange = function() {
-	};
+	httpRequest.onreadystatechange = () => {};
 
 	// Send it off
 	httpRequest.open('POST', config.API_ROOT + '/errors');

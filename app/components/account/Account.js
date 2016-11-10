@@ -105,7 +105,12 @@ export default class Support extends Component {
 					{defaultPaymentOption ?
 						<dl>
 							<dt>{defaultPaymentOption.name}</dt>
-							<dd>{defaultPaymentOption.payment_processor !== 'paypal' ? `EXP: ${defaultPaymentOption.payment_processor_details.exp_month}/${defaultPaymentOption.payment_processor_details.exp_year}` : 'PayPal Account'}</dd>
+							<dd>
+								{ defaultPaymentOption.payment_processor !== 'paypal'
+									? `EXP: ${defaultPaymentOption.payment_processor_details.exp_month}/${defaultPaymentOption.payment_processor_details.exp_year}`
+									: 'PayPal Account'
+								}
+							</dd>
 						</dl> : <Loader />
 					}
 				</div>

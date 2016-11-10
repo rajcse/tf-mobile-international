@@ -162,6 +162,7 @@ function _makeRequest(path, options) {
 	})
 	.then((response) => response.json())
 	.catch((error) => {
+		/* eslint-disable no-use-before-define */
 		// Catch the HTTP status errors, throw again to let the caller deal with the response
 
 		// If it was a 401, get a new access token here, then make the original request again
@@ -199,6 +200,7 @@ function _makeRequest(path, options) {
 			errors: [{message: error.message, code: error.statusCode}],
 			originalResponse: error.response
 		};
+		/* eslint-enable */
 	});
 }
 
@@ -671,40 +673,44 @@ class PubRecAPI {
 
 		if(!skipVerification) {
 			switch(packageData.item_type){
-			case 'phone_report':
-				// This should only happen from the phones endpoint, and never on record creation
-				return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PHONE], {
-					query: {verify: true, ...packageData.original_criteria},
-					needsAuth: true
-				})
-				.then((responseData) => {
-					if(!responseData.results.length){
-						setTimeout(() => serverActions.purchaseError('Report Not Found'));
-						return console.log(JSON.stringify(responseData));
-					}
-					this.purchasePackage(packageData, true);
-					setTimeout(() => this.fetchAccountInfo(), 0);
-				})
-				.catch((err) => {
-					console.error(err);
-				});
-			case 'email_report':
-				// This should only happen from the email endpoint, and never on record creation
-				return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.EMAIL], {
-					query: {verify: true, ...packageData.original_criteria},
-					needsAuth: true
-				})
-				.then((responseData) => {
-					if(!responseData.results.length){
-						setTimeout(() => serverActions.purchaseError('Report Not Found'));
-						return console.log(JSON.stringify(responseData));
-					}
-					this.purchasePackage(packageData, true);
-					setTimeout(() => this.fetchAccountInfo(), 0);
-				})
-				.catch((err) => {
-					console.error(err);
-				});
+				case 'phone_report':
+					// This should only happen from the phones endpoint, and never on record creation
+					return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PHONE], {
+						query: {verify: true, ...packageData.original_criteria},
+						needsAuth: true
+					})
+					.then((responseData) => {
+						if(!responseData.results.length){
+							setTimeout(() => serverActions.purchaseError('Report Not Found'));
+							return console.log(JSON.stringify(responseData));
+						}
+						this.purchasePackage(packageData, true);
+						setTimeout(() => this.fetchAccountInfo(), 0);
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+
+				case 'email_report':
+					// This should only happen from the email endpoint, and never on record creation
+					return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.EMAIL], {
+						query: {verify: true, ...packageData.original_criteria},
+						needsAuth: true
+					})
+					.then((responseData) => {
+						if(!responseData.results.length){
+							setTimeout(() => serverActions.purchaseError('Report Not Found'));
+							return console.log(JSON.stringify(responseData));
+						}
+						this.purchasePackage(packageData, true);
+						setTimeout(() => this.fetchAccountInfo(), 0);
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+
+				default:
+					break;
 			}
 		}
 
@@ -713,17 +719,17 @@ class PubRecAPI {
 				if(responseData.success) {
 					_haltedRequest = decodeURIComponent(_haltedRequest);
 					switch(packageData.item_type){
-					case 'person_report':
-						this.createRecord({pointer: _haltedRequest}, constants.recordTypes.PERSON, true);
-						break;
+						case 'person_report':
+							this.createRecord({pointer: _haltedRequest}, constants.recordTypes.PERSON, true);
+							break;
 
-					case 'email_report':
-						this.createEmailRecordFromAddress(_haltedRequest);
-						break;
+						case 'email_report':
+							this.createEmailRecordFromAddress(_haltedRequest);
+							break;
 
-					case 'phone_report':
-						this.createPhoneRecordFromNumber(_haltedRequest);
-						break;
+						case 'phone_report':
+							this.createPhoneRecordFromNumber(_haltedRequest);
+							break;
 					}
 					_haltedRequest = null;
 					//Don't need this anymore since we're going directly to the report

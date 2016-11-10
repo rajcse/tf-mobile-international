@@ -25,13 +25,13 @@ class PhotoView extends Component {
 	openPhoto(index) {
 		this.setState({
 			currentImage: index,
-			photoModalOpen: true,
+			photoModalOpen: true
 		});
 	}
 
 	closePhoto() {
 		this.setState({
-			photoModalOpen: false,
+			photoModalOpen: false
 		});
 	}
 
@@ -41,13 +41,13 @@ class PhotoView extends Component {
 
 	nextPhoto() {
 		this.setState({
-			currentImage: this.state.currentImage + 1,
+			currentImage: this.state.currentImage + 1
 		});
 	}
 
 	prevPhoto() {
 		this.setState({
-			currentImage: this.state.currentImage - 1,
+			currentImage: this.state.currentImage - 1
 		});
 	}
 
@@ -103,7 +103,7 @@ class PhotoView extends Component {
 
 PhotoView.propTypes = {
 	title: React.PropTypes.string.isRequired,
-	photos: React.PropTypes.array.isRequired,
+	photos: React.PropTypes.array.isRequired
 };
 
 export default PhotoView;

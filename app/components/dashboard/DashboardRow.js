@@ -28,43 +28,50 @@ const DashboardRow = (props) => {
 	}
 
 	switch(props.id[1]) {
-	case constants.recordTypes.PERSON:
-		if (_.has(props.data,'name.first')){
+		case constants.recordTypes.PERSON:
+			if (_.has(props.data,'name.first')){
+				rowLabel = (
+					<div>
+						<h3><span className="name">{props.data.name.first} {props.data.name.middle} {props.data.name.last}</span>
+							<span className="age">{ _.isNull(age.display) ? null : `${age.display} yr` }</span>
+						</h3>
+
+
+						<p className="location">
+							{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ': ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}
+						</p>
+					</div>
+				);
+			}
+			break;
+			
+		case constants.recordTypes.PHONE:
+			rowLabel = _.get(props,'data.phone.number') ? (
+				<div>
+					<h3>{props.data.phone.number.replace(/^(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</h3>
+					<p className="location">
+						{_.get(props.data,'location.address.city') ? props.data.location.address.city : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : '' }
+					</p>
+					<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
+				</div>
+			) : null;
+			break;
+			
+		case constants.recordTypes.EMAIL:
 			rowLabel = (
 				<div>
-					<h3><span className="name">{props.data.name.first} {props.data.name.middle} {props.data.name.last}</span>
-						<span className="age">{ _.isNull(age.display) ? null : `${age.display} yr` }</span>
-					</h3>
-
-
-					<p className="location">{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ': ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}</p>
+					<h3>{_.has(props.data.email, 'address') ? props.data.email.address : ''}</h3>
+					<p className="location">
+						{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ' : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}
+					</p>
+					<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
 				</div>
 			);
-		}
-		break;
-	case constants.recordTypes.PHONE:
-		rowLabel = _.get(props,'data.phone.number') ? (
-			<div>
-				<h3>{props.data.phone.number.replace(/^(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</h3>
-				<p className="location">{_.get(props.data,'location.address.city') ? props.data.location.address.city : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : '' }</p>
-				<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
-			</div>
-		) : null;
-		break;
-	case constants.recordTypes.EMAIL:
-		rowLabel = (
-			<div>
-				<h3>{_.has(props.data.email, 'address') ? props.data.email.address : ''}</h3>
-				<p className="location">{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ' : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}</p>
-				<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
-			</div>
-		);
-		break;
-	case constants.recordTypes.LOCATION:
-		rowLabel = null;
-		break;
-	default:
-		break;
+			break;
+
+		case constants.recordTypes.LOCATION:
+		default:
+			break;
 	}
 
 	return (

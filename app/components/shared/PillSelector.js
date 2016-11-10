@@ -1,5 +1,3 @@
-import constants from '../../constants/pubRecConstants';
-import _ from 'lodash';
 import React, { PropTypes, Component } from 'react';
 
 export default class PillSelector extends Component {
@@ -36,11 +34,11 @@ export default class PillSelector extends Component {
 		
 		return (
 			<ul className="pill-selector">
-    			{pills}
-		    </ul>
+				{pills}
+			</ul>
 		);
-	}	
-};
+	}
+}
 
 PillSelector.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.shape({
@@ -49,5 +47,6 @@ PillSelector.propTypes = {
 	})).isRequired,
 	name: PropTypes.string.isRequired,
 	defaultValue: PropTypes.string.isRequired,
-	onChange: PropTypes.func
+	onChange: PropTypes.func,
+	disabled: PropTypes.bool
 };

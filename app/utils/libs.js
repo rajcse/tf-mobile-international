@@ -12,7 +12,7 @@ export function calculateAge(birthday, deathday) {
 		range: false,
 		birthday: null,
 		deathday: null,
-		display: null,
+		display: null
 	};
 
 	// Check if birthdate exist if not return null

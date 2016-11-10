@@ -16,7 +16,7 @@ const SocialSection = (props) => {
 	// Fallback Details
 	let fallback = {
 		title: `Our extensive public records search did not uncover social records for ${name}.`,
-		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`,
+		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`
 	};
 
 	return(
@@ -62,7 +62,10 @@ const SocialSection = (props) => {
 						<SimpleInline
 						key={uuid.v4()}
 						title={['Username', 'Since']}
-						contents={[username.content , _.has(username,'date_first_seen.date.month') ? `${constants.months[username.date_first_seen.date.month]}, ${username.date_first_seen.date.day} ${username.date_first_seen.date.year}` : null]}
+						contents={ [username.content , _.has(username,'date_first_seen.date.month')
+							? `${constants.months[username.date_first_seen.date.month]}, ${username.date_first_seen.date.day} ${username.date_first_seen.date.year}`
+							: null]
+						}
 						classes="inline-half"
 						/>
 						)) }
@@ -83,7 +86,7 @@ const SocialSection = (props) => {
 SocialSection.propTypes = {
 	accounts: PropTypes.array.isRequired,
 	usernames: PropTypes.array.isRequired,
-	links: PropTypes.array.isRequired,
+	links: PropTypes.array.isRequired
 };
 
 export default SocialSection;

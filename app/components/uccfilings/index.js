@@ -4,8 +4,6 @@ import uuid from 'uuid';
 import Sticky from 'react-stickynode';
 import constants from '../../constants/pubRecConstants';
 import SimpleRow from '../shared/SimpleRow';
-import SimpleInline from '../shared/SimpleInline';
-import {STATES} from '../../utils/states';
 
 function getFileDate(date) {
 	if(_.isNull(date)) {
@@ -18,68 +16,67 @@ function getFileDate(date) {
 }
 
 const UccFilings = (props) => {
-	let { uccFilings } = props;
 	return (
 		<section id="uccfilings" className="widget premium">
 			<Sticky>
 				<h2 className="title">Possible UCC Filings</h2>
 			</Sticky>
-			{ uccFilings.map((uccfiling, index) => (
+			{ props.uccFilings.map((uccFiling, index) => (
 				<div className="document uccfiling-individual" key={index}>
 					<div className="label label-full">
-						<h3 className="document-title">{getFileDate(uccfiling.origin_filing_date)}</h3>
+						<h3 className="document-title">{getFileDate(uccFiling.origin_filing_date)}</h3>
 					</div>
 
-					{ uccfiling.filing_jurisdiction_name ?
+					{ uccFiling.filing_jurisdiction_name ?
 						<SimpleRow
 							key={uuid.v4()}
-							content={uccfiling.filing_jurisdiction_name}
+							content={uccFiling.filing_jurisdiction_name}
 							title="Filing Jurisdiction"
 						/> : null 
 					}
 
-					{ _.get(uccfiling,'filing_offices[0].filing_agency') ?
+					{ _.get(uccFiling, 'filing_offices[0].filing_agency') ?
 						<SimpleRow
 							key={uuid.v4()}
-							content={uccfiling.filing_offices[0].filing_agency}
+							content={uccFiling.filing_offices[0].filing_agency}
 							title="Filing Agency"
 						/> : null 
 					}
 
-					{ _.get(uccfiling,'filing_offices[0].address.street_address1') ?
+					{ _.get(uccFiling, 'filing_offices[0].address.street_address1') ?
 						<SimpleRow
 							key={uuid.v4()}
 							content={
-								uccfiling.filing_offices[0].address.street_address1 + ' ' +
-								uccfiling.filing_offices[0].address.city + ' ' +
-								uccfiling.filing_offices[0].address.state + ', ' +
-								uccfiling.filing_offices[0].address.zip5 
+								uccFiling.filing_offices[0].address.street_address1 + ' ' +
+								uccFiling.filing_offices[0].address.city + ' ' +
+								uccFiling.filing_offices[0].address.state + ', ' +
+								uccFiling.filing_offices[0].address.zip5 
 							}
 							title="Filing Agency Address"
 						/> : null 
 					}
 
-					{ _.get(uccfiling,'filing_offices[0].address') && !_.get(uccfiling,'filing_offices[0].address.street_address1') ?
+					{ _.get(uccFiling,'filing_offices[0].address') && !_.get(uccFiling,'filing_offices[0].address.street_address1') ?
 						<SimpleRow
 							key={uuid.v4()}
 							content={
-								uccfiling.filing_offices[0].address.street_number + ' ' +
-								uccfiling.filing_offices[0].address.street_pre_direction + ' ' +
-								uccfiling.filing_offices[0].address.street_name + ' ' +
-								uccfiling.filing_offices[0].address.street_post_direction + ' ' +
-								uccfiling.filing_offices[0].address.street_suffix + ' ' +
-								uccfiling.filing_offices[0].address.city + ' ' +
-								uccfiling.filing_offices[0].address.state + ', ' +
-								uccfiling.filing_offices[0].address.zip5 
+								uccFiling.filing_offices[0].address.street_number + ' ' +
+								uccFiling.filing_offices[0].address.street_pre_direction + ' ' +
+								uccFiling.filing_offices[0].address.street_name + ' ' +
+								uccFiling.filing_offices[0].address.street_post_direction + ' ' +
+								uccFiling.filing_offices[0].address.street_suffix + ' ' +
+								uccFiling.filing_offices[0].address.city + ' ' +
+								uccFiling.filing_offices[0].address.state + ', ' +
+								uccFiling.filing_offices[0].address.zip5 
 							}
 							title="Filing Agency Address"
 						/> : null 
 					}
 
-					{ uccfiling.filings ?
+					{ uccFiling.filings ?
 						<div className="subgroup">
 							<h3>Filings</h3>
-							{ uccfiling.filings.map((filing) => (
+							{ uccFiling.filings.map((filing) => (
 								<div className="filing" key={uuid.v4()}>
 									{ filing.type ?
 										<SimpleRow
@@ -118,15 +115,15 @@ const UccFilings = (props) => {
 					}
 
 
-					{ uccfiling.debtors ?
+					{ uccFiling.debtors ?
 						<div className="subgroup">
 							<h3>Debtors</h3>
-							{ uccfiling.debtors.map((debtor) => (
+							{ uccFiling.debtors.map((debtor) => (
 								<div className="debtor" key={uuid.v4()}>
 									{ debtor.origin_name ?
 										<SimpleRow
 											key={uuid.v4()}
-											title={_.get(debtor, 'parsed_parties[0].business_id') ? "Business Name" : "Name"}
+											title={_.get(debtor, 'parsed_parties[0].business_id') ? 'Business Name': 'Name'}
 											content={debtor.origin_name}
 										/> :null 
 									}
@@ -152,10 +149,10 @@ const UccFilings = (props) => {
 						</div> : null 
 					}
 
-					{ uccfiling.secureds ?
+					{ uccFiling.secureds ?
 						<div className="subgroup">
 							<h3>Lenders</h3>
-							{ uccfiling.secureds.map((lender) => (
+							{ uccFiling.secureds.map((lender) => (
 								<div className="lender" key={uuid.v4()}>
 									{ lender.origin_name ?
 										<SimpleRow
@@ -186,10 +183,10 @@ const UccFilings = (props) => {
 						</div> : null 
 					}
 
-					{ uccfiling.collaterals ?
+					{ uccFiling.collaterals ?
 						<div className="subgroup">
 							<h3>Collaterals</h3>
-							{ uccfiling.collaterals.map((collateral) => (
+							{ uccFiling.collaterals.map((collateral) => (
 								<div className="collaterals" key={uuid.v4()}>
 									{ collateral.description ?
 										<SimpleRow
@@ -202,7 +199,7 @@ const UccFilings = (props) => {
 
 								</div>
 							))}
-						</div> : null 
+						</div> : null
 					}
 
 				</div>
@@ -212,7 +209,7 @@ const UccFilings = (props) => {
 };
 
 UccFilings.propTypes = {
-	uccfilings: React.PropTypes.array.isRequired
+	uccFilings: React.PropTypes.array.isRequired
 };
 
 export default UccFilings;

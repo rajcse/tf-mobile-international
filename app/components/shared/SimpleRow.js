@@ -33,7 +33,7 @@ SimpleRow.propTypes = {
 		React.PropTypes.number,
 		React.PropTypes.array
 	]),
-	icon: React.PropTypes.string,
+	icon: React.PropTypes.string
 };
 
 export default SimpleRow;

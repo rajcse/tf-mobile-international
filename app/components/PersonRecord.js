@@ -287,7 +287,10 @@ class PersonRecord extends Component {
 							<h2 className="title" >
 								PREMIUM DATA
 							</h2>
-							<p className="intro">Premium Data may be available and could include additional <span>potentially sensitive information</span> about {record.reportData.names[0].first}. In order to view Premium Data, you must first authorize this access.</p>
+							<p className="intro">
+								Premium Data may be available and could include additional <span>potentially sensitive information</span>
+								about {record.reportData.names[0].first}. In order to view Premium Data, you must first authorize this access.
+							</p>
 							<p className="includes">Premium Data May Include:</p>
 							<ul>
 								<li>Bankruptcy Filings</li>

@@ -46,7 +46,7 @@ const Associates = (props) => {
 						<SimpleRow
 							key={uuid.v4()}
 							title="Date Last Shared Address"
-							content={constants.months[associate.date_last_cohabit.date_range.end.month] + ', ' + associate.date_last_cohabit.date_range.end.day + ' ' + associate.date_last_cohabit.date_range.end.year}
+							content={`${constants.months[associate.date_last_cohabit.date_range.end.month]} ${associate.date_last_cohabit.date_range.end.day}, ${associate.date_last_cohabit.date_range.end.year}`}
 						/>
 					: null }
 

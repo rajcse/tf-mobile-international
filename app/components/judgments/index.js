@@ -90,33 +90,33 @@ const Judgments = (props) => {
 						<div className="subgroup subgroup-singular">
 							<h3>Court Information</h3>
 
-								{ _.get(judgment,'court.business_name') ?
-									<SimpleRow
-										content={judgment.court.business_name}
-										title="Name"
-									/> : null
-								}
+							{ _.get(judgment,'court.business_name') ?
+								<SimpleRow
+									content={judgment.court.business_name}
+									title="Name"
+								/> : null
+							}
 
-								{ _.get(judgment,'court.address.display') ?
-									<SimpleRow
-										content={judgment.court.address.display}
-										title="Address"
-									/> : null
-								}
+							{ _.get(judgment,'court.address.display') ?
+								<SimpleRow
+									content={judgment.court.address.display}
+									title="Address"
+								/> : null
+							}
 
-								{ _.get(judgment,'court.court_id') ?
-									<SimpleRow
-										content={judgment.court.court_id}
-										title="Court ID"
-									/> : null
-								}
+							{ _.get(judgment,'court.court_id') ?
+								<SimpleRow
+									content={judgment.court.court_id}
+									title="Court ID"
+								/> : null
+							}
 
-								{ _.get(judgment,'court.phone') ?
-									<SimpleRow
-										content={judgment.court.phone}
-										title="Phone Number"
-									/> : null
-								}
+							{ _.get(judgment,'court.phone') ?
+								<SimpleRow
+									content={judgment.court.phone}
+									title="Phone Number"
+								/> : null
+							}
 
 						</div> : null
 					}

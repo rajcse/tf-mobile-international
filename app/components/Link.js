@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 function createLocationDescriptor(to, { query, hash, state }) {
 	if (query || hash || state) {
-		return { pathname: to, query, hash, state }
+		return { pathname: to, query, hash, state };
 	}
 	
 	return to;
@@ -71,7 +71,7 @@ export default class Link extends Component {
 		
 		return <a {...props} onClick={this.handleClick} />;
 	}
-	
+
 }
 
 Link.contextTypes = {

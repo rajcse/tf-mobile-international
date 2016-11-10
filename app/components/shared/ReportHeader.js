@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import uuid from 'uuid';
@@ -62,14 +62,14 @@ class ReportHeader extends Component {
 }
 
 ReportHeader.propTypes = {
-	name: React.PropTypes.string.isRequired,
-	deathdate: React.PropTypes.any,
-	birthdate: React.PropTypes.string,
-	isPremium: React.PropTypes.bool,
-	age: React.PropTypes.number,
-	location: React.PropTypes.string,
-	type: React.PropTypes.string,
-	photos: React.PropTypes.array
+	name: PropTypes.string.isRequired,
+	deathdate: PropTypes.any,
+	birthdate: PropTypes.string,
+	isPremium: PropTypes.bool,
+	age: PropTypes.number,
+	location: PropTypes.string,
+	type: PropTypes.string,
+	photos: PropTypes.array
 };
 
 export default ReportHeader;

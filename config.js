@@ -10,7 +10,7 @@ try {
 		regex: /<content +src="[^"]+\" *\/>/,
 		replacement: `<content src=\"${src}\"/>`,
 		paths: [config],
-		silent: true,
+		silent: true
 	});
 } catch (err) {
 	console.error(`ERROR: Could not replace content src in: ${config}, ${err}`);

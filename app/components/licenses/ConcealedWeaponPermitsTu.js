@@ -26,10 +26,10 @@ const ConcealedWeaponPermitsTu = (props) => {
 						
 						{ weaponPermit.permit_number &&
 							<SimpleRow
-	                            title="Permit Number"
+								title="Permit Number"
 								content={weaponPermit.permit_number}
 							/> }
-	                    
+
 						{ weaponPermit.issue_date &&
 							<SimpleRow
 								title="Issued"

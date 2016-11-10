@@ -1,5 +1,5 @@
-import constants from '../../constants/pubRecConstants';
 import React from 'react';
+import constants from '../../constants/pubRecConstants';
 import TeaserLink from '../TeaserLink';
 
 const PhoneTeaserRow = (props) => {
@@ -16,6 +16,12 @@ const PhoneTeaserRow = (props) => {
 			</TeaserLink>
 		</li>
 	);
-}
+};
+
+PhoneTeaserRow.propTypes = {
+	names: React.PropTypes.array,
+	locations: React.PropTypes.array,
+	phones: React.PropTypes.array.isRequired
+};
 
 export default PhoneTeaserRow;

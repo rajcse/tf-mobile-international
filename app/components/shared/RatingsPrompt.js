@@ -1,24 +1,23 @@
-import constants from '../../constants/pubRecConstants';
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class RatingsPrompt extends React.Component {
-   constructor(props) {
-           super(props);
+export default class RatingsPrompt extends Component {
+	constructor(props) {
+		super(props);
 
-           this.state = {
-                   initialModal: true
-           };
-    }
+		this.state = {
+			initialModal: true
+		};
+	}
 	
 	handleClick(){
 		this.setState({
 			initialModal: false
-		})
+		});
 	}
 
-    render(){
-    	if(this.state.initialModal){
-    		return (
+	render(){
+		if(this.state.initialModal){
+			return (
 				<div id="ratings-prompt">
 					<div className="modal">
 						<h3>Help us get better!</h3>
@@ -31,7 +30,7 @@ export default class RatingsPrompt extends React.Component {
 					</div>
 				</div>
 			);	
-    	} else {
+		} else {
 			return (
 				<div id="ratings-prompt">
 					<div className="modal">
@@ -39,19 +38,20 @@ export default class RatingsPrompt extends React.Component {
 						<p>{this.props.message2}</p>
 
 						<div className="confirm">
-							<button className="continue" onClick={this.props.confirm}>YES!</button>						
+							<button className="continue" onClick={this.props.confirm}>YES!</button>
 							<button className="cancel" onClick={this.props.cancel}>NO</button>
 						</div>
 					</div>
 				</div>
 			);
-    	}
+		}
 	}
 }
 
 RatingsPrompt.propTypes = {
-	message: React.PropTypes.string.isRequired,
-	message2: React.PropTypes.string.isRequired,
-	confirm: React.PropTypes.func.isRequired,
-	support: React.PropTypes.func.isRequired
+	message: PropTypes.string.isRequired,
+	message2: PropTypes.string.isRequired,
+	confirm: PropTypes.func.isRequired,
+	cancel: PropTypes.func.isRequired,
+	support: PropTypes.func.isRequired
 };

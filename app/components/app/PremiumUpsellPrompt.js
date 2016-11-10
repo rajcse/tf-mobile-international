@@ -66,9 +66,20 @@ class PremiumUpsellPrompt extends Component {
 						<i className="icon icon-close" onClick={cancelUpsell}/>
 						<h3>Important Report Info</h3>
 						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
-						<p>Thank you for being a valued Instant Checkmate user. One of our top priorities is helping you get as much information as possible in every report so that you can have a more complete understanding about the people you search.</p>
-						<p>Remember, your subscription gives you access to all of the data in an unlimited number of Standard Reports but you should know that more information could be available and you have the option to search for more information by upgrading your report to a Premium Report. This information can include sensitive personal information such as bankruptcies, liens, and mortgages.</p>
-						<p>This Premium Data is valuable and costs us money. Because this upgrade requires an additional fee to access, we require your personal authorization to continue. Click the “CONTINUE” button below to add all available Premium Data to your report and learn as much about {fullName} as possible.</p>
+						<p>
+							Thank you for being a valued Instant Checkmate user. One of our top priorities is helping you get as much information
+							as possible in every report so that you can have a more complete understanding about the people you search.
+						</p>
+						<p>
+							Remember, your subscription gives you access to all of the data in an unlimited number of Standard Reports but you should
+							know that more information could be available and you have the option to search for more information by upgrading your report
+							to a Premium Report. This information can include sensitive personal information such as bankruptcies, liens, and mortgages.
+						</p>
+						<p>
+							This Premium Data is valuable and costs us money. Because this upgrade requires an additional fee to access, we require your
+							personal authorization to continue. Click the “CONTINUE” button below to add all available Premium Data to your report and
+							learn as much about {fullName} as possible.
+						</p>
 						<p className="confirm">
 							<button type="button" className="continue btn btn-primary btn-block" onClick={this.continueToPurchase}>Continue</button>
 							<a className="cancel" onClick={cancelUpsell}>No Thanks, I don't want more info.</a>

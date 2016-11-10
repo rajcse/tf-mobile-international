@@ -67,7 +67,7 @@ const HuntingFishingLicenses = (props) => {
 };
 
 HuntingFishingLicenses.propTypes = {
-	huntingFishingLicenses: React.PropTypes.array.isRequired,
+	huntingFishingLicenses: React.PropTypes.array.isRequired
 };
 
 export default HuntingFishingLicenses;

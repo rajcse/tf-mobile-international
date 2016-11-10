@@ -115,9 +115,10 @@ export default class Register extends Component {
 						onChange={this.handleChange} />
 						
 					<p className="legal-terms">
-						By clicking “Sign Up", you agree to our <a href="https://www.truthfinder.com/terms-of-use">Terms of Use</a>, and <a href="https://www.truthfinder.com/privacy-policy">Privacy Policy</a> and agree to receive emails.
+						By clicking “Sign Up", you agree to our <a href="https://www.truthfinder.com/terms-of-use">Terms of Use</a>,
+						and <a href="https://www.truthfinder.com/privacy-policy">Privacy Policy</a> and agree to receive emails.
 					</p>
-					
+
 					<button disabled={this.state.registering} type="submit" onClick={this.doRegister}>
 						{this.state.registering ? 'Registering...' : 'Sign Up'}
 					</button>

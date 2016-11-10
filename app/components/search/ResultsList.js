@@ -8,21 +8,21 @@ const ResultsList = (props) => {
 	let results;
 
 	switch(props.type) {
-	case constants.recordTypes.PERSON:
-	default:
-		results = props.results[constants.recordTypes.PERSON].map(result => <PersonTeaserRow key={result['@search_pointer']} {...result} />);
-		break;
+		case constants.recordTypes.PERSON:
+		default:
+			results = props.results[constants.recordTypes.PERSON].map(result => <PersonTeaserRow key={result['@search_pointer']} {...result} />);
+			break;
 
-	case constants.recordTypes.PHONE:
-		results = <PhoneTeaserRow {...props.results[constants.recordTypes.PHONE][0]} />;
-		break;
+		case constants.recordTypes.PHONE:
+			results = <PhoneTeaserRow {...props.results[constants.recordTypes.PHONE][0]} />;
+			break;
 
-	case constants.recordTypes.EMAIL:
-		results = <EmailTeaserRow {...props.results[constants.recordTypes.EMAIL][0]} />;
-		break;
+		case constants.recordTypes.EMAIL:
+			results = <EmailTeaserRow {...props.results[constants.recordTypes.EMAIL][0]} />;
+			break;
 
-	case constants.recordTypes.LOCATION:
-		break;
+		case constants.recordTypes.LOCATION:
+			break;
 	}
 
 	return (

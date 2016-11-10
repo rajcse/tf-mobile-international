@@ -54,7 +54,7 @@ export default class Login extends Component {
 					</Transition>
 					
 					<label>Log In</label>
-					
+
 					<input
 						type="email"
 						placeholder="Email Address"
@@ -86,5 +86,5 @@ export default class Login extends Component {
 
 Login.propTypes = {
 	loggingIn: React.PropTypes.bool,
-	loginErrors: React.PropTypes.string,
+	loginErrors: React.PropTypes.string
 };

@@ -234,7 +234,7 @@ class LocationModal extends Component {
 											},
 											text: neighbor.names[0].display
 										}}
-									classes="btn-link btn"> View Person Report
+										classes="btn-link btn"> View Person Report
 									</SearchLink>
 								</div>
 							);
@@ -249,11 +249,11 @@ class LocationModal extends Component {
 			tabs = [{
 				name: 'sex',
 				visible: true,
-				title: 'Sex Offenders',
+				title: 'Sex Offenders'
 			}, {
 				name: 'neighbors',
 				visible: record.isPremium,
-				title: 'Possible Neighbors',
+				title: 'Possible Neighbors'
 			}, {
 				name: 'crime',
 				visible: true,
@@ -261,7 +261,7 @@ class LocationModal extends Component {
 			}];
 
 		// Only use active tabs in array - avoid index error
-		tabs = _.filter(tabs, function(o) { return o.visible; });
+		tabs = _.filter(tabs, tab => (tab.visible));
 
 		_.map(tabs, (tab, key) => {
 			let { name, visible, title } = tab;

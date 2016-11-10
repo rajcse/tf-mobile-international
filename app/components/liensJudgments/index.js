@@ -205,9 +205,18 @@ const LiensJudgments = (props) => {
 									{(_.has(debtor,'addresses[0]') && debtor.addresses[0]) ?
 										<SimpleRow
 											key={`debtor-addresse-${uuid.v4()}`}
-											content={`${debtor.addresses[0].street_number} ${debtor.addresses[0].street_pre_direction } ${debtor.addresses[0].street_name } ${debtor.addresses[0].street_suffix } ${debtor.addresses[0].unit_designation } ${debtor.addresses[0].unit_number } ${debtor.addresses[0].city } ${debtor.addresses[0].state } ${debtor.addresses[0].zip5 }`
+											content={
+													`${debtor.addresses[0].street_number} 
+													${debtor.addresses[0].street_pre_direction} 
+													${debtor.addresses[0].street_name} 
+													${debtor.addresses[0].street_suffix} 
+													${debtor.addresses[0].unit_designation} 
+													${debtor.addresses[0].unit_number} 
+													${debtor.addresses[0].city} 
+													${debtor.addresses[0].state}
+													${debtor.addresses[0].zip5 }`
 												}
-												title="Address"
+											title="Address"
 										/> : null
 									}
 									<hr/>

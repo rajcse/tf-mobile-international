@@ -1,7 +1,7 @@
-import constants from '../../constants/pubRecConstants';
 import React from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
+import constants from '../../constants/pubRecConstants';
 import TeaserLink from '../TeaserLink';
 
 // Global Functions File

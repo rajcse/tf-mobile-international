@@ -83,33 +83,33 @@ const Liens = (props) => {
 						<div className="subgroup subgroup-singular">
 							<h3>Court Information</h3>
 
-								{ _.get(lien,'court.business_name') ?
-									<SimpleRow
-										content={lien.court.business_name}
-										title="Name"
-									/> : null
-								}
+							{ _.get(lien,'court.business_name') ?
+								<SimpleRow
+									content={lien.court.business_name}
+									title="Name"
+								/> : null
+							}
 
-								{ _.get(lien,'court.address.display') ?
-									<SimpleRow
-										content={lien.court.address.display}
-										title="Address"
-									/> : null
-								}
+							{ _.get(lien,'court.address.display') ?
+								<SimpleRow
+									content={lien.court.address.display}
+									title="Address"
+								/> : null
+							}
 
-								{ _.get(lien,'court.court_id') ?
-									<SimpleRow
-										content={lien.court.court_id}
-										title="Court ID"
-									/> : null
-								}
+							{ _.get(lien,'court.court_id') ?
+								<SimpleRow
+									content={lien.court.court_id}
+									title="Court ID"
+								/> : null
+							}
 
-								{ _.get(lien,'court.phone') ?
-									<SimpleRow
-										content={lien.court.phone}
-										title="Phone Number"
-									/> : null
-								}
+							{ _.get(lien,'court.phone') ?
+								<SimpleRow
+									content={lien.court.phone}
+									title="Phone Number"
+								/> : null
+							}
 
 						</div> : null
 					}

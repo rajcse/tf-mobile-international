@@ -30,6 +30,7 @@ class EmailRecord extends Component {
 		} else if (_.has(record.reportData, 'names[0].display')){
 			name = record.reportData.names[0].display;
 		}
+		
 		return (
 			<main>
 				<Header title={record.data.email.address} backButton />
@@ -85,20 +86,20 @@ class EmailRecord extends Component {
 					/> : null
 				}
 				{name ? 
-				<section id="crossSell" className="widget">
-					<SearchLink
-						criteria={{
-							type: constants.recordTypes.PERSON,
-							query: {
-								firstName: record.reportData.names[0].first,
-								lastName: record.reportData.names[0].last,
-								state: state
-							},
-							text: record.reportData.names[0].display
-						}}
-						classes="btn btn-upgrade">View Person Report
-					</SearchLink>
-				</section> 
+					<section id="crossSell" className="widget">
+						<SearchLink
+							criteria={{
+								type: constants.recordTypes.PERSON,
+								query: {
+									firstName: record.reportData.names[0].first,
+									lastName: record.reportData.names[0].last,
+									state: state
+								},
+								text: record.reportData.names[0].display
+							}}
+							classes="btn btn-upgrade">View Person Report
+						</SearchLink>
+					</section>
 				: null}
 			</main>
 		);

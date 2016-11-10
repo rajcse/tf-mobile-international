@@ -228,8 +228,12 @@ const CurrentProperties = (props) => {
 								<h3>Ownership History</h3>
 								{ property.ownerships.map((ownership, i) => (
 									<div className="owner-history" key={uuid.v4()}>
-										{ _.get(ownership, 'date_first_seen_as_owner.date.month') ?
-											<h4>Purchase Date: {constants.months[ownership.date_first_seen_as_owner.date.month] + ' ' + ownership.date_first_seen_as_owner.date.day + ' ' + ownership.date_first_seen_as_owner.date.year}</h4> : null
+										{ _.get(ownership, 'date_first_seen_as_owner.date.month')
+											? <h4>
+												Purchase Date:
+												{`${constants.months[ownership.date_first_seen_as_owner.date.month]} ${ownership.date_first_seen_as_owner.date.day} ${ownership.date_first_seen_as_owner.date.year}`}
+											</h4>
+											: null
 										}
 
 										{ _.get(ownership, 'resale_new_construction') ?
@@ -328,9 +332,8 @@ const CurrentProperties = (props) => {
 																	title="Address"
 																/> : null
 															}
-			
 														</div>
-													)
+													);
 												})}
 											</div> : null
 										}
@@ -407,9 +410,8 @@ const CurrentProperties = (props) => {
 																	title="Transaction Type"
 																/> : null
 															}
-			
 														</div>
-													)
+													);
 												})}
 											</div> : null
 										}								
@@ -438,9 +440,8 @@ const CurrentProperties = (props) => {
 																	title="Address"
 																/> : null
 															}
-			
 														</div>
-													)
+													);
 												})}
 											</div> : null
 										}
@@ -494,7 +495,7 @@ const CurrentProperties = (props) => {
 											</div>
 										)) : null
 								))}
-							</div> : null 
+							</div> : null
 						}
 					</div>
 				)) }
