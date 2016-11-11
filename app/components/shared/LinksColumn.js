@@ -11,7 +11,7 @@ const LinksColumn = (props) => {
 				<ul className={classNames('default', classes)}>
 					{ links.map((link, i) => (
 						link.name
-						
+
 						? <li key={i}>
 							<a href={link.url}>{_.capitalize(link.name)}</a>
 						</li>
@@ -28,7 +28,7 @@ const LinksColumn = (props) => {
 
 // Validate props
 LinksColumn.propTypes = {
-	classes: React.PropTypes.array,
+	classes: React.PropTypes.string,
 	links: React.PropTypes.array.isRequired
 };
 

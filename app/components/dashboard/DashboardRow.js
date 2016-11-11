@@ -44,7 +44,7 @@ const DashboardRow = (props) => {
 				);
 			}
 			break;
-			
+
 		case constants.recordTypes.PHONE:
 			rowLabel = _.get(props,'data.phone.number') ? (
 				<div>
@@ -56,7 +56,7 @@ const DashboardRow = (props) => {
 				</div>
 			) : null;
 			break;
-			
+
 		case constants.recordTypes.EMAIL:
 			rowLabel = (
 				<div>
