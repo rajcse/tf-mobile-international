@@ -133,7 +133,7 @@ const Bankruptcies = (props) => {
 					{bankrupt.discharge_date ?
 						<SimpleRow
 							key={uuid.v4()}
-							content={constants.months[bankrupt.discharge_date.month] + ' ' + bankrupt.discharge_date.day + ' ' + bankrupt.discharge_date.year}
+							content={`${constants.months[bankrupt.discharge_date.month]} ${bankrupt.discharge_date.day}, ${bankrupt.discharge_date.year}`}
 							title="Discharge Date"
 						/> : null }
 
@@ -168,7 +168,7 @@ const Bankruptcies = (props) => {
 					{bankrupt.meeting && bankrupt.meeting.date ?
 						<SimpleRow
 							key={uuid.v4()}
-							content={constants.months[bankrupt.meeting.date.month] + ' ' + bankrupt.meeting.date.day + ' ' + bankrupt.meeting.date.year}
+							content={`${constants.months[bankrupt.meeting.date.month]} ${bankrupt.meeting.date.day}, ${bankrupt.meeting.date.year}`}
 							title="Court Date"
 						/> : null }
 
@@ -212,7 +212,7 @@ const Bankruptcies = (props) => {
 							key={uuid.v4()}
 							content={
 								`${_.capitalize(bankrupt.status_history[0].type)} on
-								${moment(`${bankrupt.status_history[0].date.month}/${bankrupt.status_history[0].date.day}/${bankrupt.status_history[0].date.year}`, 'MM/DD/YYYY').format('LL')}`
+								${moment({month: bankrupt.status_history[0].date.month - 1, day: bankrupt.status_history[0].date.day, year: bankrupt.status_history[0].date.year}).format('LL')}`
 							}
 							title="Status History"
 						/> : null }
@@ -221,7 +221,7 @@ const Bankruptcies = (props) => {
 						<SimpleRow
 							key={uuid.v4()}
 							content={
-								`${constants.months[bankrupt.comments[0].filing_date.month]} ${bankrupt.comments[0].filing_date.day} ${bankrupt.comments[0].filing_date.year} - ${bankrupt.comments[0].description}`
+								`${constants.months[bankrupt.comments[0].filing_date.month]} ${bankrupt.comments[0].filing_date.day}, ${bankrupt.comments[0].filing_date.year} - ${bankrupt.comments[0].description}`
 							}
 							title="Comments"
 						/> : null }
