@@ -8,15 +8,19 @@ const ProfessionalLicenses = (props) => {
 	const { professionalLicenses, professionalLicensesTu } = props;
 
 	function formatPhone(phonenum) {
-	    var regexObj = /^(?:\+?1[-. ]?)?(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/;
+	    const regexObj = /^(?:\+?1[-. ]?)?(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/;
+		let phone, parts;
+		
 	    if (regexObj.test(phonenum)) {
-	        var parts = phonenum.match(regexObj);
-	        var phone = '';
+	        parts = phonenum.match(regexObj);
+	        phone = '';
+			
 	        if (parts[1]) { phone += '(' + parts[1] + ') '; }
+			
 	        phone += parts[2] + '-' + parts[3];
+			
 	        return phone;
-	    }
-	    else {
+	    } else {
 	        //invalid phone number
 	        return phonenum;
 	    }
@@ -56,7 +60,17 @@ const ProfessionalLicenses = (props) => {
 
 					{ professionalLicense.address &&
 						<SimpleRow
-							content={`${professionalLicense.address.street_number} ${professionalLicense.address.street_pre_direction} ${professionalLicense.address.street_name} ${professionalLicense.address.street_suffix} ${professionalLicense.address.unit_designation} ${professionalLicense.address.unit_number} ${professionalLicense.address.city} ${professionalLicense.address.state} ${professionalLicense.address.zip5}`}
+							content={
+								`${professionalLicense.address.street_number} 
+								${professionalLicense.address.street_pre_direction} 
+								${professionalLicense.address.street_name} 
+								${professionalLicense.address.street_suffix} 
+								${professionalLicense.address.unit_designation} 
+								${professionalLicense.address.unit_number} 
+								${professionalLicense.address.city} 
+								${professionalLicense.address.state} 
+								${professionalLicense.address.zip5}`
+							}
 							title="Address"
 						/> }
 
@@ -175,7 +189,7 @@ const ProfessionalLicenses = (props) => {
 							content={professionalLicense.trade_type}
 							title="Trade Type"
 						/> }
-					
+
 					{ professionalLicense.license_number &&
 						<SimpleRow
 							content={professionalLicense.license_number}

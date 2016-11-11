@@ -26,7 +26,8 @@ class PhoneRecord extends Component {
 			<main>
 				{ reports.map((reportData) => {
 					let location = _.has(reportData,'locations[0].address.city') ? `${reportData.locations[0].address.city}, ${reportData.locations[0].address.state_code}` : null,
-					state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
+						state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
+
 					age = libs.calculateAge(reportData.dobs[0], reportData.dods[0]);
 
 					return (

@@ -24,7 +24,9 @@ const JobsColumn = (props) => {
 							{_.has(job,'title') ? <h3>{ job.title }</h3> : null}
 							{ _.has(job,'organization') ? <h4>{_.startCase(_.toLower(job.organization))}</h4> : null }
 							{ !_.isNull(job.date_range.start) ?
-								<p>({`${moment(job.date_range.start.month, 'MM').format('MMM')} ${job.date_range.start.year} - ${moment(job.date_range.end.month, 'MM').format('MMM')}  ${job.date_range.end.year}`})</p>
+								<p>
+									({`${moment(job.date_range.start.month, 'MM').format('MMM')} ${job.date_range.start.year} - ${moment(job.date_range.end.month, 'MM').format('MMM')}  ${job.date_range.end.year}`})
+								</p>
 							: null }
 							<hr/>
 						</li>

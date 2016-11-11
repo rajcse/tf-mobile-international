@@ -2,7 +2,6 @@ import {hashHistory} from 'react-router';
 import constants from '../constants/pubRecConstants';
 import dispatcher from '../dispatcher';
 import pubRecAPI from '../utils/PubRecAPI';
-import appStoreAPI from '../utils/AppStoreAPI';
 
 export default {
 	search(criteria) {
@@ -106,7 +105,7 @@ export default {
 
 	clearRecordError(redirectToHome = true) {
 		dispatcher.dispatch({
-			actionType: constants.actions.CLEAR_RECORD_ERROR,
+			actionType: constants.actions.CLEAR_RECORD_ERROR
 		});
 
 		if(redirectToHome) hashHistory.push('/');
@@ -114,7 +113,7 @@ export default {
 
 	clearUserErrors(redirectToHome = false) {
 		dispatcher.dispatch({
-			actionType: constants.actions.CLEAR_USER_ERRORS,
+			actionType: constants.actions.CLEAR_USER_ERRORS
 		});
 
 		if(redirectToHome) hashHistory.push('/');
@@ -216,7 +215,7 @@ export default {
 		});
 		this.clearSearchResults();
 	},
-		
+
 	refreshProductUpsell() {
 		dispatcher.dispatch({
 			actionType: constants.actions.REFRESH_PRODUCT_UPSELL

@@ -1,20 +1,18 @@
-import constants from '../../constants/pubRecConstants';
 import React from 'react';
 import SimpleRow from '../shared/SimpleRow';
 import moment from 'moment';
-import _ from 'lodash';
 
 const WeaponPermits = (props) => {
 
 	let { weaponPermits } = props;
 
 	return (
-		<div className='weapon-permits-container license-group'>
+		<div className="weapon-permits-container license-group">
 			<div className="label label-full">
 				<h3 className="subsection-title premium">Possible Weapon Permits</h3>
 			</div>
 			{ weaponPermits.map((weaponPermit, i) => (
-				<div className='document license-individual' key={i}>
+				<div className="document license-individual" key={i}>
 
 					{ weaponPermit.permit && weaponPermit.permit.permit_number ?
 						<SimpleRow
@@ -60,7 +58,17 @@ const WeaponPermits = (props) => {
 
 					{ weaponPermit.address ?
 						<SimpleRow
-							content={`${weaponPermit.address.street_number} ${weaponPermit.address.street_pre_direction} ${weaponPermit.address.street_name} ${weaponPermit.address.street_suffix} ${weaponPermit.address.unit_designation} ${weaponPermit.address.unit_number} ${weaponPermit.address.city} ${weaponPermit.address.state} ${weaponPermit.address.zip5}`}
+							content={
+								`${weaponPermit.address.street_number} 
+								${weaponPermit.address.street_pre_direction} 
+								${weaponPermit.address.street_name} 
+								${weaponPermit.address.street_suffix} 
+								${weaponPermit.address.unit_designation} 
+								${weaponPermit.address.unit_number} 
+								${weaponPermit.address.city} 
+								${weaponPermit.address.state}
+								${weaponPermit.address.zip5}`
+							}
 							title="Address"
 						/> : null
 					}
@@ -83,10 +91,10 @@ const WeaponPermits = (props) => {
 			)) }
 		</div>
 	);
-}
+};
 
 WeaponPermits.propTypes = {
-	weaponPermits: React.PropTypes.array.isRequired,
-}
+	weaponPermits: React.PropTypes.array.isRequired
+};
 
 export default WeaponPermits;

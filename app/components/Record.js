@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 import constants from '../constants/pubRecConstants';
 import pubRecAPI from '../utils/PubRecAPI';
@@ -11,7 +11,7 @@ import PhoneRecord from './PhoneRecord';
 import EmailRecord from './EmailRecord';
 import LocationRecord from './LocationRecord';
 
-export default class Record extends React.Component {
+export default class Record extends Component {
 	constructor(props, context) {
 		super(props, context);
 
@@ -115,28 +115,28 @@ export default class Record extends React.Component {
 		let recordRendered = null;
 
 		switch(this.state.record.id[1]) {
-		case constants.recordTypes.PERSON:
-			recordRendered = (
-				<PersonRecord
-					record={this.state.record}
-					openLocation={this._gotoLocationModal}
-					openCrime={this._gotoCriminalModal}
-					location={this.props.location}
-					appState={this.props.appState}
-				/>
-			);
-			break;
-		case constants.recordTypes.PHONE:
-			recordRendered = <PhoneRecord record={this.state.record} />;
-			break;
-		case constants.recordTypes.EMAIL:
-			recordRendered = <EmailRecord record={this.state.record} />;
-			break;
-		case constants.recordTypes.LOCATION:
-			recordRendered = <LocationRecord record={this.state.record} />;
-			break;
-		default:
-			break;
+			case constants.recordTypes.PERSON:
+				recordRendered = (
+					<PersonRecord
+						record={this.state.record}
+						openLocation={this._gotoLocationModal}
+						openCrime={this._gotoCriminalModal}
+						location={this.props.location}
+						appState={this.props.appState}
+					/>
+				);
+				break;
+			case constants.recordTypes.PHONE:
+				recordRendered = <PhoneRecord record={this.state.record} />;
+				break;
+			case constants.recordTypes.EMAIL:
+				recordRendered = <EmailRecord record={this.state.record} />;
+				break;
+			case constants.recordTypes.LOCATION:
+				recordRendered = <LocationRecord record={this.state.record} />;
+				break;
+			default:
+				break;
 		}
 
 		return (
@@ -150,7 +150,16 @@ export default class Record extends React.Component {
 					openOffender: this._gotoOffenderModal
 				}) || recordRendered}
 				<div id="fcra-disclaimer">
-					<p>DISCLAIMER: You may not use our service or the information it provides to make decisions about consumer credit, employment, insurance, tenant screening, or any other purpose that would require FCRA compliance. TruthFinder does not provide consumer reports and is not a consumer reporting agency. (These terms have special meanings under the Fair Credit Reporting Act, 15 USC 1681 et seq., ("FCRA"), which are incorporated herein by reference.) The information available on our website may not be 100% accurate, complete, or up to date, so do not use it as a substitute for your own due diligence, especially if you have concerns about a person's criminal history. TruthFinder does not make any representation or warranty about the accuracy of the information available through our website or about the character or integrity of the person about whom you inquire. For more information, please review TruthFinder Terms of Use</p>
+					<p>
+						DISCLAIMER: You may not use our service or the information it provides to make decisions about consumer credit,
+						employment, insurance, tenant screening, or any other purpose that would require FCRA compliance. TruthFinder does
+						not provide consumer reports and is not a consumer reporting agency. (These terms have special meanings under the
+						Fair Credit Reporting Act, 15 USC 1681 et seq., ("FCRA"), which are incorporated herein by reference.) The information
+						available on our website may not be 100% accurate, complete, or up to date, so do not use it as a substitute for your
+						own due diligence, especially if you have concerns about a person's criminal history. TruthFinder does not make any
+						representation or warranty about the accuracy of the information available through our website or about the character
+						or integrity of the person about whom you inquire. For more information, please review TruthFinder Terms of Use
+					</p>
 				</div>
 			</div>
 		);
@@ -158,7 +167,8 @@ export default class Record extends React.Component {
 }
 
 Record.propTypes = {
-	params: React.PropTypes.object,
-	children: React.PropTypes.node,
-	location: React.PropTypes.object,
+	appState: PropTypes.object,
+	params: PropTypes.object,
+	children: PropTypes.node,
+	location: PropTypes.object
 };

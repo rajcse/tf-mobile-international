@@ -16,7 +16,7 @@
     "compile": "node config && NODE_ENV=production webpack && cordova build",
     "start": "node config && NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000",
     "start:prod": "node config && NODE_ENV=production webpack-dev-server --host 0.0.0.0 --port 3000",
-    "test": "eslint lib && npm outdated --depth 0"
+    "test": "eslint app && yarn outdated"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",

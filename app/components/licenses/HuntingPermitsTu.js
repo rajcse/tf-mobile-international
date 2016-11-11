@@ -20,16 +20,16 @@ const HuntingPermitsTu = (props) => {
 					<div className="document license-individual" key={i}>
 						{ holderName &&
 							<SimpleRow
-						        title="Issued To"
-						        content={titleCase(`${holderName.first} ${holderName.last}`)}
+								title="Issued To"
+								content={titleCase(`${holderName.first} ${holderName.last}`)}
 						    /> }
 					    
 						{ huntingPermit.permit_number &&
 							<SimpleRow
-					            title="Permit Number"
+								title="Permit Number"
 								content={huntingPermit.permit_number}
 							/> }
-					    
+
 						{ huntingPermit.issue_date && huntingPermit.issue_date.month > 0 &&
 							<SimpleRow
 								title="Issued"
@@ -42,7 +42,7 @@ const HuntingPermitsTu = (props) => {
 								content={`${constants.months[huntingPermit.expiry_date.month]} ${huntingPermit.expiry_date.day}, ${huntingPermit.expiry_date.year}`}
 							/> }
 					</div>
-                );
+				);
 			})}
 		</div>
 	);

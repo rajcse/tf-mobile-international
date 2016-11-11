@@ -71,8 +71,12 @@ const PaymentPrompt = (props) => {
 			content.push(
 				<div key={uuid.v4()}>
 					<h3>Upgrade Your Account To Access This Report!</h3>
-					<p className="intro">When you upgrade your account with Email Report access you'll be able to search for any email address and reveal Online accounts and other information associated with that email address.</p>
-					<p className="includes">Email Reports may contain:</p>
+					<p className="intro">
+						When you upgrade your account with Email Report access you'll be able to search for any email address and reveal Online accounts and other information associated with that email address.
+					</p>
+					<p className="includes">
+						Email Reports may contain:
+					</p>
 					<ul>
 						<li>Name</li>
 						<li>Photos</li>
@@ -89,7 +93,7 @@ const PaymentPrompt = (props) => {
 			);
 			break;
 	}
-	
+
 	return (
 		<div id="payment-prompt">
 			<div className="modal">
@@ -110,6 +114,7 @@ PaymentPrompt.propTypes = {
 	terms: React.PropTypes.string.isRequired,
 	item_type: React.PropTypes.string.isRequired,
 	recurring_price: React.PropTypes.number.isRequired,
+	purchasePending: React.PropTypes.bool,
 	confirmCrossSell: React.PropTypes.func.isRequired,
 	cancelCrossSell: React.PropTypes.func.isRequired
 };

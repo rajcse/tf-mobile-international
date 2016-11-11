@@ -6,8 +6,6 @@ import SimpleRow from '../shared/SimpleRow';
 import Sticky from 'react-stickynode';
 import {STATES} from '../../utils/states';
 
-import * as libs from '../../utils/libs';
-
 function getFileDate(date) {
 	if(!date) {
 		return 'eviction';

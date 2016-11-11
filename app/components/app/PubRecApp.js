@@ -70,25 +70,9 @@ export default class PubRecApp extends React.Component {
 		userStore.addChangeListener(this.onUserChange);
 	}
 
-	// // Fired when receiving props (setState does NOT trigger this)
-	// componentWillReceiveProps(nextProps) {
-	//
-	// }
-	//
-	// Fired when new props or state is received. Needs to be FAST
 	shouldComponentUpdate() {
 		return true;
 	}
-	//
-	// // Fired immediately before render, and only if shouldComponentUpdate returned true
-	// componentWillUpdate(nextProps, nextState) {
-	//
-	// }
-	//
-	// // Fired immediately after render and changes are flushed to the DOM
-	// componentDidUpdate(prevProps, prevState) {
-	//
-	// }
 
 	componentWillUnmount() {
 		searchStore.removeChangeListener(this.onResultsChange);
@@ -248,7 +232,11 @@ export default class PubRecApp extends React.Component {
 					(this.state.welcomeModal) ?
 						<WelcomePrompt
 							message1="Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available."
-							message2="To celebrate the launch of our new Mobile App we're granting each new user 50 FREE Person reports, 30 FREE Phone Number lookups, and 30 FREE Email address lookups. As a bonus, you will also have access to our website where you can look people up and view reports on your desktop or laptop!"
+							message2={
+								`To celebrate the launch of our new Mobile App we're granting each new user 50 FREE Person reports,
+								30 FREE Phone Number lookups, and 30 FREE Email address lookups. As a bonus, you will also have
+								access to our website where you can look people up and view reports on your desktop or laptop!`
+							}
 							confirmWelcome={this.confirmWelcome}
 						/> : null
 				}
@@ -260,5 +248,5 @@ export default class PubRecApp extends React.Component {
 
 PubRecApp.propTypes = {
 	children: React.PropTypes.node.isRequired,
-	dispatch: React.PropTypes.any,
+	dispatch: React.PropTypes.any
 };

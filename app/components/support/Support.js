@@ -59,11 +59,13 @@ export default class Support extends React.Component {
 				<h2>TruthFinder Support</h2>
 				<h4>Contact Us By Email</h4>
 				<p>
-					If you have questions about your account or are experiencing issues, please let us know! Send us a brief message describing the issue and a Member Care representative will reach out to you shortly.
+					If you have questions about your account or are experiencing issues, please let us know!
+					Send us a brief message describing the issue and a Member Care representative will reach out to you shortly.
 				</p>
-				{ this.state.success ?
-					<p className="success-message"><strong>Your message is received.</strong><br /> You will be contacted shortly</p> :
-					<form id="supportForm" onSubmit={this.postSlack} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
+				{ this.state.success
+					? <p className="success-message"><strong>Your message is received.</strong><br /> You will be contacted shortly</p>
+
+					: <form id="supportForm" onSubmit={this.postSlack} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
 
 						<textArea
 							type="text"

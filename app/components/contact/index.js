@@ -50,7 +50,7 @@ const ContactSection = (props) => {
 	// Fallback Details
 	let fallback = {
 		title: `Our extensive public records search did not uncover contact records ${name}.`,
-		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`,
+		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`
 	};
 
 	return(
@@ -75,7 +75,7 @@ const ContactSection = (props) => {
 ContactSection.propTypes = {
 	phones: React.PropTypes.array,
 	emails: React.PropTypes.array,
-	current: React.PropTypes.string,
+	current: React.PropTypes.string
 };
 
 export default ContactSection;

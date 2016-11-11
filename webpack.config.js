@@ -33,7 +33,7 @@ const common = {
 			'uuid',
 			'flux',
 			'jwt-decode',
-			'whatwg-fetch',
+			'whatwg-fetch'
 		]
 	},
 	output: {
@@ -99,7 +99,7 @@ if (ENV === 'development') {
 				jQuery: 'jquery'
 			}),
 			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-		],
+		]
 	});
 } else {
 	// config can be added here for minifying / etc
@@ -118,6 +118,6 @@ if (ENV === 'development') {
 				jQuery: 'jquery'
 			}),
 			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-		],
+		]
 	});
 }

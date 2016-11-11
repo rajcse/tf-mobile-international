@@ -70,9 +70,9 @@ export default {
 		PERSON: 'person',
 		PHONE: 'phone',
 		LOCATION: 'location',
-		EMAIL: 'email',
+		EMAIL: 'email'
 	},
-	
+
 	// These keys must match the type values above
 	recordEndpoints: {
 		person: 'people',

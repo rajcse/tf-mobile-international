@@ -77,33 +77,38 @@ export default class SearchForm extends React.Component {
 
 		// Local criteria for customization
 		let search = {
-			type: this.props.criteria.type
-		};
+				type: this.props.criteria.type
+			},
+			firstName,
+			middleInitial,
+			lastName,
+			city,
+			phoneNumber,
+			emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
 
 		switch(this.props.criteria.type) {
-		// By default, perform a person search
-		case constants.recordTypes.PERSON:
-		default:
-			if(!this.props.criteria[constants.recordTypes.PERSON].firstName || !this.props.criteria[constants.recordTypes.PERSON].lastName) return this.setState({error: true});
+			// By default, perform a person search
+			case constants.recordTypes.PERSON:
+			default:
+				if(!this.props.criteria[constants.recordTypes.PERSON].firstName || !this.props.criteria[constants.recordTypes.PERSON].lastName) return this.setState({error: true});
 
-			let firstName = this.props.criteria[constants.recordTypes.PERSON].firstName.trim(),
-				middleInitial = this.props.criteria[constants.recordTypes.PERSON].middleInitial.trim(),
-				lastName = this.props.criteria[constants.recordTypes.PERSON].lastName.trim();
-			let city = _.has(this.props.criteria[constants.recordTypes.PERSON],'city') ? this.props.criteria[constants.recordTypes.PERSON].city.trim() : '';
-			search.query = {firstName: firstName, middleInitial: middleInitial,lastName: lastName, state: this.props.criteria[constants.recordTypes.PERSON].state, city: city};
-			break;
+				firstName = this.props.criteria[constants.recordTypes.PERSON].firstName.trim(),
+					middleInitial = this.props.criteria[constants.recordTypes.PERSON].middleInitial.trim(),
+					lastName = this.props.criteria[constants.recordTypes.PERSON].lastName.trim(),
+					city = _.has(this.props.criteria[constants.recordTypes.PERSON],'city') ? this.props.criteria[constants.recordTypes.PERSON].city.trim() : '';
+				search.query = {firstName: firstName, middleInitial: middleInitial,lastName: lastName, state: this.props.criteria[constants.recordTypes.PERSON].state, city: city};
+				break;
 
-		case constants.recordTypes.PHONE:
-			let phoneNumber = this.props.criteria[constants.recordTypes.PHONE].text.replace(/[^0-9]/g, '');
-			if(phoneNumber.length !== 10) return this.setState({error: true});
-			search.query = {phone: phoneNumber};
-			break;
+			case constants.recordTypes.PHONE:
+				phoneNumber = this.props.criteria[constants.recordTypes.PHONE].text.replace(/[^0-9]/g, '');
+				if(phoneNumber.length !== 10) return this.setState({error: true});
+				search.query = {phone: phoneNumber};
+				break;
 
-		case constants.recordTypes.EMAIL:
-			let emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
-			if(!emailRegex.test(this.props.criteria[constants.recordTypes.EMAIL].text)) return this.setState({error: true});
-			search.query = {email: this.props.criteria[constants.recordTypes.EMAIL].text};
-			break;
+			case constants.recordTypes.EMAIL:
+				if(!emailRegex.test(this.props.criteria[constants.recordTypes.EMAIL].text)) return this.setState({error: true});
+				search.query = {email: this.props.criteria[constants.recordTypes.EMAIL].text};
+				break;
 		}
 
 		viewActions.search(search);
@@ -233,19 +238,19 @@ export default class SearchForm extends React.Component {
 			];
 
 		switch(this.props.criteria.type) {
-		// By default, render the person search
-		case constants.recordTypes.PERSON:
-		default:
-			form = this.renderPersonForm();
-			break;
+			// By default, render the person search
+			case constants.recordTypes.PERSON:
+			default:
+				form = this.renderPersonForm();
+				break;
 
-		case constants.recordTypes.PHONE:
-			form = this.renderPhoneForm();
-			break;
+			case constants.recordTypes.PHONE:
+				form = this.renderPhoneForm();
+				break;
 
-		case constants.recordTypes.EMAIL:
-			form = this.renderEmailForm();
-			break;
+			case constants.recordTypes.EMAIL:
+				form = this.renderEmailForm();
+				break;
 		}
 
 		return (

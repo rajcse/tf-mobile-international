@@ -7,9 +7,7 @@ import Sticky from 'react-stickynode';
 
 // Return a closure to pass to each location row
 function getLocationDetails(pointer) {
-	return function() {
-		viewActions.fetchLocationTeaser(pointer);
-	};
+	return () => (viewActions.fetchLocationTeaser(pointer));
 }
 
 const LocationSection = (props) => {

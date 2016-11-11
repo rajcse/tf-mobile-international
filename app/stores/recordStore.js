@@ -43,7 +43,7 @@ class RecordStore extends EventEmitter {
 let recordStore = new RecordStore();
 
 // Register callback to handle all updates
-dispatcher.register(function(action) {
+dispatcher.register(action => {
 
 	switch(action.actionType) {
 		case constants.actions.FETCH_RECORD:
@@ -64,13 +64,13 @@ dispatcher.register(function(action) {
 		case constants.actions.CLEAR_RECORD_ERROR:
 			_error = null;
 			recordStore.emitChange();
-			break;	
+			break;
 
 		case constants.actions.FETCH_LOCATION_TEASER:
 			break;
 
 		case constants.actions.RECEIVE_LOCATION_TEASER:
-			mergeLocationData(action.pointer, action.location)
+			mergeLocationData(action.pointer, action.location);
 			recordStore.emitChange();
 			break;
 

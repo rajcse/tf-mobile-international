@@ -1,7 +1,6 @@
 import {hashHistory} from 'react-router';
 import constants from '../constants/pubRecConstants';
 import dispatcher from '../dispatcher';
-import appStoreAPI from '../utils/AppStoreAPI';
 import pubRecAPI from '../utils/PubRecAPI';
 
 export default {
@@ -32,7 +31,7 @@ export default {
 
 	redirectToSearch() {
 		dispatcher.dispatch({
-			actionType: constants.actions.GOTO_SEARCH,
+			actionType: constants.actions.GOTO_SEARCH
 		});
 		hashHistory.push('/search');
 	},
@@ -113,7 +112,7 @@ export default {
 			actionType: constants.actions.PURCHASE_SUCCESSFUL
 		});
 	},
-	
+
 	purchaseError(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_ERROR,

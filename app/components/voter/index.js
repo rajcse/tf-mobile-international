@@ -1,6 +1,5 @@
 import React from 'react';
 import uuid from 'uuid';
-import _ from 'lodash';
 import constants from '../../constants/pubRecConstants';
 import SimpleRow from '../shared/SimpleRow';
 import Sticky from 'react-stickynode';

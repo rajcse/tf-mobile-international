@@ -12,7 +12,7 @@ class CriminalRecordsSection extends Component {
 		// Fallback Details
 		let fallback = {
 			title: `Our extensive public records search did not uncover arrest or criminal records ${name}.`,
-			content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`,
+			content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`
 		};
 		return (
 			<section id="criminal" className="widget">

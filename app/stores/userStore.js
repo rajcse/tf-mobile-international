@@ -108,154 +108,154 @@ class UserStore extends EventEmitter {
 let userStore = new UserStore();
 
 // Register callback to handle all updates
-dispatcher.register(function(action) {
+dispatcher.register(action => {
 	switch(action.actionType) {
-	case constants.actions.CHECK_LOCAL_USER:
-		break;
+		case constants.actions.CHECK_LOCAL_USER:
+			break;
 
-	case constants.actions.REGISTER:
-		_registering = true;
-		_registerErrors = null;
-		userStore.emitChange();
-		break;
+		case constants.actions.REGISTER:
+			_registering = true;
+			_registerErrors = null;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.REGISTER_FAILED:
-		_registering = false;
-		_registerErrors = action.errors;
-		userStore.emitChange();
-		break;
+		case constants.actions.REGISTER_FAILED:
+			_registering = false;
+			_registerErrors = action.errors;
+			userStore.emitChange();
+			break;
+				
+		case constants.actions.LOGIN:
+			_loggingIn = true;
+			_loginErrors = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.LOGIN_FAILED:
+			_loggingIn = false;
+			_loginErrors = action.errors;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_USER:
+			_loggingIn = false;
+			_loginErrors = null;
+			_user = action.user;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_ACCOUNT_INFO:
+			_accountInfo = action.account;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_USAGE:
+			_usage = action.usage;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.PAYMENT_REQUIRED:
+			_productCrossSell = action.product;
+			userStore.emitChange();
+			break;
 			
-	case constants.actions.LOGIN:
-		_loggingIn = true;
-		_loginErrors = null;
-		userStore.emitChange();
-		break;
+		case constants.actions.SHOW_PREMIUM_UPSELL:
+			_premiumUpsell = action.recordId;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.LOGIN_FAILED:
-		_loggingIn = false;
-		_loginErrors = action.errors;
-		userStore.emitChange();
-		break;
-
-	case constants.actions.RECEIVE_USER:
-		_loggingIn = false;
-		_loginErrors = null;
-		_user = action.user;
-		userStore.emitChange();
-		break;
-
-	case constants.actions.RECEIVE_ACCOUNT_INFO:
-		_accountInfo = action.account;
-		userStore.emitChange();
-		break;
-
-	case constants.actions.RECEIVE_USAGE:
-		_usage = action.usage;
-		userStore.emitChange();
-		break;
-
-	case constants.actions.PAYMENT_REQUIRED:
-		_productCrossSell = action.product;
-		userStore.emitChange();
-		break;
+		case constants.actions.CONFIRM_PREMIUM_UPSELL:
+			_purchasePending = true;
+			userStore.emitChange();
+			break;
+			
+		case constants.actions.CANCEL_PREMIUM_UPSELL:
+			_premiumUpsell = null;
+			userStore.emitChange();
+			break;
+			
+		case constants.actions.PURCHASE_SUCCESSFUL:
+			_premiumUpsell = null;
+			_productCrossSell = null;
+			_purchasePending = false;
+			_purchaseSuccess = true;
+			userStore.emitChange();
+			break;
+			
+		case constants.actions.PURCHASE_ERROR:
+			_purchasePending = false;
+			_purchaseErrors = action.errors;
+			userStore.emitChange();
+			break;
 		
-	case constants.actions.SHOW_PREMIUM_UPSELL:
-		_premiumUpsell = action.recordId;
-		userStore.emitChange();
-		break;
+		case constants.actions.CANCEL_CROSS_SELL:
+			_productCrossSell = null;
+			_purchasePending = false;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.CONFIRM_PREMIUM_UPSELL:
-		_purchasePending = true;
-		userStore.emitChange();
-		break;
-		
-	case constants.actions.CANCEL_PREMIUM_UPSELL:
-		_premiumUpsell = null;
-		userStore.emitChange();
-		break;
-		
-	case constants.actions.PURCHASE_SUCCESSFUL:
-		_premiumUpsell = null;
-		_productCrossSell = null;
-		_purchasePending = false;
-		_purchaseSuccess = true;
-		userStore.emitChange();
-		break;
-		
-	case constants.actions.PURCHASE_ERROR:
-		_purchasePending = false;
-		_purchaseErrors = action.errors;
-		userStore.emitChange();
-		break;
-	
-	case constants.actions.CANCEL_CROSS_SELL:
-		_productCrossSell = null;
-		_purchasePending = false;
-		userStore.emitChange();
-		break;
+		case constants.actions.CONFIRM_CROSS_SELL:
+			_purchasePending = true;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.CONFIRM_CROSS_SELL:
-		_purchasePending = true;
-		userStore.emitChange();
-		break;
+		case constants.actions.CLEAR_USER_ERRORS:
+			_purchaseErrors = null;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.CLEAR_USER_ERRORS:
-		_purchaseErrors = null;
-		userStore.emitChange();
-		break;	
-
-	case constants.actions.GOTO_SEARCH:
-		userStore.emitChange();
-		break;
+		case constants.actions.GOTO_SEARCH:
+			userStore.emitChange();
+			break;
 
 
-	case constants.actions.CLEAR_SUCCESS:
-		_purchaseSuccess = false;
-		userStore.emitChange();
-		break;
+		case constants.actions.CLEAR_SUCCESS:
+			_purchaseSuccess = false;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.RATE:
-		_rated = true;
-		userStore.emitChange();
-		break;
+		case constants.actions.RATE:
+			_rated = true;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.CONFIRM_WELCOME:
-		_welcomeModalStatus = false
-		userStore.emitChange();
-		break;
+		case constants.actions.CONFIRM_WELCOME:
+			_welcomeModalStatus = false;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.SET_WELCOME_STATUS:
-		_welcomeModalStatus = true
-		userStore.emitChange();
-		break;
+		case constants.actions.SET_WELCOME_STATUS:
+			_welcomeModalStatus = true;
+			userStore.emitChange();
+			break;
 
-	case constants.actions.REPORT_VIEW:
-		_reportsLookedAt = window.localStorage.getItem('reportsLookedAt');
-		userStore.emitChange();
-		break;
+		case constants.actions.REPORT_VIEW:
+			_reportsLookedAt = window.localStorage.getItem('reportsLookedAt');
+			userStore.emitChange();
+			break;
 
-	case constants.actions.REVOKE_PREMIUM_ACCESS:
-		_premiumAccess = false;
-		userStore.emitChange();
-		break;
+		case constants.actions.REVOKE_PREMIUM_ACCESS:
+			_premiumAccess = false;
+			userStore.emitChange();
+			break;
 
-	// This waits for the PubRecAPI to clear its jwt state
-	case constants.actions.LOGGED_OUT:
-		_user = null;
-		_accountInfo = null;
-		_loggingIn = false;
-		_loginErrors = null;
-		_productCrossSell = null;
-		_premiumUpsell = null;
-		_purchaseSuccess = false;
-		_purchasePending = false;
-		_premiumAccess = true;
-		_usage = [];
-		userStore.emitChange();
-		break;
+		// This waits for the PubRecAPI to clear its jwt state
+		case constants.actions.LOGGED_OUT:
+			_user = null;
+			_accountInfo = null;
+			_loggingIn = false;
+			_loginErrors = null;
+			_productCrossSell = null;
+			_premiumUpsell = null;
+			_purchaseSuccess = false;
+			_purchasePending = false;
+			_premiumAccess = true;
+			_usage = [];
+			userStore.emitChange();
+			break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 });
 

@@ -4,8 +4,7 @@ import TeaserLink from '../TeaserLink';
 
 const EmailTeaserRow = (props) => {
 
-	let address = props.locations.length ? `${props.locations[0].address.city}, ${props.locations[0].address.state_code} ${props.locations[0].address.zip_code}` : '',
-		name = props.names.length ? `Owner: ${props.names[0].first} ${props.names[0].last}` : '';
+	let name = props.names.length ? `Owner: ${props.names[0].first} ${props.names[0].last}` : '';
 
 	return (
 		<li className="email">
@@ -15,6 +14,11 @@ const EmailTeaserRow = (props) => {
 			</TeaserLink>
 		</li>
 	);
-}
+};
+
+EmailTeaserRow.propTypes = {
+	names: React.PropTypes.array,
+	emails: React.PropTypes.array.isRequired
+};
 
 export default EmailTeaserRow;

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-var Chart = require('react-chartjs-2');
-var Bar = Chart.Bar;
+const Chart = require('react-chartjs-2');
+const Bar = Chart.Bar;
 
 export default class ChartBar extends Component {
 	render() {
@@ -35,7 +35,7 @@ export default class ChartBar extends Component {
 				borderWidth: 1,
 				hoverBackgroundColor: chartHover,
 				hoverBorderColor: chartHover,
-				data: _.tail(data),
+				data: _.tail(data)
 			};
 		}
 

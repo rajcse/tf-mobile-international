@@ -1,7 +1,6 @@
 import constants from '../../constants/pubRecConstants';
 import React from 'react';
 import SearchLink from '../SearchLink';
-import _ from 'lodash';
 import Sticky from 'react-stickynode';
 import DefaultColumn from '../shared/DefaultColumn';
 
@@ -11,7 +10,7 @@ const Relationships = (props) => {
 	// Fallback Details
 	let fallback = {
 		title: `Our extensive public records search did not uncover relationship records for ${name}.`,
-		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`,
+		content: `We scanned for ${name}'s name among hundreds of millions of records from local, state, and federal databases in all 50 states.`
 	};
 
 	return (
@@ -56,7 +55,7 @@ const Relationships = (props) => {
 											},
 											text: relationship.names[0].display
 										}}
-									classes="btn-link btn"> View Person Report
+										classes="btn-link btn"> View Person Report
 									</SearchLink>
 									<hr/>
 								</li>

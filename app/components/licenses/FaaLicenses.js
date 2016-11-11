@@ -1,4 +1,3 @@
-import constants from '../../constants/pubRecConstants';
 import React from 'react';
 import SimpleRow from '../shared/SimpleRow';
 import moment from 'moment';
@@ -37,7 +36,7 @@ const FAALicenses = (props) => {
 					title="Registered Address"
 				/>
 			);
-		}	
+		}
 
 		if (faaLicense.number) {
 			singleLicense.push(
@@ -125,14 +124,14 @@ const FAALicenses = (props) => {
 				}
 
 				certificateGroup.push(
-					<div className='faa-certificate' key={uuid.v4()}>
+					<div className="faa-certificate" key={uuid.v4()}>
 						{singleCertificate}
 					</div>
-				)
+				);
 
 			});
 			singleLicense.push(
-				<div className='subgroup' key={uuid.v4()}>
+				<div className="subgroup" key={uuid.v4()}>
 					<h3>Associated Certificates</h3>
 					{certificateGroup}
 				</div>
@@ -140,24 +139,24 @@ const FAALicenses = (props) => {
 		}
 		// add the completed singleLicense array to the main content array
 		content.push(
-			<div className='document license-individual' key={uuid.v4()}>
+			<div className="document license-individual" key={uuid.v4()}>
 				{singleLicense}
 			</div>
-		)
+		);
 	});
 
 	return (
-		<div className='faa-licenses-container license-group'>
+		<div className="faa-licenses-container license-group">
 			<div className="label label-full">
 				<h3 className={containsPremiumData ? 'premium' + ' subsection-title' : 'subsection-title'}>Possible FAA Licenses</h3>
 			</div>
 			{ content }
 		</div>
 	);
-}
+};
 
 FAALicenses.propTypes = {
-	faaLicenses: React.PropTypes.array.isRequired,
-}
+	faaLicenses: React.PropTypes.array.isRequired
+};
 
 export default FAALicenses;

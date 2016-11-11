@@ -1,4 +1,3 @@
-import constants from '../../constants/pubRecConstants';
 import React from 'react';
 
 const WelcomePrompt = (props) => {
@@ -14,12 +13,12 @@ const WelcomePrompt = (props) => {
 			</div>
 		</div>
 	);
-}
+};
 
-export default WelcomePrompt;
-
-WelcomePrompt.PropTypes = {
+WelcomePrompt.propTypes = {
 	message1: React.PropTypes.string.isRequired,
 	message2: React.PropTypes.string.isRequired,
 	confirmWelcome: React.PropTypes.func.isRequired
-}
+};
+
+export default WelcomePrompt;

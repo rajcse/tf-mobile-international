@@ -1,11 +1,10 @@
-import constants from '../../constants/pubRecConstants';
-import React, { Component } from 'react';
+import React from 'react';
 
 const Loader = (props) => {
 	return (
 		<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className="loader">
 			
-			<rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#a6a6a6" transform="rotate(0 50 50) translate(0 -30)">  
+			<rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#a6a6a6" transform="rotate(0 50 50) translate(0 -30)">
 				<animate attributeName="opacity" from="1" to="0" dur="1s" begin="0s" repeatCount="indefinite"></animate>
 			</rect>
 			<rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#a6a6a6" transform="rotate(30 50 50) translate(0 -30)">
@@ -43,6 +42,6 @@ const Loader = (props) => {
 			</rect>
 		</svg>
 	);
-}
+};
 
 export default Loader;
