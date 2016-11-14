@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import Svg from '../Svg';
 import constants from '../../constants/pubRecConstants';
 import { titleCase } from '../../utils/libs';
 import SimpleRow from '../shared/SimpleRow';
@@ -11,11 +12,11 @@ const HuntingPermitsTu = (props) => {
 	return (
 		<div className="hunting-fishing-container license-group">
 			<div className="label label-full">
-				<h3 className="subsection-title premium">Possible Hunting Permits</h3>
+				<h3 className="subsection-title premium"><Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> Possible Hunting Permits</h3>
 			</div>
 			{ huntingPermitsTu.map((huntingPermit, i) => {
 				const holderName = _.get(huntingPermit.holder, 'names[0]');
-                
+
 				return (
 					<div className="document license-individual" key={i}>
 						{ holderName &&
@@ -23,7 +24,7 @@ const HuntingPermitsTu = (props) => {
 								title="Issued To"
 								content={titleCase(`${holderName.first} ${holderName.last}`)}
 						    /> }
-					    
+
 						{ huntingPermit.permit_number &&
 							<SimpleRow
 								title="Permit Number"

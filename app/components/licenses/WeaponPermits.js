@@ -1,5 +1,6 @@
 import React from 'react';
 import SimpleRow from '../shared/SimpleRow';
+import Svg from '../Svg';
 import moment from 'moment';
 
 const WeaponPermits = (props) => {
@@ -9,7 +10,7 @@ const WeaponPermits = (props) => {
 	return (
 		<div className="weapon-permits-container license-group">
 			<div className="label label-full">
-				<h3 className="subsection-title premium">Possible Weapon Permits</h3>
+				<h3 className="subsection-title premium"><Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> Possible Weapon Permits</h3>
 			</div>
 			{ weaponPermits.map((weaponPermit, i) => (
 				<div className="document license-individual" key={i}>
@@ -18,35 +19,35 @@ const WeaponPermits = (props) => {
 						<SimpleRow
 							content={weaponPermit.permit.permit_number}
 							title="Permit Number"
-						/> : null 
+						/> : null
 					}
 
 					{ weaponPermit.permit && weaponPermit.permit.permit_type ?
 						<SimpleRow
 							content={weaponPermit.permit.permit_type}
 							title="Permit Type"
-						/> : null 
+						/> : null
 					}
 
 					{ weaponPermit.permit && weaponPermit.permit.weapon_type ?
 						<SimpleRow
 							content={weaponPermit.permit.weapon_type}
 							title="Weapon Type"
-						/> : null 
+						/> : null
 					}
 
 					{ weaponPermit.permit && weaponPermit.permit.registration_date ?
 						<SimpleRow
 							content={moment(`${weaponPermit.permit.registration_date.month}/${weaponPermit.permit.registration_date.day}/${weaponPermit.permit.registration_date.year}`, 'MM/DD/YYYY').format('LL')}
 							title="Registration Date"
-						/> : null 
+						/> : null
 					}
 
 					{ weaponPermit.permit && weaponPermit.permit.expiration_date ?
 						<SimpleRow
 							content={moment(`${weaponPermit.permit.expiration_date.month}/${weaponPermit.permit.expiration_date.day}/${weaponPermit.permit.expiration_date.year}`, 'MM/DD/YYYY').format('LL')}
 							title="Expiration Date"
-						/> : null 
+						/> : null
 					}
 
 					{ weaponPermit.name ?
@@ -59,13 +60,13 @@ const WeaponPermits = (props) => {
 					{ weaponPermit.address ?
 						<SimpleRow
 							content={
-								`${weaponPermit.address.street_number} 
-								${weaponPermit.address.street_pre_direction} 
-								${weaponPermit.address.street_name} 
-								${weaponPermit.address.street_suffix} 
-								${weaponPermit.address.unit_designation} 
-								${weaponPermit.address.unit_number} 
-								${weaponPermit.address.city} 
+								`${weaponPermit.address.street_number}
+								${weaponPermit.address.street_pre_direction}
+								${weaponPermit.address.street_name}
+								${weaponPermit.address.street_suffix}
+								${weaponPermit.address.unit_designation}
+								${weaponPermit.address.unit_number}
+								${weaponPermit.address.city}
 								${weaponPermit.address.state}
 								${weaponPermit.address.zip5}`
 							}

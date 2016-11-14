@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import Svg from '../Svg';
 import constants from '../../constants/pubRecConstants';
 import SimpleRow from '../shared/SimpleRow';
 
@@ -10,15 +11,15 @@ const ProfessionalLicenses = (props) => {
 	function formatPhone(phonenum) {
 	    const regexObj = /^(?:\+?1[-. ]?)?(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/;
 		let phone, parts;
-		
+
 	    if (regexObj.test(phonenum)) {
 	        parts = phonenum.match(regexObj);
 	        phone = '';
-			
+
 	        if (parts[1]) { phone += '(' + parts[1] + ') '; }
-			
+
 	        phone += parts[2] + '-' + parts[3];
-			
+
 	        return phone;
 	    } else {
 	        //invalid phone number
@@ -29,7 +30,7 @@ const ProfessionalLicenses = (props) => {
 	return (
 		<div className="professional-licenses-container">
 			<div className="label label-full">
-				<h3 className="subsection-title premium">Possible Professional Licenses</h3>
+				<h3 className="subsection-title premium"><Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> Possible Professional Licenses</h3>
 			</div>
 			{ professionalLicenses.map((professionalLicense, i) => (
 				<div className="document license-individual" key={i}>
@@ -61,14 +62,14 @@ const ProfessionalLicenses = (props) => {
 					{ professionalLicense.address &&
 						<SimpleRow
 							content={
-								`${professionalLicense.address.street_number} 
-								${professionalLicense.address.street_pre_direction} 
-								${professionalLicense.address.street_name} 
-								${professionalLicense.address.street_suffix} 
-								${professionalLicense.address.unit_designation} 
-								${professionalLicense.address.unit_number} 
-								${professionalLicense.address.city} 
-								${professionalLicense.address.state} 
+								`${professionalLicense.address.street_number}
+								${professionalLicense.address.street_pre_direction}
+								${professionalLicense.address.street_name}
+								${professionalLicense.address.street_suffix}
+								${professionalLicense.address.unit_designation}
+								${professionalLicense.address.unit_number}
+								${professionalLicense.address.city}
+								${professionalLicense.address.state}
 								${professionalLicense.address.zip5}`
 							}
 							title="Address"
@@ -85,7 +86,7 @@ const ProfessionalLicenses = (props) => {
 							content={professionalLicense.practice_type}
 							title="Practice Type"
 						/> }
-					
+
 					{ professionalLicense.license_number &&
 						<SimpleRow
 							content={professionalLicense.license_number}
@@ -138,7 +139,7 @@ const ProfessionalLicenses = (props) => {
 
 				</div>
 			)) }
-			
+
 			{ professionalLicensesTu.map((professionalLicense, i) => (
 				<div className="document license-individual" key={i}>
 					{ professionalLicense.license_type &&
@@ -183,7 +184,7 @@ const ProfessionalLicenses = (props) => {
 							content={professionalLicense.specialties[0]}
 							title="Specialties"
 						/> }
-						
+
 					{ professionalLicense.trade_type &&
 						<SimpleRow
 							content={professionalLicense.trade_type}

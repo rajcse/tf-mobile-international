@@ -1686,6 +1686,10 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
+fallback-loader:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/fallback-loader/-/fallback-loader-0.0.0.tgz#f5f7f16ddfd35789484a7538af072934989d7321"
+
 fast-levenshtein@~2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"

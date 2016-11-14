@@ -1,6 +1,7 @@
 import React from 'react';
 import SimpleRow from '../shared/SimpleRow';
 import SimpleInline from '../shared/SimpleInline';
+import Svg from '../Svg';
 import moment from 'moment';
 import uuid from 'uuid';
 
@@ -11,7 +12,7 @@ const HuntingFishingLicenses = (props) => {
 	return (
 		<div className="hunting-fishing-container license-group">
 			<div className="label label-full">
-				<h3 className="subsection-title premium">Possible Hunting/Fishing Licenses</h3>
+				<h3 className="subsection-title premium"><Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> Possible Hunting/Fishing Licenses</h3>
 			</div>
 			{ huntingFishingLicenses.map((huntingFishingLicense, i) => (
 				<div className="document license-individual" key={i}>

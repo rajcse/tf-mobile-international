@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import _ from 'lodash';
+import Svg from './svg';
 import moment from 'moment';
 import { RouteTransition } from 'react-router-transition';
 import Header from './shared/Header';
@@ -293,24 +294,24 @@ class PersonRecord extends Component {
 							</p>
 							<p className="includes">Premium Data May Include:</p>
 							<ul>
-								<li>Bankruptcy Filings</li>
-								<li>Properties Owned</li>
-								<li>Civil Judgments</li>
-								<li>Tax Liens</li>
-								<li>Foreclosures</li>
-								<li>Corporate Affiliations</li>
-								<li>Water Craft Owned</li>
-								<li>Voter Registration</li>
-								<li>Education Information</li>
-								<li>Professional Licenses</li>
-								<li>Hunting/Fishing Permits</li>
-								<li>Weapons Permits</li>
-								<li>Prior Addresses</li>
-								<li>Auto Accident Information</li>
-								<li>Information on Neighbors</li>
-								<li>Business Associates</li>
-								<li>Additional Phone Numbers</li>
-								<li>And More!!</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Bankruptcy Filings</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Properties Owned</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Civil Judgments</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Tax Liens</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Foreclosures</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Corporate Affiliations</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Water Craft Owned</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Voter Registration</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Education Information</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Professional Licenses</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Hunting/Fishing Permits</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Weapons Permits</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Prior Addresses</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Auto Accident Information</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Information on Neighbors</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Business Associates</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Additional Phone Numbers</li>
+								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>And More!!</li>
 							</ul>
 							<button onClick={ () => viewActions.showPremiumUpsell(record.id[2]) } className="btn btn-upgrade">View More Information</button>
 						</section>

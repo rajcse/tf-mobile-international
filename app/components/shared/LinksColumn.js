@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Svg from '../Svg';
 import _ from 'lodash';
 
 const LinksColumn = (props) => {
@@ -12,12 +13,12 @@ const LinksColumn = (props) => {
 					{ links.map((link, i) => (
 						link.name
 
-						? <li key={i}>
-							<a href={link.url}>{_.capitalize(link.name)}</a>
-						</li>
+							? <li key={i}>
+								<a href={link.url}><Svg svg="linkIcon" style={{width: 16}} className="link-icon" /> {_.capitalize(link.name)} </a>
+							</li>
 
 						: <li key={i}>
-							<a href={link.url}>{link.url}</a>
+							<a href={link.url}><Svg svg="linkIcon" style={{width: 16}} className="link-icon" /> {link.url} </a>
 						</li>
 					)) }
 				</ul>

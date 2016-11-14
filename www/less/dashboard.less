@@ -83,14 +83,17 @@
             }
 
             .premium-icon {
-              background-image: url('/img/ui/premium-icon-gold.svg');
-              background-size: contain;
-              content: "";
               width: 12px;
               height: 16px;
               display: inline-block;
               position: relative;
               top: 4px;
+
+              svg {
+                  .cls-1 {
+                      fill: @brand-orange;
+                  }
+              }
             }
 
             span {

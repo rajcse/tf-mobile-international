@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
+import Svg from '../Svg';
 import constants from '../../constants/pubRecConstants';
 import Link from '../Link';
 
@@ -77,7 +78,7 @@ const DashboardRow = (props) => {
 	return (
 		<li className={classNames('history-item', props.id[1], { premium: props.data.isPremium })}>
 			<Link to={'/users/' + props.id[0] + '/records/' + props.id[2]}>
-				{props.data.isPremium ? <span className="premium-text"><i className="premium-icon" /> Premium Report</span> : null}
+				{props.data.isPremium ? <span className="premium-text"><Svg svg="premiumIcon" style={{width: 12}} className="premium-icon" /> Premium Report</span> : null}
 				{rowLabel}
 			</Link>
 		</li>

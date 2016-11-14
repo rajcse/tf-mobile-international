@@ -1,5 +1,6 @@
 import React from 'react';
 import SimpleRow from '../shared/SimpleRow';
+import Svg from '../Svg';
 import moment from 'moment';
 import uuid from 'uuid';
 import _ from 'lodash';
@@ -13,7 +14,7 @@ const FAALicenses = (props) => {
 	faaLicenses.map((faaLicense, i) => {
 		let singleLicense = [];
 		let certificateGroup = [];
-		
+
 		if (faaLicense['@provider'] == 'local.person.lexis.comp') {
 			containsPremiumData = true;
 		}
@@ -26,7 +27,7 @@ const FAALicenses = (props) => {
 					title="Name"
 				/>
 			);
-		}	
+		}
 
 		if (_.has(faaLicense, 'address.display') && faaLicense.address.display) {
 			singleLicense.push(
@@ -148,7 +149,10 @@ const FAALicenses = (props) => {
 	return (
 		<div className="faa-licenses-container license-group">
 			<div className="label label-full">
-				<h3 className={containsPremiumData ? 'premium' + ' subsection-title' : 'subsection-title'}>Possible FAA Licenses</h3>
+				<h3 className={containsPremiumData ? 'premium' + ' subsection-title' : 'subsection-title'}>
+					{containsPremiumData ? <Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> : null }
+					Possible FAA Licenses
+				</h3>
 			</div>
 			{ content }
 		</div>

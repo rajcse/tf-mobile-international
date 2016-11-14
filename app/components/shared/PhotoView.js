@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
+import Svg from '../Svg';
 import OwlCarousel from 'react-owl-carousel';
 import Loader from '../shared/Loader';
 import config from 'config';
@@ -67,14 +68,21 @@ class PhotoView extends Component {
 
 		let photoGallery = this.state.photoModalOpen ?
 			<div className="photo-modal" onClick={() => this.closePhoto()}>
-				<div className="photo-close" onClick={() => this.closePhoto()}>Close Photo</div>
+				<div className="photo-close" onClick={() => this.closePhoto()}>
+					<Svg svg="closePhoto" style={{width: 30}} className="close-photo" />
+					<p>Close Photo</p>
+				</div>
 				<div className="photo-wrapper">
 					<img src={config.API_ROOT + '/data/image/' + this.state.photos[this.state.currentImage].thumbnail_token} onClick={this.preventClose}/>
 					<Loader />
 				</div>
 				<div className="photo-controller" onClick={this.preventClose} >
-					{this.state.currentImage !== 0 ? <a className="control photo-previous" onClick={() => this.prevPhoto()}><i>&nbsp;</i></a> : null}
-					{this.state.currentImage !== this.props.photos.length - 1 ? <a className="control photo-next" onClick={() => this.nextPhoto()}><i>&nbsp;</i></a> : null}
+					{this.state.currentImage !== 0 ?
+						<a className="control photo-previous" onClick={() => this.prevPhoto()}><Svg svg="previousIcon" style={{width: 15}} className="previous-icon" /></a>
+					: null}
+					{this.state.currentImage !== this.props.photos.length - 1 ?
+						<a className="control photo-next" onClick={() => this.nextPhoto()}><Svg svg="nextIcon" style={{width: 15}} className="next-icon" /></a>
+					: null}
 				</div>
 			</div> : null;
 

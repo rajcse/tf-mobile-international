@@ -75,15 +75,16 @@ class ProfileColumn extends Component {
 				</div>
 
 				{ !_.isEmpty(social.tags) ?
-					<ul className="tags">
-						{ _.map( initialTags, (tag, key) => {
-							return (<li key={key}>
-								{ _.truncate(tag.content, (
-									'length': 48
-								)) }
-							</li>);
-						}) }
-
+					<div>
+						<ul className="tags">
+							{ _.map( initialTags, (tag, key) => {
+								return (<li key={key}>
+									{ _.truncate(tag.content, (
+										'length': 48
+									)) }
+								</li>);
+							}) }
+						</ul>
 						{ difference > 0 ?
 							<button onClick={this.showMore} className="btn btn-link">Show More ({difference})</button>
 						: null }
@@ -91,7 +92,7 @@ class ProfileColumn extends Component {
 						{ showTags ?
 							<button onClick={this.showLess} className="btn btn-link">Show Less</button>
 						: null }
-					</ul>
+					</div>
 				: null }
 			</div>
 		);

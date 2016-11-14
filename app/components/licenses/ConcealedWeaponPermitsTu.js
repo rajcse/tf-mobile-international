@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import _ from 'lodash';
+import Svg from '../Svg';
 import { titleCase } from '../../utils/libs';
 import SimpleRow from '../shared/SimpleRow';
 
@@ -11,11 +12,11 @@ const ConcealedWeaponPermitsTu = (props) => {
 	return (
 		<div className="weapon-permits-container license-group">
 			<div className="label label-full">
-				<h3 className="subsection-title premium">Possible Concealed Weapon Permits</h3>
+				<h3 className="subsection-title premium"><Svg svg="premiumIconSmall" style={{width: 10}} className="title-icon" /> Possible Concealed Weapon Permits</h3>
 			</div>
 			{ concealedWeaponPermitsTu.map((weaponPermit, i) => {
 				const holderName = _.get(weaponPermit.holder, 'names[0]');
-				
+
 				return (
 					<div className="document license-individual" key={i}>
 						{ holderName &&
@@ -23,7 +24,7 @@ const ConcealedWeaponPermitsTu = (props) => {
 								title="Issued To"
 								content={titleCase(`${holderName.first} ${holderName.last}`)}
 							/> }
-						
+
 						{ weaponPermit.permit_number &&
 							<SimpleRow
 								title="Permit Number"
