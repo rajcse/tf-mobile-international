@@ -203,7 +203,7 @@ class PersonRecord extends Component {
 							/>
 					: null }
 
-					{ isPremium ?
+					{ (!isPremium && appState.premiumAccess || isPremium) ?
 						<Businesses
 							businesses={record.reportData.corporate_affiliations}
 							name={record.reportData.names[0].display}
