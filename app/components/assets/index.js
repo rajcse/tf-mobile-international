@@ -31,7 +31,7 @@ const Assets = (props) => {
 					<p>Asset information can only be revealed after you give authorization. Click the button below to access all the available information on {name}’s assets.</p>
 
 					<p>
-						<button className="btn btn-block" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
 					</p>
 				</div>
 			</section>

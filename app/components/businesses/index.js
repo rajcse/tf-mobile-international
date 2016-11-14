@@ -29,7 +29,7 @@ const Businesses = (props) => {
 					<p>Some info is so sensitive we can only reveal it on a Per-Report Basis. Click the button below to have access to available business information on {name}.</p>
 
 					<p>
-						<button className="btn btn-block" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
 					</p>
 				</div>
 			</section>
@@ -50,14 +50,14 @@ const Businesses = (props) => {
 					<div className="label label-full">
 						<h3 className="document-title">{business.company_name}</h3>
 					</div>
-					
+
 					{ _.get(business,'name.first') ?
 						<SimpleRow
 							content={business.name.first + ' ' + business.name.last}
 							title="Name"
 						/> : null
 					}
-						
+
 					{ business.company_names && business.company_names.length &&
 						<SimpleRow
 							content={business.company_names[0].name}
@@ -69,7 +69,7 @@ const Businesses = (props) => {
 							content={business.corporation_number}
 							title="Corporation Number"
 						/> }
-						
+
 					{ business.business_ids && business.business_ids.duns_number &&
 						<SimpleRow
 							content={business.business_ids.duns_number}

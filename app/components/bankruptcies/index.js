@@ -45,7 +45,7 @@ const Bankruptcies = (props) => {
 					</p>
 
 					<p>
-						<button className="btn btn-block" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
 					</p>
 				</div>
 			</section>

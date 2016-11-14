@@ -81,7 +81,7 @@ class PremiumUpsellPrompt extends Component {
 							learn as much about {fullName} as possible.
 						</p>
 						<p className="confirm">
-							<button type="button" className="continue btn btn-primary btn-block" onClick={this.continueToPurchase}>Continue</button>
+							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToPurchase}>Continue</button>
 							<a className="cancel" onClick={cancelUpsell}>No Thanks, I don't want more info.</a>
 						</p>
 					</div>
