@@ -67,7 +67,7 @@ class PremiumUpsellPrompt extends Component {
 						<h3>Important Report Info</h3>
 						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
 						<p>
-							Thank you for being a valued Instant Checkmate user. One of our top priorities is helping you get as much information
+							Thank you for being a valued TruthFinder user. One of our top priorities is helping you get as much information
 							as possible in every report so that you can have a more complete understanding about the people you search.
 						</p>
 						<p>
