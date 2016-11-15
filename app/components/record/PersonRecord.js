@@ -205,7 +205,7 @@ class PersonRecord extends Component {
 							/>
 					: null }
 
-					{ isPremium ?
+					{ (appState.premiumAccess || isPremium) ?
 						<Businesses
 							businesses={record.reportData.corporate_affiliations}
 							name={record.reportData.names[0].display}
@@ -238,7 +238,7 @@ class PersonRecord extends Component {
 							/>
 					: null }
 
-					{ (!isPremium && appState.premiumAccess || isPremium) ?
+					{ (appState.premiumAccess || isPremium) ?
 						<Bankruptcies
 							bankruptcies={record.reportData.bankruptcies}
 							name={record.reportData.names[0].display}
