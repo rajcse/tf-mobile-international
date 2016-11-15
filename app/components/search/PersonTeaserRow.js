@@ -1,11 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-import constants from '../../constants/pubRecConstants';
-import TeaserLink from '../TeaserLink';
+import constants from 'constants/pubRecConstants';
+import TeaserLink from 'components/shared/TeaserLink';
 
 // Global Functions File
-import * as libs from '../../utils/libs';
+import * as libs from 'utils/libs';
 
 const PersonTeaserRow = (props) => {
 	let age = libs.calculateAge(props.dobs[0], props.dods[0]);

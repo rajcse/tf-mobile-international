@@ -1,6 +1,6 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import Svg from '../Svg';
+import Svg from 'components/svg/Svg';
 
 const Header = (props) => {
 	const limitLength = (str, length) => `${str.substring(0, length)}...`;

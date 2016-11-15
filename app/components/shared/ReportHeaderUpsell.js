@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'uuid';
 import Sticky from 'react-stickynode';
-import Svg from '../Svg';
+import Svg from 'components/svg/Svg';
 
 const ReportHeaderUpsell = (props) => {
 	return (

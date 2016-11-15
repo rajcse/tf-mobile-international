@@ -1,7 +1,7 @@
 import {hashHistory} from 'react-router';
-import constants from '../constants/pubRecConstants';
-import dispatcher from '../dispatcher';
-import pubRecAPI from '../utils/PubRecAPI';
+import constants from 'constants/pubRecConstants';
+import dispatcher from 'dispatcher';
+import pubRecAPI from 'utils/PubRecAPI';
 
 export default {
 	receiveSearchResults(results, type) {
@@ -56,7 +56,7 @@ export default {
 			actionType: constants.actions.REPORT_VIEW
 		});
 	},
-	
+
 	recordRequestError(error) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECORD_REQUEST_ERROR,
@@ -78,7 +78,7 @@ export default {
 			user
 		});
 	},
-	
+
 	receiveAccountInfo(account) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECEIVE_ACCOUNT_INFO,
@@ -92,7 +92,7 @@ export default {
 			errors
 		});
 	},
-	
+
 	loginFailed(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGIN_FAILED,
@@ -106,7 +106,7 @@ export default {
 			product
 		});
 	},
-	
+
 	purchaseSuccessful() {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_SUCCESSFUL

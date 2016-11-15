@@ -1,7 +1,7 @@
 import {hashHistory} from 'react-router';
-import constants from '../constants/pubRecConstants';
-import dispatcher from '../dispatcher';
-import pubRecAPI from '../utils/PubRecAPI';
+import constants from 'constants/pubRecConstants';
+import dispatcher from 'dispatcher';
+import pubRecAPI from 'utils/PubRecAPI';
 
 export default {
 	search(criteria) {
@@ -76,23 +76,23 @@ export default {
 		});
 		pubRecAPI.createRecord(recordData, recordType, true);
 	},
-	
+
 	// Use this to try and navigate directly to a phone record from any record
 	selectPhone(number) {
 		dispatcher.dispatch({
 			actionType: constants.actions.SELECT_PHONE,
 			number
 		});
-		pubRecAPI.createPhoneRecordFromNumber(number);	
+		pubRecAPI.createPhoneRecordFromNumber(number);
 	},
-	
+
 	// Use this to try and navigate directly to a phone record from any record
 	selectEmail(address) {
 		dispatcher.dispatch({
 			actionType: constants.actions.SELECT_EMAIL,
 			address
 		});
-		pubRecAPI.createEmailRecordFromAddress(address);	
+		pubRecAPI.createEmailRecordFromAddress(address);
 	},
 
 	fetchRecord(criteria) {
@@ -153,7 +153,7 @@ export default {
 		});
 		pubRecAPI.register(credentials);
 	},
-	
+
 	login(credentials) {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGIN,
@@ -175,7 +175,7 @@ export default {
 		});
 		pubRecAPI.fetchAccountInfo();
 	},
-	
+
 	showPremiumUpsell(recordId) {
 		dispatcher.dispatch({
 			actionType: constants.actions.SHOW_PREMIUM_UPSELL,
@@ -198,7 +198,7 @@ export default {
 			actionType: constants.actions.CANCEL_PREMIUM_UPSELL
 		});
 	},
-	
+
 	confirmCrossSell(sku) {
 		dispatcher.dispatch({
 			actionType: constants.actions.CONFIRM_CROSS_SELL,

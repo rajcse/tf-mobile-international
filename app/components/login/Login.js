@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Transition from '../Transition';
-import viewActions from '../../actions/viewActions';
-import Loader from '../shared/Loader';
-import Svg from '../Svg';
+import Transition from 'components/shared/Transition';
+import viewActions from 'actions/viewActions';
+import Loader from 'components/shared/Loader';
+import Svg from 'components/svg/Svg';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -52,7 +52,7 @@ export default class Login extends Component {
 					<Transition transitionName="login-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
 						{this.props.loginErrors ? <p className="error-message">{this.props.loginErrors}</p> : null}
 					</Transition>
-					
+
 					<label>Log In</label>
 
 					<input

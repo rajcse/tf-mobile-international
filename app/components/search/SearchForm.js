@@ -1,9 +1,9 @@
-import constants from '../../constants/pubRecConstants';
+import constants from 'constants/pubRecConstants';
 import _ from 'lodash';
 import React from 'react';
-import viewActions from '../../actions/viewActions';
-import {STATES} from '../../utils/states';
-import PillSelector from '../shared/PillSelector';
+import viewActions from 'actions/viewActions';
+import {STATES} from 'utils/states';
+import PillSelector from 'components/shared/PillSelector';
 
 function _formatPhone(phone) {
 	let numValue = phone.replace(/[^0-9]/g, ''),

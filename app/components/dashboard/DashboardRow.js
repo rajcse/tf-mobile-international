@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
-import Svg from '../Svg';
-import constants from '../../constants/pubRecConstants';
-import Link from '../Link';
+import Svg from 'components/svg/Svg';
+import constants from 'constants/pubRecConstants';
+import Link from 'components/shared/Link';
 
 // Global Functions File
-import * as libs from '../../utils/libs';
+import * as libs from 'utils/libs';
 
 const DashboardRow = (props) => {
 	let rowLabel = null,

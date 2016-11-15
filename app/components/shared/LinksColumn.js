@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Svg from '../Svg';
+import Svg from 'components/svg/Svg';
 import _ from 'lodash';
 
 const LinksColumn = (props) => {

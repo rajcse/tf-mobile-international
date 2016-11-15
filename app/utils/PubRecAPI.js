@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import 'whatwg-fetch';
 import jwtDecode from 'jwt-decode';
-import constants from '../constants/pubRecConstants';
-import serverActions from '../actions/serverActions';
+import constants from 'constants/pubRecConstants';
+import serverActions from 'actions/serverActions';
 import config from 'config';
 
 // Promise polyfill

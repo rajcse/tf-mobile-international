@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../shared/Header';
-import serverActions from '../../actions/serverActions';
+import Header from 'components/shared/Header';
+import serverActions from 'actions/serverActions';
 
 export default class Support extends React.Component {
 	constructor(props) {

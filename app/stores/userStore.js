@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
-import constants from '../constants/pubRecConstants';
-import dispatcher from '../dispatcher';
+import constants from 'constants/pubRecConstants';
+import dispatcher from 'dispatcher';
 
 const CHANGE_EVENT = 'change';
 
@@ -53,15 +53,15 @@ class UserStore extends EventEmitter {
 	getProductCrossSell() {
 		return _productCrossSell;
 	}
-	
+
 	getPremiumUpsell() {
 		return _premiumUpsell;
 	}
-	
+
 	getPurchasePending() {
 		return _purchasePending;
 	}
-	
+
 	getPurchaseErrors() {
 		return _purchaseErrors;
 	}
@@ -69,11 +69,11 @@ class UserStore extends EventEmitter {
 	getPurchaseSuccess() {
 		return _purchaseSuccess;
 	}
-	
+
 	isRegistering() {
 		return _registering;
 	}
-	
+
 	getRegisterErrors() {
 		return _registerErrors;
 	}
@@ -124,7 +124,7 @@ dispatcher.register(action => {
 			_registerErrors = action.errors;
 			userStore.emitChange();
 			break;
-				
+
 		case constants.actions.LOGIN:
 			_loggingIn = true;
 			_loginErrors = null;
@@ -158,7 +158,7 @@ dispatcher.register(action => {
 			_productCrossSell = action.product;
 			userStore.emitChange();
 			break;
-			
+
 		case constants.actions.SHOW_PREMIUM_UPSELL:
 			_premiumUpsell = action.recordId;
 			userStore.emitChange();
@@ -168,12 +168,12 @@ dispatcher.register(action => {
 			_purchasePending = true;
 			userStore.emitChange();
 			break;
-			
+
 		case constants.actions.CANCEL_PREMIUM_UPSELL:
 			_premiumUpsell = null;
 			userStore.emitChange();
 			break;
-			
+
 		case constants.actions.PURCHASE_SUCCESSFUL:
 			_premiumUpsell = null;
 			_productCrossSell = null;
@@ -181,13 +181,13 @@ dispatcher.register(action => {
 			_purchaseSuccess = true;
 			userStore.emitChange();
 			break;
-			
+
 		case constants.actions.PURCHASE_ERROR:
 			_purchasePending = false;
 			_purchaseErrors = action.errors;
 			userStore.emitChange();
 			break;
-		
+
 		case constants.actions.CANCEL_CROSS_SELL:
 			_productCrossSell = null;
 			_purchasePending = false;

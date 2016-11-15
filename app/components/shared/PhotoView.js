@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import Svg from '../Svg';
+import Svg from 'components/svg/Svg';
 import OwlCarousel from 'react-owl-carousel';
-import Loader from '../shared/Loader';
+import Loader from 'components/shared/Loader';
 import config from 'config';
 
 class PhotoView extends Component {

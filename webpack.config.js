@@ -9,6 +9,7 @@ process.env.BABEL_ENV = ENV;
 const common = {
 	devtool: 'cheap-module-source-map',
 	resolve: {
+		root: path.resolve('./app'),
 		extensions: ['', '.json', '.js', '.jsx'],
 		modulesDirectories: ['node_modules'],
 		alias: {

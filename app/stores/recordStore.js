@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
-import constants from '../constants/pubRecConstants';
+import constants from 'constants/pubRecConstants';
 import _ from 'lodash';
-import dispatcher from '../dispatcher';
+import dispatcher from 'dispatcher';
 
 const CHANGE_EVENT = 'change';
 
@@ -10,7 +10,7 @@ let _record = null,
 
 function mergeLocationData(pointer, location) {
 	let locationIndex = _.findIndex(_record.reportData.locations, {'@search_pointer': pointer});
-	
+
 	if(locationIndex >= 0) {
 		_record.reportData.locations[locationIndex] = _.merge(_record.reportData.locations[locationIndex], location);
 	}
@@ -21,7 +21,7 @@ class RecordStore extends EventEmitter {
 	getCurrentRecord() {
 		return _record;
 	}
-	
+
 	getError() {
 		return _error;
 	}
@@ -55,12 +55,12 @@ dispatcher.register(action => {
 			_record = action.record;
 			recordStore.emitChange();
 			break;
-		
+
 		case constants.actions.RECORD_REQUEST_ERROR:
 			_error = action.error;
 			recordStore.emitChange();
 			break;
-		
+
 		case constants.actions.CLEAR_RECORD_ERROR:
 			_error = null;
 			recordStore.emitChange();

@@ -1,6 +1,6 @@
-import constants from '../../constants/pubRecConstants';
+import constants from 'constants/pubRecConstants';
 import React from 'react';
-import TeaserLink from '../TeaserLink';
+import TeaserLink from 'components/shared/TeaserLink';
 
 const EmailTeaserRow = (props) => {
 

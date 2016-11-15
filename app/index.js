@@ -6,18 +6,18 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
 import { useScroll } from 'react-router-scroll';
 
-import PubRecApp from './components/app/PubRecApp';
-import Register from './components/register/Register';
-import Dashboard from './components/dashboard/Dashboard';
-import Search from './components/search/Search';
-import Support from './components/support/Support';
-import Account from './components/account/Account';
-import Record from './components/Record';
+import PubRecApp from 'components/PubRecApp';
+import Register from 'components/register/Register';
+import Dashboard from 'components/dashboard/Dashboard';
+import Search from 'components/search/Search';
+import Support from 'components/support/Support';
+import Account from 'components/account/Account';
+import Record from 'components/record/Record';
 
 // Modal Routes
-import LocationModal from './components/location/modal';
-import OffenderModal from './components/offender/modal';
-import CriminalModal from './components/criminal/modal';
+import LocationModal from 'components/record/components/LocationModal';
+import SexOffendersModal from 'components/record/components/SexOffendersModal';
+import CrimeModal from 'components/record/components/CrimeModal';
 
 // Expose the kickoff method to Cordova
 window.initializeApp = () => {
@@ -31,8 +31,8 @@ window.initializeApp = () => {
 				{/* This goes last because of the loose routing */}
 				<Route path="/users/:userId/records/:recordId" component={Record} >
 					<Route path="location" component={LocationModal}/>
-					<Route path="offender" component={OffenderModal}/>
-					<Route path="criminal" component={CriminalModal}/>
+					<Route path="offender" component={SexOffendersModal}/>
+					<Route path="criminal" component={CrimeModal}/>
 				</Route>
 			</Route>
 			<Route path="/register" component={Register} />
