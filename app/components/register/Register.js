@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import userStore from '../../stores/userStore';
-import Transition from '../Transition';
-import viewActions from '../../actions/viewActions';
-import Loader from '../shared/Loader';
-import Svg from '../Svg';
+import userStore from 'stores/userStore';
+import Transition from 'components/shared/Transition';
+import viewActions from 'actions/viewActions';
+import Loader from 'components/shared/Loader';
+import Svg from 'components/svg/Svg';
 
 export default class Register extends Component {
 	constructor(props) {
@@ -29,7 +29,7 @@ export default class Register extends Component {
 	componentWillMount() {
 		userStore.addChangeListener(this.onUserChange);
 	}
-	
+
 	componentWillUnmount() {
 		userStore.removeChangeListener(this.onUserChange);
 	}
@@ -43,11 +43,11 @@ export default class Register extends Component {
 
 	doRegister(e) {
 		e.preventDefault();
-		
+
 		let fullName = this.state.fullName.trim().split(' ').filter(val => val),
 			first_name = fullName.shift(),
 			last_name = fullName.join(' ');
-					
+
 		viewActions.register({
 			first_name,
 			last_name,
@@ -79,9 +79,9 @@ export default class Register extends Component {
 					<Transition transitionName="register-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
 						{this.state.registerErrors ? <p className="error-message">{this.state.registerErrors}</p> : null}
 					</Transition>
-					
+
 					<label>Create Free Account</label>
-					
+
 					<input
 						type="text"
 						placeholder="Full Name"
@@ -89,7 +89,7 @@ export default class Register extends Component {
 						name="fullName"
 						disabled={this.state.registering}
 						onChange={this.handleChange} />
-						
+
 					<input
 						type="email"
 						placeholder="Email Address"
@@ -105,7 +105,7 @@ export default class Register extends Component {
 						name="password"
 						disabled={this.state.registering}
 						onChange={this.handleChange} />
-						
+
 					<input
 						type="password"
 						placeholder="Confirm Password"
@@ -113,7 +113,7 @@ export default class Register extends Component {
 						name="confirmPassword"
 						disabled={this.state.registering}
 						onChange={this.handleChange} />
-						
+
 					<p className="legal-terms">
 						By clicking “Sign Up", you agree to our <a href="https://www.truthfinder.com/terms-of-use">Terms of Use</a>,
 						and <a href="https://www.truthfinder.com/privacy-policy">Privacy Policy</a> and agree to receive emails.

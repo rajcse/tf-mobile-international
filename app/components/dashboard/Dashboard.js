@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import constants from '../../constants/pubRecConstants';
-import Header from '../shared/Header';
+import constants from 'constants/pubRecConstants';
+import Header from 'components/shared/Header';
 import DashboardRow from './DashboardRow';
 
 export default class Dashboard extends React.Component {

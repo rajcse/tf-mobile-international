@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
-import constants from '../constants/pubRecConstants';
-import dispatcher from '../dispatcher';
+import constants from 'constants/pubRecConstants';
+import dispatcher from 'dispatcher';
 
 const CHANGE_EVENT = 'change';
 

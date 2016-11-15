@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Svg from '../Svg';
+import Svg from 'components/svg/Svg';
 
 const DefaultColumn = (props) => {
 	let {

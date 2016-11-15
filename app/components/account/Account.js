@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import pubRecAPI from '../../utils/PubRecAPI';
-import userStore from '../../stores/userStore';
-import viewActions from '../../actions/viewActions';
-import Header from '../shared/Header';
-import Loader from '../shared/Loader';
+import pubRecAPI from 'utils/PubRecAPI';
+import userStore from 'stores/userStore';
+import viewActions from 'actions/viewActions';
+import Header from 'components/shared/Header';
+import Loader from 'components/shared/Loader';
 
 export default class Support extends Component {
 	constructor(props) {

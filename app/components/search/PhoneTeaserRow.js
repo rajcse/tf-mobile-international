@@ -1,6 +1,6 @@
 import React from 'react';
-import constants from '../../constants/pubRecConstants';
-import TeaserLink from '../TeaserLink';
+import constants from 'constants/pubRecConstants';
+import TeaserLink from 'components/shared/TeaserLink';
 
 const PhoneTeaserRow = (props) => {
 
