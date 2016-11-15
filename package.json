@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "android": "cordova run android",
-    "android:build": "cordova build --release --buildConfig=./build.json android -- --gradleArg=-PcdvVersionCode=1001592263",
+    "android:build": "cordova build --release --buildConfig=./build.json android -- --gradleArg=-PcdvVersionCode=1001592273",
     "build": "NODE_ENV=production webpack --display-error-details",
     "build:dev": "NODE_ENV=development webpack --display-error-details",
     "ios": "cordova run ios",
