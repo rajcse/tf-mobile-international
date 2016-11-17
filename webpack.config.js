@@ -30,7 +30,6 @@ const common = {
 			'react-scroll',
 			'react-sticky',
 			'react-stickynode',
-			'react-tap-event-plugin',
 			'uuid',
 			'flux',
 			'jwt-decode',
@@ -70,6 +69,11 @@ const common = {
 			test: require.resolve('jquery'),
 			loader: 'expose?$!expose?jQuery'
 		}]
+	},
+	externals: {
+		'cheerio': 'window',
+		'react/lib/ExecutionEnvironment': true,
+		'react/lib/ReactContext': true
 	},
 	debug: true,
 	cache: true,
