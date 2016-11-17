@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import Loader from 'components/shared/Loader';
+import Loader from 'components/Loader';
 import pubRecAPI from 'utils/PubRecAPI';
 
 class PremiumUpsellPrompt extends Component {

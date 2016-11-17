@@ -6,18 +6,18 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
 import { useScroll } from 'react-router-scroll';
 
-import PubRecApp from 'components/PubRecApp';
-import Register from 'components/register/Register';
-import Dashboard from 'components/dashboard/Dashboard';
-import Search from 'components/search/Search';
-import Support from 'components/support/Support';
-import Account from 'components/account/Account';
-import Record from 'components/record/Record';
+import PubRecApp from './PubRecApp';
+import Register from 'containers/register/Register';
+import Dashboard from 'containers/dashboard/Dashboard';
+import Search from 'containers/search/Search';
+import Support from 'containers/support/Support';
+import Account from 'containers/account/Account';
+import Record from 'containers/record/Record';
 
 // Modal Routes
-import LocationModal from 'components/record/components/LocationModal';
-import SexOffendersModal from 'components/record/components/SexOffendersModal';
-import CrimeModal from 'components/record/components/CrimeModal';
+import LocationModal from 'containers/record/components/LocationModal';
+import SexOffendersModal from 'containers/record/components/SexOffendersModal';
+import CrimeModal from 'containers/record/components/CrimeModal';
 
 // Expose the kickoff method to Cordova
 window.initializeApp = () => {

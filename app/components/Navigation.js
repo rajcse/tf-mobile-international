@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'components/shared/Link';
+import Link from 'components/Link';
 import Svg from 'components/svg/Svg';
 
 export default class Navigation extends Component {
