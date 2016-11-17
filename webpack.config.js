@@ -30,7 +30,6 @@ const common = {
 			'react-scroll',
 			'react-sticky',
 			'react-stickynode',
-			'react-tap-event-plugin',
 			'uuid',
 			'flux',
 			'jwt-decode',
@@ -81,10 +80,23 @@ if (ENV === 'development') {
 	module.exports = merge(common, {
 		devServer: {
 			contentBase: path.join(__dirname, 'www'),
+			port: 3000,
 			historyApiFallback: true,
 			watchOptions: {
 				aggregateTimeout: 300,
 				poll: 1000
+			},
+			proxy: {
+				'/remove_dev_404s': {
+					target: 'goodbye_dev_404s',
+					secure: false,
+					bypass: (req, res) => {
+						if(req.url === '/cordova.js' || req.url === '/favicon.ico') {
+							// end the response quick so we don't get 404's
+							res.status(200).send('');
+						}
+					}
+				}
 			},
 			hot: true,
 			inline: true,
