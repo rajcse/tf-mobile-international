@@ -19,11 +19,11 @@ describe('Login', () => {
 
 	it('should update the login state on clicking button', () => {
 		renderer.setState({
-			email: 'leianivey+prod1@thecontrolgroup.com',
-			password: 'Kingston876'
+			email: 'test@test.com',
+			password: 'test'
 		}, () => {
-			expect(renderer.state.email).to.equal('leianivey+prod1@thecontrolgroup.com');
-			expect(renderer.state.password).to.equal('Kingston876');
+			expect(renderer.state.email).to.equal('test@test.com');
+			expect(renderer.state.password).to.equal('test');
 
 			let button = findRenderedDOMComponentWithClass(renderer, 'login-btn');
 
