@@ -70,11 +70,6 @@ const common = {
 			loader: 'expose?$!expose?jQuery'
 		}]
 	},
-	externals: {
-		'cheerio': 'window',
-		'react/lib/ExecutionEnvironment': true,
-		'react/lib/ReactContext': true
-	},
 	debug: true,
 	cache: true,
 	displayErrorDetails: true,
