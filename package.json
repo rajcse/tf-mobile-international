@@ -16,9 +16,8 @@
     "compile": "node config && NODE_ENV=production webpack && cordova build",
     "start": "node config && NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000",
     "start:prod": "node config && NODE_ENV=production webpack-dev-server --host 0.0.0.0 --port 3000",
-    "lint": "eslint app && yarn outdated",
-    "test": "NODE_ENV=production cross-env NODE_PATH=./app mocha --compilers js:babel-core/register -w test/utils/browser.js test/*.spec.js",
-    "test:karma": "NODE_ENV=production cross-env NODE_PATH=./app ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "lint:outdated": "eslint app && yarn outdated",
+    "test": "NODE_ENV=production cross-env NODE_PATH=./app ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
