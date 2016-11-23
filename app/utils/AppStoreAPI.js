@@ -24,7 +24,7 @@ class AppStoreAPI {
 		// in the console (reassuring us that something is happening).
 		//store.verbosity = store.INFO;
 		window.store.verbosity = window.store.DEBUG;
-		window.store.validator = 'https://api.fovea.cc:1982/check-purchase';
+		// window.store.validator = 'https://api.fovea.cc:1982/check-purchase';
 
 		if(window.device.platform === 'iOS') this.registerAppleProducts();
 		if(window.device.platform === 'Android') this.registerGoogleProducts();
@@ -34,9 +34,14 @@ class AppStoreAPI {
 
 		});
 
+		window.store.when(PREMIUM_PERSON_REPORT).approved(p => {
+			p.finish();
+		});
+
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).approved(p => {
 			console.log('verify subscription!!!!!!!!');
-			p.verify();
+			window.product = p;
+			// p.verify();
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).verified(p => {
@@ -73,34 +78,35 @@ class AppStoreAPI {
 		window.store.refresh();
 	}
 
-	// purchaseSubscription(product) {
-	//     //console.log(product);
-	//     window.store.order('unlimited_standard_report_27_78_month_mobile');
-	// }
-
 	purchasePremium() {
-		window.store.order('premium_person_report_1999_mobile');
+		window.store.order(PREMIUM_PERSON_REPORT);
 	}
 
 	registerGoogleProducts() {
 		window.store.register({
-			id:    'unlimited_standard_report_27_78_month_mobile',
+			id: 'unlim_person_28_99_1mo',
 			alias: PERSON_SUBSCRIPTION_1_MONTH,
-			type:  window.store.PAID_SUBSCRIPTION
+			type: window.store.PAID_SUBSCRIPTION
 		});
 
 		window.store.register({
-			id:    'premium_person_report_1999_mobile',
+			id: 'premium_person_report_19_99',
 			alias: PREMIUM_PERSON_REPORT,
-			type:  window.store.CONSUMABLE
+			type: window.store.CONSUMABLE
 		});
 	}
 
 	registerAppleProducts() {
 		window.store.register({
-			id:    'premium_person_report_19_99',
+			id: 'unlim_person_28_99_1mo',
+			alias: PERSON_SUBSCRIPTION_1_MONTH,
+			type: window.store.PAID_SUBSCRIPTION
+		});
+
+		window.store.register({
+			id: 'premium_person_report_19_99',
 			alias: PREMIUM_PERSON_REPORT,
-			type:  window.store.CONSUMABLE
+			type: window.store.CONSUMABLE
 		});
 	}
 }

@@ -16,7 +16,8 @@ let _user = null,
 	_productCrossSell = null,
 	_purchaseSuccess = false,
 	_rated = false,
-	_reportsLookedAt = window.localStorage.getItem('reportsLookedAt'),
+	// Just in case our value gets borked, we need to check to make sure it's a number before coercing, otherwise we'll be incrementing NaN forever
+	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
 	_premiumAccess = true,
 	_welcomeModalStatus = false,
 	_usage = [];
@@ -38,8 +39,12 @@ class UserStore extends EventEmitter {
 		return _welcomeModalStatus;
 	}
 
-	getReportsLookedAt() {
-		return _reportsLookedAt;
+	getrecordsViewed() {
+		return _recordsViewed;
+	}
+
+	incrementRecordsViewed() {
+		window.localStorage.setItem('recordsViewed', ++_recordsViewed);
 	}
 
 	getRated() {
@@ -229,8 +234,8 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.REPORT_VIEW:
-			_reportsLookedAt = window.localStorage.getItem('reportsLookedAt');
+		case constants.actions.RECEIVE_RECORD:
+			userStore.incrementRecordsViewed();
 			userStore.emitChange();
 			break;
 

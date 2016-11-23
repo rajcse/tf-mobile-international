@@ -1,5 +1,11 @@
 import '../www/less/main.less';
 
+// Fetch polyfill
+import 'whatwg-fetch';
+
+// Promise polyfill
+require('es6-promise').polyfill();
+
 import React from 'react';
 import config from 'config';
 import ReactDOM from 'react-dom';

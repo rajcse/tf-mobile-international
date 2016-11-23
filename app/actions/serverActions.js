@@ -51,12 +51,6 @@ export default {
 		});
 	},
 
-	reportView() {
-		dispatcher.dispatch({
-			actionType: constants.actions.REPORT_VIEW
-		});
-	},
-
 	recordRequestError(error) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECORD_REQUEST_ERROR,

@@ -1,14 +1,14 @@
 /**
- * Takes an array of strings and returns and object where 
+ * Takes an array of strings and returns an object where
  * the values are identical to the keys
  */
 function mirror(arr) {
 	let obj = {};
-	
+
 	for (let i = 0; i < arr.length; i++) {
 		obj[arr[i]] = arr[i];
 	}
-	
+
 	return obj;
 }
 
@@ -59,12 +59,11 @@ export default {
 		'CLEAR_SEARCH_ERROR',
 		'CLEAR_SUCCESS',
 		'RATE',
-		'REPORT_VIEW',
 		'REVOKE_PREMIUM_ACCESS',
 		'CONFIRM_WELCOME',
 		'SET_WELCOME_STATUS'
 	]),
-	
+
 	// These must match what usage-service is expecting
 	recordTypes: {
 		PERSON: 'person',

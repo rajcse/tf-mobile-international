@@ -1,12 +1,8 @@
 import _ from 'lodash';
-import 'whatwg-fetch';
 import jwtDecode from 'jwt-decode';
 import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
 import config from 'config';
-
-// Promise polyfill
-require('es6-promise').polyfill();
 
 const RECORD_CACHE_LIMIT = 25;
 const RECORDID_CACHE_LIMIT = 100;
@@ -582,19 +578,6 @@ class PubRecAPI {
 		return _makeRequest('/users/' + user.id + '/records/' + criteria.recordId, {needsAuth: true})
 			.then((responseData) => {
 				if(responseData.success) {
-					//Count how many reports looked at and store it locally
-
-					let count = window.localStorage.getItem('reportsLookedAt');
-					//console.log(count);
-					if(!count){
-						window.localStorage.setItem('reportsLookedAt', 1);
-					} else {
-						count++;
-						window.localStorage.setItem('reportsLookedAt', count);
-					}
-
-					serverActions.reportView();
-
 					// Check for a stale version of the record in their history first
 					let staleRecordIndex = _.findIndex(_recordCache, (record) => record.id[2] === responseData.record.id[2]);
 
@@ -635,6 +618,7 @@ class PubRecAPI {
 
 	getUsage() {
 		let user = _userFromAccessToken(_accessToken);
+
 		return _makeRequest('/users/' + user.id + '/records', {needsAuth: true})
 			.then((responseData) => {
 				if(responseData.success) {
@@ -650,10 +634,10 @@ class PubRecAPI {
 
 	purchasePremium(recordId) {
 		let user = _userFromAccessToken(_accessToken);
+
 		return _makeRequest('/users/' + user.id + '/premium-upsell', {needsAuth: true, method: 'POST', body: { recordId }})
 			.then((responseData) => {
 				if(responseData.success) {
-					//serverActions.redirectToRecord(user.id, recordId.recordId);
 					this.fetchRecord({recordId}, true).then(() => setTimeout(serverActions.purchaseSuccessful));
 					setTimeout(() => this.fetchAccountInfo(), 0);
 				} else {
@@ -667,7 +651,6 @@ class PubRecAPI {
 			});
 	}
 
-	// TODO: Don't hardcode item_types
 	purchasePackage(packageData, skipVerification) {
 		let user = _userFromAccessToken(_accessToken);
 
