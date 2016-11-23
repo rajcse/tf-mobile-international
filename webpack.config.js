@@ -7,7 +7,6 @@ const ENV = require('./env');
 process.env.BABEL_ENV = ENV;
 
 const common = {
-	devtool: 'cheap-module-source-map',
 	resolve: {
 		root: path.resolve('./app'),
 		extensions: ['', '.json', '.js', '.jsx'],
@@ -70,14 +69,33 @@ const common = {
 			loader: 'expose?$!expose?jQuery'
 		}]
 	},
-	debug: true,
 	cache: true,
 	displayErrorDetails: true,
 	outputPathinfo: true
 };
 
-if (ENV === 'development') {
+if (ENV === 'production') {
+	// config can be added here for minifying / etc
 	module.exports = merge(common, {
+		plugins: [
+			new webpack.DefinePlugin({
+				'process.env': {
+					NODE_ENV: JSON.stringify('production')
+				}
+			}),
+			new webpack.optimize.UglifyJsPlugin(),
+			new webpack.ProvidePlugin({
+				_: 'lodash',
+				$: 'jquery',
+				jQuery: 'jquery'
+			}),
+			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+		]
+	});
+} else {
+	module.exports = merge(common, {
+		debug: true,
+		devtool: 'source-map',
 		devServer: {
 			contentBase: path.join(__dirname, 'www'),
 			port: 3000,
@@ -106,25 +124,6 @@ if (ENV === 'development') {
 		plugins: [
 			new webpack.optimize.OccurenceOrderPlugin(),
 			new webpack.HotModuleReplacementPlugin(),
-			new webpack.ProvidePlugin({
-				_: 'lodash',
-				$: 'jquery',
-				jQuery: 'jquery'
-			}),
-			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-		]
-	});
-} else {
-	// config can be added here for minifying / etc
-	module.exports = merge(common, {
-		devtool: 'eval',
-		plugins: [
-			new webpack.DefinePlugin({
-				'process.env': {
-					NODE_ENV: JSON.stringify('production')
-				}
-			}),
-			new webpack.optimize.UglifyJsPlugin(),
 			new webpack.ProvidePlugin({
 				_: 'lodash',
 				$: 'jquery',

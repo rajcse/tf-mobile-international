@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "android": "yarn run build && phonegap run android",
-    "android:build": "yarn run build && phonegap build --release --buildConfig=./build.json android -- --gradleArg=-PcdvVersionCode=1001592273",
+    "android:build": "yarn run build && phonegap build --release --buildConfig=./build.json android",
     "build": "eslint app && NODE_ENV=production webpack --display-error-details",
     "build:dev": "NODE_ENV=development webpack --display-error-details",
     "ios": "yarn run build && phonegap run ios",
