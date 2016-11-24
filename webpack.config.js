@@ -25,8 +25,6 @@ const common = {
 			'react-router-scroll',
 			'react-router-transition',
 			'react-scroll',
-			'react-sticky',
-			'react-stickynode',
 			'uuid',
 			'flux',
 			'jwt-decode',
