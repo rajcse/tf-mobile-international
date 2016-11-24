@@ -18,7 +18,7 @@ let _user = null,
 	_rated = false,
 	// Just in case our value gets borked, we need to check to make sure it's a number before coercing, otherwise we'll be incrementing NaN forever
 	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
-	_premiumAccess = true,
+	_premiumAccess = false, // Default to false, hit user endpoint to check for access on app start/login/refresh token
 	_welcomeModalStatus = false,
 	_usage = [];
 
@@ -239,8 +239,8 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.REVOKE_PREMIUM_ACCESS:
-			_premiumAccess = false;
+		case constants.actions.ENABLE_PREMIUM_ACCESS:
+			_premiumAccess = true;
 			userStore.emitChange();
 			break;
 
@@ -254,7 +254,7 @@ dispatcher.register(action => {
 			_premiumUpsell = null;
 			_purchaseSuccess = false;
 			_purchasePending = false;
-			_premiumAccess = true;
+			_premiumAccess = false;
 			_usage = [];
 			userStore.emitChange();
 			break;

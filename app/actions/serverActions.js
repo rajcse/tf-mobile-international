@@ -142,9 +142,9 @@ export default {
 		});
 	},
 
-	revokePremiumAccess() {
+	enablePremiumAccess() {
 		dispatcher.dispatch({
-			actionType: constants.actions.REVOKE_PREMIUM_ACCESS
+			actionType: constants.actions.ENABLE_PREMIUM_ACCESS
 		});
 	},
 

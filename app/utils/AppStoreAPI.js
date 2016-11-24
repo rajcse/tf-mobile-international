@@ -20,11 +20,7 @@ class AppStoreAPI {
 			return console.warn('Store not available');
 		}
 
-		// Let's set a pretty high verbosity level, so that we see a lot of stuff
-		// in the console (reassuring us that something is happening).
-		//store.verbosity = store.INFO;
-		window.store.verbosity = window.store.DEBUG;
-		// window.store.validator = 'https://api.fovea.cc:1982/check-purchase';
+		// window.store.verbosity = window.store.DEBUG;
 
 		if(window.device.platform === 'iOS') this.registerAppleProducts();
 		if(window.device.platform === 'Android') this.registerGoogleProducts();
@@ -39,27 +35,18 @@ class AppStoreAPI {
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).approved(p => {
-			console.log('verify subscription!!!!!!!!');
-			window.product = p;
-			// p.verify();
+			p.verify();
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).verified(p => {
-			console.log('subscription verified!!!!!!!!');
 			p.finish();
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).unverified(p => {
-			console.log('subscription unverified!!!!!!!!!');
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).updated(p => {
-			if (p.owned) {
-				console.log('You are a lucky subscriber!');
-				// location.reload(true);
-			} else {
-				console.log('You are NOT subscribed!');
-			}
+
 		});
 
 		// Log all errors
@@ -70,7 +57,7 @@ class AppStoreAPI {
 		// When every goes as expected, it's time to celebrate!
 		// The 'ready' event should be welcomed with music and fireworks,
 		window.store.ready(() => {
-			console.log('\\o/ STORE READY \\o/');
+			// console.log('\\o/ STORE READY \\o/');
 		});
 
 		// After we've done our setup, we tell the store to do
@@ -79,7 +66,7 @@ class AppStoreAPI {
 	}
 
 	purchasePremium() {
-		window.store.order(PREMIUM_PERSON_REPORT);
+		// window.store.order(PREMIUM_PERSON_REPORT);
 	}
 
 	registerGoogleProducts() {
