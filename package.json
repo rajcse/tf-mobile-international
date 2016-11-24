@@ -8,8 +8,8 @@
   "scripts": {
     "android": "yarn run build && phonegap run android",
     "android:build": "yarn run build && phonegap build --release --buildConfig=./build.json android",
-    "build": "eslint app && NODE_ENV=production webpack --display-error-details",
-    "build:dev": "NODE_ENV=development webpack --display-error-details",
+    "build": "eslint app && NODE_ENV=production webpack",
+    "build:dev": "NODE_ENV=development webpack",
     "ios": "yarn run build && phonegap run ios",
 		"ios:build": "yarn run build && phonegap build ios",
     "clean": "cordova clean",
