@@ -1,7 +1,6 @@
 import React from 'react';
 import uuid from 'uuid';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import {STATES} from 'utils/states';
@@ -11,9 +10,7 @@ const Accidents = (props) => {
 	let { accidents } = props;
 	return (
 		<section id="accidents" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Accidents</h2>
-			</Sticky>
+			<h2 className="title">Possible Accidents</h2>
 			{ accidents.map((accident) => (
 				<div className="document accident-individual" key={uuid.v4()}>
 					<div className="label label-full">

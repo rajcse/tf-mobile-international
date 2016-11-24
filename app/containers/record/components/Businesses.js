@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import {STATES} from 'utils/states';
@@ -17,9 +16,7 @@ const Businesses = (props) => {
 	if (!isPremium) {
 		return (
 			<section id="businesses" className="widget">
-				<Sticky>
-					<h2 className="title">Business Information</h2>
-				</Sticky>
+				<h2 className="title">Business Information</h2>
 
 				<div className="document">
 					<div className="label">
@@ -42,9 +39,7 @@ const Businesses = (props) => {
 
 	return (
 		<section id="businesses" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Businesses</h2>
-			</Sticky>
+			<h2 className="title">Possible Businesses</h2>
 			{ businesses.map((business, index) => (
 				<div className="document business-individual" key={index}>
 					<div className="label label-full">

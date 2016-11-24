@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 
@@ -18,9 +17,7 @@ function getFileDate(date) {
 const UccFilings = (props) => {
 	return (
 		<section id="uccfilings" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible UCC Filings</h2>
-			</Sticky>
+			<h2 className="title">Possible UCC Filings</h2>
 			{ props.uccFilings.map((uccFiling, index) => (
 				<div className="document uccfiling-individual" key={index}>
 					<div className="label label-full">
@@ -32,7 +29,7 @@ const UccFilings = (props) => {
 							key={uuid.v4()}
 							content={uccFiling.filing_jurisdiction_name}
 							title="Filing Jurisdiction"
-						/> : null 
+						/> : null
 					}
 
 					{ _.get(uccFiling, 'filing_offices[0].filing_agency') ?
@@ -40,7 +37,7 @@ const UccFilings = (props) => {
 							key={uuid.v4()}
 							content={uccFiling.filing_offices[0].filing_agency}
 							title="Filing Agency"
-						/> : null 
+						/> : null
 					}
 
 					{ _.get(uccFiling, 'filing_offices[0].address.street_address1') ?
@@ -50,10 +47,10 @@ const UccFilings = (props) => {
 								uccFiling.filing_offices[0].address.street_address1 + ' ' +
 								uccFiling.filing_offices[0].address.city + ' ' +
 								uccFiling.filing_offices[0].address.state + ', ' +
-								uccFiling.filing_offices[0].address.zip5 
+								uccFiling.filing_offices[0].address.zip5
 							}
 							title="Filing Agency Address"
-						/> : null 
+						/> : null
 					}
 
 					{ _.get(uccFiling,'filing_offices[0].address') && !_.get(uccFiling,'filing_offices[0].address.street_address1') ?
@@ -67,10 +64,10 @@ const UccFilings = (props) => {
 								uccFiling.filing_offices[0].address.street_suffix + ' ' +
 								uccFiling.filing_offices[0].address.city + ' ' +
 								uccFiling.filing_offices[0].address.state + ', ' +
-								uccFiling.filing_offices[0].address.zip5 
+								uccFiling.filing_offices[0].address.zip5
 							}
 							title="Filing Agency Address"
-						/> : null 
+						/> : null
 					}
 
 					{ uccFiling.filings ?
@@ -83,14 +80,14 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title="Filing Type"
 											content={filing.type}
-										/> :null 
+										/> :null
 									}
 									{ _.get(filing, 'date.month') ?
 										<SimpleRow
 											key={uuid.v4()}
 											title="Filing Date"
 											content={constants.months[filing.date.month] + ' ' + filing.date.day + ' ' + filing.date.year}
-										/> :null 
+										/> :null
 									}
 
 									{ _.get(filing, 'expiration_date.month') ?
@@ -98,7 +95,7 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title="Expiration Date"
 											content={constants.months[filing.expiration_date.month] + ' ' + filing.expiration_date.day + ' ' + filing.expiration_date.year}
-										/> :null 
+										/> :null
 									}
 
 									{ filing.number ?
@@ -106,12 +103,12 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title="Filing Number"
 											content={filing.number}
-										/> :null 
+										/> :null
 									}
 
 								</div>
 							))}
-						</div> : null 
+						</div> : null
 					}
 
 
@@ -125,7 +122,7 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title={_.get(debtor, 'parsed_parties[0].business_id') ? 'Business Name': 'Name'}
 											content={debtor.origin_name}
-										/> :null 
+										/> :null
 									}
 
 									{ _.get(debtor, 'addresses[0]') ?
@@ -140,13 +137,13 @@ const UccFilings = (props) => {
 												debtor.addresses[0].street_suffix + ' ' +
 												debtor.addresses[0].city + ' ' +
 												debtor.addresses[0].state + ', ' +
-												debtor.addresses[0].zip5 
+												debtor.addresses[0].zip5
 											}
-										/> :null 
+										/> :null
 									}
 								</div>
 							))}
-						</div> : null 
+						</div> : null
 					}
 
 					{ uccFiling.secureds ?
@@ -159,7 +156,7 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title="Name"
 											content={lender.origin_name}
-										/> :null 
+										/> :null
 									}
 
 									{ _.get(lender, 'addresses[0]') ?
@@ -174,13 +171,13 @@ const UccFilings = (props) => {
 												lender.addresses[0].street_suffix + ' ' +
 												lender.addresses[0].city + ' ' +
 												lender.addresses[0].state + ', ' +
-												lender.addresses[0].zip5 
+												lender.addresses[0].zip5
 											}
-										/> :null 
+										/> :null
 									}
 								</div>
 							))}
-						</div> : null 
+						</div> : null
 					}
 
 					{ uccFiling.collaterals ?
@@ -193,7 +190,7 @@ const UccFilings = (props) => {
 											key={uuid.v4()}
 											title="Description"
 											content={collateral.description}
-										/> :null 
+										/> :null
 									}
 
 

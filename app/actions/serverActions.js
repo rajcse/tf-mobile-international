@@ -51,6 +51,12 @@ export default {
 		});
 	},
 
+	viewUncachedRecord() {
+		dispatcher.dispatch({
+			actionType: constants.actions.VIEW_UNCACHED_RECORD
+		});
+	},
+
 	recordRequestError(error) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECORD_REQUEST_ERROR,

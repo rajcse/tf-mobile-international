@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 
 // Container Specific Component
 import ContactPhone from './ContactPhone';
@@ -55,9 +54,7 @@ const Contact = (props) => {
 
 	return(
 		<section id="contact" className="widget">
-			<Sticky>
-				<h2 className="title">Contact Information</h2>
-			</Sticky>
+			<h2 className="title">Contact Information</h2>
 
 			{content.length > 0 ? content :
 				<DefaultColumn

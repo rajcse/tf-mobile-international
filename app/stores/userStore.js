@@ -234,7 +234,7 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.RECEIVE_RECORD:
+		case constants.actions.VIEW_UNCACHED_RECORD:
 			userStore.incrementRecordsViewed();
 			userStore.emitChange();
 			break;
@@ -256,6 +256,8 @@ dispatcher.register(action => {
 			_purchasePending = false;
 			_premiumAccess = false;
 			_usage = [];
+			_recordsViewed = 0;
+			window.localStorage.removeItem('recordsViewed');
 			userStore.emitChange();
 			break;
 

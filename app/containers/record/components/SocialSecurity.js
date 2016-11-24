@@ -3,15 +3,12 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 const SocialSecurity = (props) => {
 	let { ssn } = props;
 	return (
 		<section id="ssn" className="widget premium">
-			<Sticky>
-				<h2 className="title">Social Security Information</h2>
-			</Sticky>
+			<h2 className="title">Social Security Information</h2>
 
 			<div className="document ssn-individual">
 				{ ssn.valid ?

@@ -1,5 +1,4 @@
 import React from 'react';
-import Sticky from 'react-stickynode';
 
 // Container Specific Component
 import DEALicenses from './DEALicenses';
@@ -100,9 +99,7 @@ const Licenses = (props) => {
 
 	return(
 		<section id="licenses" className={containsPremiumData ? 'premium' + ' widget' : 'widget'}>
-			<Sticky>
-				<h2 className="title">Licenses</h2>
-			</Sticky>
+			<h2 className="title">Licenses</h2>
 
 			{content}
 		</section>

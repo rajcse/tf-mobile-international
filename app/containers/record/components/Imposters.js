@@ -3,15 +3,12 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 const Imposters = (props) => {
 	let { imposters } = props;
 	return (
 		<section id="imposters" className="widget premium">
-			<Sticky>
-				<h2 className="title">Imposters</h2>
-			</Sticky>				
+			<h2 className="title">Imposters</h2>
 			{ imposters[0].akas.map((imposter, index) => (
 				<div className="document imposter-individual" key={index}>
 					<div className="label label-full">

@@ -610,6 +610,7 @@ class PubRecAPI {
 
 					// Shift out the oldest element if the history length is greater than the limit
 					if(_recordCache.length > RECORD_CACHE_LIMIT) _recordCache.shift();
+					setTimeout(serverActions.viewUncachedRecord, 0);
 					setTimeout(() => serverActions.receiveRecord(responseData.record), 0);
 				} else {
 					console.log(responseData.errors);

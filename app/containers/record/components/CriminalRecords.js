@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Sticky from 'react-stickynode';
 import CriminalRecordsList from './CriminalRecordsList';
 import DefaultColumn from 'components/DefaultColumn';
 
@@ -16,9 +15,7 @@ class CriminalRecords extends Component {
 		};
 		return (
 			<section id="criminal" className="widget">
-				<Sticky>
-					<h2 className="title">Possible Criminal Records</h2>
-				</Sticky>
+				<h2 className="title">Possible Criminal Records</h2>
 
 				{ filteredCrimes.length > 0 ?
 					<CriminalRecordsList

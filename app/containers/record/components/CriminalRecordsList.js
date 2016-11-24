@@ -3,7 +3,7 @@ import OwlCarousel from 'react-owl-carousel';
 import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'lodash';
-import {STATES} from 'utils/states';
+import { STATES } from 'utils/states';
 import uuid from 'uuid';
 
 class CriminalRecordsList extends Component {
@@ -19,9 +19,9 @@ class CriminalRecordsList extends Component {
 							</div>
 							<OwlCarousel slideSpeed={300} itemsCustom={[[0,1.25], [375, 1.5]]} navigation={false} autoHeight singleItem={false} autoPlay={false} >
 								{ matchType.map((crime, index) => {
-									
+
 									let crimeType = crime.case_type_description
-										? crime.case_type_description 
+										? crime.case_type_description
 										: _.has(crime,'offenses[0].case_type')
 											? crime.offenses[0].case_type
 											: null;
@@ -50,13 +50,13 @@ class CriminalRecordsList extends Component {
 
 											{ crimeCity && crimeState
 												? <p>{crimeCity}, {crimeState}</p>
-												: crimeState 
+												: crimeState
 													? <p>{crimeState}</p>
 													: null
 											}
 
-											{ crimeType 
-												? <p>{crimeType.toLowerCase()}</p> 
+											{ crimeType
+												? <p>{crimeType.toLowerCase()}</p>
 												: null
 											}
 
