@@ -51,7 +51,7 @@ export default class PubRecApp extends React.Component {
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
 			success: userStore.getPurchaseSuccess(),
-			reportsLookedAt: userStore.getReportsLookedAt(),
+			recordsViewed: userStore.getrecordsViewed(),
 			userRated: userStore.getRated(),
 			premiumAccess: userStore.getPremiumAccess(),
 			welcomeModal: userStore.getWelcomeModalStatus()
@@ -103,7 +103,7 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			success: userStore.getPurchaseSuccess(),
-			reportsLookedAt: userStore.getReportsLookedAt(),
+			recordsViewed: userStore.getrecordsViewed(),
 			userRated: userStore.getRated(),
 			premiumAccess: userStore.getPremiumAccess(),
 			welcomeModal: userStore.getWelcomeModalStatus()
@@ -217,7 +217,7 @@ export default class PubRecApp extends React.Component {
 
 				{
 					//pop up the ratings modal when reports looked at is 5 and user has not rated before
-					((this.state.reportsLookedAt === 5) && !this.state.userRated) ?
+					((this.state.recordsViewed === 5) && !this.state.userRated) ?
 						<RatingsPrompt
 							message="How are you liking our app?"
 							message2="If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!"

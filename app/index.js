@@ -1,5 +1,11 @@
 import '../www/less/main.less';
 
+// Fetch polyfill
+import 'whatwg-fetch';
+
+// Promise polyfill
+require('es6-promise').polyfill();
+
 import React from 'react';
 import config from 'config';
 import ReactDOM from 'react-dom';
@@ -14,6 +20,10 @@ import Support from 'containers/support/Support';
 import Account from 'containers/account/Account';
 import Record from 'containers/record/Record';
 
+/* eslint-disable no-unused-vars */
+import appStoreAPI from 'utils/AppStoreAPI';
+/* eslint-enable */
+
 // Modal Routes
 import LocationModal from 'containers/record/components/LocationModal';
 import SexOffendersModal from 'containers/record/components/SexOffendersModal';
@@ -21,6 +31,10 @@ import CrimeModal from 'containers/record/components/CrimeModal';
 
 // Expose the kickoff method to Cordova
 window.initializeApp = () => {
+
+	// Initialize the app store plugin
+	// appStoreAPI.init();
+
 	ReactDOM.render(
 		<Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
 			<Route path="/" component={PubRecApp}>

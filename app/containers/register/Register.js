@@ -27,10 +27,22 @@ export default class Register extends Component {
 	}
 
 	componentWillMount() {
+		// Handle some app status bar style changes
+		if(window.StatusBar) {
+			window.StatusBar.backgroundColorByHexString('#57BF93');
+			window.StatusBar.styleLightContent();
+		}
+
 		userStore.addChangeListener(this.onUserChange);
 	}
 
 	componentWillUnmount() {
+		// Set the status bar back to normal
+		if(window.StatusBar) {
+			window.StatusBar.backgroundColorByHexString('#ffffff');
+			window.StatusBar.styleDefault();
+		}
+
 		userStore.removeChangeListener(this.onUserChange);
 	}
 

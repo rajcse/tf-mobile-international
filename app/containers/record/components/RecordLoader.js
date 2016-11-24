@@ -10,6 +10,20 @@ class RecordLoader extends Component {
 		this.cancelLoader = this.cancelLoader.bind(this);
 	}
 
+	componentDidMount() {
+		// Hide the status bar
+		if(window.StatusBar) {
+			window.StatusBar.hide();
+		}
+	}
+
+	componentWillUnmount() {
+		// Show the status bar again
+		if(window.StatusBar) {
+			window.StatusBar.show();
+		}
+	}
+
 	cancelLoader(){
 		hashHistory.goBack();
 	}

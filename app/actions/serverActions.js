@@ -51,12 +51,6 @@ export default {
 		});
 	},
 
-	reportView() {
-		dispatcher.dispatch({
-			actionType: constants.actions.REPORT_VIEW
-		});
-	},
-
 	recordRequestError(error) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECORD_REQUEST_ERROR,
@@ -148,9 +142,9 @@ export default {
 		});
 	},
 
-	revokePremiumAccess() {
+	enablePremiumAccess() {
 		dispatcher.dispatch({
-			actionType: constants.actions.REVOKE_PREMIUM_ACCESS
+			actionType: constants.actions.ENABLE_PREMIUM_ACCESS
 		});
 	},
 
