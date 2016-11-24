@@ -31,7 +31,7 @@ import CrimeModal from 'containers/record/components/CrimeModal';
 window.initializeApp = () => {
 
 	// Initialize the app store plugin
-	appStoreAPI.init();
+	// appStoreAPI.init();
 
 	ReactDOM.render(
 		<Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>

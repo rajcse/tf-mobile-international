@@ -453,6 +453,7 @@ class PubRecAPI {
 	}
 
 	/**
+	 * TEMP
 	 * This method should be completely removed after we open premium access for all users
 	 */
 	checkPremiumAccess() {
