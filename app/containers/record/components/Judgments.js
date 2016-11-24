@@ -3,7 +3,6 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 import * as libs from 'utils/libs';
 
@@ -21,9 +20,7 @@ const Judgments = (props) => {
 	let { judgments } = props;
 	return (
 		<section id="judgments" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Judgments</h2>
-			</Sticky>
+			<h2 className="title">Possible Judgments</h2>
 			{ judgments.map((judgment, index) => (
 				<div className="document judgment-individual" key={uuid.v4()}>
 					<div className="label label-full">

@@ -2,16 +2,13 @@ import React, { PropTypes } from 'react';
 import SimpleRow from 'components/SimpleRow';
 import uuid from 'uuid';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 
 const StudentRecords = (props) => {
 	let { records } = props;
 
 	return (
 		<div className="student widget premium" >
-			<Sticky>
-				<h2 className="title">High School Records</h2>
-			</Sticky>
+			<h2 className="title">High School Records</h2>
 
 			{ _.map(records, (record) => {
 				return (

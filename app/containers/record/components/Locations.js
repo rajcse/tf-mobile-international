@@ -3,7 +3,6 @@ import Location from './Location';
 import viewActions from 'actions/viewActions';
 import _ from 'lodash';
 import uuid from 'uuid';
-import Sticky from 'react-stickynode';
 
 // Return a closure to pass to each location row
 function getLocationDetails(pointer) {
@@ -28,9 +27,7 @@ const Locations = (props) => {
 
 	return(
 		<section id="location" className="widget">
-			<Sticky>
-				<h2 className="title">Location History</h2>
-			</Sticky>
+			<h2 className="title">Location History</h2>
 
 			<div className="label">
 				<h4>Addresses</h4>

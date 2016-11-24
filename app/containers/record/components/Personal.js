@@ -9,8 +9,6 @@ import Jobs from './Jobs';
 import EducationColumn from './Education';
 import RelativesColumn from './Relatives';
 
-import Sticky from 'react-stickynode';
-
 import uuid from 'uuid';
 
 const Personal = (props) => {
@@ -159,9 +157,7 @@ const Personal = (props) => {
 
 	return(
 		<section id="personal" className="widget">
-			<Sticky>
-				<h2 className="title">Personal Information</h2>
-			</Sticky>
+			<h2 className="title">Personal Information</h2>
 
 			{personalNode}
 

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import uuid from 'uuid';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 // import constants from 'constants/pubRecConstants';
 
 import SocialProfile from './SocialProfile';
@@ -21,9 +20,7 @@ const Social = (props) => {
 
 	return(
 		<section id="social" className="widget">
-			<Sticky>
-				<h2 className="title">Social Profiles</h2>
-			</Sticky>
+			<h2 className="title">Social Profiles</h2>
 
 			{ accounts.length > 0 ?
 				<div>

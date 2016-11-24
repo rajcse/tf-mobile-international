@@ -3,8 +3,7 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
-import {STATES} from 'utils/states';
+import { STATES } from 'utils/states';
 
 function getFileDate(date) {
 	if(!date) {
@@ -20,9 +19,7 @@ const Evictions = (props) => {
 	let { evictions } = props;
 	return (
 		<section id="evictions" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Evictions</h2>
-			</Sticky>
+			<h2 className="title">Possible Evictions</h2>
 			{ evictions.map((eviction, index) => (
 				<div className="document eviction-individual" key={uuid.v4()}>
 					<div className="label label-full">

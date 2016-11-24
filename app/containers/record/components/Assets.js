@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import uuid from 'uuid';
@@ -19,9 +18,7 @@ const Assets = (props) => {
 	if (!isPremium) {
 		return (
 			<section id="assets" className="widget">
-				<Sticky>
-					<h2 className="title">Asset Information</h2>
-				</Sticky>
+				<h2 className="title">Asset Information</h2>
 
 				<div className="document">
 					<div className="label">
@@ -45,9 +42,7 @@ const Assets = (props) => {
 	return (
 		<div className="multi-container">
 			<section id="assets" className="widget premium">
-				<Sticky>
-					<h2 className="title">Properties</h2>
-				</Sticky>
+				<h2 className="title">Properties</h2>
 				{ assets.map((asset, index) => (
 					<div className="document asset-individual" key={index}>
 						{ _.get(asset, 'entities[0].address.display') ?

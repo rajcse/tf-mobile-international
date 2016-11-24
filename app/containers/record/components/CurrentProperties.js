@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import uuid from 'uuid';
@@ -12,9 +11,7 @@ const CurrentProperties = (props) => {
 	return (
 		<div className="multi-container">
 			<section id="current-properties" className="widget premium">
-				<Sticky>
-					<h2 className="title">Properties</h2>
-				</Sticky>
+				<h2 className="title">Properties</h2>
 				{ currentProperties.map((property, index) => (
 					<div className="document property-individual" key={index}>
 						{ _.get(property, 'address.display') ?
@@ -220,8 +217,8 @@ const CurrentProperties = (props) => {
 								/> : null
 							}
 
-						</div> 
-						
+						</div>
+
 
 						{ property.ownerships ?
 							<div className="subgroup">
@@ -308,9 +305,9 @@ const CurrentProperties = (props) => {
 
 
 
-										{ ownership.owners ? 
+										{ ownership.owners ?
 											<div className="subgroup">
-												{ i == 0 ? <h3>Current Owner(s)</h3> : <h3>Previous Owner(s)</h3>} 
+												{ i == 0 ? <h3>Current Owner(s)</h3> : <h3>Previous Owner(s)</h3>}
 												{_.map(ownership.owners, (owner, i) => {
 													return(
 														<div className="owner" key={uuid.v4()}>
@@ -338,7 +335,7 @@ const CurrentProperties = (props) => {
 											</div> : null
 										}
 
-										{ ownership.mortgages ? 
+										{ ownership.mortgages ?
 											<div className="subgroup">
 												<h3>Mortgage Information</h3>
 												{_.map(ownership.mortgages, (mortgage, i) => {
@@ -414,9 +411,9 @@ const CurrentProperties = (props) => {
 													);
 												})}
 											</div> : null
-										}								
+										}
 
-										{ ownership.sellers ? 
+										{ ownership.sellers ?
 											<div className="subgroup">
 												<h3>Seller(s)</h3>
 												{_.map(ownership.sellers, (seller, i) => {
@@ -445,10 +442,10 @@ const CurrentProperties = (props) => {
 												})}
 											</div> : null
 										}
-										
+
 									</div>
 								))}
-							</div> : null 
+							</div> : null
 						}
 
 						{ _.get(property,'property_taxes.assessments') ?
@@ -491,7 +488,7 @@ const CurrentProperties = (props) => {
 														title="Tax Year"
 													/> : null
 												}
-												
+
 											</div>
 										)) : null
 								))}

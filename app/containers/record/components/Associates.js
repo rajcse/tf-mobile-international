@@ -5,7 +5,6 @@ import SimpleInline from 'components/SimpleInline';
 import SimpleRow from 'components/SimpleRow';
 import _ from 'lodash';
 import uuid from 'uuid';
-import Sticky from 'react-stickynode';
 
 const Associates = (props) => {
 	let {
@@ -88,9 +87,7 @@ const Associates = (props) => {
 	return (
 		<div className="multi-container">
 			<section id="associates" className="widget premium">
-				<Sticky>
-					<h2 className="title">Possible Associates</h2>
-				</Sticky>
+				<h2 className="title">Possible Associates</h2>
 				<div className="content content-full">
 					<ul className="default">
 						{content}
