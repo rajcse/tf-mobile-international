@@ -22,7 +22,7 @@ export default class Login extends Component {
 
 	componentDidMount() {
 		// Handle some app status bar style changes
-		if(window.StatusBar) {
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
 			window.StatusBar.backgroundColorByHexString('#57BF93');
 			window.StatusBar.styleLightContent();
 		}
@@ -30,7 +30,7 @@ export default class Login extends Component {
 
 	componentWillUnmount() {
 		// Set the status bar back to normal
-		if(window.StatusBar) {
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
 			window.StatusBar.backgroundColorByHexString('#ffffff');
 			window.StatusBar.styleDefault();
 		}

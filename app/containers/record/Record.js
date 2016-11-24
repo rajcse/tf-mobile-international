@@ -98,7 +98,6 @@ export default class Record extends Component {
 
 	render() {
 		if(this.state.error) {
-			console.log('error!');
 			return (
 				<ErrorPrompt confirmError={viewActions.clearRecordError} message="There was an error loading your report, please try again" />
 			);
