@@ -2,9 +2,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
 
-const ENV = require('./env');
-
-process.env.BABEL_ENV = ENV;
+process.env.BABEL_ENV = process.env.NODE_ENV;
 
 const common = {
 	resolve: {
@@ -74,7 +72,7 @@ const common = {
 	outputPathinfo: true
 };
 
-if (ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
 	// config can be added here for minifying / etc
 	module.exports = merge(common, {
 		plugins: [
