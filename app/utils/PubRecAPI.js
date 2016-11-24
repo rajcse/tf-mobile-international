@@ -460,7 +460,7 @@ class PubRecAPI {
 		let user = _userFromAccessToken(_accessToken);
 		return _makeRequest('/users/' + user.id, {needsAuth: true})
 			.then((responseData) => {
-				if(responseData.success && _.get(responseData.user, 'data.premium_access')) {
+				if(responseData.success && (_.get(responseData.user, 'data.premium_access') || !_.has(responseData.user, 'data.premium_access'))) {
 					setTimeout(() => serverActions.enablePremiumAccess(), 0);
 				}
 			})

@@ -20,7 +20,9 @@ import Support from 'containers/support/Support';
 import Account from 'containers/account/Account';
 import Record from 'containers/record/Record';
 
+/* eslint-disable no-unused-vars */
 import appStoreAPI from 'utils/AppStoreAPI';
+/* eslint-enable */
 
 // Modal Routes
 import LocationModal from 'containers/record/components/LocationModal';
