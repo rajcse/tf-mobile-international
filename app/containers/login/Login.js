@@ -20,6 +20,21 @@ export default class Login extends Component {
 		this.blurOnForm = this.blurOnForm.bind(this);
 	}
 
+	componentDidMount() {
+		// Handle some app status bar style changes
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+			window.StatusBar.backgroundColorByHexString('#57BF93');
+			window.StatusBar.styleLightContent();
+		}
+	}
+
+	componentWillUnmount() {
+		// Set the status bar back to normal
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+			window.StatusBar.backgroundColorByHexString('#ffffff');
+			window.StatusBar.styleDefault();
+		}
+	}
 
 	doLogin(e) {
 		e.preventDefault();

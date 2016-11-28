@@ -51,9 +51,9 @@ export default {
 		});
 	},
 
-	reportView() {
+	viewUncachedRecord() {
 		dispatcher.dispatch({
-			actionType: constants.actions.REPORT_VIEW
+			actionType: constants.actions.VIEW_UNCACHED_RECORD
 		});
 	},
 
@@ -148,9 +148,9 @@ export default {
 		});
 	},
 
-	revokePremiumAccess() {
+	enablePremiumAccess() {
 		dispatcher.dispatch({
-			actionType: constants.actions.REVOKE_PREMIUM_ACCESS
+			actionType: constants.actions.ENABLE_PREMIUM_ACCESS
 		});
 	},
 

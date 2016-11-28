@@ -1,12 +1,8 @@
 import _ from 'lodash';
-import 'whatwg-fetch';
 import jwtDecode from 'jwt-decode';
 import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
 import config from 'config';
-
-// Promise polyfill
-require('es6-promise').polyfill();
 
 const RECORD_CACHE_LIMIT = 25;
 const RECORDID_CACHE_LIMIT = 100;
@@ -231,6 +227,10 @@ class PubRecAPI {
 				// Trigger a received user
 				serverActions.receiveUser(user);
 
+				// TEMP
+				// Check for premium access
+				this.checkPremiumAccess();
+
 				// Fetch the initial usage info for the user
 				// If the access token is expired, it will refresh itself automatically on 401
 				this.getUsage();
@@ -254,6 +254,10 @@ class PubRecAPI {
 
 					// Set the tokens in local storage
 					window.localStorage.setItem('accessToken', _accessToken);
+
+					// TEMP
+					// Check for premium access
+					this.checkPremiumAccess();
 
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
 				} else {
@@ -316,11 +320,6 @@ class PubRecAPI {
 					// Set welcome modal status for new users
 					serverActions.setWelcomeStatus();
 
-					//check if we have premium access for the account and revoke if needs be
-					if(!responseData.premium_access){
-						setTimeout(() => serverActions.revokePremiumAccess(), 0);
-					}
-
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
@@ -370,13 +369,12 @@ class PubRecAPI {
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
 					setTimeout(() => this.fetchAccountInfo(), 0);
 
-					//check if we have premium access for the account and revoke if needs be
-					if(!responseData.premium_access){
-						setTimeout(() => serverActions.revokePremiumAccess(), 0);
-					}
-
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
+
+					// TEMP
+					// Check for premium access
+					this.checkPremiumAccess();
 
 					// Get the usage for the user
 					this.getUsage();
@@ -447,6 +445,23 @@ class PubRecAPI {
 					setTimeout(() => serverActions.receiveAccountInfo(responseData.user), 0);
 				} else {
 					console.error(responseData.errors);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
+	/**
+	 * TEMP
+	 * This method should be completely removed after we open premium access for all users
+	 */
+	checkPremiumAccess() {
+		let user = _userFromAccessToken(_accessToken);
+		return _makeRequest('/users/' + user.id, {needsAuth: true})
+			.then((responseData) => {
+				if(responseData.success && (_.get(responseData.user, 'data.premium_access') || !_.has(responseData.user, 'data.premium_access'))) {
+					setTimeout(() => serverActions.enablePremiumAccess(), 0);
 				}
 			})
 			.catch((error) => {
@@ -582,19 +597,6 @@ class PubRecAPI {
 		return _makeRequest('/users/' + user.id + '/records/' + criteria.recordId, {needsAuth: true})
 			.then((responseData) => {
 				if(responseData.success) {
-					//Count how many reports looked at and store it locally
-
-					let count = window.localStorage.getItem('reportsLookedAt');
-					//console.log(count);
-					if(!count){
-						window.localStorage.setItem('reportsLookedAt', 1);
-					} else {
-						count++;
-						window.localStorage.setItem('reportsLookedAt', count);
-					}
-
-					serverActions.reportView();
-
 					// Check for a stale version of the record in their history first
 					let staleRecordIndex = _.findIndex(_recordCache, (record) => record.id[2] === responseData.record.id[2]);
 
@@ -608,6 +610,7 @@ class PubRecAPI {
 
 					// Shift out the oldest element if the history length is greater than the limit
 					if(_recordCache.length > RECORD_CACHE_LIMIT) _recordCache.shift();
+					setTimeout(serverActions.viewUncachedRecord, 0);
 					setTimeout(() => serverActions.receiveRecord(responseData.record), 0);
 				} else {
 					console.log(responseData.errors);
@@ -635,6 +638,7 @@ class PubRecAPI {
 
 	getUsage() {
 		let user = _userFromAccessToken(_accessToken);
+
 		return _makeRequest('/users/' + user.id + '/records', {needsAuth: true})
 			.then((responseData) => {
 				if(responseData.success) {
@@ -650,10 +654,10 @@ class PubRecAPI {
 
 	purchasePremium(recordId) {
 		let user = _userFromAccessToken(_accessToken);
+
 		return _makeRequest('/users/' + user.id + '/premium-upsell', {needsAuth: true, method: 'POST', body: { recordId }})
 			.then((responseData) => {
 				if(responseData.success) {
-					//serverActions.redirectToRecord(user.id, recordId.recordId);
 					this.fetchRecord({recordId}, true).then(() => setTimeout(serverActions.purchaseSuccessful));
 					setTimeout(() => this.fetchAccountInfo(), 0);
 				} else {
@@ -667,7 +671,6 @@ class PubRecAPI {
 			});
 	}
 
-	// TODO: Don't hardcode item_types
 	purchasePackage(packageData, skipVerification) {
 		let user = _userFromAccessToken(_accessToken);
 

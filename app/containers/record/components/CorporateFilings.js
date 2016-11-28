@@ -1,7 +1,6 @@
 import React from 'react';
 import uuid from 'uuid';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import {STATES} from 'utils/states';
@@ -10,9 +9,7 @@ const CorporateFilings = (props) => {
 	let { corporateFilings } = props;
 	return (
 		<section id="corporate-filings" className="widget premium">
-			<Sticky>
-				<h2 className="title">Corporate Filings</h2>
-			</Sticky>
+			<h2 className="title">Corporate Filings</h2>
 			{ corporateFilings.map((corporateFiling, index) => (
 				<div className="document corporate-filing-individual" key={index}>
 					<div className="label label-full">
@@ -156,7 +153,7 @@ const CorporateFilings = (props) => {
 									</div>
 								);
 							})}
-						</div> : null 
+						</div> : null
 					}
 
 					{corporateFiling.amendments ?
@@ -193,7 +190,7 @@ const CorporateFilings = (props) => {
 									</div>
 								);
 							})}
-						</div> : null 
+						</div> : null
 					}
 
 				</div>

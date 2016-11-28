@@ -2,16 +2,13 @@ import React from 'react';
 import uuid from 'uuid';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 const VoterRegistrations = (props) => {
 	let { registrations } = props;
 
 	return (
 		<section id="voter-registrations" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Voter Reg.</h2>
-			</Sticky>
+			<h2 className="title">Possible Voter Reg.</h2>
 
 			{ registrations.map((registration, index) => (
 				<div className="document registration-individual" key={index}>

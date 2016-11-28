@@ -3,7 +3,6 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 import * as libs from 'utils/libs';
 
@@ -21,9 +20,7 @@ const LiensJudgments = (props) => {
 	let { liensJudgments } = props;
 	return (
 		<section id="liens" className="widget premium">
-			<Sticky>
-				<h2 className="title">Liens And Judgments</h2>
-			</Sticky>
+			<h2 className="title">Liens And Judgments</h2>
 			{ liensJudgments.map((lien, index) => (
 				<div className="document lien-individual" key={index}>
 					<div className="label label-full">
@@ -206,13 +203,13 @@ const LiensJudgments = (props) => {
 										<SimpleRow
 											key={`debtor-addresse-${uuid.v4()}`}
 											content={
-													`${debtor.addresses[0].street_number} 
-													${debtor.addresses[0].street_pre_direction} 
-													${debtor.addresses[0].street_name} 
-													${debtor.addresses[0].street_suffix} 
-													${debtor.addresses[0].unit_designation} 
-													${debtor.addresses[0].unit_number} 
-													${debtor.addresses[0].city} 
+													`${debtor.addresses[0].street_number}
+													${debtor.addresses[0].street_pre_direction}
+													${debtor.addresses[0].street_name}
+													${debtor.addresses[0].street_suffix}
+													${debtor.addresses[0].unit_designation}
+													${debtor.addresses[0].unit_number}
+													${debtor.addresses[0].city}
 													${debtor.addresses[0].state}
 													${debtor.addresses[0].zip5 }`
 												}

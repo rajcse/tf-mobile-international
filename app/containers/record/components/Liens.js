@@ -3,7 +3,6 @@ import uuid from 'uuid';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import Sticky from 'react-stickynode';
 
 import * as libs from 'utils/libs';
 
@@ -21,9 +20,7 @@ const Liens = (props) => {
 	let { liens } = props;
 	return (
 		<section id="liens" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Liens</h2>
-			</Sticky>
+			<h2 className="title">Possible Liens</h2>
 			{ liens.map((lien, index) => (
 				<div className="document lien-individual" key={uuid.v4()}>
 					<div className="label label-full">

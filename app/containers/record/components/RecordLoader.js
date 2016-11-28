@@ -1,6 +1,6 @@
 import Loader from 'components/Loader';
 import React, { Component } from 'react';
-import {hashHistory} from 'react-router';
+import { hashHistory } from 'react-router';
 
 class RecordLoader extends Component {
 
@@ -8,6 +8,20 @@ class RecordLoader extends Component {
 		super(props);
 
 		this.cancelLoader = this.cancelLoader.bind(this);
+	}
+
+	componentDidMount() {
+		// Hide the status bar
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+			window.StatusBar.hide();
+		}
+	}
+
+	componentWillUnmount() {
+		// Show the status bar again
+		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+			window.StatusBar.show();
+		}
 	}
 
 	cancelLoader(){

@@ -1,7 +1,6 @@
 import React from 'react';
 import uuid from 'uuid';
 import _ from 'lodash';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 
@@ -9,12 +8,11 @@ const Watercrafts = (props) => {
 	let { watercrafts } = props;
 	return (
 		<section id="watercrafts" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Watercrafts Owned</h2>
-			</Sticky>
+			<h2 className="title">Possible Watercrafts Owned</h2>
+
 			{ watercrafts.map((watercraft, index) => (
 				<div className="document watercraft-individual" key={index}>
-					
+
 					{ _.get(watercraft, 'description.make') ?
 						<div className="label label-full">
 							<h3 className="document-title">{_.get(watercraft,'description.model_year') + ' ' + watercraft.description.make}</h3>

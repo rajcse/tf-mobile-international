@@ -1,7 +1,6 @@
 import constants from 'constants/pubRecConstants';
 import React from 'react';
 import SearchLink from 'components/SearchLink';
-import Sticky from 'react-stickynode';
 import DefaultColumn from 'components/DefaultColumn';
 
 const Relationships = (props) => {
@@ -16,9 +15,7 @@ const Relationships = (props) => {
 	return (
 		<div className="multi-container">
 			<section id="relationships" className="widget premium">
-				<Sticky>
-					<h2 className="title">Possible Relationships</h2>
-				</Sticky>
+				<h2 className="title">Possible Relationships</h2>
 
 				{ relationships.length > 0 ?
 					<div className="content content-full">

@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import uuid from 'uuid';
-import Sticky from 'react-stickynode';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import SimpleInline from 'components/SimpleInline';
@@ -30,9 +29,7 @@ const Bankruptcies = (props) => {
 	if (!isPremium) {
 		return (
 			<section id="bankruptcies" className="widget">
-				<Sticky>
-					<h2 className="title">Bankruptcies, Judgments, Liens</h2>
-				</Sticky>
+				<h2 className="title">Bankruptcies, Judgments, Liens</h2>
 
 				<div className="document">
 					<div className="label">
@@ -58,9 +55,7 @@ const Bankruptcies = (props) => {
 
 	return (
 		<section id="bankruptcies" className="widget premium">
-			<Sticky>
-				<h2 className="title">Possible Bankruptcies</h2>
-			</Sticky>
+			<h2 className="title">Possible Bankruptcies</h2>
 			{ bankruptcies.map((bankrupt, index) => (
 				<div className="document bankruptcy-individual" key={index}>
 					<div className="label label-full">
