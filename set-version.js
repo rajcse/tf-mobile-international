@@ -29,7 +29,8 @@ process.stdout.write(versionCode);
 let configXml;
 try {
 	configXml = fs.readFileSync('./config.xml', 'utf8');
-	configXml = configXml.replace(/version="[\d.]*" android-versionCode="\d*"/, `version="${version}" android-versionCode="${versionCode}"`);
+	configXml = configXml.replace(/(<widget[^>]*version=)"[\d.]*"/, `$1"${version}"`);
+	configXml = configXml.replace(/(android-versionCode=)"\d*"/, `$1"${versionCode}"`);
 	fs.writeFileSync('./config.xml', configXml, 'utf8');
 } catch(e) {
 	console.log(e);
