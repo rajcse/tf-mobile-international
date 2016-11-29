@@ -64,6 +64,13 @@ window.initializeApp = () => {
 		window.cordova.getAppVersion.getVersionCode()
 			.then(build => window.appBuild = build);
 	}
+
+	/**
+	 * Facebook event tracking
+	 */
+	if(window.facebookConnectPlugin) {
+		window.facebookConnectPlugin.activateApp();
+	}
 };
 
 // Log all client errors - self contained VanillaJS, matches endpoint used in the funnel
