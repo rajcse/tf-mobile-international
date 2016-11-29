@@ -1,23 +1,20 @@
 {
   "name": "truthfinder-mobile",
   "version": "1.0.0",
-  "description": "TruthFinder Mobile App",
+  "description": "TruthFinder Mobile App Build Tools",
   "author": "The Control Group",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "android": "yarn run build && phonegap run android",
+    "android": "yarn run build && phonegap run android --device",
     "android:build": "yarn run build && phonegap build --release --buildConfig=./build.json android",
     "build": "eslint app && NODE_ENV=production webpack",
-    "build:dev": "NODE_ENV=development webpack",
     "ios": "yarn run build && phonegap run ios",
     "ios:build": "yarn run build && phonegap build ios",
-    "clean": "cordova clean",
-    "prepare": "NODE_ENV=production webpack && cordova prepare",
-    "compile": "NODE_ENV=production webpack && cordova build",
     "start": "NODE_ENV=development webpack-dev-server",
     "start:prod": "NODE_ENV=production webpack-dev-server",
-    "test": "eslint app && yarn outdated"
+    "test": "eslint app && yarn outdated",
+		"set-version": "node set-version"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
