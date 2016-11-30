@@ -1,6 +1,6 @@
 # TruthFinder Mobile App
 
-Built with PhoneGap and React
+Built with Cordova and React
 
 ## Prerequisites
 
@@ -45,10 +45,10 @@ Usage (Install dependencies): `yarn`
 
 Usage (Add dependencies): `yarn add --dev package-name`
 
-### PhoneGap
-This is necessary to do local builds. It is a thin layer around Cordova, and includes all Cordova CLI functionality.
+### Cordova
+This is necessary to do all builds. https://cordova.apache.org
 
-Install: `npm i -g phonegap`
+Install: `npm i -g cordova`
 
 ## Development Environments
 This is app is designed to be tested on a wide range of devices and as such we have written a few short commands to help get you there.
