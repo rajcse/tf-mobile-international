@@ -10,9 +10,10 @@ In order to build for Android you will need the latest versions of Java Developm
 ### Android SDK
 To stay most current and avoid build conflicts, it's recommended to use the official Android Studio install to get Android SDKs and tools on your computer: https://developer.android.com/studio/install.html
 
-You will need to install the highest build tool version listed in the Android SDK Manager, as well as the Platform SDK for the highest API number available.
-
-![](https://dl.dropboxusercontent.com/u/12648103/Screen%20Shot%202016-11-02%20at%205.13.50%20PM.png)
+Now run `~/Library/Android/sdk/tools/android` to open the Android SDK Manager. You will need to install:
+- The highest 'Android SDK Build-tools' version listed
+- `Android 6.0 (API 23)` - only the `SDK Platform` is required
+- Under "Extras", the `Android Support Repository`
 
 ### Chrome Web Inspector
 Application Logs from any developer enabled, connected Android device are available natively in Chrome by going to [chrome://inspect](chrome://inspect). Use these to debug on a device locally, and for all preliminary QA.
