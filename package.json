@@ -1,24 +1,20 @@
 {
   "name": "truthfinder-mobile",
   "version": "1.0.0",
-  "description": "TruthFinder Mobile App",
+  "description": "TruthFinder Mobile App Build Tools",
   "author": "The Control Group",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "android": "yarn run build && phonegap run android",
-    "android:build": "yarn run build && cordovaet build --release --buildConfig=./build.json android",
+    "android": "yarn run build && cordova run android --device",
+    "android:build": "yarn run build && cordova build --release --buildConfig=./build.json android",
     "build": "eslint app && NODE_ENV=production webpack",
-    "build:dev": "NODE_ENV=development webpack",
-    "ios": "yarn run build && phonegap run ios",
-    "ios:build": "yarn run build && phonegap build ios",
-    "clean": "cordova clean",
-    "prepare": "NODE_ENV=production webpack && cordova prepare",
-    "compile": "NODE_ENV=production webpack && cordova build",
+    "ios": "yarn run build && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
+    "ios:build": "yarn run build && cordova build ios",
     "start": "NODE_ENV=development webpack-dev-server",
     "start:prod": "NODE_ENV=production webpack-dev-server",
     "test": "eslint app && yarn outdated",
-    "test:units": "NODE_ENV=production cross-env NODE_PATH=./app ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+		"set-version": "node set-version"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",

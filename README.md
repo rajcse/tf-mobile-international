@@ -1,6 +1,6 @@
 # TruthFinder Mobile App
 
-Built with PhoneGap and React
+Built with Cordova and React
 
 ## Prerequisites
 
@@ -21,6 +21,9 @@ If successful your Android SDK Manager will open.
 For these current builds of Android we are running on version '5.1.1' and will require all relating Build-tools under "Tools" with revision 24.*.* and Android API 6.0 (23).
 
 ![](https://dl.dropboxusercontent.com/u/12648103/Screen%20Shot%202016-11-02%20at%205.13.50%20PM.png)
+
+### Chrome Web Inspector
+Application Logs from any developer enabled, connected Android device are available natively in Chrome by going to [chrome://inspect](chrome://inspect). Use these to debug on a device locally, and for all preliminary QA.
 
 ### ADB Logs and Other Tools
 Get live logs from your Android device in console while testing and debugging while your phone is connected via usb.
@@ -43,7 +46,7 @@ Usage (Install dependencies): `yarn`
 Usage (Add dependencies): `yarn add --dev package-name`
 
 ### Cordova
-This is necessary to do local builds.
+This is necessary to do all builds. https://cordova.apache.org
 
 Install: `npm i -g cordova`
 
@@ -57,10 +60,10 @@ Before you start any form of development be sure to install all project dependen
 ### Developing in the Browser ( Safari or Chrome only for now )
 This stack uses 'webpack-dev-server' to bundle and serve all project assets.
 
-Start Server (Development): `npm run start`
-Start Server (Production): `npm run start:prod`
+Start Server (Local API): `yarn run start`
+Start Server (Production API): `yarn run start:prod`
 
-This command checks the config file for environment variables, such as development vs production build, and starts a webpack server. Once the server has started visit `http://localhost:3000` from your preferred browser to view the app. Any changes made to the app while this command is running will trigger a 'rebundle' with webpack and update the app accordingly. If you wish to quit developing in the browser you may close webpack at anytime using the `CTRL + C` command in the same terminal window.
+This command checks the config file for environment variables, such as development vs production API endpoint, and starts a webpack server. Once the server has started visit `http://localhost:3000` from your preferred browser to view the app. Any changes made to the app while this command is running will trigger a 'rebundle' with webpack and update the app accordingly. If you wish to quit developing in the browser you may close webpack at anytime using the `CTRL + C` command in the same terminal window.
 
 For development using the production config, you will need run `window.device` and `window.initializeApp()` from your console to initialize the app. The app self-initializes when using the development config.
 
@@ -78,28 +81,22 @@ Before any testing can begin we will need to prepare, compile and build the righ
 #### Prepare Platforms and Plugins
 This is the planning stage of the app, plugin checks and platform support is checked and generated here. If your project folder does not have any reference to 'plugins' or 'platforms' you will need to run this command.
 
-Usage: `npm run prepare`
-
-#### Compile Assets
-This puts all the right files in the right places. Any changes made to index.html or the app will go into the final build of the app.
-
-If you are testing / debugging on a mobile device you will need to run this command again so that changes will be visible in the app.
-
-Usage: `npm run compile`
+Usage: `yarn run prepare`
 
 #### Build APK / iOS (Development Only)
 Depending on the device you wish to test you may run one of the corresponding commands below. If you have no testing devices connected to your system this will build emulator on your machine. Otherwise you may plug in any device and build directly to that device for testing.
 
-Android Devices: `npm run android`
+Android Devices: `yarn run android`
 
-iOS Devices: `npm run ios`
+iOS Devices: `yarn run ios`
 
 
-## Android Production Builds
-Android devices require a bit of elbow grease before you may add a new release to the app store. Luckily we have a few commands that will make this an ease for you. The 2 most important things to do before you build for production on android is generate a release key and a release apk.
+## Releases
+All builds must be tested thoroughly locally, and pass QA on a real device locally before moving to production channels (Alpha/Beta/Production). If any particular version requires more than a couple builds on production channels then local QA needs to be tighter.
 
-### Android Version Number
-The version number of the app is saved in the package.json under `android:build` script. If your version number is below the version necessary to build then you should update the number there.
+### Versioning
+The version of the app is saved in the `config.xml`. Do not modify this directly. The app uses Semantic Versioning (http://semver.org), and the build versions are calculated automatically from this. Run `yarn run set-version -- X.X.X` to set a new version in `config.xml`. This will also create a build number for that version set to `1`. Subsequent builds sent to production channels must be manually set via the `-b n` flag (ex. `yarn run set-version -- 1.1.0 -b 2`). If you find yourself building
+
 
 ### Android Release APK
 Once you have a working release key it's time to build your release apk. This process will also ask for a password which is the same as the one used for your release key. Once complete, take note of where the release apk is built to and upload to the play store.
