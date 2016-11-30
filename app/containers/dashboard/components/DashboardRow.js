@@ -21,18 +21,35 @@ class DashboardRow extends React.Component {
 
 		this.swipedLeft = this.swipedLeft.bind(this);
 		this.swipingLeft = this.swipingLeft.bind(this);
+		this.resetSwipe = this.resetSwipe.bind(this);
+		this.archiveAnimation = this.archiveAnimation.bind(this);
 	}
 
 	swipedLeft() {
 		this.setState({
-			left: '0px',
+			left: '-75px',
 			swiped: true
 		});
 	}
 
 	swipingLeft(e, left) {
 		this.setState({
-			left: `-${left}px`
+			left: `-${left}px`,
+			swiped: false
+		});
+	}
+
+	archiveAnimation() {
+		this.setState({
+			left: '-9999px',
+			swiped: true
+		});
+	}
+
+	resetSwipe() {
+		this.setState({
+			left: '0px',
+			swiped: false
 		});
 	}
 
@@ -112,12 +129,17 @@ class DashboardRow extends React.Component {
 		return (
 			<Swipeable
 				onSwipingLeft={this.swipingLeft}
-				onSwipedLeft={this.swipedLeft} >
+				onSwipedLeft={this.swipedLeft}
+				onSwipedRight={this.resetSwipe} >
 				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped })}>
-					{ archiveStatus ?
-						<span className="archive-record" onClick={() => pubRecAPI.toggleArchiveRecord(id[2], id[1], true) }>
+					{ archiveStatus || this.state.swiped ?
+						<span className="archive-record" onClick={() => { this.archiveAnimation(), pubRecAPI.toggleArchiveRecord(id[2], id[1], true); }}>
 							<Svg svg="closeGreyCircle" />
 						</span>
+					: null }
+
+					{ this.state.swiped ?
+						<p className="archive-text">Tap To Delete Record</p>
 					: null }
 
 					<Link to={'/users/' + id[0] + '/records/' + id[2]}>

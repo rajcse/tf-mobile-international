@@ -13,11 +13,6 @@ const Header = (props) => {
 				<span className="header-btn" onClick={props.buttonHandler ? props.buttonHandler : () => hashHistory.goBack()} />
 			: null }
 
-			{ !_.isUndefined(props.archiveStatus) && !_.isUndefined(props.archiveToggle) ?
-				props.archiveStatus ? <span className="archive-cancel" onClick={() => props.archiveToggle()}>Cancel</span>
-				: null
-			: null }
-
 			{title}
 
 			{ !_.isUndefined(props.archiveStatus) && !_.isUndefined(props.archiveToggle) ?
