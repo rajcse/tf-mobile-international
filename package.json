@@ -7,10 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "android": "yarn run build && cordova run android --device",
-    "android:build": "yarn run build && cordova build --release --buildConfig=./build.json android",
+    "release": "yarn run build && cordova build --release --buildConfig=./build.json android && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
     "build": "eslint app && NODE_ENV=production webpack",
-    "ios": "yarn run build && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
-    "ios:build": "yarn run build && cordova build ios",
     "start": "NODE_ENV=development webpack-dev-server",
     "start:prod": "NODE_ENV=production webpack-dev-server",
     "test": "eslint app && yarn outdated",

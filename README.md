@@ -5,7 +5,7 @@ Built with Cordova and React
 ## Prerequisites
 
 ### Java Development Kit 8
-In order to build for android you will need the latest versions of Java Development Kit installed. Download a copy for your specific machine here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
+In order to build for Android you will need the latest versions of Java Development Kit installed. Download a copy for your specific machine here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
 
 ### Android SDK
 If you haven't already found a good reason to use [brew](http://brew.sh/), this should be it. Install a fresh version of Android SDK Manager using homebrew. This is necessary to build an android apk on your system.
@@ -30,9 +30,7 @@ Get live logs from your Android device in console while testing and debugging wh
 
 Install: `brew install android-platform-tools`
 
-Usage: `adb logcat | grep -i chromium`
-
-This gets all the logs from the devices chrome window - look out for react and api specific errors here.
+Usage: `adb logcat`
 
 ### Yarn
 Install all project dependencies quickly. This works the same way as `npm install`
@@ -83,8 +81,8 @@ This is the planning stage of the app, plugin checks and platform support is che
 
 Usage: `yarn run prepare`
 
-#### Build APK / iOS (Development Only)
-Depending on the device you wish to test you may run one of the corresponding commands below. If you have no testing devices connected to your system this will build emulator on your machine. Otherwise you may plug in any device and build directly to that device for testing.
+#### Build apk / iOS (Development Only)
+Depending on the device you wish to test you may run one of the corresponding commands below. This step requires an actual device plugged into your machine. Android will attempt to deploy directly to the device, iOS will open Xcode and the generated project to continue manually from there.
 
 Android Devices: `yarn run android`
 
@@ -92,13 +90,13 @@ iOS Devices: `yarn run ios`
 
 
 ## Releases
-All builds must be tested thoroughly locally, and pass QA on a real device locally before moving to production channels (Alpha/Beta/Production). If any particular version requires more than a couple builds on production channels then local QA needs to be tighter.
+All builds must be tested thoroughly locally, and pass QA on a real device locally before moving to production channels (Alpha/Beta/Production). If any particular version requires more than a couple builds on production channels then local QA should be tighter.
 
 ### Versioning
-The version of the app is saved in the `config.xml`. Do not modify this directly. The app uses Semantic Versioning (http://semver.org), and the build versions are calculated automatically from this. Run `yarn run set-version -- X.X.X` to set a new version in `config.xml`. This will also create a build number for that version set to `1`. Subsequent builds sent to production channels must be manually set via the `-b n` flag (ex. `yarn run set-version -- 1.1.0 -b 2`). If you find yourself building
+The version of the app is saved in the `config.xml`. Do not modify this directly. The app uses Semantic Versioning (http://semver.org), and the build versions are calculated automatically from this. Run `yarn run set-version -- X.X.X` to set a new version in `config.xml`. This will also create a build number for that version set to `1`. Subsequent builds sent to production channels must be manually set via the `-b n` flag (ex. `yarn run set-version -- 1.1.0 -b 2`).
 
 
-### Android Release APK
-Once you have a working release key it's time to build your release apk. This process will also ask for a password which is the same as the one used for your release key. Once complete, take note of where the release apk is built to and upload to the play store.
+### Device Release
+Once you have a working release key it's time to build your release apk and xcode project. This process will also ask for an Android signing password which is the same as the one used for your Android release key. Once complete, the Android apk will be found at `/platforms/android/build/outputs/apk/android.apk`, and xcode should have opened automatically (the iOS project can be found at `/platforms/ios/TruthFinder.xcodeproj`).
 
-Usage: `npm run android:build`
+Usage: `npm run release`
