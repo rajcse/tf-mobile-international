@@ -132,14 +132,16 @@ class DashboardRow extends React.Component {
 				onSwipedLeft={this.swipedLeft}
 				onSwipedRight={this.resetSwipe} >
 				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped })}>
-					{ archiveStatus || this.state.swiped ?
+					{ archiveStatus && !this.state.swiped ?
 						<span className="archive-record" onClick={() => { this.archiveAnimation(), pubRecAPI.toggleArchiveRecord(id[2], id[1], true); }}>
 							<Svg svg="closeGreyCircle" />
 						</span>
 					: null }
 
 					{ this.state.swiped ?
-						<p className="archive-text">Tap To Delete Record</p>
+						<p className="archive-text" onClick={() => { this.archiveAnimation(), pubRecAPI.toggleArchiveRecord(id[2], id[1], true); }}>
+							<span>Tap To Delete</span>
+						</p>
 					: null }
 
 					<Link to={'/users/' + id[0] + '/records/' + id[2]}>

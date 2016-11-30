@@ -15,9 +15,9 @@ const Header = (props) => {
 
 			{title}
 
-			{ !_.isUndefined(props.archiveStatus) && !_.isUndefined(props.archiveToggle) ?
-				props.archiveStatus ? <span className="archive-done" onClick={() => props.archiveToggle()}>Done</span>
-				: <span className="archive-edit" onClick={() => props.archiveToggle()}>Edit</span>
+			{ !_.isUndefined(props.archiveStatus) && !_.isUndefined(props.archiveStatusToggle) ?
+				props.archiveStatus ? <span className="archive-done" onClick={() => props.archiveStatusToggle()}>Done</span>
+				: <span className="archive-edit" onClick={() => props.archiveStatusToggle()}>Edit</span>
 			: null }
 		</header>
 	);
@@ -27,7 +27,7 @@ Header.propTypes = {
 	title: React.PropTypes.string,
 	backButton: React.PropTypes.bool,
 	archiveStatus: React.PropTypes.bool,
-	archiveToggle: React.PropTypes.func,
+	archiveStatusToggle: React.PropTypes.func,
 	buttonHandler: React.PropTypes.func
 };
 
