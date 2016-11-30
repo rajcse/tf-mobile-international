@@ -671,6 +671,25 @@ class PubRecAPI {
 			});
 	}
 
+	/**
+	 * Toggle Record Archive
+	 */
+	toggleArchiveRecord(recordId, recordType, archive) {
+		let user = _userFromAccessToken(_accessToken);
+
+		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
+			query: { archive: archive },
+			needsAuth: true,
+			method: 'PATCH'
+		})
+		.then(() => {
+			this.getUsage();
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+	}
+
 	purchasePackage(packageData, skipVerification) {
 		let user = _userFromAccessToken(_accessToken);
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import pubRecAPI from 'utils/PubRecAPI';
 import classNames from 'classnames';
+import Swipeable from 'react-swipeable';
 import Svg from 'components/svg/Svg';
 import constants from 'constants/pubRecConstants';
 import Link from 'components/Link';
@@ -8,86 +10,132 @@ import Link from 'components/Link';
 // Global Functions File
 import * as libs from 'utils/libs';
 
-const DashboardRow = (props) => {
-	let rowLabel = null,
-		age, death;
+class DashboardRow extends React.Component {
+	constructor(props) {
+		super(props);
 
-	// If deathdate is valid then send with calc otherwise use birthdate
-	// Date of death may contain 2 objects date & date_range.
-	// Iterate through bout objects and store the valid date of death to be used later
-	_.forEach(props.data.dods, (value) => {
-		if(value) {
-			death = props.data.dods;
-		}
-	});
+		this.state = {
+			left: 0,
+			swiped: false
+		};
 
-	// Calculate age based on information available
-	if (_.isUndefined(death)) {
-		age = libs.calculateAge(props.data.dobs);
-	} else {
-		age = libs.calculateAge(props.data.dobs, death);
+		this.swipedLeft = this.swipedLeft.bind(this);
+		this.swipingLeft = this.swipingLeft.bind(this);
 	}
 
-	switch(props.id[1]) {
-		case constants.recordTypes.PERSON:
-			if (_.has(props.data,'name.first')){
+	swipedLeft() {
+		this.setState({
+			left: '0px',
+			swiped: true
+		});
+	}
+
+	swipingLeft(e, left) {
+		this.setState({
+			left: `-${left}px`
+		});
+	}
+
+	render() {
+		let { data, id, archiveStatus } = this.props,
+			rowLabel = null,
+			age,
+			death;
+
+		const style = {
+			left: this.state.left
+		};
+
+		// If deathdate is valid then send with calc otherwise use birthdate
+		// Date of death may contain 2 objects date & date_range.
+		// Iterate through bout objects and store the valid date of death to be used later
+		_.forEach(data.dods, (value) => {
+			if(value) {
+				death = data.dods;
+			}
+		});
+
+		// Calculate age based on information available
+		if (_.isUndefined(death)) {
+			age = libs.calculateAge(data.dobs);
+		} else {
+			age = libs.calculateAge(data.dobs, death);
+		}
+
+		switch(id[1]) {
+			case constants.recordTypes.PERSON:
+				if (_.has(data,'name.first')){
+					rowLabel = (
+						<div>
+							<h3><span className="name">{data.name.first} {data.name.middle} {data.name.last}</span>
+								<span className="age">{ _.isNull(age.display) ? null : `${age.display} yr` }</span>
+							</h3>
+
+
+							<p className="location">
+								{_.get(data,'location.address.city') ? data.location.address.city + ', ': ''} {_.has(data,'location.address.state') ? data.location.address.state : ''}
+							</p>
+						</div>
+					);
+				}
+				break;
+
+			case constants.recordTypes.PHONE:
+				rowLabel = _.get(data,'phone.number') ? (
+					<div>
+						<h3>{data.phone.number.replace(/^(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</h3>
+						<p className="location">
+							{_.get(data,'location.address.city') ? data.location.address.city : ''} {_.has(data,'location.address.state') ? data.location.address.state : '' }
+						</p>
+						<p className="name">{_.has(data.name, 'first') ? data.name.first : ''} {_.has(data.name, 'last') ? data.name.last : ''}</p>
+					</div>
+				) : null;
+				break;
+
+			case constants.recordTypes.EMAIL:
 				rowLabel = (
 					<div>
-						<h3><span className="name">{props.data.name.first} {props.data.name.middle} {props.data.name.last}</span>
-							<span className="age">{ _.isNull(age.display) ? null : `${age.display} yr` }</span>
-						</h3>
-
-
+						<h3>{_.has(data.email, 'address') ? data.email.address : ''}</h3>
 						<p className="location">
-							{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ': ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}
+							{_.get(data,'location.address.city') ? data.location.address.city + ', ' : ''} {_.has(data,'location.address.state') ? data.location.address.state : ''}
 						</p>
+						<p className="name">{_.has(data.name, 'first') ? data.name.first : ''} {_.has(data.name, 'last') ? data.name.last : ''}</p>
 					</div>
 				);
-			}
-			break;
+				break;
 
-		case constants.recordTypes.PHONE:
-			rowLabel = _.get(props,'data.phone.number') ? (
-				<div>
-					<h3>{props.data.phone.number.replace(/^(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</h3>
-					<p className="location">
-						{_.get(props.data,'location.address.city') ? props.data.location.address.city : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : '' }
-					</p>
-					<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
-				</div>
-			) : null;
-			break;
+			case constants.recordTypes.LOCATION:
+			default:
+				break;
+		}
 
-		case constants.recordTypes.EMAIL:
-			rowLabel = (
-				<div>
-					<h3>{_.has(props.data.email, 'address') ? props.data.email.address : ''}</h3>
-					<p className="location">
-						{_.get(props.data,'location.address.city') ? props.data.location.address.city + ', ' : ''} {_.has(props.data,'location.address.state') ? props.data.location.address.state : ''}
-					</p>
-					<p className="name">{_.has(props.data.name, 'first') ? props.data.name.first : ''} {_.has(props.data.name, 'last') ? props.data.name.last : ''}</p>
-				</div>
-			);
-			break;
+		return (
+			<Swipeable
+				onSwipingLeft={this.swipingLeft}
+				onSwipedLeft={this.swipedLeft} >
+				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped })}>
+					{ archiveStatus ?
+						<span className="archive-record" onClick={() => pubRecAPI.toggleArchiveRecord(id[2], id[1], true) }>
+							<Svg svg="closeGreyCircle" />
+						</span>
+					: null }
 
-		case constants.recordTypes.LOCATION:
-		default:
-			break;
+					<Link to={'/users/' + id[0] + '/records/' + id[2]}>
+						{data.isPremium ? <span className="premium-text">
+							<Svg svg="premiumIcon" style={{width: 12}} className="premium-icon" /> Premium Report</span>
+						: null }
+						{rowLabel}
+					</Link>
+				</li>
+			</Swipeable>
+		);
 	}
-
-	return (
-		<li className={classNames('history-item', props.id[1], { premium: props.data.isPremium })}>
-			<Link to={'/users/' + props.id[0] + '/records/' + props.id[2]}>
-				{props.data.isPremium ? <span className="premium-text"><Svg svg="premiumIcon" style={{width: 12}} className="premium-icon" /> Premium Report</span> : null}
-				{rowLabel}
-			</Link>
-		</li>
-	);
-};
+}
 
 DashboardRow.propTypes = {
 	id: React.PropTypes.array.isRequired,
-	data: React.PropTypes.object.isRequired
+	data: React.PropTypes.object.isRequired,
+	archiveStatus: React.PropTypes.bool
 };
 
 export default DashboardRow;

@@ -97,12 +97,14 @@ class Location extends Component {
 							</p>
 						</div>
 					</div>
-					{_.isUndefined(openLocation) ? null :
+					{_.isUndefined(openLocation) ?
+						null :
 						<button className="btn-location with-arrow">View Neighbors & Crime Data</button>
 					}
 				</div>
 
-				{_.isUndefined(openLocation) ? null :
+				{_.isUndefined(openLocation) ?
+					null :
 					<div className="content content-full">
 						<div className="location-details">
 							<p>To view registered Sex Offenders and their crimess for this area, tap below.</p>

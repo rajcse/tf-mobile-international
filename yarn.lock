@@ -3549,6 +3549,10 @@ react-scroll@^1.4.4:
   dependencies:
     object-assign "^4.0.1"
 
+react-swipeable@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-3.7.0.tgz#c51f1a9c21e132d06bb95bf75554d23f89385162"
+
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-transform-catch-errors/-/react-transform-catch-errors-1.0.2.tgz#1b4d4a76e97271896fc16fe3086c793ec88a9eeb"

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils, { renderIntoDocument, findRenderedDOMComponentWithClass } from 'react-addons-test-utils';
