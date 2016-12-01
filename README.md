@@ -14,6 +14,7 @@ Now run `~/Library/Android/sdk/tools/android` to open the Android SDK Manager. Y
 - The highest 'Android SDK Build-tools' version listed
 - `Android 6.0 (API 23)` - only the `SDK Platform` is required
 - Under "Extras", the `Android Support Repository`
+- Under "Extras", the `Google Repository`
 
 ### Chrome Web Inspector
 Application Logs from any developer enabled, connected Android device are available natively in Chrome by going to [chrome://inspect](chrome://inspect). Use these to debug on a device locally, and for all preliminary QA.
