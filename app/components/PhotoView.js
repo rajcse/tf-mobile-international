@@ -67,7 +67,7 @@ class PhotoView extends Component {
 		let { photos } = this.state;
 
 		let photoGallery = this.state.photoModalOpen ?
-			<div className="photo-modal" onClick={() => this.closePhoto()}>
+			(<div className="photo-modal" onClick={() => this.closePhoto()}>
 				<div className="photo-close" onClick={() => this.closePhoto()}>
 					<Svg svg="closePhoto" style={{width: 30}} className="close-photo" />
 					<p>Close Photo</p>
@@ -84,7 +84,7 @@ class PhotoView extends Component {
 						<a className="control photo-next" onClick={() => this.nextPhoto()}><Svg svg="nextIcon" style={{width: 15}} className="next-icon" /></a>
 					: null}
 				</div>
-			</div> : null;
+			</div>) : null;
 
 		return (
 			<div className="simple-column row">

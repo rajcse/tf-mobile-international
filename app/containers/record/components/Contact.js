@@ -56,14 +56,14 @@ const Contact = (props) => {
 		<section id="contact" className="widget">
 			<h2 className="title">Contact Information</h2>
 
-			{content.length > 0 ? content :
-				<DefaultColumn
+			{ content.length > 0 ? content
+				: <DefaultColumn
 					name={name}
 					icon="social"
 					title={fallback.title}
 					content={fallback.content}
 					type="contact"
-				/>
+					/>
 			}
 		</section>
 	);
