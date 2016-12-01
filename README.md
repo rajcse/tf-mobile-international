@@ -72,7 +72,7 @@ Before any testing can begin we will need to prepare, compile and build the righ
 #### Prepare Platforms and Plugins
 This is the planning stage of the app, plugin checks and platform support is checked and generated here. If your project folder does not have any reference to 'plugins' or 'platforms' you will need to run this command.
 
-Usage: `yarn run prepare`
+Usage: `cordova prepare`
 
 #### Build apk / iOS (Development Only)
 Depending on the device you wish to test you may run one of the corresponding commands below. This step requires an actual device plugged into your machine. Android will attempt to deploy directly to the device, iOS will open Xcode and the generated project to continue manually from there.
