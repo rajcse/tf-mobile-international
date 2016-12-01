@@ -15,10 +15,10 @@ const Header = (props) => {
 
 			{title}
 
-			{ !_.isUndefined(props.archiveStatus) && !_.isUndefined(props.archiveStatusToggle) ?
+			{ _.isUndefined(props.archiveStatus) && _.isUndefined(props.archiveStatusToggle) ? null :
 				props.archiveStatus ? <span className="archive-done" onClick={() => props.archiveStatusToggle()}>Done</span>
 				: <span className="archive-edit" onClick={() => props.archiveStatusToggle()}>Edit</span>
-			: null }
+			}
 		</header>
 	);
 };

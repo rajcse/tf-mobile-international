@@ -13,7 +13,6 @@ export default class Dashboard extends React.Component {
 
 		this.state = {
 			filter: 'ALL',
-			records: [],
 			isArchived: false,
 			confirmArchive: false
 		};
@@ -80,7 +79,7 @@ export default class Dashboard extends React.Component {
 					archiveStatusToggle={this.archiveStatusToggle}
 				/>
 
-				<div id="record-filter" className={!records.length ? 'disabled' : ''}>
+				<div id="record-filter" className={records.length ? '' : 'disabled'}>
 					<label htmlFor="dashboard-filter">FILTER BY</label>
 					<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
 						<option value="ALL" >All Reports</option>
@@ -90,9 +89,9 @@ export default class Dashboard extends React.Component {
 					</select>
 				</div>
 
-				{ !records.length ?
+				{ records.length ?
+					<h6>Sorted by most recently viewed</h6> :
 					<h6>No Reports</h6>
-					: <h6>Sorted by most recently viewed</h6>
 				}
 
 				<ul id="record-history">
@@ -105,14 +104,14 @@ export default class Dashboard extends React.Component {
 					: null) }
 
 					{/* Fallback if no records exist on dashboard or recently archived all records */}
-					{ !records.length ?
-						<div className="no-records">
+					{ records.length ? null
+						: <div className="no-records">
 							<h3>No Reports Available</h3>
 							<p>
 								<Link to="/search">Do a New Search!</Link>
 							</p>
 						</div>
-					: null }
+					}
 				</ul>
 
 				{ this.state.isArchived ?
