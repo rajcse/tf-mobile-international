@@ -23,7 +23,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-        <variable name="APP_ID" value="109396249535582" />
+        <variable name="APP_ID" value="1682932698592804" />
         <variable name="APP_NAME" value="TruthFinder" />
     </plugin>
     <plugin name="cc.fovea.cordova.purchase" source="npm" spec="~6.0.0">
