@@ -14,6 +14,7 @@ import ErrorPrompt from 'components/ErrorPrompt';
 import SuccessPrompt from 'components/SuccessPrompt';
 import RatingsPrompt from 'components/RatingsPrompt';
 import WelcomePrompt from 'components/WelcomePrompt';
+import NotificationPrompt from 'components/NotificationPrompt';
 
 export default class PubRecApp extends React.Component {
 
@@ -48,6 +49,7 @@ export default class PubRecApp extends React.Component {
 			purchasePending: userStore.getPurchasePending(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			usage: userStore.getUsage(),
+			notifications: [0, 1, 2, 3],
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
 			success: userStore.getPurchaseSuccess(),
@@ -239,6 +241,12 @@ export default class PubRecApp extends React.Component {
 							}
 							confirmWelcome={this.confirmWelcome}
 						/> : null
+				}
+
+				{
+					<NotificationPrompt
+						notifications={this.state.notifications}
+					/>
 				}
 				<Navigation />
 			</div>

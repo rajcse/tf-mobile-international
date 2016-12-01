@@ -1,0 +1,51 @@
+#notification-prompt {
+	position: relative;
+
+	.notice {
+		background: @brand-white;
+		padding: 0;
+		position: fixed;
+		left: 10px;
+		right: 10px;
+		bottom: 50px;
+		box-sizing: border-box;
+		border-radius: 4px;
+		box-shadow: 0 0 2px -2px @brand-black;
+		transition: all .5 ease;
+
+		.notice-level {
+			background: @brand-blue;
+			width: 50px;
+			min-height: 50px;
+			float: left;
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+			margin-right: 10px;
+			text-align: center;
+			padding: 10px 5px;
+			box-sizing: border-box;
+
+			svg {
+				width: 30px;
+				max-height: 30px;
+
+				.cls-1 {
+					fill: @brand-white;
+				}
+			}
+		}
+
+		.notice-text {
+			float: left;
+			padding: 7px;
+
+			h3 {
+				margin: 0;
+			}
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+}
