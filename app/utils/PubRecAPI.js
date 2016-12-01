@@ -676,6 +676,7 @@ class PubRecAPI {
 	 */
 	toggleArchiveRecord(recordId, recordType, archive) {
 		let user = _userFromAccessToken(_accessToken);
+		_recordCache = [];
 
 		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
 			query: { archive: archive },
