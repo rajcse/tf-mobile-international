@@ -10,7 +10,7 @@ module.exports = function (config) {
 		],
 		preprocessors: {
 			'tests.webpack.js': [ 'webpack', 'sourcemap' ]
-	  },
+		},
 		webpack: {
 			devtool: 'inline-source-map',
 			node: {
