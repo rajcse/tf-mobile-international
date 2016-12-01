@@ -8,19 +8,12 @@ Built with Cordova and React
 In order to build for Android you will need the latest versions of Java Development Kit installed. Download a copy for your specific machine here: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html.
 
 ### Android SDK
-If you haven't already found a good reason to use [brew](http://brew.sh/), this should be it. Install a fresh version of Android SDK Manager using homebrew. This is necessary to build an android apk on your system.
+To stay most current and avoid build conflicts, it's recommended to use the official Android Studio install to get Android SDKs and tools on your computer: https://developer.android.com/studio/install.html
 
-Install: `brew install android-sdk`
-
-Usage: `android`
-
-Once the installation is complete, kindly follow the installation instructions to make sure android sdk is added to your system. If you feel confident that your system is ready to build android, try opening a new tab in terminal and running `android`.
-
-If successful your Android SDK Manager will open.
-
-For these current builds of Android we are running on version '5.1.1' and will require all relating Build-tools under "Tools" with revision 24.*.* and Android API 6.0 (23).
-
-![](https://dl.dropboxusercontent.com/u/12648103/Screen%20Shot%202016-11-02%20at%205.13.50%20PM.png)
+Now run `~/Library/Android/sdk/tools/android` to open the Android SDK Manager. You will need to install:
+- The highest 'Android SDK Build-tools' version listed
+- `Android 6.0 (API 23)` - only the `SDK Platform` is required
+- Under "Extras", the `Android Support Repository`
 
 ### Chrome Web Inspector
 Application Logs from any developer enabled, connected Android device are available natively in Chrome by going to [chrome://inspect](chrome://inspect). Use these to debug on a device locally, and for all preliminary QA.
