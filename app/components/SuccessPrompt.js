@@ -14,10 +14,8 @@ const SuccessPrompt = (props) => {
 			<div className="modal modal-transparent">
 				<Svg svg="successModal" />
 				<h3>Success!</h3>
-				<p>Your report has been upgraded. Please continue to report.</p>
-
 				<div className="confirm">
-					<button className="continue" onClick={() => { unBlurRecord(); props.confirmSuccess(); }}>View Premium Data</button>
+					<button className="continue" onClick={() => { unBlurRecord(); props.confirmSuccess(); }}>Continue</button>
 				</div>
 			</div>
 		</div>
