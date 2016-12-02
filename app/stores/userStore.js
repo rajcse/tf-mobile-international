@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {EventEmitter} from 'events';
 import constants from 'constants/pubRecConstants';
 import dispatcher from 'dispatcher';
@@ -20,6 +21,7 @@ let _user = null,
 	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
 	_premiumAccess = false, // Default to false, hit user endpoint to check for access on app start/login/refresh token
 	_welcomeModalStatus = false,
+	_notifications = [],
 	_usage = [];
 
 class UserStore extends EventEmitter {
@@ -95,6 +97,10 @@ class UserStore extends EventEmitter {
 	// We don't care if the access token is expired, the API will handle that
 	isLoggedIn() {
 		return _user !== null;
+	}
+
+	getNotifications() {
+		return _notifications;
 	}
 
 	emitChange() {
@@ -213,6 +219,15 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
+		case constants.actions.RECEIVE_NOTIFICATION:
+			_notifications.push(action.notification);
+			userStore.emitChange();
+			break;
+
+		case constants.actions.CLEAR_NOTIFICATION:
+			_.remove(_notifications, {id: action.id});
+			userStore.emitChange();
+			break;
 
 		case constants.actions.CLEAR_SUCCESS:
 			_purchaseSuccess = false;
