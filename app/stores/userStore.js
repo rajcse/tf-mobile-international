@@ -220,13 +220,11 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.RECEIVE_NOTIFICATION:
-			console.log(action.notification);
 			_notifications.push(action.notification);
 			userStore.emitChange();
 			break;
 
 		case constants.actions.CLEAR_NOTIFICATION:
-			console.log(_.remove(_notifications, {id: action.id}));
 			_.remove(_notifications, {id: action.id});
 			userStore.emitChange();
 			break;
