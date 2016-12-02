@@ -8,7 +8,7 @@ const version = process.argv[2];
 if(!version) throw new Error('No version specified');
 
 let	build = 1;
-if(~process.argv.indexOf('-b')) build = process.argv[process.argv.indexOf('-b') + 1] || 1;
+if(~process.argv.indexOf('-b')) build = Number(process.argv[process.argv.indexOf('-b') + 1]) || 1;
 
 const calculateVersion = (a, b, c) => (
 	String((a*10000 + b*100 + c)*1000 + 1000000000 + build)
