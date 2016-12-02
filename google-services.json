@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "822453628267",
+    "firebase_url": "https://truthfinder-1ff0a.firebaseio.com",
+    "project_id": "truthfinder-1ff0a",
+    "storage_bucket": "truthfinder-1ff0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822453628267:android:ee56b79706217299",
+        "android_client_info": {
+          "package_name": "com.truthfinder.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822453628267-p8toh0qrc4khnb9rfpl5vrn3p6qogv7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCJVipdiuJQbzLbke8nOL_bzoCGMZNWeo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

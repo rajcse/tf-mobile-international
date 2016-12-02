@@ -222,6 +222,13 @@ export default {
 		});
 	},
 
+	clearNotification(id) {
+		dispatcher.dispatch({
+			actionType: constants.actions.CLEAR_NOTIFICATION,
+			id
+		});
+	},
+
 	getUsage() {
 		dispatcher.dispatch({
 			actionType: constants.actions.GET_USAGE
