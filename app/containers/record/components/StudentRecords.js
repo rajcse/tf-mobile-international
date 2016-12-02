@@ -13,9 +13,9 @@ const StudentRecords = (props) => {
 			{ _.map(records, (record) => {
 				return (
 					<div key={uuid.v4()}>
-						{ !record.high_school_grad_year ?
-							null :
-							<SimpleRow
+						{ !record.high_school_grad_year
+							? null
+							: <SimpleRow
 								content={record.high_school_grad_year}
 								title="High School Graduation Year"
 							/>

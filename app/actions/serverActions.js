@@ -154,6 +154,13 @@ export default {
 		});
 	},
 
+	receiveNotification(notification) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_NOTIFICATION,
+			notification
+		});
+	},
+
 	setWelcomeStatus() {
 		dispatcher.dispatch({
 			actionType: constants.actions.SET_WELCOME_STATUS

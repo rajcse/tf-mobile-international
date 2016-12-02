@@ -22,6 +22,7 @@ import Record from 'containers/record/Record';
 
 /* eslint-disable no-unused-vars */
 import appStoreAPI from 'utils/AppStoreAPI';
+import firebaseClient from 'utils/FirebaseClient';
 /* eslint-enable */
 
 // Modal Routes
@@ -34,25 +35,6 @@ window.initializeApp = () => {
 
 	// Initialize the app store plugin
 	// appStoreAPI.init();
-
-	ReactDOM.render(
-		<Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
-			<Route path="/" component={PubRecApp}>
-				<IndexRoute component={Dashboard}/>
-				<Route path="/search" component={Search}/>
-				<Route path="/support" component={Support}/>
-				<Route path="/account" component={Account}/>
-				{/* This goes last because of the loose routing */}
-				<Route path="/users/:userId/records/:recordId" component={Record} >
-					<Route path="location" component={LocationModal}/>
-					<Route path="offender" component={SexOffendersModal}/>
-					<Route path="criminal" component={CrimeModal}/>
-				</Route>
-			</Route>
-			<Route path="/register" component={Register} />
-		</Router>,
-		document.querySelector('#app')
-	);
 
 	/**
 	 * Sets the app version as quickly as possible - this is async for reasons unknown, blame the plugin author
@@ -71,6 +53,33 @@ window.initializeApp = () => {
 	if(window.facebookConnectPlugin) {
 		window.facebookConnectPlugin.activateApp();
 	}
+
+	/**
+	 * Firebase hookup
+	 */
+	if(window.FirebasePlugin) {
+		firebaseClient.init();
+	}
+
+	// Render after all plugin/service initialization
+	ReactDOM.render(
+		<Router history={hashHistory} render={applyRouterMiddleware(useScroll())}>
+			<Route path="/" component={PubRecApp}>
+				<IndexRoute component={Dashboard}/>
+				<Route path="/search" component={Search}/>
+				<Route path="/support" component={Support}/>
+				<Route path="/account" component={Account}/>
+				{/* This goes last because of the loose routing */}
+				<Route path="/users/:userId/records/:recordId" component={Record} >
+					<Route path="location" component={LocationModal}/>
+					<Route path="offender" component={SexOffendersModal}/>
+					<Route path="criminal" component={CrimeModal}/>
+				</Route>
+			</Route>
+			<Route path="/register" component={Register} />
+		</Router>,
+		document.querySelector('#app')
+	);
 };
 
 // Log all client errors - self contained VanillaJS, matches endpoint used in the funnel

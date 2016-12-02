@@ -12,7 +12,7 @@ class AppStoreAPI {
 	}
 
 	/**
-	 * Initializes the store when on `deviceready` event
+	 * Initializes the store on `deviceready` event
 	 */
 	init() {
 		// The store is not available in browser
