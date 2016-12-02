@@ -86,7 +86,7 @@ export default class Login extends Component {
 						disabled={this.props.loggingIn}
 						onChange={this.handleChange} />
 
-					<button disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
+					<button className="login-btn" disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
 						{this.props.loggingIn ? 'Logging In...' : 'Log In'}
 					</button>
 					{this.props.loggingIn ? <Loader /> : null}

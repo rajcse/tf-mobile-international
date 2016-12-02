@@ -131,7 +131,8 @@ class LocationModal extends Component {
 					<div className="label">
 						<h4>Near</h4>
 						{_.isUndefined(record.address) ? null : <p>{record.address.street}</p>}
-						{_.isUndefined(record.address) ? null :
+						{_.isUndefined(record.address) ?
+							null :
 							<p>{record.address.city}
 								{record.address.state_code ? `, ${record.address.state_code}` : null}
 								{record.address.zip_code ? `, ${record.address.zip_code}` : null}

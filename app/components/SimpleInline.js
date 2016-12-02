@@ -25,9 +25,9 @@ const SimpleInline = (props) => {
 	});
 
 	const finalNode = inlineNode.length > 0 ?
-		<div className="simple-inline row">
+		(<div className="simple-inline row">
 			{inlineNode}
-		</div>
+		</div>)
 	: null ;
 
 	return finalNode;

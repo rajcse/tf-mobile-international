@@ -150,38 +150,46 @@ class PersonRecord extends Component {
 					{/*               Premium Sections           */}
 					{ isPremium ?
 						<div>
-							{ _.isEmpty(record.reportData.associates) && _.isEmpty(record.reportData.possible_associates) ? null :
-								<Associates
-									associates={record.reportData.associates}
-									possibleAssociates={record.reportData.possible_associates}
-									calculateAge={libs.calculateAge}
-								/>
+							{ _.isEmpty(record.reportData.associates) && _.isEmpty(record.reportData.possible_associates)
+								? null
+									: <Associates
+										associates={record.reportData.associates}
+										possibleAssociates={record.reportData.possible_associates}
+										calculateAge={libs.calculateAge}
+										/>
 							}
-							{ _.isEmpty(record.reportData.possible_student_records) ? null :
-								<StudentRecords
-									records={record.reportData.possible_student_records}
-								/>
+
+							{ _.isEmpty(record.reportData.possible_student_records)
+								? null
+									: <StudentRecords
+										records={record.reportData.possible_student_records}
+										/>
 							}
-							{ _.isEmpty(record.reportData.relationships) ? null :
-								<Relationships
-									name={record.reportData.names[0].first}
-									relationships={record.reportData.relationships}
-								/>
+
+							{ _.isEmpty(record.reportData.relationships)
+								? null
+									: <Relationships
+										name={record.reportData.names[0].first}
+										relationships={record.reportData.relationships}
+										/>
 							}
-							{ _.isEmpty(record.reportData.imposters) ? null :
-								<Imposters
-									imposters={record.reportData.imposters}
-								/>
+							{ _.isEmpty(record.reportData.imposters)
+								? null
+									:	<Imposters
+										imposters={record.reportData.imposters}
+										 />
 							}
-							{ _.isEmpty(record.reportData.ssn_info) ? null :
-								<SocialSecurity
-									ssn={record.reportData.ssn_info}
-								/>
+							{ _.isEmpty(record.reportData.ssn_info)
+								? null
+									:	<SocialSecurity
+										ssn={record.reportData.ssn_info}
+										 />
 							}
-							{ _.isEmpty(record.reportData.voter_registrations) ? null :
-								<VoterRegistrations
-									registrations={record.reportData.voter_registrations}
-								/>
+							{ _.isEmpty(record.reportData.voter_registrations)
+								? null
+									:	<VoterRegistrations
+										registrations={record.reportData.voter_registrations}
+									/>
 							}
 						</div>
 					: null }
@@ -199,10 +207,9 @@ class PersonRecord extends Component {
 
 					{/*               Premium Sections           */}
 					{ isPremium ?
-						_.isEmpty(record.reportData.accidents) ? null :
-							<Accidents
-								accidents={record.reportData.accidents}
-							/>
+						_.isEmpty(record.reportData.accidents) ? null : <Accidents
+							accidents={record.reportData.accidents}
+																														/>
 					: null }
 
 					{ (appState.premiumAccess || isPremium) ?
@@ -215,8 +222,9 @@ class PersonRecord extends Component {
 						/> : null }
 
 					{ isPremium ?
-						_.isEmpty(record.reportData.tu_corporate_filings) ? null :
-							<CorporateFilings
+						_.isEmpty(record.reportData.tu_corporate_filings)
+						? null
+							:	<CorporateFilings
 								corporateFilings={record.reportData.tu_corporate_filings}
 							/>
 					: null }
@@ -232,8 +240,9 @@ class PersonRecord extends Component {
 					: null }
 
 					{ isPremium ?
-						_.isEmpty(record.reportData.current_properties) ? null :
-							<CurrentProperties
+						_.isEmpty(record.reportData.current_properties)
+						? null
+							:	<CurrentProperties
 								currentProperties={record.reportData.current_properties}
 							/>
 					: null }
@@ -250,37 +259,45 @@ class PersonRecord extends Component {
 
 					{ isPremium ?
 						<div>
-							{ _.isEmpty(record.reportData.liens_judgments) ? null :
-								<LiensJudgments
-									liensJudgments={record.reportData.liens_judgments}
-								/>
+							{ _.isEmpty(record.reportData.liens_judgments)
+								? null
+									: <LiensJudgments
+										liensJudgments={record.reportData.liens_judgments}
+										/>
 							}
 
-							{ _.isEmpty(record.reportData.liens) ? null :
-								<Liens
-									liens={record.reportData.liens}
-								/>
+							{ _.isEmpty(record.reportData.liens)
+								? null
+									: <Liens
+										liens={record.reportData.liens}
+										/>
 							}
-							{ _.isEmpty(record.reportData.judgments) ? null :
-								<Judgments
-									judgments={record.reportData.judgments}
-								/>
+							{ _.isEmpty(record.reportData.judgments)
+								? null
+									:	<Judgments
+										judgments={record.reportData.judgments}
+									/>
 							}
-							{ _.isEmpty(record.reportData.evictions) ? null :
-								<Evictions
-									evictions={record.reportData.evictions}
-								/>
-							}
-							{ _.isEmpty(record.reportData.watercrafts) ? null :
-								<Watercrafts
-									watercrafts={record.reportData.watercrafts}
-								/>
+							{ _.isEmpty(record.reportData.evictions)
+								? null
+									: <Evictions
+										evictions={record.reportData.evictions}
+										/>
 							}
 
-							{ _.isEmpty(record.reportData.ucc_filings) ? null :
-								<UccFilings
-									uccFilings={record.reportData.ucc_filings}
-								/>
+							{ _.isEmpty(record.reportData.watercrafts)
+								? null
+									: <Watercrafts
+										watercrafts={record.reportData.watercrafts}
+										/>
+							}
+
+							{
+								_.isEmpty(record.reportData.ucc_filings)
+								? null
+									:	<UccFilings
+										uccFilings={record.reportData.ucc_filings}
+									/>
 							}
 						</div>
 					: null }
