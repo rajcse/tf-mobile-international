@@ -67,8 +67,8 @@ class Notification extends React.Component {
 					</div>
 
 					<div className="notice-text">
-						<h3>Title</h3>
-						<p>Content</p>
+						<h3>{notice.title}</h3>
+						<p>{notice.content}</p>
 					</div>
 				</div>
 			</Swipeable>

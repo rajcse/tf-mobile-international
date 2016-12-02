@@ -37,5 +37,5 @@ class FirebaseClient {
 }
 
 let firebaseClient = new FirebaseClient();
-window.firebaseClient = firebaseClient;
+
 export default firebaseClient;
