@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 // import pubRecAPI from 'utils/PubRecAPI';
 import viewActions from 'actions/viewActions';
@@ -49,15 +50,7 @@ export default class PubRecApp extends React.Component {
 			purchasePending: userStore.getPurchasePending(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			usage: userStore.getUsage(),
-			notifications: [{
-				level: 'info'
-			}, {
-				level: 'info'
-			}, {
-				level: 'error'
-			}, {
-				level: 'success'
-			}],
+			notifications: userStore.getNotifications(),
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
 			success: userStore.getPurchaseSuccess(),
@@ -252,9 +245,11 @@ export default class PubRecApp extends React.Component {
 				}
 
 				{
-					<NotificationPrompt
-						notifications={this.state.notifications}
-					/>
+					this.state.notifications.length ?
+						<NotificationPrompt
+							notifications={_.takeRight(this.state.notifications, 4)}
+						/>
+					: null
 				}
 				<Navigation />
 			</div>
