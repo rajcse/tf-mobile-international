@@ -25,8 +25,10 @@ class PhoneRecord extends Component {
 		return (
 			<main>
 				{ reports.map((reportData) => {
-					let location = _.has(reportData,'locations[0].address.city') ? `${reportData.locations[0].address.city}, ${reportData.locations[0].address.state_code}` : null,
-						state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
+					let location = _.has(reportData,'locations[0].address.city') ?
+						`${reportData.locations[0].address.city}, ${reportData.locations[0].address.state_code}`
+						: null;
+					let state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
 
 					age = libs.calculateAge(reportData.dobs[0], reportData.dods[0]);
 
@@ -83,20 +85,22 @@ class PhoneRecord extends Component {
 								/> : null
 							}
 
-							<section id="crossSell" className="widget">
-								<SearchLink
-									criteria={{
-										type: constants.recordTypes.PERSON,
-										query: {
-											firstName: reportData.names[0].first,
-											lastName: reportData.names[0].last,
-											state: state
-										},
-										text: reportData.names[0].display
-									}}
-									classes="btn btn-upgrade">View Person Report
-								</SearchLink>
-							</section>
+							{ _.get(reportData.names[0], 'first') ?
+								<section id="crossSell" className="widget">
+									<SearchLink
+										criteria={{
+											type: constants.recordTypes.PERSON,
+											query: {
+												firstName: reportData.names[0].first,
+												lastName: reportData.names[0].last,
+												state: state
+											},
+											text: reportData.names[0].display
+										}}
+										classes="btn btn-upgrade">View Person Report
+									</SearchLink>
+								</section>
+							: null }
 						</div>
 					);
 				}

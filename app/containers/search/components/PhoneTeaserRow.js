@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import TeaserLink from 'components/TeaserLink';
 
@@ -11,7 +12,9 @@ const PhoneTeaserRow = (props) => {
 		<li className="phone">
 			<TeaserLink teaser={props} recordType={constants.recordTypes.PHONE}>
 				<h3>{props.phones[0].display}</h3>
-				<p>{name}</p>
+				{_.get(props.names[0], 'first') ?
+					<p>{name}</p>
+				: null }
 				<p>{address}</p>
 			</TeaserLink>
 		</li>
