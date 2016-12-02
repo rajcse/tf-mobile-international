@@ -16,7 +16,7 @@ class FirebaseClient {
 	 */
 	init() {
 		// Affects iOS only
-		window.FirebasePlugin.grantPermission();
+		// window.FirebasePlugin.grantPermission();
 
 		// Set the device token
 		window.FirebasePlugin.onTokenRefresh(token => this.deviceToken = token, e => console.error(e));
