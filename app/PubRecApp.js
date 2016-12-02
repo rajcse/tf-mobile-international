@@ -49,7 +49,15 @@ export default class PubRecApp extends React.Component {
 			purchasePending: userStore.getPurchasePending(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			usage: userStore.getUsage(),
-			notifications: [0, 1, 2, 3],
+			notifications: [{
+				level: 'info'
+			}, {
+				level: 'info'
+			}, {
+				level: 'error'
+			}, {
+				level: 'success'
+			}],
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
 			success: userStore.getPurchaseSuccess(),
