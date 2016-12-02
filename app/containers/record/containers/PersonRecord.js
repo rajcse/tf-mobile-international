@@ -93,6 +93,15 @@ class PersonRecord extends Component {
 						photos={record.reportData.images}
 						isPremium={isPremium}
 					/>
+
+					{/* Possible Sex Offender*/}
+					{ record.reportData.possible_sex_offender ?
+						<section id="possible-offender" className="widget widget-error">
+							<h2 className="title"><Svg svg="exclamationWhite" /> Possible <strong>Sex Offender</strong></h2>
+							<p className="intro">Our sources show that this person may be a <span>registered sex offender</span>.</p>
+						</section>
+					: null }
+
 					<Personal
 						nameTitle="Name"
 						aliasTitle="Aliases"
@@ -156,14 +165,14 @@ class PersonRecord extends Component {
 										associates={record.reportData.associates}
 										possibleAssociates={record.reportData.possible_associates}
 										calculateAge={libs.calculateAge}
-										/>
+									  />
 							}
 
 							{ _.isEmpty(record.reportData.possible_student_records)
 								? null
 									: <StudentRecords
 										records={record.reportData.possible_student_records}
-										/>
+									  />
 							}
 
 							{ _.isEmpty(record.reportData.relationships)
@@ -171,7 +180,7 @@ class PersonRecord extends Component {
 									: <Relationships
 										name={record.reportData.names[0].first}
 										relationships={record.reportData.relationships}
-										/>
+									  />
 							}
 							{ _.isEmpty(record.reportData.imposters)
 								? null
@@ -189,7 +198,7 @@ class PersonRecord extends Component {
 								? null
 									:	<VoterRegistrations
 										registrations={record.reportData.voter_registrations}
-									/>
+										 />
 							}
 						</div>
 					: null }
@@ -226,7 +235,7 @@ class PersonRecord extends Component {
 						? null
 							:	<CorporateFilings
 								corporateFilings={record.reportData.tu_corporate_filings}
-							/>
+								 />
 					: null }
 
 					{ isPremium ?
@@ -244,7 +253,7 @@ class PersonRecord extends Component {
 						? null
 							:	<CurrentProperties
 								currentProperties={record.reportData.current_properties}
-							/>
+								 />
 					: null }
 
 					{ (appState.premiumAccess || isPremium) ?
@@ -263,33 +272,33 @@ class PersonRecord extends Component {
 								? null
 									: <LiensJudgments
 										liensJudgments={record.reportData.liens_judgments}
-										/>
+									  />
 							}
 
 							{ _.isEmpty(record.reportData.liens)
 								? null
 									: <Liens
 										liens={record.reportData.liens}
-										/>
+									  />
 							}
 							{ _.isEmpty(record.reportData.judgments)
 								? null
 									:	<Judgments
 										judgments={record.reportData.judgments}
-									/>
+										 />
 							}
 							{ _.isEmpty(record.reportData.evictions)
 								? null
 									: <Evictions
 										evictions={record.reportData.evictions}
-										/>
+									  />
 							}
 
 							{ _.isEmpty(record.reportData.watercrafts)
 								? null
 									: <Watercrafts
 										watercrafts={record.reportData.watercrafts}
-										/>
+									  />
 							}
 
 							{
@@ -297,7 +306,7 @@ class PersonRecord extends Component {
 								? null
 									:	<UccFilings
 										uccFilings={record.reportData.ucc_filings}
-									/>
+										 />
 							}
 						</div>
 					: null }
@@ -308,7 +317,7 @@ class PersonRecord extends Component {
 								PREMIUM DATA
 							</h2>
 							<p className="intro">
-								Premium Data may be available and could include additional <span>potentially sensitive information</span>
+								Premium Data may be available and could include additional <span>potentially sensitive information </span>
 								about {record.reportData.names[0].first}. In order to view Premium Data, you must first authorize this access.
 							</p>
 							<p className="includes">Premium Data May Include:</p>
