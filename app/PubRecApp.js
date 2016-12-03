@@ -56,7 +56,6 @@ export default class PubRecApp extends React.Component {
 			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userRated: userStore.getRated(),
-			premiumAccess: userStore.getPremiumAccess(),
 			welcomeModal: userStore.getWelcomeModalStatus()
 		};
 
@@ -108,7 +107,6 @@ export default class PubRecApp extends React.Component {
 			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userRated: userStore.getRated(),
-			premiumAccess: userStore.getPremiumAccess(),
 			welcomeModal: userStore.getWelcomeModalStatus()
 		});
 	}

@@ -34,7 +34,7 @@ import CrimeModal from 'containers/record/components/CrimeModal';
 window.initializeApp = () => {
 
 	// Initialize the app store plugin
-	// appStoreAPI.init();
+	appStoreAPI.init();
 
 	/**
 	 * Sets the app version as quickly as possible - this is async for reasons unknown, blame the plugin author

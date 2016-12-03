@@ -49,8 +49,7 @@ class PersonRecord extends Component {
 		let {
 			record,
 			openLocation,
-			openCrime,
-			appState
+			openCrime
 		} = this.props;
 
 		let	isPremium = _.get(record.data, 'isPremium', false),
@@ -64,7 +63,7 @@ class PersonRecord extends Component {
 		deathYear = age.deathday ? null : moment(age.deathday, 'MM/DD/YYYY').year();
 
 		return (
-			<main className={ (!isPremium && appState.premiumAccess) ? 'no-premium' : 'has-premium'}>
+			<main className={ (!isPremium) ? 'no-premium' : 'has-premium'}>
 				<Header title={`${record.reportData.names[0].first}'s Report`} backButton />
 
 				<RouteTransition
@@ -77,7 +76,7 @@ class PersonRecord extends Component {
 					atActive={{ opacity: 1 }}
 				>
 					{/* Premium Upsell Sticky Header */}
-					{ (!isPremium && appState.premiumAccess) ?
+					{ (!isPremium) ?
 						<ReportHeaderUpsell
 							showPremiumUpsell={viewActions.showPremiumUpsell}
 							recordID={record.id[2]}
@@ -137,7 +136,7 @@ class PersonRecord extends Component {
 						openCrime={openCrime}
 					/>
 
-					{ (!isPremium && appState.premiumAccess) ?
+					{ (!isPremium) ?
 						<Assets
 							assets={record.reportData.properties}
 							name={record.reportData.names[0].display}
@@ -221,14 +220,13 @@ class PersonRecord extends Component {
 																														/>
 					: null }
 
-					{ (appState.premiumAccess || isPremium) ?
-						<Businesses
-							businesses={record.reportData.corporate_affiliations}
-							name={record.reportData.names[0].display}
-							isPremium={isPremium}
-							showPremiumUpsell={viewActions.showPremiumUpsell}
-							recordID={record.id[2]}
-						/> : null }
+					<Businesses
+						businesses={record.reportData.corporate_affiliations}
+						name={record.reportData.names[0].display}
+						isPremium={isPremium}
+						showPremiumUpsell={viewActions.showPremiumUpsell}
+						recordID={record.id[2]}
+					/>
 
 					{ isPremium ?
 						_.isEmpty(record.reportData.tu_corporate_filings)
@@ -256,15 +254,13 @@ class PersonRecord extends Component {
 								 />
 					: null }
 
-					{ (appState.premiumAccess || isPremium) ?
-						<Bankruptcies
-							bankruptcies={record.reportData.bankruptcies}
-							name={record.reportData.names[0].display}
-							isPremium={isPremium}
-							showPremiumUpsell={viewActions.showPremiumUpsell}
-							recordID={record.id[2]}
-						/>
-					: null }
+					<Bankruptcies
+						bankruptcies={record.reportData.bankruptcies}
+						name={record.reportData.names[0].display}
+						isPremium={isPremium}
+						showPremiumUpsell={viewActions.showPremiumUpsell}
+						recordID={record.id[2]}
+					/>
 
 					{ isPremium ?
 						<div>
@@ -311,7 +307,7 @@ class PersonRecord extends Component {
 						</div>
 					: null }
 
-					{ (!isPremium && appState.premiumAccess) ?
+					{ (!isPremium) ?
 						<section id="premiumUpsell" className="widget premium">
 							<h2 className="title" >
 								PREMIUM DATA

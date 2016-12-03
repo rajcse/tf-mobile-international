@@ -148,12 +148,6 @@ export default {
 		});
 	},
 
-	enablePremiumAccess() {
-		dispatcher.dispatch({
-			actionType: constants.actions.ENABLE_PREMIUM_ACCESS
-		});
-	},
-
 	receiveNotification(notification) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECEIVE_NOTIFICATION,

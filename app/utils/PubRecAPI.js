@@ -227,10 +227,6 @@ class PubRecAPI {
 				// Trigger a received user
 				serverActions.receiveUser(user);
 
-				// TEMP
-				// Check for premium access
-				this.checkPremiumAccess();
-
 				// Fetch the initial usage info for the user
 				// If the access token is expired, it will refresh itself automatically on 401
 				this.getUsage();
@@ -254,10 +250,6 @@ class PubRecAPI {
 
 					// Set the tokens in local storage
 					window.localStorage.setItem('accessToken', _accessToken);
-
-					// TEMP
-					// Check for premium access
-					this.checkPremiumAccess();
 
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
 				} else {
@@ -372,10 +364,6 @@ class PubRecAPI {
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
-					// TEMP
-					// Check for premium access
-					this.checkPremiumAccess();
-
 					// Get the usage for the user
 					this.getUsage();
 
@@ -445,23 +433,6 @@ class PubRecAPI {
 					setTimeout(() => serverActions.receiveAccountInfo(responseData.user), 0);
 				} else {
 					console.error(responseData.errors);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}
-
-	/**
-	 * TEMP
-	 * This method should be completely removed after we open premium access for all users
-	 */
-	checkPremiumAccess() {
-		let user = _userFromAccessToken(_accessToken);
-		return _makeRequest('/users/' + user.id, {needsAuth: true})
-			.then((responseData) => {
-				if(responseData.success && (_.get(responseData.user, 'data.premium_access') || !_.has(responseData.user, 'data.premium_access'))) {
-					setTimeout(() => serverActions.enablePremiumAccess(), 0);
 				}
 			})
 			.catch((error) => {

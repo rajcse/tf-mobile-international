@@ -19,7 +19,6 @@ let _user = null,
 	_rated = false,
 	// Just in case our value gets borked, we need to check to make sure it's a number before coercing, otherwise we'll be incrementing NaN forever
 	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
-	_premiumAccess = false, // Default to false, hit user endpoint to check for access on app start/login/refresh token
 	_welcomeModalStatus = false,
 	_notifications = [],
 	_usage = [];
@@ -31,10 +30,6 @@ class UserStore extends EventEmitter {
 
 	getUsage() {
 		return _usage;
-	}
-
-	getPremiumAccess() {
-		return _premiumAccess;
 	}
 
 	getWelcomeModalStatus() {
@@ -254,11 +249,6 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.ENABLE_PREMIUM_ACCESS:
-			_premiumAccess = true;
-			userStore.emitChange();
-			break;
-
 		// This waits for the PubRecAPI to clear its jwt state
 		case constants.actions.LOGGED_OUT:
 			_user = null;
@@ -269,7 +259,6 @@ dispatcher.register(action => {
 			_premiumUpsell = null;
 			_purchaseSuccess = false;
 			_purchasePending = false;
-			_premiumAccess = false;
 			_usage = [];
 			_recordsViewed = 0;
 			window.localStorage.removeItem('recordsViewed');
