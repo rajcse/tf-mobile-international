@@ -2,6 +2,7 @@ import {hashHistory} from 'react-router';
 import constants from 'constants/pubRecConstants';
 import dispatcher from 'dispatcher';
 import pubRecAPI from 'utils/PubRecAPI';
+import appStoreAPI from '../utils/AppStoreAPI';
 
 export default {
 	receiveSearchResults(results, type) {

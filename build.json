@@ -2,7 +2,7 @@
   "android": {
     "release": {
       "keystore": "./truthfinder-app.jks",
-      "storePassword": "",
+      "storePassword": "123456",
       "alias": "test",
       "password" : "123456",
       "keystoreType": ""

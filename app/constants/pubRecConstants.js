@@ -64,7 +64,8 @@ export default {
 		'RATE',
 		'ENABLE_PREMIUM_ACCESS',
 		'CONFIRM_WELCOME',
-		'SET_WELCOME_STATUS'
+		'SET_WELCOME_STATUS',
+		'CONFIRM_PREMIUM_UPSELL_GOOGLE'
 	]),
 
 	// These must match what usage-service is expecting

@@ -123,7 +123,12 @@ export default class PubRecApp extends React.Component {
 	}
 
 	confirmPremiumUpsell() {
-		viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
+		//viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
+		if(this.state.accountInfo.default_payment_option_id){
+			viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
+		} else {
+			viewActions.confirmPremiumUpsellGoogle(this.state.premiumUpsell);
+		}
 	}
 
 	confirmSuccess() {

@@ -2,6 +2,7 @@ import {hashHistory} from 'react-router';
 import constants from 'constants/pubRecConstants';
 import dispatcher from 'dispatcher';
 import pubRecAPI from 'utils/PubRecAPI';
+import appStoreAPI from 'utils/AppStoreAPI';
 
 export default {
 	search(criteria) {
@@ -188,9 +189,15 @@ export default {
 			actionType: constants.actions.CONFIRM_PREMIUM_UPSELL,
 			recordId
 		});
-		//APP STORE INTEGRATION NOT READY YET!!!
-		//appStoreAPI.purchaseSubscription(product);
 		pubRecAPI.purchasePremium(recordId);
+	},
+
+	confirmPremiumUpsellGoogle(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.CONFIRM_PREMIUM_UPSELL_GOOGLE,
+			recordId
+		});
+		appStoreAPI.purchasePremium();
 	},
 
 	cancelPremiumUpsell() {

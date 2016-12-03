@@ -20,10 +20,16 @@ class AppStoreAPI {
 			return console.warn('Store not available');
 		}
 
-		// window.store.verbosity = window.store.DEBUG;
+		// Set debug level logging
+		window.store.verbosity = window.store.DEBUG;
 
 		if(window.device.platform === 'iOS') this.registerAppleProducts();
 		if(window.device.platform === 'Android') this.registerGoogleProducts();
+
+		window.store.validator = (p, cb) => {
+			console.log(JSON.stringify(p.transaction));
+			cb(true, p.transaction);
+		};
 
 		// When there is a product update
 		window.store.when('product').updated(p => {
@@ -31,6 +37,11 @@ class AppStoreAPI {
 		});
 
 		window.store.when(PREMIUM_PERSON_REPORT).approved(p => {
+			p.verify();
+		});
+
+		window.store.when(PREMIUM_PERSON_REPORT).verified(p => {
+			console.log(JSON.stringify(p.transaction));
 			p.finish();
 		});
 
@@ -43,6 +54,7 @@ class AppStoreAPI {
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).unverified(p => {
+
 		});
 
 		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).updated(p => {
@@ -66,7 +78,7 @@ class AppStoreAPI {
 	}
 
 	purchasePremium() {
-		// window.store.order(PREMIUM_PERSON_REPORT);
+		window.store.order(PREMIUM_PERSON_REPORT);
 	}
 
 	registerGoogleProducts() {
