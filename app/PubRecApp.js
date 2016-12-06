@@ -1,9 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-// import pubRecAPI from 'utils/PubRecAPI';
 import viewActions from 'actions/viewActions';
-
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
 
@@ -63,8 +61,6 @@ export default class PubRecApp extends React.Component {
 		this.onUserChange = this.onUserChange.bind(this);
 		this.confirmCrossSell = this.confirmCrossSell.bind(this);
 		this.cancelCrossSell = this.cancelCrossSell.bind(this);
-		this.confirmPremiumUpsell = this.confirmPremiumUpsell.bind(this);
-		this.cancelPremiumUpsell = this.cancelPremiumUpsell.bind(this);
 	}
 
 	componentWillMount() {
@@ -120,23 +116,9 @@ export default class PubRecApp extends React.Component {
 		viewActions.cancelCrossSell();
 	}
 
-	confirmPremiumUpsell() {
-		//viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
-		if(this.state.accountInfo.default_payment_option_id){
-			viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
-		} else {
-			viewActions.confirmPremiumUpsellGoogle(this.state.premiumUpsell);
-		}
-	}
-
 	confirmSuccess() {
 		viewActions.clearSuccess();
 		window.scrollTo(0, 0);
-	}
-
-	cancelPremiumUpsell() {
-		viewActions.clearUserErrors();
-		viewActions.cancelPremiumUpsell();
 	}
 
 	goToSupport() {
@@ -183,11 +165,9 @@ export default class PubRecApp extends React.Component {
 				{ this.state.premiumUpsell && !this.state.purchaseErrors ?
 					<PremiumUpsellPrompt
 						purchasePending={this.state.purchasePending}
-						confirmUpsell={this.confirmPremiumUpsell}
 						confirmSuccess={this.confirmSuccess}
-						cancelUpsell={this.cancelPremiumUpsell}
-						currentReport={this.state.usage[0].data}
 						accountInfo={this.state.accountInfo}
+						premiumUpsell={this.state.premiumUpsell}
 					/>
 					: null
 				}

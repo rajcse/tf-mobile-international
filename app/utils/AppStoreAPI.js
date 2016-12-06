@@ -1,10 +1,9 @@
 /**
-* Handles 402 response and upsell flow
-* @return {[type]} [description]
+* Handles all communication with the app store
+* @return {Object} App Store Singleton
 */
 
-const PERSON_SUBSCRIPTION_1_MONTH = 'PERSON_SUBSCRIPTION_1_MONTH',
-	PREMIUM_PERSON_REPORT = 'PREMIUM_PERSON_REPORT';
+import constants from 'constants/pubRecConstants';
 
 class AppStoreAPI {
 	constructor() {
@@ -36,28 +35,28 @@ class AppStoreAPI {
 
 		});
 
-		window.store.when(PREMIUM_PERSON_REPORT).approved(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
 			p.verify();
 		});
 
-		window.store.when(PREMIUM_PERSON_REPORT).verified(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).verified(p => {
 			console.log(JSON.stringify(p.transaction));
 			p.finish();
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).approved(p => {
+		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).approved(p => {
 			p.verify();
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).verified(p => {
+		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).verified(p => {
 			p.finish();
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).unverified(p => {
+		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).unverified(p => {
 
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).updated(p => {
+		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).updated(p => {
 
 		});
 
@@ -77,20 +76,24 @@ class AppStoreAPI {
 		window.store.refresh();
 	}
 
+	getPremiumUpsellInfo() {
+		return window.store.get(constants.productTypes.PREMIUM_PERSON_REPORT);
+	}
+
 	purchasePremium() {
-		window.store.order(PREMIUM_PERSON_REPORT);
+		window.store.order(constants.productTypes.PREMIUM_PERSON_REPORT);
 	}
 
 	registerGoogleProducts() {
 		window.store.register({
 			id: 'unlim_person_28_99_1mo',
-			alias: PERSON_SUBSCRIPTION_1_MONTH,
+			alias: constants.planTypes.PERSON_REPORT_1_MONTH,
 			type: window.store.PAID_SUBSCRIPTION
 		});
 
 		window.store.register({
 			id: 'premium_person_report_19_99',
-			alias: PREMIUM_PERSON_REPORT,
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT,
 			type: window.store.CONSUMABLE
 		});
 	}
@@ -98,13 +101,13 @@ class AppStoreAPI {
 	registerAppleProducts() {
 		window.store.register({
 			id: 'unlim_person_28_99_1mo',
-			alias: PERSON_SUBSCRIPTION_1_MONTH,
+			alias: constants.planTypes.PERSON_REPORT_1_MONTH,
 			type: window.store.PAID_SUBSCRIPTION
 		});
 
 		window.store.register({
 			id: 'premium_person_report_19_99',
-			alias: PREMIUM_PERSON_REPORT,
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT,
 			type: window.store.CONSUMABLE
 		});
 	}

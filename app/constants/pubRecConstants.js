@@ -45,6 +45,7 @@ export default {
 		'RECEIVE_USAGE',
 		'PAYMENT_REQUIRED',
 		'SHOW_PREMIUM_UPSELL',
+		'RECEIVE_PREMIUM_UPSELL',
 		'CONFIRM_PREMIUM_UPSELL',
 		'CANCEL_PREMIUM_UPSELL',
 		'CONFIRM_CROSS_SELL',
@@ -63,8 +64,7 @@ export default {
 		'CLEAR_SUCCESS',
 		'RATE',
 		'CONFIRM_WELCOME',
-		'SET_WELCOME_STATUS',
-		'CONFIRM_PREMIUM_UPSELL_GOOGLE'
+		'SET_WELCOME_STATUS'
 	]),
 
 	// These must match what usage-service is expecting
@@ -81,6 +81,22 @@ export default {
 		phone: 'phones',
 		location: 'locations',
 		email: 'emails'
+	},
+
+	// These values must mirror the mappings in site JSON
+	planTypes: {
+		PERSON_REPORT_1_MONTH: 'person_report_1_month'
+	},
+
+	// These values must mirror the mappings in site JSON
+	productTypes: {
+		PREMIUM_PERSON_REPORT: 'premium_person_report'
+	},
+
+	// These must match what accounts service expects
+	inAppPaymentProcessors: {
+		APPLE: 'apple_iap',
+		GOOGLE: 'google_play'
 	},
 
 	months: {

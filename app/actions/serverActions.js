@@ -155,6 +155,13 @@ export default {
 		});
 	},
 
+	receivePremiumUpsellInfo(premiumUpsell) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_PREMIUM_UPSELL,
+			premiumUpsell
+		});
+	},
+
 	setWelcomeStatus() {
 		dispatcher.dispatch({
 			actionType: constants.actions.SET_WELCOME_STATUS

@@ -1,6 +1,7 @@
-import React, { Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Loader from 'components/Loader';
 import pubRecAPI from 'utils/PubRecAPI';
+import viewActions from 'actions/viewActions';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
@@ -8,13 +9,14 @@ class PremiumUpsellPrompt extends Component {
 
 		this.state = {
 			introModal: true,
-			purchasePending: this.props.purchasePending || false,
 			continueModal: false,
 			upgradingModal: false
 		};
 
 		this.continueToPurchase = this.continueToPurchase.bind(this);
 		this.continueToUpgrade = this.continueToUpgrade.bind(this);
+		this.confirmPremiumUpsell = this.confirmPremiumUpsell.bind(this);
+		this.cancelPremiumUpsell = this.cancelPremiumUpsell.bind(this);
 	}
 
 	componentWillMount() {
@@ -33,37 +35,41 @@ class PremiumUpsellPrompt extends Component {
 			continueModal: false,
 			upgradingModal: true
 		}, () => {
-			this.props.confirmUpsell();
+			this.confirmPremiumUpsell();
 			this.blurRecord();
 		});
 	}
 
+	confirmPremiumUpsell() {
+		viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
+	}
+
+	cancelPremiumUpsell() {
+		viewActions.clearUserErrors();
+		viewActions.cancelPremiumUpsell();
+	}
+
 	blurRecord() {
-		document.querySelector('#record').classList.add('blur');
+		// Do this safely to enable upsells fomr outside records
+		const visibleRecord = document.querySelector('#record');
+		if(visibleRecord) visibleRecord.classList.add('blur');
 	}
 
 	render() {
-		let {
-			introModal,
-			purchasePending,
-			continueModal,
-			upgradingModal
-		} = this.state;
-
-		let {
-			cancelUpsell,
-			currentReport,
-			accountInfo
-		} = this.props;
-
-		let fullName = `${currentReport.name.first} ${currentReport.name.last}`;
+		const {
+				introModal,
+				continueModal,
+				upgradingModal
+			} = this.state,
+			{ premiumUpsellProduct, record } = this.props.premiumUpsell,
+			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
 		return (
 			<div id="payment-prompt">
 				{/* First Step - Show intro text to upsell */}
 				{ introModal ?
 					<div className="modal">
-						<i className="icon icon-close" onClick={cancelUpsell}/>
+						<i className="icon icon-close" onClick={this.cancelPremiumUpsell}/>
 						<h3>Important Report Info</h3>
 						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
 						<p>
@@ -82,7 +88,7 @@ class PremiumUpsellPrompt extends Component {
 						</p>
 						<p className="confirm">
 							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToPurchase}>Continue</button>
-							<a className="cancel" onClick={cancelUpsell}>No Thanks, I don't want more info.</a>
+							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
 						</p>
 					</div>
 				: null }
@@ -90,17 +96,17 @@ class PremiumUpsellPrompt extends Component {
 				{/* Continue to Purchase */}
 				{ continueModal ?
 					<div className="modal">
-						<i className="icon icon-close" onClick={cancelUpsell}/>
+						<i className="icon icon-close" onClick={this.cancelPremiumUpsell}/>
 						<h3>Important Report Info</h3>
 						<p>Click <strong>CONTINUE</strong> to add available Premium Data to this report and see what else you can uncover. <strong>Our data providers update their databases daily!!</strong></p>
 
 						<p className="confirm">
 							<button className="continue" onClick={this.continueToUpgrade}>Continue
-								{ accountInfo.balances.premium_person_report > 0 ?
-									<span>Upgrade this report using credits</span>
-									: <span>Upgrade this report for $19.99</span> }
+								{ this.props.accountInfo.balances.premium_person_report > 0 ?
+									<span>Upgrade this report using 1 credit</span>
+									: <span>Upgrade this report for ${premiumUpsellProduct.price}</span> }
 							</button>
-							<a className="cancel" onClick={cancelUpsell}>No Thanks, I don't want more info.</a>
+							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
 						</p>
 					</div>
 				: null }
@@ -115,7 +121,7 @@ class PremiumUpsellPrompt extends Component {
 				: null }
 
 				{/* Purchase Upsell */}
-				{ purchasePending ?
+				{ this.props.purchasePending ?
 					<div className="modal">
 						<h3>Upgrading your report...</h3>
 						<p>Please wait while we add more data to your your report...</p>
@@ -129,9 +135,7 @@ class PremiumUpsellPrompt extends Component {
 export default PremiumUpsellPrompt;
 
 PremiumUpsellPrompt.propTypes = {
-	purchasePending: React.PropTypes.bool.isRequired,
-	confirmUpsell: React.PropTypes.func.isRequired,
-	cancelUpsell: React.PropTypes.func.isRequired,
-	currentReport: React.PropTypes.object,
-	accountInfo: React.PropTypes.object
+	purchasePending: PropTypes.bool.isRequired,
+	premiumUpsell: PropTypes.object,
+	accountInfo: PropTypes.object
 };

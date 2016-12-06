@@ -166,7 +166,12 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.SHOW_PREMIUM_UPSELL:
-			_premiumUpsell = action.recordId;
+			// _premiumUpsell = action.recordId;
+			// userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_PREMIUM_UPSELL:
+			_premiumUpsell = action.premiumUpsell;
 			userStore.emitChange();
 			break;
 

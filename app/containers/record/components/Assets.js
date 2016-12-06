@@ -11,8 +11,7 @@ const Assets = (props) => {
 		assets,
 		isPremium,
 		name,
-		showPremiumUpsell,
-		recordID
+		showPremiumUpsell
 	} = props;
 
 	if (!isPremium) {
@@ -28,14 +27,14 @@ const Assets = (props) => {
 					<p>Asset information can only be revealed after you give authorization. Click the button below to access all the available information on {name}’s assets.</p>
 
 					<p>
-						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={showPremiumUpsell}>View Premium Data</button>
 					</p>
 				</div>
 			</section>
 		);
 	}
 
-	if (isPremium && assets.length === 0) {
+	if (isPremium && !assets.length) {
 		return null;
 	}
 
@@ -377,8 +376,7 @@ Assets.propTypes = {
 	assets: React.PropTypes.array,
 	isPremium: React.PropTypes.bool,
 	name: React.PropTypes.string,
-	showPremiumUpsell: React.PropTypes.func,
-	recordID: React.PropTypes.string
+	showPremiumUpsell: React.PropTypes.func
 };
 
 export default Assets;

@@ -9,8 +9,7 @@ const Businesses = (props) => {
 		businesses,
 		isPremium,
 		name,
-		showPremiumUpsell,
-		recordID
+		showPremiumUpsell
 	} = props;
 
 	if (!isPremium) {
@@ -26,7 +25,7 @@ const Businesses = (props) => {
 					<p>Some info is so sensitive we can only reveal it on a Per-Report Basis. Click the button below to have access to available business information on {name}.</p>
 
 					<p>
-						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={showPremiumUpsell}>View Premium Data</button>
 					</p>
 				</div>
 			</section>
@@ -123,8 +122,7 @@ Businesses.propTypes = {
 	businesses: React.PropTypes.array,
 	isPremium: React.PropTypes.bool,
 	name: React.PropTypes.string,
-	showPremiumUpsell: React.PropTypes.func,
-	recordID: React.PropTypes.string
+	showPremiumUpsell: React.PropTypes.func
 };
 
 export default Businesses;
