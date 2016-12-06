@@ -36,13 +36,15 @@ export default class SearchForm extends React.Component {
 		super(props);
 
 		this.state = {
-			error: null
+			error: null,
+			toggleState: false
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handlePhoneKeyPress = this.handlePhoneKeyPress.bind(this);
 		this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
 		this.doSearch = this.doSearch.bind(this);
+		this.toggleState = this.toggleState.bind(this);
 	}
 
 	handleInputChange(e) {
@@ -70,6 +72,12 @@ export default class SearchForm extends React.Component {
 	handleSearchTypeChange(searchType) {
 		viewActions.updateSearchCriteria({field: 'type', value: searchType});
 		this.setState({error: null});
+	}
+
+	toggleState() {
+		this.setState({
+			toggleState: !this.state.toggleState
+		});
 	}
 
 	doSearch(e) {
@@ -117,9 +125,9 @@ export default class SearchForm extends React.Component {
 	renderPersonForm() {
 		let statesList = [];
 
-		for(let state in STATES) {
-			statesList.push(<option key={state} value={state}>{state}</option>);
-		}
+		_.map(STATES, (state, index) => {
+			statesList.push(<option key={index} value={index}>{this.state.toggleState ? state : index}</option>);
+		});
 
 		return (
 			<div id="person-search">
@@ -175,7 +183,9 @@ export default class SearchForm extends React.Component {
 
 					<div className="controls">
 						<label>State</label>
-						<select name="state" disabled={this.props.searching} defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'} onChange={this.handleInputChange}>
+						<select name="state" disabled={this.props.searching} defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
+							onClick={() => this.toggleState()}
+							onChange={() => { this.toggleState(); this.handleInputChange(); }}>
 							{statesList}
 						</select>
 					</div>
