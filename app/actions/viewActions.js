@@ -183,12 +183,20 @@ export default {
 		pubRecAPI.fetchPremiumUpsellInfo(record);
 	},
 
-	confirmPremiumUpsell(recordId) {
+	purchasePremiumRecord(premiumUpsell) {
 		dispatcher.dispatch({
-			actionType: constants.actions.CONFIRM_PREMIUM_UPSELL,
+			actionType: constants.actions.PURCHASE_PREMIUM_RECORD,
+			premiumUpsell
+		});
+		pubRecAPI.purchasePremiumRecord(premiumUpsell);
+	},
+
+	upgradeToPremiumRecord(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.UPGRADE_TO_PREMIUM_RECORD,
 			recordId
 		});
-		pubRecAPI.purchasePremium(recordId);
+		pubRecAPI.upgradeToPremiumRecord(recordId);
 	},
 
 	cancelPremiumUpsell() {

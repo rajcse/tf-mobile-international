@@ -162,60 +162,58 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.premiumUpsell && !this.state.purchaseErrors ?
+				{ this.state.premiumUpsell && !this.state.purchaseErrors &&
 					<PremiumUpsellPrompt
-						purchasePending={this.state.purchasePending}
-						confirmSuccess={this.confirmSuccess}
-						accountInfo={this.state.accountInfo}
 						premiumUpsell={this.state.premiumUpsell}
 					/>
-					: null
 				}
 
-				{ this.state.productCrossSell && !this.state.purchaseErrors ?
+				{ this.state.productCrossSell && !this.state.purchaseErrors &&
 					<PaymentPrompt
 						confirmCrossSell={this.confirmCrossSell}
 						purchasePending={this.state.purchasePending}
 						cancelCrossSell={this.cancelCrossSell}
 						{...this.state.productCrossSell}
-					/> : null
+					/>
 				}
 
-				{this.state.purchaseErrors ?
+				{this.state.purchaseErrors &&
 					<ErrorPrompt
 						message={'An error occured while making your purchase. Please visit <a href="https://www.truthfinder.com/dashboard/account/my-billing">www.truthfinder.com</a> to review your settings.'}
-						confirmError={this.state.premiumUpsell ? this.cancelPremiumUpsell : this.cancelCrossSell}
-					/> : null
+						confirmError={ this.state.premiumUpsell
+							? () => { viewActions.clearUserErrors(); viewActions.cancelPremiumUpsell(); }
+							: this.cancelCrossSell
+						}
+					/>
 				}
-				{this.state.search.errors ?
+
+				{this.state.search.errors &&
 					<ErrorPrompt
 						message="Report Not Found"
 						confirmError={viewActions.clearSearchError}
-					/> : null
+					/>
 				}
 
-				{this.state.success ?
+				{this.state.success &&
 					<SuccessPrompt
 						message="Purchase Successful"
 						confirmSuccess={this.confirmSuccess}
-					/> : null
+					/>
 				}
 
-				{
-					//pop up the ratings modal when reports looked at is 5 and user has not rated before
-					((this.state.recordsViewed === 5) && !this.state.userRated) ?
+				{ // pop up the ratings modal when reports looked at is 5 and user has not rated before
+					this.state.recordsViewed === 5 && !this.state.userRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
 							message2="If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!"
 							confirm={this.confirmRating}
 							support={this.goToSupport}
 							cancel={this.cancelRating}
-						/> : null
+						/>
 				}
 
-				{
-					//welcome modal that has the free credit info
-					(this.state.welcomeModal) ?
+				{ //welcome modal that has the free credit info
+					this.state.welcomeModal &&
 						<WelcomePrompt
 							message1="Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available."
 							message2={
@@ -224,16 +222,13 @@ export default class PubRecApp extends React.Component {
 								access to our website where you can look people up and view reports on your desktop or laptop!`
 							}
 							confirmWelcome={this.confirmWelcome}
-						/> : null
+						/>
 				}
 
-				{
-					this.state.notifications.length ?
-						<NotificationPrompt
-							notifications={_.takeRight(this.state.notifications, 4)}
-						/>
-					: null
+				{ !!this.state.notifications.length &&
+					<NotificationPrompt notifications={_.takeRight(this.state.notifications, 4)} />
 				}
+
 				<Navigation />
 			</div>
 		);
@@ -241,6 +236,5 @@ export default class PubRecApp extends React.Component {
 }
 
 PubRecApp.propTypes = {
-	children: React.PropTypes.node.isRequired,
-	dispatch: React.PropTypes.any
+	children: React.PropTypes.node.isRequired
 };

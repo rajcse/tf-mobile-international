@@ -113,6 +113,12 @@ export default {
 		});
 	},
 
+	premiumUpgradeSuccessful() {
+		dispatcher.dispatch({
+			actionType: constants.actions.PREMIUM_UPGRADE_SUCCESSFUL
+		});
+	},
+
 	purchaseError(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_ERROR,

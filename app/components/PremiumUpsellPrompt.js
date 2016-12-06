@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Loader from 'components/Loader';
-import pubRecAPI from 'utils/PubRecAPI';
 import viewActions from 'actions/viewActions';
 
 class PremiumUpsellPrompt extends Component {
@@ -9,39 +8,47 @@ class PremiumUpsellPrompt extends Component {
 
 		this.state = {
 			introModal: true,
-			continueModal: false,
+			confirmationModal: false,
 			upgradingModal: false
 		};
 
-		this.continueToPurchase = this.continueToPurchase.bind(this);
-		this.continueToUpgrade = this.continueToUpgrade.bind(this);
-		this.confirmPremiumUpsell = this.confirmPremiumUpsell.bind(this);
+		this.continueToConfirmation = this.continueToConfirmation.bind(this);
+		this.confirmPurchaseAndUpgrade = this.confirmPurchaseAndUpgrade.bind(this);
+		this.confirmUpgradeWithCredits = this.confirmUpgradeWithCredits.bind(this);
 		this.cancelPremiumUpsell = this.cancelPremiumUpsell.bind(this);
 	}
 
-	componentWillMount() {
-		pubRecAPI.fetchAccountInfo();
+	componentWillUnmount() {
+		// Clear the record blur
+		const visibleRecord = document.querySelector('#record');
+		if(visibleRecord) visibleRecord.classList.remove('blur');
 	}
 
-	continueToPurchase() {
+	continueToConfirmation() {
 		this.setState({
 			introModal: false,
-			continueModal: true
+			confirmationModal: true
 		});
 	}
 
-	continueToUpgrade() {
+	confirmPurchaseAndUpgrade() {
 		this.setState({
-			continueModal: false,
+			confirmationModal: false,
 			upgradingModal: true
 		}, () => {
-			this.confirmPremiumUpsell();
+			viewActions.purchasePremiumRecord(this.props.premiumUpsell);
 			this.blurRecord();
 		});
 	}
 
-	confirmPremiumUpsell() {
-		viewActions.confirmPremiumUpsell(this.state.premiumUpsell);
+	confirmUpgradeWithCredits() {
+		this.setState({
+			confirmationModal: false,
+			upgradingModal: true
+		}, () => {
+			viewActions.upgradeToPremiumRecord(this.props.premiumUpsell.record.id[2]);
+			this.blurRecord();
+		});
 	}
 
 	cancelPremiumUpsell() {
@@ -50,26 +57,20 @@ class PremiumUpsellPrompt extends Component {
 	}
 
 	blurRecord() {
-		// Do this safely to enable upsells fomr outside records
+		// Do this safely to enable upsells from outside records
 		const visibleRecord = document.querySelector('#record');
 		if(visibleRecord) visibleRecord.classList.add('blur');
 	}
 
 	render() {
-		const {
-				introModal,
-				continueModal,
-				upgradingModal
-			} = this.state,
-			{ premiumUpsellProduct, record } = this.props.premiumUpsell,
+		const { premiumUpsellProduct, record, accountInfo } = this.props.premiumUpsell,
 			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
 		return (
 			<div id="payment-prompt">
 				{/* First Step - Show intro text to upsell */}
-				{ introModal ?
+				{ this.state.introModal ?
 					<div className="modal">
-						<i className="icon icon-close" onClick={this.cancelPremiumUpsell}/>
 						<h3>Important Report Info</h3>
 						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
 						<p>
@@ -87,44 +88,39 @@ class PremiumUpsellPrompt extends Component {
 							learn as much about {fullName} as possible.
 						</p>
 						<p className="confirm">
-							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToPurchase}>Continue</button>
+							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToConfirmation}>Continue</button>
 							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
 						</p>
 					</div>
 				: null }
 
 				{/* Continue to Purchase */}
-				{ continueModal ?
+				{ this.state.confirmationModal ?
 					<div className="modal">
-						<i className="icon icon-close" onClick={this.cancelPremiumUpsell}/>
 						<h3>Important Report Info</h3>
 						<p>Click <strong>CONTINUE</strong> to add available Premium Data to this report and see what else you can uncover. <strong>Our data providers update their databases daily!!</strong></p>
 
 						<p className="confirm">
-							<button className="continue" onClick={this.continueToUpgrade}>Continue
-								{ this.props.accountInfo.balances.premium_person_report > 0 ?
-									<span>Upgrade this report using 1 credit</span>
-									: <span>Upgrade this report for ${premiumUpsellProduct.price}</span> }
-							</button>
+							{ accountInfo.balances.premium_person_report > 0
+								? <button className="continue" onClick={this.confirmUpgradeWithCredits}>Continue
+									<span>Upgrade this report using 1 Premium credit</span>
+								</button>
+
+								: <button className="continue" onClick={this.confirmPurchaseAndUpgrade}>Continue
+									<span>Upgrade this report for ${premiumUpsellProduct.price}</span>
+								</button>
+							}
 							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
 						</p>
 					</div>
 				: null }
 
 				{/* Upgrading Modal */}
-				{ upgradingModal ?
+				{ this.state.upgradingModal ?
 					<div className="modal modal-transparent">
 						<Loader />
 						<h3>Upgrading Your Report</h3>
 						<p>Please wait while we add premium data to your report...</p>
-					</div>
-				: null }
-
-				{/* Purchase Upsell */}
-				{ this.props.purchasePending ?
-					<div className="modal">
-						<h3>Upgrading your report...</h3>
-						<p>Please wait while we add more data to your your report...</p>
 					</div>
 				: null }
 			</div>
@@ -135,7 +131,5 @@ class PremiumUpsellPrompt extends Component {
 export default PremiumUpsellPrompt;
 
 PremiumUpsellPrompt.propTypes = {
-	purchasePending: PropTypes.bool.isRequired,
-	premiumUpsell: PropTypes.object,
-	accountInfo: PropTypes.object
+	premiumUpsell: PropTypes.object
 };

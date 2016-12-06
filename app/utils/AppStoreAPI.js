@@ -1,5 +1,5 @@
 /**
-* Handles all communication with the app store
+* Handles all communication with the app store as well as API purchase handling
 * @return {Object} App Store Singleton
 */
 
@@ -19,11 +19,22 @@ class AppStoreAPI {
 			return console.warn('Store not available');
 		}
 
+		// Set some constants mapping App store types to PubRec types
+		this.PRODUCTS = [window.store.CONSUMABLE, window.store.NON_CONSUMABLE];
+		this.PLANS = [window.store.NON_RENEWING_SUBSCRIPTION, window.store.PAID_SUBSCRIPTION, window.store.FREE_SUBSCRIPTION];
+
 		// Set debug level logging
 		window.store.verbosity = window.store.DEBUG;
 
-		if(window.device.platform === 'iOS') this.registerAppleProducts();
-		if(window.device.platform === 'Android') this.registerGoogleProducts();
+		if(window.device.platform === 'iOS') {
+			this.registerAppleProducts();
+			this.PAYMENT_PROCESSOR = 'apple_iap';
+		}
+
+		if(window.device.platform === 'Android') {
+			this.registerGoogleProducts();
+			this.PAYMENT_PROCESSOR = 'google_play';
+		}
 
 		window.store.validator = (p, cb) => {
 			console.log(JSON.stringify(p.transaction));
@@ -76,12 +87,20 @@ class AppStoreAPI {
 		window.store.refresh();
 	}
 
-	getPremiumUpsellInfo() {
-		return window.store.get(constants.productTypes.PREMIUM_PERSON_REPORT);
+	/**
+	 * Set a custom validator method. This gets called from pubRecAPI in its constructor
+	 */
+	setValidator(validator) {
+		// Make sure store is available
+		if(window.store) return window.store.validator = validator;
 	}
 
-	purchasePremium() {
-		window.store.order(constants.productTypes.PREMIUM_PERSON_REPORT);
+	getProductInfo(productAlias) {
+		return window.store.get(productAlias);
+	}
+
+	purchaseProduct(productAlias) {
+		window.store.order(productAlias);
 	}
 
 	registerGoogleProducts() {

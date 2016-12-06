@@ -210,6 +210,35 @@ function _makeRequest(path, options) {
  *     by the .catch() method in this DAO
  */
 class PubRecAPI {
+	constructor() {
+		appStoreAPI.setValidator((product, cb) => {
+			const productSkus = [],
+				planSkus = [],
+				appStoreDetails = {
+					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR
+				};
+
+			// Check whether we need a plan or product, and if we have a sku mapped
+			if(appStoreAPI.PLANS.includes(product.type)) {
+				planSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
+			} else {
+				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
+			}
+
+			// Set the rest of the app store details needed
+			if(product.transation.purchaseToken) appStoreDetails.token = product.transation.purchaseToken;
+			if(product.transation.orderId) appStoreDetails.googleOrderId = product.transation.orderId;
+
+			this.purchase(productSkus, planSkus, appStoreDetails)
+				.then(order => {
+					cb(true, {...product.transaction});
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		});
+	}
+
 	checkLocalUser() {
 		// Check there's already a valid access and refresh token in local storage
 		let accessToken = window.localStorage.getItem('accessToken'),
@@ -388,7 +417,7 @@ class PubRecAPI {
 	}
 
 	slackPost(message) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		// Validate credentials first
 		if(!message.message) {
@@ -425,7 +454,7 @@ class PubRecAPI {
 	}
 
 	fetchAccountInfo() {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 		return _makeRequest('/users/' + user.id, {needsAuth: true})
 			.then(responseData => {
 				if(responseData.success) {
@@ -454,7 +483,7 @@ class PubRecAPI {
 	 * the app after successful response
 	 */
 	createRecord(recordData, recordType, redirect, forceRefresh) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 		if(!forceRefresh) {
 			// Check for a cached recordId to serve immediately
 			let cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
@@ -550,7 +579,7 @@ class PubRecAPI {
 	 * This also handles checking the local cache prior to requesting a record
 	 */
 	fetchRecord(criteria, forceRefresh) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		if(!forceRefresh) {
 			// Check for a cached record in their history to serve immediately
@@ -607,7 +636,7 @@ class PubRecAPI {
 	}
 
 	getUsage() {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		return _makeRequest('/users/' + user.id + '/records', {needsAuth: true})
 			.then(responseData => {
@@ -623,16 +652,24 @@ class PubRecAPI {
 	}
 
 	fetchPremiumUpsellInfo(record) {
-		this.checkPaymentOptionOnFile()
-			.then(paymentOptionOnFile => {
+		let accountInfo;
+
+		this.fetchUser()
+			.then(user => {
+				// Set the account info for down the line
+				accountInfo = user;
+
+				const paymentOptions = user.payment_options || [],
+					paymentOptionOnFile = paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
+
 				if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				} else {
-					return appStoreAPI.getPremiumUpsellInfo();
+					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				}
 			})
 			.then(premiumUpsellProduct => {
-				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, premiumUpsellProduct}), 0);
+				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, premiumUpsellProduct, accountInfo}), 0);
 			})
 			.catch(error => {
 				console.error(error);
@@ -640,16 +677,14 @@ class PubRecAPI {
 	}
 
 	/**
-	 * Internal function used to see if a user has a card on file or to serve in-app purchases
+	 * Internal function used to fetch user info
 	 */
-	checkPaymentOptionOnFile() {
-		let user = _userFromAccessToken(_accessToken);
+	fetchUser() {
+		const user = _userFromAccessToken(_accessToken);
 		return _makeRequest('/users/' + user.id, {needsAuth: true})
 			.then(responseData => {
 				if(responseData.success){
-					const paymentOptions = responseData.user.payment_options || [];
-
-					return paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
+					return responseData.user;
 				}
 			})
 			.catch(error => {
@@ -683,47 +718,80 @@ class PubRecAPI {
 			});
 	}
 
-	purchasePremium(recordId) {
-		let user = _userFromAccessToken(_accessToken);
+	purchase(productSkus = [], planSkus = [], appStoreDetails) {
+		const cart = {
+			productSkus,
+			planSkus
+		};
 
-		return _makeRequest('/users/' + user.id + '/premium-upsell', {needsAuth: true, method: 'POST', body: { recordId }})
+		if(appStoreDetails) cart.appStoreDetails = appStoreDetails;
+
+		return _makeRequest('/purchase', {needsAuth: true, method: 'POST', body: cart})
 			.then(responseData => {
 				if(responseData.success) {
-					this.fetchRecord({recordId}, true).then(() => setTimeout(serverActions.purchaseSuccessful));
-					setTimeout(() => this.fetchAccountInfo(), 0);
+					return responseData.order;
 				} else {
-					console.error(responseData.errors);
-					setTimeout(() => serverActions.purchaseError(responseData.errors));
+					// Throw an erro for downstream
+					throw new Error(responseData.errors[0]);
 				}
-			})
-			.catch(error => {
-				console.error(error);
-				setTimeout(() => serverActions.purchaseError(error));
 			});
 	}
 
-	/**
-	 * Toggle Record Archive
-	 */
-	toggleArchiveRecord(recordId, recordType, archive) {
-		let user = _userFromAccessToken(_accessToken);
-		_recordCache = [];
+	updateRecord(recordId, updates) {
+		const user = _userFromAccessToken(_accessToken);
 
-		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
-			query: { archive: archive },
-			needsAuth: true,
-			method: 'PATCH'
-		})
-		.then(() => {
-			this.getUsage();
-		})
-		.catch(error => {
-			console.error(error);
-		});
+		// Only allow archive/unarchive and premium upgrade for now
+		let data = {};
+
+		if(updates.hasOwnProperty('isArchived')) data.isArchived = Boolean(updates.isArchived);
+		if(updates.isPremium) data.isPremium = true;
+
+		return _makeRequest('/users/' + user.id + '/records/' + recordId, {needsAuth: true, method: 'PATCH', body: data});
+	}
+
+	purchasePremiumRecord(premiumUpsell) {
+		let order;
+
+		// Switch between pubrec purchase and in app purchase
+		// In app products will not have a 'sku' property
+		if(premiumUpsell.premiumUpsellProduct.sku) {
+			order = this.purchase([premiumUpsell.premiumUpsellProduct.sku]);
+		} else {
+			order = appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT);
+		}
+
+		return order
+				.catch(error => {
+					console.error(error);
+					setTimeout(() => serverActions.purchaseError(error));
+				})
+				.then(order => {
+					return this.updateRecord(premiumUpsell.record.id[2], {isPremium: true});
+				})
+				.catch(error => {
+					console.error('Upgrade Error', error);
+				})
+				.then(() => this.fetchRecord({recordId: premiumUpsell.record.id[2]}, true))
+				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
+				.catch(error => {
+					console.error(error);
+				});
+	}
+
+	upgradeToPremiumRecord(recordId) {
+		return this.updateRecord(recordId, {isPremium: true})
+				.catch(error => {
+					console.error('Upgrade Error', error);
+				})
+				.then(() => this.fetchRecord({recordId}, true))
+				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
+				.catch(error => {
+					console.error(error);
+				});
 	}
 
 	purchasePackage(packageData, skipVerification) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		if(!skipVerification) {
 			switch(packageData.item_type){
@@ -798,6 +866,26 @@ class PubRecAPI {
 				setTimeout(() => serverActions.purchaseError(error));
 			});
 
+	}
+
+	/**
+	 * Toggle Record Archive
+	 */
+	toggleArchiveRecord(recordId, recordType, archive) {
+		const user = _userFromAccessToken(_accessToken);
+		_recordCache = [];
+
+		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
+			query: { archive: archive },
+			needsAuth: true,
+			method: 'PATCH'
+		})
+		.then(() => {
+			this.getUsage();
+		})
+		.catch(error => {
+			console.error(error);
+		});
 	}
 }
 

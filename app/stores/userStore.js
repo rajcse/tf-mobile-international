@@ -175,9 +175,9 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.CONFIRM_PREMIUM_UPSELL:
-			_purchasePending = true;
-			userStore.emitChange();
+		case constants.actions.PURCHASE_PREMIUM_RECORD:
+			// _purchasePending = true;
+			// userStore.emitChange();
 			break;
 
 		case constants.actions.CANCEL_PREMIUM_UPSELL:
@@ -185,8 +185,12 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.PURCHASE_SUCCESSFUL:
+		case constants.actions.PREMIUM_UPGRADE_SUCCESSFUL:
 			_premiumUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.PURCHASE_SUCCESSFUL:
 			_productCrossSell = null;
 			_purchasePending = false;
 			_purchaseSuccess = true;
