@@ -1,10 +1,9 @@
 /**
-* Handles 402 response and upsell flow
-* @return {[type]} [description]
+* Handles all communication with the app store as well as API purchase handling
+* @return {Object} App Store Singleton
 */
 
-const PERSON_SUBSCRIPTION_1_MONTH = 'PERSON_SUBSCRIPTION_1_MONTH',
-	PREMIUM_PERSON_REPORT = 'PREMIUM_PERSON_REPORT';
+import constants from 'constants/pubRecConstants';
 
 class AppStoreAPI {
 	constructor() {
@@ -20,44 +19,52 @@ class AppStoreAPI {
 			return console.warn('Store not available');
 		}
 
-		// window.store.verbosity = window.store.DEBUG;
+		// Set some constants mapping App store types to PubRec types
+		this.PRODUCTS = [window.store.CONSUMABLE, window.store.NON_CONSUMABLE];
+		this.PLANS = [window.store.NON_RENEWING_SUBSCRIPTION, window.store.PAID_SUBSCRIPTION, window.store.FREE_SUBSCRIPTION];
 
-		if(window.device.platform === 'iOS') this.registerAppleProducts();
-		if(window.device.platform === 'Android') this.registerGoogleProducts();
+		if(window.device.platform === 'iOS') {
+			this.registerAppleProducts();
+			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.APPLE;
+		}
 
-		// When there is a product update
-		window.store.when('product').updated(p => {
+		if(window.device.platform === 'Android') {
+			this.registerGoogleProducts();
+			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.GOOGLE;
+		}
 
-		});
-
-		window.store.when(PREMIUM_PERSON_REPORT).approved(p => {
-			p.finish();
-		});
-
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).approved(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT_IAP).approved(p => {
 			p.verify();
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).verified(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT_IAP).verified(p => {
 			p.finish();
 		});
 
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).unverified(p => {
-		});
-
-		window.store.when(PERSON_SUBSCRIPTION_1_MONTH).updated(p => {
-
-		});
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).approved(p => {
+		// 	p.verify();
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).verified(p => {
+		// 	p.finish();
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).unverified(p => {
+		//
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).updated(p => {
+		//
+		// });
 
 		// Log all errors
 		window.store.error(error => {
-			console.log('ERROR ' + error.code + ': ' + error.message);
+			console.error('STORE:ERROR', error);
+
 		});
 
-		// When every goes as expected, it's time to celebrate!
-		// The 'ready' event should be welcomed with music and fireworks,
 		window.store.ready(() => {
-			// console.log('\\o/ STORE READY \\o/');
+
 		});
 
 		// After we've done our setup, we tell the store to do
@@ -65,34 +72,60 @@ class AppStoreAPI {
 		window.store.refresh();
 	}
 
-	purchasePremium() {
-		// window.store.order(PREMIUM_PERSON_REPORT);
+	/**
+	 * Set a custom validator method. This gets called from pubRecAPI in its constructor
+	 */
+	setValidator(validator) {
+		// Make sure store is available
+		if(window.store) return window.store.validator = validator;
+	}
+
+	/**
+	 * Register a callback that fires only once
+	 */
+	registerOnce(productAlias, action, cb) {
+		window.store.once(productAlias, action, cb);
+	}
+
+	/**
+	 * Unregister any callback
+	 */
+	unregister(cb) {
+		window.store.off(cb);
+	}
+
+	getProductInfo(productAlias) {
+		return window.store.get(productAlias);
+	}
+
+	purchaseProduct(productAlias) {
+		return window.store.order(productAlias);
 	}
 
 	registerGoogleProducts() {
-		window.store.register({
-			id: 'unlim_person_28_99_1mo',
-			alias: PERSON_SUBSCRIPTION_1_MONTH,
-			type: window.store.PAID_SUBSCRIPTION
-		});
+		// window.store.register({
+		// 	id: 'unlim_person_28_99_1mo',
+		// 	alias: constants.planTypes.PERSON_REPORT_1_MONTH_IAP,
+		// 	type: window.store.PAID_SUBSCRIPTION
+		// });
 
 		window.store.register({
-			id: 'premium_person_report_19_99',
-			alias: PREMIUM_PERSON_REPORT,
+			id: 'premium_person_report_9_99',
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
 	}
 
 	registerAppleProducts() {
-		window.store.register({
-			id: 'unlim_person_28_99_1mo',
-			alias: PERSON_SUBSCRIPTION_1_MONTH,
-			type: window.store.PAID_SUBSCRIPTION
-		});
+		// window.store.register({
+		// 	id: 'unlim_person_28_99_1mo',
+		// 	alias: constants.planTypes.PERSON_REPORT_1_MONTH_IAP,
+		// 	type: window.store.PAID_SUBSCRIPTION
+		// });
 
 		window.store.register({
-			id: 'premium_person_report_19_99',
-			alias: PREMIUM_PERSON_REPORT,
+			id: 'premium_person_report_9_99',
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
 	}

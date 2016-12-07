@@ -22,8 +22,7 @@ const Bankruptcies = (props) => {
 		bankruptcies,
 		isPremium,
 		name,
-		showPremiumUpsell,
-		recordID
+		showPremiumUpsell
 	} = props;
 
 	if (!isPremium) {
@@ -42,7 +41,7 @@ const Bankruptcies = (props) => {
 					</p>
 
 					<p>
-						<button className="btn btn-upgrade" onClick={() => showPremiumUpsell(recordID)}>View Premium Data</button>
+						<button className="btn btn-upgrade" onClick={showPremiumUpsell}>View Premium Data</button>
 					</p>
 				</div>
 			</section>
@@ -293,8 +292,7 @@ Bankruptcies.propTypes = {
 	bankruptcies: React.PropTypes.array,
 	isPremium: React.PropTypes.bool,
 	name: React.PropTypes.string,
-	showPremiumUpsell: React.PropTypes.func,
-	recordID: React.PropTypes.string
+	showPremiumUpsell: React.PropTypes.func
 };
 
 export default Bankruptcies;

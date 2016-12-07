@@ -113,6 +113,12 @@ export default {
 		});
 	},
 
+	premiumUpgradeSuccessful() {
+		dispatcher.dispatch({
+			actionType: constants.actions.PREMIUM_UPGRADE_SUCCESSFUL
+		});
+	},
+
 	purchaseError(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_ERROR,
@@ -148,16 +154,17 @@ export default {
 		});
 	},
 
-	enablePremiumAccess() {
-		dispatcher.dispatch({
-			actionType: constants.actions.ENABLE_PREMIUM_ACCESS
-		});
-	},
-
 	receiveNotification(notification) {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECEIVE_NOTIFICATION,
 			notification
+		});
+	},
+
+	receivePremiumUpsellInfo(premiumUpsell) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_PREMIUM_UPSELL,
+			premiumUpsell
 		});
 	},
 

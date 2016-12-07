@@ -26,6 +26,7 @@ export default {
 		'SELECT_EMAIL',
 		'FETCH_RECORD',
 		'RECEIVE_RECORD',
+		'ARCHIVE_RECORD',
 		'VIEW_UNCACHED_RECORD',
 		'RECORD_REQUEST_ERROR',
 		'CLEAR_RECORD_ERROR',
@@ -45,7 +46,10 @@ export default {
 		'RECEIVE_USAGE',
 		'PAYMENT_REQUIRED',
 		'SHOW_PREMIUM_UPSELL',
-		'CONFIRM_PREMIUM_UPSELL',
+		'RECEIVE_PREMIUM_UPSELL',
+		'PURCHASE_PREMIUM_RECORD',
+		'UPGRADE_TO_PREMIUM_RECORD',
+		'PREMIUM_UPGRADE_SUCCESSFUL',
 		'CANCEL_PREMIUM_UPSELL',
 		'CONFIRM_CROSS_SELL',
 		'CANCEL_CROSS_SELL',
@@ -62,7 +66,6 @@ export default {
 		'CLEAR_SEARCH_ERROR',
 		'CLEAR_SUCCESS',
 		'RATE',
-		'ENABLE_PREMIUM_ACCESS',
 		'CONFIRM_WELCOME',
 		'SET_WELCOME_STATUS'
 	]),
@@ -81,6 +84,24 @@ export default {
 		phone: 'phones',
 		location: 'locations',
 		email: 'emails'
+	},
+
+	// These values must mirror the mappings in site JSON
+	planTypes: {
+		PERSON_REPORT_1_MONTH: 'person_report_1_month',
+		PERSON_REPORT_1_MONTH_IAP: 'person_report_1_month_iap'
+	},
+
+	// These values must mirror the mappings in site JSON
+	productTypes: {
+		PREMIUM_PERSON_REPORT: 'premium_person_report',
+		PREMIUM_PERSON_REPORT_IAP: 'premium_person_report_iap'
+	},
+
+	// These must match what accounts service expects
+	inAppPaymentProcessors: {
+		APPLE: 'apple_iap',
+		GOOGLE: 'google_play'
 	},
 
 	months: {
