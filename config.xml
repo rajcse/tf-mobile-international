@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1010300003" id="com.truthfinder.app" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1010300004" id="com.truthfinder.app" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TruthFinder</name>
     <description>
         TruthFinder Background Check
@@ -27,7 +27,7 @@
         <variable name="APP_NAME" value="TruthFinder" />
     </plugin>
     <plugin name="cc.fovea.cordova.purchase" source="npm" spec="~6.0.0">
-        <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngvlFjgwZ4FCpLchqsogG5/lKmyYF7xEVqBKTKFAop4rjrgQ4dOcxL0qvWpZlPJlwQ1OOOwCRSmPsaJ172OmBHo4wffZTbF82z8aEt3FO4Xs4S7M8WL2yXpsRo1NEiRpKDrDi7hpBkt5ZqBsTr6KlkUMiWqSkur9QAWwF0iU/Bhy/royJdiG9R9QhgfF752cYX4rMMHNcvuF5yid9Y/MCk6m7kyo6ufCxlQRubZuY77yvm+LJDOIjwUkvDGDlAgBNmWCSkgz+QRI" />
+        <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngvlFjgwZ4FCpLchqsogG5/lKmyYF7xEVqBKTKFAop4rjrgQ4dOcxL0qvWpZlPJlwQ1OOOwCRSmPsaJ172OmBHo4wffZTbF82z8aEt3FO4Xs4S7M8WL2yXpsRo1NEiRpKDrDi7hpBkt5ZqBsTr6KlkUMiWqSkur9QAWwF0iU/Bhy/royJdiG9R9QhgfF752cYX4rMMHNcvuF5yid9Y/MCk6m7kyo6ufCxlQRubZuY77yvm+LJDOIjwUkvDGDlAgBNmWCSkgz+QRIIjcI2/NCRgrz7iJJo6xYOyDupaLr0CdmQw5TSqvlJkl5YWUivSJKBNtXN/gewkqIAMUPNahDFwIDAQAB" />
     </plugin>
 	<plugin name="cordova-plugin-firebase" spec="~0.1.18" />
     <icon src="www/img/icon.png" />
