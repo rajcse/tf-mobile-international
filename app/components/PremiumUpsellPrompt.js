@@ -107,7 +107,7 @@ class PremiumUpsellPrompt extends Component {
 								</button>
 
 								: <button className="continue" onClick={this.confirmPurchaseAndUpgrade}>Continue
-									<span>Upgrade this report for ${premiumUpsellProduct.price}</span>
+									<span>Upgrade this report for ${String(premiumUpsellProduct.price).replace('$', '')/* Fix for difference between IAP and Accounts Service */}</span>
 								</button>
 							}
 							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
