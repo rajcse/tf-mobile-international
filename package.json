@@ -79,6 +79,7 @@
     "react-router-scroll": "^0.3.2",
     "react-router-transition": "0.0.6",
     "react-scroll": "^1.4.4",
+    "react-search-input": "^0.10.3",
     "react-swipeable": "^3.7.0",
     "replace": "^0.3.0",
     "sinon": "^1.17.6",

@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { createFilter } from 'react-search-input';
 import pubRecAPI from 'utils/PubRecAPI';
 import constants from 'constants/pubRecConstants';
 import Header from 'components/Header';
@@ -7,16 +8,43 @@ import Svg from 'components/svg/Svg';
 import Link from 'components/Link';
 import DashboardRow from './components/DashboardRow';
 
+const KEYS_TO_FILTERS = [
+	'data.name.first',
+	'data.name.last',
+	'data.location.address.city',
+	'data.location.address.state'
+];
+
 export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let records = _.chain(this.props.appState.usage)
+			.filter((record) => {
+				return !_.isNull(record.data.pointer);
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports by people with valid ids
+				return record.id[1] !== 'people';
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports: Hide address look ups
+				return record.id[1] !== 'location';
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports: Archived Record
+				return !record.data.isArchived;
+			}).value();
+
 		this.state = {
+			searchTerm: '',
+			records: records,
 			filter: 'ALL',
 			isArchived: false,
 			confirmArchive: false
 		};
 
+		this.handleSearch = this.handleSearch.bind(this);
 		this.handleFilterChange = this.handleFilterChange.bind(this);
 		this.archiveAllRecords = this.archiveAllRecords.bind(this);
 		this.archiveStatusToggle = this.archiveStatusToggle.bind(this);
@@ -24,6 +52,24 @@ export default class Dashboard extends React.Component {
 
 	handleFilterChange() {
 		this.setState({filter: event.target.value});
+	}
+
+	/**
+	* Update search term
+	**/
+	handleSearch(term) {
+		this.setState({
+			searchTerm: term
+		});
+	}
+
+	/**
+	* Filter Services
+	*/
+	searchRecords() {
+		let filtered = this.state.records.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+
+		return filtered;
 	}
 
 	/**
@@ -54,22 +100,7 @@ export default class Dashboard extends React.Component {
 	}
 
 	render() {
-		let records = _.chain(this.props.appState.usage)
-			.filter((record) => {
-				return !_.isNull(record.data.pointer);
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports by people with valid ids
-				return record.id[1] !== 'people';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Hide address look ups
-				return record.id[1] !== 'location';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Archived Record
-				return !record.data.isArchived;
-			}).value();
+		let records = this.searchRecords();
 
 		return (
 			<div id="dashboard">
@@ -77,6 +108,7 @@ export default class Dashboard extends React.Component {
 					title="My Reports"
 					archiveStatus={this.state.isArchived}
 					archiveStatusToggle={this.archiveStatusToggle}
+					searchFilter={this.handleSearch}
 				/>
 
 				<div id="record-filter" className={records.length ? '' : 'disabled'}>
