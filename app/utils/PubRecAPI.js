@@ -778,6 +778,7 @@ class PubRecAPI {
 					res = p => resolve(p);
 					rej = error => reject(error);
 					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'verified', res);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'cancelled', rej);
 					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'unverified', rej);
 					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'error', rej);
 				});

@@ -28,12 +28,12 @@ class AppStoreAPI {
 
 		if(window.device.platform === 'iOS') {
 			this.registerAppleProducts();
-			this.PAYMENT_PROCESSOR = 'apple_iap';
+			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.APPLE;
 		}
 
 		if(window.device.platform === 'Android') {
 			this.registerGoogleProducts();
-			this.PAYMENT_PROCESSOR = 'google_play';
+			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.GOOGLE;
 		}
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
