@@ -19,26 +19,9 @@ export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 
-		let records = _.chain(this.props.appState.usage)
-			.filter((record) => {
-				return !_.isNull(record.data.pointer);
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports by people with valid ids
-				return record.id[1] !== 'people';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Hide address look ups
-				return record.id[1] !== 'location';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Archived Record
-				return !record.data.isArchived;
-			}).value();
-
 		this.state = {
 			searchTerm: '',
-			records: records,
+			records: [],
 			filter: 'ALL',
 			isArchived: false,
 			confirmArchive: false
@@ -66,8 +49,8 @@ export default class Dashboard extends React.Component {
 	/**
 	* Filter Services
 	*/
-	searchRecords() {
-		let filtered = this.state.records.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+	searchRecords(records) {
+		let filtered = records.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
 		return filtered;
 	}
@@ -100,7 +83,24 @@ export default class Dashboard extends React.Component {
 	}
 
 	render() {
-		let records = this.searchRecords();
+		let records = _.chain(this.props.appState.usage)
+			.filter((record) => {
+				return !_.isNull(record.data.pointer);
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports by people with valid ids
+				return record.id[1] !== 'people';
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports: Hide address look ups
+				return record.id[1] !== 'location';
+			})
+			.filter((record) => {
+				// Filter Dashboard Reports: Archived Record
+				return !record.data.isArchived;
+			}).value();
+
+		records = this.searchRecords(records);
 
 		return (
 			<div id="dashboard">
