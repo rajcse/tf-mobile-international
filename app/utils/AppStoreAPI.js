@@ -23,9 +23,6 @@ class AppStoreAPI {
 		this.PRODUCTS = [window.store.CONSUMABLE, window.store.NON_CONSUMABLE];
 		this.PLANS = [window.store.NON_RENEWING_SUBSCRIPTION, window.store.PAID_SUBSCRIPTION, window.store.FREE_SUBSCRIPTION];
 
-		// Set debug level logging
-		window.store.verbosity = window.store.DEBUG;
-
 		if(window.device.platform === 'iOS') {
 			this.registerAppleProducts();
 			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.APPLE;
@@ -37,12 +34,10 @@ class AppStoreAPI {
 		}
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
-			console.warn('APPROVED' + JSON.stringify(p));
 			p.verify();
 		});
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).verified(p => {
-			console.warn('VERIFIED' + JSON.stringify(p));
 			p.finish();
 		});
 

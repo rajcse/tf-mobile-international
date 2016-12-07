@@ -177,10 +177,8 @@ function _makeRequest(path, options) {
 					_haltedRequest = queryString.substr(1).split('=')[1];
 					if(!_haltedRequest){
 						_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
-						//_haltedRequest = JSON.parse(fetchOpts.body).record;
 					}
 					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
-					//console.log(JSON.stringify(responseData.errors[0].item));
 					setTimeout(() => serverActions.clearSearchState());
 				});
 			}
@@ -212,7 +210,6 @@ function _makeRequest(path, options) {
 class PubRecAPI {
 	init() {
 		appStoreAPI.setValidator((product, cb) => {
-			console.warn('VALIDATOR:' + JSON.stringify(product));
 			const productSkus = [],
 				planSkus = [],
 				appStoreDetails = {
@@ -227,8 +224,6 @@ class PubRecAPI {
 				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
 			}
 
-
-			console.warn('APPSTOREDETAILS:' + JSON.stringify(appStoreDetails));
 			this.purchase(productSkus, planSkus, appStoreDetails)
 				.then(order => {
 					cb(true, {...product.transaction});
@@ -768,7 +763,6 @@ class PubRecAPI {
 			// Promisify the product event callbacks, then unregister them as needed
 			let res, rej;
 			order = order.then(p => {
-				console.warn('P:INITIALIZED' + JSON.stringify(p));
 				return new Promise((resolve, reject) => {
 					// Save them to the outer scope to deregister later
 					res = p => resolve(p);
@@ -780,12 +774,10 @@ class PubRecAPI {
 				});
 			})
 			.then(p => {
-				console.warn('P:VERIFIED' + JSON.stringify(p));
 				appStoreAPI.unregister(rej);
 				return p;
 			})
 			.catch(error => {
-				console.warn('P:ERROR' + JSON.stringify(error));
 				appStoreAPI.unregister(res);
 				throw error;
 			});
@@ -793,13 +785,11 @@ class PubRecAPI {
 
 		return order
 				.catch(error => {
-					console.error('ORDER ERROR' + JSON.stringify(error));
 					setTimeout(() => serverActions.purchaseError(error));
 					// Skip the rest of the chain
 					throw error;
 				})
 				.then(o => {
-					console.log('UPDATING RECORD', o);
 					return this.upgradeToPremiumRecord(premiumUpsell.record.id[2]);
 				})
 				.catch(error => {
@@ -895,20 +885,14 @@ class PubRecAPI {
 	}
 
 	/**
-	 * Toggle Record Archive
+	 * Sets the record's archive status
 	 */
-	toggleArchiveRecord(recordId, recordType, archive) {
-		const user = _userFromAccessToken(_accessToken);
-		_recordCache = [];
+	setRecordArchiveStatus(recordId, isArchived) {
+		// Remove the cached record
+		_.remove(_recordCache, record => record.id[2] === recordId);
 
-		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
-			query: { archive: archive },
-			needsAuth: true,
-			method: 'PATCH'
-		})
-		.then(() => {
-			this.getUsage();
-		})
+		return this.updateRecord(recordId, {isArchived: Boolean(isArchived)})
+		.then(() => this.getUsage())
 		.catch(error => {
 			console.error(error);
 		});

@@ -238,5 +238,12 @@ export default {
 			actionType: constants.actions.GET_USAGE
 		});
 		pubRecAPI.getUsage();
+	},
+
+	archiveRecord(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.ARCHIVE_RECORD
+		});
+		pubRecAPI.setRecordArchiveStatus(recordId, true);
 	}
 };
