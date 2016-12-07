@@ -126,7 +126,11 @@ export default class SearchForm extends React.Component {
 		let statesList = [];
 
 		_.map(STATES, (state, index) => {
-			statesList.push(<option key={index} value={index}>{this.state.toggleState ? state : index}</option>);
+			statesList.push(<option
+				key={index}
+				value={index}>
+				{this.state.toggleState ? state : index}
+			</option>);
 		});
 
 		return (
@@ -183,7 +187,10 @@ export default class SearchForm extends React.Component {
 
 					<div className="controls">
 						<label>State</label>
-						<select name="state" disabled={this.props.searching} defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
+						<select
+							name="state"
+							disabled={this.props.searching}
+							defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
 							onClick={() => this.toggleState()}
 							onChange={() => { this.toggleState(); this.handleInputChange(); }}>
 							{statesList}
