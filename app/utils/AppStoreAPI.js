@@ -36,22 +36,13 @@ class AppStoreAPI {
 			this.PAYMENT_PROCESSOR = 'google_play';
 		}
 
-		window.store.validator = (p, cb) => {
-			console.log(JSON.stringify(p.transaction));
-			cb(true, p.transaction);
-		};
-
-		// When there is a product update
-		window.store.when('product').updated(p => {
-
-		});
-
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
+			console.warn('APPROVED', Object.assign({}, p));
 			p.verify();
 		});
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).verified(p => {
-			console.log(JSON.stringify(p.transaction));
+			console.warn('VERIFIED', Object.assign({}, p));
 			p.finish();
 		});
 
@@ -73,13 +64,12 @@ class AppStoreAPI {
 
 		// Log all errors
 		window.store.error(error => {
-			console.log('ERROR ' + error.code + ': ' + error.message);
+			console.error('STORE:ERROR', error);
+
 		});
 
-		// When every goes as expected, it's time to celebrate!
-		// The 'ready' event should be welcomed with music and fireworks,
 		window.store.ready(() => {
-			// console.log('\\o/ STORE READY \\o/');
+
 		});
 
 		// After we've done our setup, we tell the store to do
@@ -95,12 +85,26 @@ class AppStoreAPI {
 		if(window.store) return window.store.validator = validator;
 	}
 
+	/**
+	 * Register a callback that fires only once
+	 */
+	registerOnce(productAlias, action, cb) {
+		window.store.once(productAlias, action, cb);
+	}
+
+	/**
+	 * Unregister any callback
+	 */
+	unregister(cb) {
+		window.store.off(cb);
+	}
+
 	getProductInfo(productAlias) {
 		return window.store.get(productAlias);
 	}
 
 	purchaseProduct(productAlias) {
-		window.store.order(productAlias);
+		return window.store.order(productAlias);
 	}
 
 	registerGoogleProducts() {

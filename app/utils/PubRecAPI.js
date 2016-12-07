@@ -210,8 +210,9 @@ function _makeRequest(path, options) {
  *     by the .catch() method in this DAO
  */
 class PubRecAPI {
-	constructor() {
+	init() {
 		appStoreAPI.setValidator((product, cb) => {
+			console.warn('VALIDATOR:', Object.assign({}, product));
 			const productSkus = [],
 				planSkus = [],
 				appStoreDetails = {
@@ -226,8 +227,11 @@ class PubRecAPI {
 			}
 
 			// Set the rest of the app store details needed
-			if(product.transation.purchaseToken) appStoreDetails.token = product.transation.purchaseToken;
-			if(product.transation.orderId) appStoreDetails.googleOrderId = product.transation.orderId;
+			if(product.transaction.purchaseToken) appStoreDetails.token = product.transaction.purchaseToken;
+			if(product.transaction.orderId) appStoreDetails.googleOrderId = product.transaction.orderId;
+			if(product.transaction.id) appStoreDetails.appleOrderId = product.transaction.id;
+			if(product.transaction.transactionReceipt) appStoreDetails.appleTransactionReceipt = product.transaction.transactionReceipt;
+			if(product.transaction.appStoreReceipt) appStoreDetails.appleAppStoreReceipt = product.transaction.appStoreReceipt;
 
 			this.purchase(productSkus, planSkus, appStoreDetails)
 				.then(order => {
@@ -235,6 +239,7 @@ class PubRecAPI {
 				})
 				.catch(error => {
 					console.error(error);
+					cb(false, error);
 				});
 		});
 	}
@@ -757,22 +762,49 @@ class PubRecAPI {
 		if(premiumUpsell.premiumUpsellProduct.sku) {
 			order = this.purchase([premiumUpsell.premiumUpsellProduct.sku]);
 		} else {
-			order = appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT);
+			// Wrap the wonky plugin promise with a real promise
+			order = new Promise((resolve, reject) => {
+				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT)
+					.then(p => resolve(p))
+					.error(error => reject(error));
+			});
+
+			// Promisify the product event callbacks, then unregister them as needed
+			let res, rej;
+			order = order.then(p => {
+				console.warn('P:INITIALIZED', Object.assign({}, p));
+				return new Promise((resolve, reject) => {
+					// Save them to the outer scope to deregister later
+					res = p => resolve(p);
+					rej = error => reject(error);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'verified', res);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'unverified', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'error', rej);
+				});
+			})
+			.then(p => {
+				console.warn('P:VERIFIED', Object.assign({}, p));
+				appStoreAPI.unregister(rej);
+				return p;
+			})
+			.catch(error => {
+				console.warn('P:ERROR', error);
+				appStoreAPI.unregister(res);
+				throw error;
+			});
 		}
 
 		return order
 				.catch(error => {
-					console.error(error);
+					console.error('ORDER ERROR', error);
 					setTimeout(() => serverActions.purchaseError(error));
+					// Skip the rest of the chain
+					throw error;
 				})
-				.then(order => {
-					return this.updateRecord(premiumUpsell.record.id[2], {isPremium: true});
+				.then(o => {
+					console.log('UPDATING RECORD', o);
+					return this.upgradeToPremiumRecord(premiumUpsell.record.id[2]);
 				})
-				.catch(error => {
-					console.error('Upgrade Error', error);
-				})
-				.then(() => this.fetchRecord({recordId: premiumUpsell.record.id[2]}, true))
-				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
 				.catch(error => {
 					console.error(error);
 				});
@@ -780,9 +812,6 @@ class PubRecAPI {
 
 	upgradeToPremiumRecord(recordId) {
 		return this.updateRecord(recordId, {isPremium: true})
-				.catch(error => {
-					console.error('Upgrade Error', error);
-				})
 				.then(() => this.fetchRecord({recordId}, true))
 				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
 				.catch(error => {

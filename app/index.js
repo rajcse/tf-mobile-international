@@ -20,10 +20,9 @@ import Support from 'containers/support/Support';
 import Account from 'containers/account/Account';
 import Record from 'containers/record/Record';
 
-/* eslint-disable no-unused-vars */
+import pubRecAPI from 'utils/PubRecAPI';
 import appStoreAPI from 'utils/AppStoreAPI';
 import firebaseClient from 'utils/FirebaseClient';
-/* eslint-enable */
 
 // Modal Routes
 import LocationModal from 'containers/record/components/LocationModal';
@@ -33,7 +32,9 @@ import CrimeModal from 'containers/record/components/CrimeModal';
 // Expose the kickoff method to Cordova
 window.initializeApp = () => {
 
-	// Initialize the app store plugin
+	// 1 - Initialize the PubRec API
+	pubRecAPI.init();
+	// 2 - Initialize the app store plugin
 	appStoreAPI.init();
 
 	/**
