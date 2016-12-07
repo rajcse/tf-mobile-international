@@ -212,11 +212,12 @@ function _makeRequest(path, options) {
 class PubRecAPI {
 	init() {
 		appStoreAPI.setValidator((product, cb) => {
-			console.warn('VALIDATOR:', Object.assign({}, product));
+			console.warn('VALIDATOR:' + JSON.stringify(product));
 			const productSkus = [],
 				planSkus = [],
 				appStoreDetails = {
-					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR
+					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR,
+					...product.transaction
 				};
 
 			// Check whether we need a plan or product, and if we have a sku mapped
@@ -226,13 +227,8 @@ class PubRecAPI {
 				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
 			}
 
-			// Set the rest of the app store details needed
-			if(product.transaction.purchaseToken) appStoreDetails.token = product.transaction.purchaseToken;
-			if(product.transaction.orderId) appStoreDetails.googleOrderId = product.transaction.orderId;
-			if(product.transaction.id) appStoreDetails.appleOrderId = product.transaction.id;
-			if(product.transaction.transactionReceipt) appStoreDetails.appleTransactionReceipt = product.transaction.transactionReceipt;
-			if(product.transaction.appStoreReceipt) appStoreDetails.appleAppStoreReceipt = product.transaction.appStoreReceipt;
 
+			console.warn('APPSTOREDETAILS:' + JSON.stringify(appStoreDetails));
 			this.purchase(productSkus, planSkus, appStoreDetails)
 				.then(order => {
 					cb(true, {...product.transaction});
@@ -772,7 +768,7 @@ class PubRecAPI {
 			// Promisify the product event callbacks, then unregister them as needed
 			let res, rej;
 			order = order.then(p => {
-				console.warn('P:INITIALIZED', Object.assign({}, p));
+				console.warn('P:INITIALIZED' + JSON.stringify(p));
 				return new Promise((resolve, reject) => {
 					// Save them to the outer scope to deregister later
 					res = p => resolve(p);
@@ -784,12 +780,12 @@ class PubRecAPI {
 				});
 			})
 			.then(p => {
-				console.warn('P:VERIFIED', Object.assign({}, p));
+				console.warn('P:VERIFIED' + JSON.stringify(p));
 				appStoreAPI.unregister(rej);
 				return p;
 			})
 			.catch(error => {
-				console.warn('P:ERROR', error);
+				console.warn('P:ERROR' + JSON.stringify(error));
 				appStoreAPI.unregister(res);
 				throw error;
 			});
@@ -797,7 +793,7 @@ class PubRecAPI {
 
 		return order
 				.catch(error => {
-					console.error('ORDER ERROR', error);
+					console.error('ORDER ERROR' + JSON.stringify(error));
 					setTimeout(() => serverActions.purchaseError(error));
 					// Skip the rest of the chain
 					throw error;

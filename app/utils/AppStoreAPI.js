@@ -37,12 +37,12 @@ class AppStoreAPI {
 		}
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
-			console.warn('APPROVED', Object.assign({}, p));
+			console.warn('APPROVED' + JSON.stringify(p));
 			p.verify();
 		});
 
 		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).verified(p => {
-			console.warn('VERIFIED', Object.assign({}, p));
+			console.warn('VERIFIED' + JSON.stringify(p));
 			p.finish();
 		});
 
