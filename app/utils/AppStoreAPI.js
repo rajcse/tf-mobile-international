@@ -33,29 +33,29 @@ class AppStoreAPI {
 			this.PAYMENT_PROCESSOR = constants.inAppPaymentProcessors.GOOGLE;
 		}
 
-		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).approved(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT_IAP).approved(p => {
 			p.verify();
 		});
 
-		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT).verified(p => {
+		window.store.when(constants.productTypes.PREMIUM_PERSON_REPORT_IAP).verified(p => {
 			p.finish();
 		});
 
-		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).approved(p => {
-			p.verify();
-		});
-
-		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).verified(p => {
-			p.finish();
-		});
-
-		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).unverified(p => {
-
-		});
-
-		window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH).updated(p => {
-
-		});
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).approved(p => {
+		// 	p.verify();
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).verified(p => {
+		// 	p.finish();
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).unverified(p => {
+		//
+		// });
+		//
+		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).updated(p => {
+		//
+		// });
 
 		// Log all errors
 		window.store.error(error => {
@@ -103,29 +103,29 @@ class AppStoreAPI {
 	}
 
 	registerGoogleProducts() {
-		window.store.register({
-			id: 'unlim_person_28_99_1mo',
-			alias: constants.planTypes.PERSON_REPORT_1_MONTH,
-			type: window.store.PAID_SUBSCRIPTION
-		});
+		// window.store.register({
+		// 	id: 'unlim_person_28_99_1mo',
+		// 	alias: constants.planTypes.PERSON_REPORT_1_MONTH_IAP,
+		// 	type: window.store.PAID_SUBSCRIPTION
+		// });
 
 		window.store.register({
-			id: 'premium_person_report_19_99',
-			alias: constants.productTypes.PREMIUM_PERSON_REPORT,
+			id: 'premium_person_report_9_99',
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
 	}
 
 	registerAppleProducts() {
-		window.store.register({
-			id: 'unlim_person_28_99_1mo',
-			alias: constants.planTypes.PERSON_REPORT_1_MONTH,
-			type: window.store.PAID_SUBSCRIPTION
-		});
+		// window.store.register({
+		// 	id: 'unlim_person_28_99_1mo',
+		// 	alias: constants.planTypes.PERSON_REPORT_1_MONTH_IAP,
+		// 	type: window.store.PAID_SUBSCRIPTION
+		// });
 
 		window.store.register({
-			id: 'premium_person_report_19_99',
-			alias: constants.productTypes.PREMIUM_PERSON_REPORT,
+			id: 'premium_person_report_9_99',
+			alias: constants.productTypes.PREMIUM_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
 	}

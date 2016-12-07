@@ -661,7 +661,7 @@ class PubRecAPI {
 				if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				} else {
-					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
+					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
 				}
 			})
 			.then(premiumUpsellProduct => {
@@ -755,7 +755,7 @@ class PubRecAPI {
 		} else {
 			// Wrap the wonky plugin promise with a real promise
 			order = new Promise((resolve, reject) => {
-				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT)
+				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
 					.then(p => resolve(p))
 					.error(error => reject(error));
 			});
@@ -767,10 +767,10 @@ class PubRecAPI {
 					// Save them to the outer scope to deregister later
 					res = p => resolve(p);
 					rej = error => reject(error);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'verified', res);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'cancelled', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'unverified', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT, 'error', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
 				});
 			})
 			.then(p => {

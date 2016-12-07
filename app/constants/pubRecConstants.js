@@ -88,12 +88,14 @@ export default {
 
 	// These values must mirror the mappings in site JSON
 	planTypes: {
-		PERSON_REPORT_1_MONTH: 'person_report_1_month'
+		PERSON_REPORT_1_MONTH: 'person_report_1_month',
+		PERSON_REPORT_1_MONTH_IAP: 'person_report_1_month_iap'
 	},
 
 	// These values must mirror the mappings in site JSON
 	productTypes: {
-		PREMIUM_PERSON_REPORT: 'premium_person_report'
+		PREMIUM_PERSON_REPORT: 'premium_person_report',
+		PREMIUM_PERSON_REPORT_IAP: 'premium_person_report_iap'
 	},
 
 	// These must match what accounts service expects
