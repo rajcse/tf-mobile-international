@@ -17,7 +17,7 @@ const Header = (props) => {
 		searchTerm,
 		toggleSearch,
 		isSearching
-	} = this.props;
+	} = props;
 
 	title = title ? <h1>{title.length > 20 ? limitLength(title, 20) : title}</h1>
 		: <Svg className="logo" svg="tfLogo" />;
