@@ -162,7 +162,7 @@ export default class Dashboard extends React.Component {
 
 				{ this.state.isArchived &&
 					<div className="archive-all">
-						<button className="btn" onClick={() => { this.archiveModalToggle(); this.archiveStatusToggle(); }}>Clear All Report History</button>
+						<button className="btn" onClick={() => this.archiveModalToggle()}>Clear All Report History</button>
 					</div>
 				}
 
