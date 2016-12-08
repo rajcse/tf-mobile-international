@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { createFilter } from 'react-search-input';
 import constants from 'constants/pubRecConstants';
 import viewActions from 'actions/viewActions';
@@ -11,7 +12,9 @@ const KEYS_TO_FILTERS = [
 	'data.name.first',
 	'data.name.last',
 	'data.location.address.city',
-	'data.location.address.state'
+	'data.location.address.state',
+	'data.phone.number',
+	'data.email.address'
 ];
 
 export default class Dashboard extends React.Component {
@@ -23,10 +26,13 @@ export default class Dashboard extends React.Component {
 			records: [],
 			filter: 'ALL',
 			isArchived: false,
-			confirmArchive: false
+			confirmArchive: false,
+			isSearching: false
 		};
 
 		this.handleSearch = this.handleSearch.bind(this);
+		this.toggleSearch = this.toggleSearch.bind(this);
+		this.searchRecords = this.searchRecords.bind(this);
 		this.handleFilterChange = this.handleFilterChange.bind(this);
 		this.archiveAllRecords = this.archiveAllRecords.bind(this);
 		this.archiveStatusToggle = this.archiveStatusToggle.bind(this);
@@ -42,6 +48,15 @@ export default class Dashboard extends React.Component {
 	handleSearch(term) {
 		this.setState({
 			searchTerm: term
+		});
+	}
+
+	/**
+	 * Toggle Search Records
+	 */
+	toggleSearch() {
+		this.setState({
+			isSearching: !this.state.isSearching
 		});
 	}
 
@@ -97,21 +112,27 @@ export default class Dashboard extends React.Component {
 					archiveStatus={this.state.isArchived}
 					archiveStatusToggle={this.archiveStatusToggle}
 					searchFilter={this.handleSearch}
+					searchTerm={this.state.searchTerm}
+					isSearching={this.state.isSearching}
+					toggleSearch={this.toggleSearch}
 				/>
 
-				<div id="record-filter" className={records.length ? '' : 'disabled'}>
-					<label htmlFor="dashboard-filter">FILTER BY</label>
-					<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
-						<option value="ALL">All Reports</option>
-						<option value={constants.recordTypes.PERSON}>Person Reports</option>
-						<option value={constants.recordTypes.PHONE}>Phone Reports</option>
-						<option value={constants.recordTypes.EMAIL}>Email Reports</option>
-					</select>
-				</div>
+				{ _.isEmpty(this.state.searchTerm) ?
+					<div id="record-filter" className={records.length ? '' : 'disabled'}>
+						<label htmlFor="dashboard-filter">FILTER BY</label>
+						<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
+							<option value="ALL">All Reports</option>
+							<option value={constants.recordTypes.PERSON}>Person Reports</option>
+							<option value={constants.recordTypes.PHONE}>Phone Reports</option>
+							<option value={constants.recordTypes.EMAIL}>Email Reports</option>
+						</select>
+					</div>
+				: null }
 
-				{ records.length
-					? <h6>Sorted by most recently viewed</h6>
+				{ _.isEmpty(this.state.searchTerm) ? records.length ?
+					<h6>Sorted by most recently viewed</h6>
 					: <h6>No Reports</h6>
+					: <h6>Search Records for "{this.state.searchTerm}"</h6>
 				}
 
 				<ul id="record-history">
@@ -123,6 +144,7 @@ export default class Dashboard extends React.Component {
 						/>)
 					}
 
+
 					{/* Fallback if no records exist on dashboard or recently archived all records */}
 					{ !records.length &&
 						<div className="no-records">
@@ -131,6 +153,10 @@ export default class Dashboard extends React.Component {
 								<Link to="/search">Do a New Search!</Link>
 							</p>
 						</div>
+					}
+
+					{ _.isEmpty(this.state.searchTerm) ? null
+						: <button className="btn btn-primary btn-upgrade" onClick={() => { this.handleSearch(''); this.toggleSearch(); }}>Show All Reports</button>
 					}
 				</ul>
 
