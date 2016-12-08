@@ -1,8 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
 import { createFilter } from 'react-search-input';
-import pubRecAPI from 'utils/PubRecAPI';
 import constants from 'constants/pubRecConstants';
+import viewActions from 'actions/viewActions';
 import Header from 'components/Header';
 import Svg from 'components/svg/Svg';
 import Link from 'components/Link';
@@ -33,7 +32,7 @@ export default class Dashboard extends React.Component {
 		this.archiveStatusToggle = this.archiveStatusToggle.bind(this);
 	}
 
-	handleFilterChange() {
+	handleFilterChange(event) {
 		this.setState({filter: event.target.value});
 	}
 
@@ -59,9 +58,7 @@ export default class Dashboard extends React.Component {
 	 * Archive All Reports
 	 */
 	archiveAllRecords(records) {
-		records.map(record => {
-			pubRecAPI.toggleArchiveRecord(record.id[2], record.id[1], true);
-		});
+		records.map(record => viewActions.archiveRecord(record.id[2]));
 	}
 
 	/**
@@ -83,22 +80,13 @@ export default class Dashboard extends React.Component {
 	}
 
 	render() {
-		let records = _.chain(this.props.appState.usage)
-			.filter((record) => {
-				return !_.isNull(record.data.pointer);
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports by people with valid ids
-				return record.id[1] !== 'people';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Hide address look ups
-				return record.id[1] !== 'location';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Archived Record
-				return !record.data.isArchived;
-			}).value();
+		let records = this.props.appState.usage.filter(record => {
+			return (
+				record.data.pointer &&
+				!['people', 'location'].includes(record.id[1]) &&
+				!record.data.isArchived
+			);
+		});
 
 		records = this.searchRecords(records);
 
@@ -114,31 +102,31 @@ export default class Dashboard extends React.Component {
 				<div id="record-filter" className={records.length ? '' : 'disabled'}>
 					<label htmlFor="dashboard-filter">FILTER BY</label>
 					<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
-						<option value="ALL" >All Reports</option>
+						<option value="ALL">All Reports</option>
 						<option value={constants.recordTypes.PERSON}>Person Reports</option>
 						<option value={constants.recordTypes.PHONE}>Phone Reports</option>
 						<option value={constants.recordTypes.EMAIL}>Email Reports</option>
 					</select>
 				</div>
 
-				{ records.length ?
-					<h6>Sorted by most recently viewed</h6> :
-					<h6>No Reports</h6>
+				{ records.length
+					? <h6>Sorted by most recently viewed</h6>
+					: <h6>No Reports</h6>
 				}
 
 				<ul id="record-history">
-					{ records.map(record => this.state.filter === 'ALL' || record.id[1] === this.state.filter ?
+					{ records.map(record => (this.state.filter === 'ALL' || record.id[1] === this.state.filter) &&
 						<DashboardRow
 							key={JSON.stringify(record.id[2])}
 							archiveStatus={this.state.isArchived}
 							{...record}
-						/>
-					: null) }
+						/>)
+					}
 
 					{/* Fallback if no records exist on dashboard or recently archived all records */}
-					{ records.length ? null
-						: <div className="no-records">
-							<h3>No Reports Available</h3>
+					{ !records.length &&
+						<div className="no-records">
+							<h3>No Report History</h3>
 							<p>
 								<Link to="/search">Do a New Search!</Link>
 							</p>
@@ -146,13 +134,13 @@ export default class Dashboard extends React.Component {
 					}
 				</ul>
 
-				{ this.state.isArchived ?
+				{ this.state.isArchived &&
 					<div className="archive-all">
 						<button className="btn" onClick={() => { this.archiveModalToggle(); this.archiveStatusToggle(); }}>Clear All Report History</button>
 					</div>
-				: null }
+				}
 
-				{ this.state.confirmArchive ?
+				{ this.state.confirmArchive &&
 					<div id="archive-prompt">
 						<div className="modal-bg" />
 						<div className="modal modal-prompt">
@@ -170,7 +158,7 @@ export default class Dashboard extends React.Component {
 							</div>
 						</div>
 					</div>
-				: null }
+				}
 			</div>
 		);
 	}

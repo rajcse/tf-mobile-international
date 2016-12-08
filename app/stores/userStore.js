@@ -19,7 +19,6 @@ let _user = null,
 	_rated = false,
 	// Just in case our value gets borked, we need to check to make sure it's a number before coercing, otherwise we'll be incrementing NaN forever
 	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
-	_premiumAccess = false, // Default to false, hit user endpoint to check for access on app start/login/refresh token
 	_welcomeModalStatus = false,
 	_notifications = [],
 	_usage = [];
@@ -31,10 +30,6 @@ class UserStore extends EventEmitter {
 
 	getUsage() {
 		return _usage;
-	}
-
-	getPremiumAccess() {
-		return _premiumAccess;
 	}
 
 	getWelcomeModalStatus() {
@@ -171,13 +166,18 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.SHOW_PREMIUM_UPSELL:
-			_premiumUpsell = action.recordId;
+			// _premiumUpsell = action.recordId;
+			// userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_PREMIUM_UPSELL:
+			_premiumUpsell = action.premiumUpsell;
 			userStore.emitChange();
 			break;
 
-		case constants.actions.CONFIRM_PREMIUM_UPSELL:
-			_purchasePending = true;
-			userStore.emitChange();
+		case constants.actions.PURCHASE_PREMIUM_RECORD:
+			// _purchasePending = true;
+			// userStore.emitChange();
 			break;
 
 		case constants.actions.CANCEL_PREMIUM_UPSELL:
@@ -185,8 +185,12 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.PURCHASE_SUCCESSFUL:
+		case constants.actions.PREMIUM_UPGRADE_SUCCESSFUL:
 			_premiumUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.PURCHASE_SUCCESSFUL:
 			_productCrossSell = null;
 			_purchasePending = false;
 			_purchaseSuccess = true;
@@ -254,11 +258,6 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.ENABLE_PREMIUM_ACCESS:
-			_premiumAccess = true;
-			userStore.emitChange();
-			break;
-
 		// This waits for the PubRecAPI to clear its jwt state
 		case constants.actions.LOGGED_OUT:
 			_user = null;
@@ -269,7 +268,6 @@ dispatcher.register(action => {
 			_premiumUpsell = null;
 			_purchaseSuccess = false;
 			_purchasePending = false;
-			_premiumAccess = false;
 			_usage = [];
 			_recordsViewed = 0;
 			window.localStorage.removeItem('recordsViewed');

@@ -1,11 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
-import pubRecAPI from 'utils/PubRecAPI';
 import classNames from 'classnames';
 import Swipeable from 'react-swipeable';
 import Svg from 'components/svg/Svg';
 import constants from 'constants/pubRecConstants';
 import Link from 'components/Link';
+import viewActions from 'actions/viewActions';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -133,13 +133,13 @@ class DashboardRow extends React.Component {
 				onSwipedRight={this.resetSwipe} >
 				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped })}>
 					{ archiveStatus && !this.state.swiped ?
-						<span className="archive-record" onClick={() => { this.archiveAnimation(), pubRecAPI.toggleArchiveRecord(id[2], id[1], true); }}>
+						<span className="archive-record" onClick={() => { this.archiveAnimation(), viewActions.archiveRecord(id[2]); }}>
 							<Svg svg="closeGreyCircle" />
 						</span>
 					: null }
 
 					{ this.state.swiped ?
-						<p className="archive-text" onClick={() => { this.archiveAnimation(), pubRecAPI.toggleArchiveRecord(id[2], id[1], true); }}>
+						<p className="archive-text" onClick={() => { this.archiveAnimation(), viewActions.archiveRecord(id[2]); }}>
 							<span>Tap To Delete</span>
 						</p>
 					: null }
