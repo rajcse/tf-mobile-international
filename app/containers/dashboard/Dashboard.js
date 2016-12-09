@@ -39,7 +39,9 @@ export default class Dashboard extends React.Component {
 	}
 
 	handleFilterChange(event) {
-		this.setState({filter: event.target.value});
+		this.setState({
+			filter: event.target.value
+		});
 	}
 
 	/**
@@ -47,7 +49,8 @@ export default class Dashboard extends React.Component {
 	**/
 	handleSearch(term) {
 		this.setState({
-			searchTerm: term
+			searchTerm: term,
+			filter: 'ALL'
 		});
 	}
 
@@ -156,7 +159,7 @@ export default class Dashboard extends React.Component {
 					}
 
 					{ _.isEmpty(this.state.searchTerm) ? null
-						: <button className="btn btn-primary btn-upgrade" onClick={() => { this.handleSearch(''); this.toggleSearch(); }}>Show All Reports</button>
+						: <button className="btn btn-primary btn-upgrade" onClick={() => this.handleSearch('')}>Show All Reports</button>
 					}
 				</ul>
 
