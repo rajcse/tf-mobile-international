@@ -48,13 +48,18 @@ export default class SearchForm extends React.Component {
 	}
 
 	handleInputChange(e) {
+		// Focus on button to reset state toggle
+		this.button.focus();
+
 		// Format the phone number
 		if(this.props.criteria.type === constants.recordTypes.PHONE) e.target.value = _formatPhone(e.target.value);
 
 		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
 
 		// Reset the error until they try to submit again
-		this.setState({error: null});
+		this.setState({
+			error: null
+		});
 	}
 
 	handlePhoneKeyPress(e) {
@@ -123,16 +128,6 @@ export default class SearchForm extends React.Component {
 	}
 
 	renderPersonForm() {
-		let statesList = [];
-
-		_.map(STATES, (state, index) => {
-			statesList.push(<option
-				key={index}
-				value={index}>
-				{this.state.toggleState ? state : index}
-			</option>);
-		});
-
 		return (
 			<div id="person-search">
 				<div className="row">
@@ -191,9 +186,13 @@ export default class SearchForm extends React.Component {
 							name="state"
 							disabled={this.props.searching}
 							defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
-							onClick={() => this.toggleState()}
-							onChange={() => { this.toggleState(); this.handleInputChange(); }}>
-							{statesList}
+							onFocus={() => { this.toggleState(); }}
+							onChange={() => { this.toggleState(); this.handleInputChange(); }} >
+							{ _.map(STATES, (state, index) => {
+								return (<option key={index} value={index} onClick={() => { this.toggleState(); }}>
+									{ this.state.toggleState ? state : index}
+								</option>);
+							}) }
 						</select>
 					</div>
 				</div>
@@ -247,8 +246,7 @@ export default class SearchForm extends React.Component {
 				},{
 					label: 'Phone',
 					value: constants.recordTypes.PHONE
-				},
-				{
+				}, {
 					label: 'Email',
 					value: constants.recordTypes.EMAIL
 				}
@@ -284,7 +282,7 @@ export default class SearchForm extends React.Component {
 
 				{form}
 
-				<button disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
+				<button ref={button => this.button = button} disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
 			</form>
 		);
 	}
