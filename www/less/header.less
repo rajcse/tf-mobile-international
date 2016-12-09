@@ -19,7 +19,7 @@ header {
         font-size: 18px;
     }
 
-    > .archive-edit, > .archive-done {
+    > .header-edit, > .header-done {
         display: block;
         position: absolute;
         right: 15px;
@@ -50,6 +50,53 @@ header {
             border-top: none;
             border-right: none;
             transform: rotate(45deg);
+        }
+    }
+
+	.header-search {
+        display: block;
+        position: absolute;
+        left: 15px;
+        bottom: 18px;
+        height: 20px;
+        width: 20px;
+        z-index: 101;
+
+		.header-search-icon {
+			.cls-1 {
+				fill: @brand-blue;
+			}
+		}
+    }
+
+    .search-input {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 75%;
+        transition: all .5s ease;
+
+        &.hidden {
+            width: 0;
+			transition: all .5s ease;
+
+            input {
+                opacity: 0;
+				transition: all .5s ease;
+            }
+        }
+
+        input {
+            background: @brand-gray;
+            border-radius: 4px;
+            border: none;
+            padding: 10px 15px 10px 35px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 100;
+            opacity: 1;
+			transition: all .5s ease;
         }
     }
 

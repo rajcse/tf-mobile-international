@@ -2,6 +2,7 @@ import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
+import appStoreAPI from './AppStoreAPI';
 import config from 'config';
 
 const RECORD_CACHE_LIMIT = 25;
@@ -125,79 +126,77 @@ function _makeRequest(path, options) {
 	}
 
 	return fetch(config.API_ROOT + path + queryString, fetchOpts)
-	.then((response) => {
-		// If it's not JSON, throw and catch an error to default before it just bellyflops trying to parse the response
-		if(response.headers.get('Content-Type') !== 'application/json') {
+		.then(response => {
+			// If it's not JSON, throw and catch an error to default before it just bellyflops trying to parse the response
+			if(response.headers.get('Content-Type') !== 'application/json') {
 
-			throw new PubRecAPIError({
-				message: response.statusText,
-				responseBody: response.text(),
-				statusCode: response.status,
-				requestPath: path
-			});
-		}
+				throw new PubRecAPIError({
+					message: response.statusText,
+					responseBody: response.text(),
+					statusCode: response.status,
+					requestPath: path
+				});
+			}
 
-		return response;
-	})
-	.then((response) => {
-		// Check for HTTP error statuses, throw errors to skip processing response body
+			return response;
+		})
+		.then(response => {
+			// Check for HTTP error statuses, throw errors to skip processing response body
 
-		// Check for Unauthorized response
-		if(response.status === 401) throw new PubRecAPIError({message: 'Access Token Expired', statusCode: response.status});
+			// Check for Unauthorized response
+			if(response.status === 401) throw new PubRecAPIError({message: 'Access Token Expired', statusCode: response.status});
 
-		// If it's a 402, we need to throw an error to halt downstream processes
-		if(response.status === 402) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
+			// If it's a 402, we need to throw an error to halt downstream processes
+			if(response.status === 402) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
 
-		// If it's a 403, log the user out. No requests should return a 403 that doesn't require the user to log out
-		if(response.status === 403) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
+			// If it's a 403, log the user out. No requests should return a 403 that doesn't require the user to log out
+			if(response.status === 403) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
 
-		// Throw a generic error for every other error status
-		if(response.status > 400) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
+			// Throw a generic error for every other error status
+			if(response.status > 400) throw new PubRecAPIError({message: response.statusText, responseBody: response.json(), statusCode: response.status});
 
-		return response;
-	})
-	.then((response) => response.json())
-	.catch((error) => {
-		/* eslint-disable no-use-before-define */
-		// Catch the HTTP status errors, throw again to let the caller deal with the response
+			return response;
+		})
+		.then(response => response.json())
+		.catch(error => {
+			/* eslint-disable no-use-before-define */
+			// Catch the HTTP status errors, throw again to let the caller deal with the response
 
-		// If it was a 401, get a new access token here, then make the original request again
-		if(error.statusCode === 401 && requestCount++ < 10) {
-			return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
-		} else if(error.statusCode === 401){
-				// After 10 attempts, they should be logged out
-			pubRecAPI.logout();
-		}
+			// If it was a 401, get a new access token here, then make the original request again
+			if(error.statusCode === 401 && requestCount++ < 10) {
+				return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
+			} else if(error.statusCode === 401){
+					// After 10 attempts, they should be logged out
+				pubRecAPI.logout();
+			}
 
-		// If it's a 402, call the upsell flow now, don't hit the caller's catch block
-		if(error.statusCode === 402) {
-			error.responseBody.then(responseData => {
+			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
+			if(error.statusCode === 402) {
+				error.responseBody.then(responseData => {
 
-				_haltedRequest = queryString.substr(1).split('=')[1];
-				if(!_haltedRequest){
-					_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
-					//_haltedRequest = JSON.parse(fetchOpts.body).record;
-				}
-				setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
-				//console.log(JSON.stringify(responseData.errors[0].item));
-				setTimeout(() => serverActions.clearSearchState());
-			});
-		}
+					_haltedRequest = queryString.substr(1).split('=')[1];
+					if(!_haltedRequest){
+						_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
+					}
+					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
+					setTimeout(() => serverActions.clearSearchState());
+				});
+			}
 
-		if(error.statusCode === 403) {
-			pubRecAPI.logout();
-		}
+			if(error.statusCode === 403) {
+				pubRecAPI.logout();
+			}
 
-		if(error.statusCode > 400) throw error;
+			if(error.statusCode > 400) throw error;
 
-		// Return a default object for down the line
-		return {
-			success: false,
-			errors: [{message: error.message, code: error.statusCode}],
-			originalResponse: error.response
-		};
-		/* eslint-enable */
-	});
+			// Return a default object for down the line
+			return {
+				success: false,
+				errors: [{message: error.message, code: error.statusCode}],
+				originalResponse: error.response
+			};
+			/* eslint-enable */
+		});
 }
 
 
@@ -209,6 +208,33 @@ function _makeRequest(path, options) {
  *     by the .catch() method in this DAO
  */
 class PubRecAPI {
+	init() {
+		appStoreAPI.setValidator((product, cb) => {
+			const productSkus = [],
+				planSkus = [],
+				appStoreDetails = {
+					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR,
+					...product.transaction
+				};
+
+			// Check whether we need a plan or product, and if we have a sku mapped
+			if(appStoreAPI.PLANS.includes(product.type)) {
+				planSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
+			} else {
+				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
+			}
+
+			this.purchase(productSkus, planSkus, appStoreDetails)
+				.then(order => {
+					cb(true, {...product.transaction});
+				})
+				.catch(error => {
+					console.error(error);
+					cb(false, error);
+				});
+		});
+	}
+
 	checkLocalUser() {
 		// Check there's already a valid access and refresh token in local storage
 		let accessToken = window.localStorage.getItem('accessToken'),
@@ -227,10 +253,6 @@ class PubRecAPI {
 				// Trigger a received user
 				serverActions.receiveUser(user);
 
-				// TEMP
-				// Check for premium access
-				this.checkPremiumAccess();
-
 				// Fetch the initial usage info for the user
 				// If the access token is expired, it will refresh itself automatically on 401
 				this.getUsage();
@@ -247,7 +269,7 @@ class PubRecAPI {
 
 	refreshAccessToken() {
 		return _makeRequest('/refresh-access-token', {method: 'POST', body: {refreshToken: _refreshToken}})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					// Set the access token for future calls
 					_accessToken = responseData.accessToken;
@@ -255,16 +277,12 @@ class PubRecAPI {
 					// Set the tokens in local storage
 					window.localStorage.setItem('accessToken', _accessToken);
 
-					// TEMP
-					// Check for premium access
-					this.checkPremiumAccess();
-
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
 				} else {
 					console.log(responseData.errors);
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
@@ -300,7 +318,7 @@ class PubRecAPI {
 		credentials.cordovaDevice = window.device;
 
 		return _makeRequest('/register', {method: 'POST', body: credentials})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 						// Set the access token for future calls
 					_accessToken = responseData.accessToken;
@@ -333,7 +351,7 @@ class PubRecAPI {
 					}
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				if (error.statusCode === 409) {
 					setTimeout(() => serverActions.registerFailed('The email address you entered is already in use, please try another one or call member care at (800) 699-8081'), 0);
 				} else {
@@ -354,7 +372,7 @@ class PubRecAPI {
 		credentials.cordovaDevice = window.device;
 
 		return _makeRequest('/login', {method: 'POST', body: credentials})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 						// Set the access token for future calls
 					_accessToken = responseData.accessToken;
@@ -372,10 +390,6 @@ class PubRecAPI {
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
-					// TEMP
-					// Check for premium access
-					this.checkPremiumAccess();
-
 					// Get the usage for the user
 					this.getUsage();
 
@@ -392,15 +406,14 @@ class PubRecAPI {
 					}
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 				setTimeout(() => serverActions.loginFailed(error.message), 0);
 			});
 	}
 
 	slackPost(message) {
-
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		// Validate credentials first
 		if(!message.message) {
@@ -413,15 +426,14 @@ class PubRecAPI {
 		message.text = message.message;
 
 		return _makeRequest('/users/' + user.id + '/slackroom-post', {needsAuth: true, method: 'POST', body: message})
-
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					// TODO: Do something
 				} else {
 					// TODO: Switch error messages based on error response
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
@@ -438,43 +450,26 @@ class PubRecAPI {
 	}
 
 	fetchAccountInfo() {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 		return _makeRequest('/users/' + user.id, {needsAuth: true})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					setTimeout(() => serverActions.receiveAccountInfo(responseData.user), 0);
 				} else {
 					console.error(responseData.errors);
 				}
 			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}
-
-	/**
-	 * TEMP
-	 * This method should be completely removed after we open premium access for all users
-	 */
-	checkPremiumAccess() {
-		let user = _userFromAccessToken(_accessToken);
-		return _makeRequest('/users/' + user.id, {needsAuth: true})
-			.then((responseData) => {
-				if(responseData.success && (_.get(responseData.user, 'data.premium_access') || !_.has(responseData.user, 'data.premium_access'))) {
-					setTimeout(() => serverActions.enablePremiumAccess(), 0);
-				}
-			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
 
 	search(criteria) {
 		return _makeRequest('/' + constants.recordEndpoints[criteria.type], {query: criteria.query, needsAuth: true})
-			.then((responseData) => {
+			.then(responseData => {
 				setTimeout(() => serverActions.receiveSearchResults(responseData.results, criteria.type), 0);
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
@@ -484,7 +479,7 @@ class PubRecAPI {
 	 * the app after successful response
 	 */
 	createRecord(recordData, recordType, redirect, forceRefresh) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 		if(!forceRefresh) {
 			// Check for a cached recordId to serve immediately
 			let cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
@@ -516,7 +511,7 @@ class PubRecAPI {
 				type: recordType
 			}
 		})
-		.then((responseData) => {
+		.then(responseData => {
 			if(responseData.success) {
 				// Add the new recordId to the cache
 				_recordIdCache.push({pointer: recordData.pointer, recordId: responseData.recordId});
@@ -535,7 +530,7 @@ class PubRecAPI {
 				console.log(responseData.errors);
 			}
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.error(error);
 		});
 	}
@@ -545,7 +540,7 @@ class PubRecAPI {
 			query: {phone: number},
 			needsAuth: true
 		})
-		.then((responseData) => {
+		.then(responseData => {
 			if(!responseData.results.length){
 				setTimeout(() => serverActions.searchError('404'), 0);
 				return console.log(responseData);
@@ -553,8 +548,8 @@ class PubRecAPI {
 
 			this.createRecord({phone: {number}}, constants.recordTypes.PHONE, true);
 		})
-		.catch((err) => {
-			console.error(err);
+		.catch(error => {
+			console.error(error);
 		});
 	}
 
@@ -563,7 +558,7 @@ class PubRecAPI {
 			query: {email: address},
 			needsAuth: true
 		})
-		.then((responseData) => {
+		.then(responseData => {
 			if(!responseData.results.length){
 				setTimeout(() => serverActions.searchError('404'), 0);
 				return console.log(responseData);
@@ -571,8 +566,8 @@ class PubRecAPI {
 
 			this.createRecord({email: {address}}, constants.recordTypes.EMAIL, true);
 		})
-		.catch((err) => {
-			console.error(err);
+		.catch(error => {
+			console.error(error);
 		});
 	}
 
@@ -580,7 +575,7 @@ class PubRecAPI {
 	 * This also handles checking the local cache prior to requesting a record
 	 */
 	fetchRecord(criteria, forceRefresh) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		if(!forceRefresh) {
 			// Check for a cached record in their history to serve immediately
@@ -595,7 +590,7 @@ class PubRecAPI {
 		}
 
 		return _makeRequest('/users/' + user.id + '/records/' + criteria.recordId, {needsAuth: true})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					// Check for a stale version of the record in their history first
 					let staleRecordIndex = _.findIndex(_recordCache, (record) => record.id[2] === responseData.record.id[2]);
@@ -617,7 +612,7 @@ class PubRecAPI {
 				}
 			})
 			.then(() => this.getUsage())
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 				setTimeout(() => serverActions.recordRequestError(error), 0);
 			});
@@ -628,71 +623,191 @@ class PubRecAPI {
 	 */
 	fetchLocationTeaser(pointer) {
 		return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.LOCATION], {query: {pointer}, needsAuth: true})
-			.then((responseData) => {
+			.then(responseData => {
 				setTimeout(() => serverActions.receiveLocationTeaser(pointer, responseData.results[0]), 0);
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
 
 	getUsage() {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		return _makeRequest('/users/' + user.id + '/records', {needsAuth: true})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					setTimeout(() => serverActions.receiveUsage(responseData.records), 0);
 				} else {
 					console.error(responseData.errors);
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 			});
 	}
 
-	purchasePremium(recordId) {
-		let user = _userFromAccessToken(_accessToken);
+	fetchPremiumUpsellInfo(record) {
+		let accountInfo;
 
-		return _makeRequest('/users/' + user.id + '/premium-upsell', {needsAuth: true, method: 'POST', body: { recordId }})
-			.then((responseData) => {
-				if(responseData.success) {
-					this.fetchRecord({recordId}, true).then(() => setTimeout(serverActions.purchaseSuccessful));
-					setTimeout(() => this.fetchAccountInfo(), 0);
+		this.fetchUser()
+			.then(user => {
+				// Set the account info for down the line
+				accountInfo = user;
+
+				const paymentOptions = user.payment_options || [],
+					paymentOptionOnFile = paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
+
+				if(paymentOptionOnFile) {
+					return this.fetchProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				} else {
-					console.error(responseData.errors);
-					setTimeout(() => serverActions.purchaseError(responseData.errors));
+					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
 				}
 			})
-			.catch((error) => {
+			.then(premiumUpsellProduct => {
+				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, premiumUpsellProduct, accountInfo}), 0);
+			})
+			.catch(error => {
 				console.error(error);
-				setTimeout(() => serverActions.purchaseError(error));
 			});
 	}
 
 	/**
-	 * Toggle Record Archive
+	 * Internal function used to fetch user info
 	 */
-	toggleArchiveRecord(recordId, recordType, archive) {
-		let user = _userFromAccessToken(_accessToken);
-		_recordCache = [];
+	fetchUser() {
+		const user = _userFromAccessToken(_accessToken);
+		return _makeRequest('/users/' + user.id, {needsAuth: true})
+			.then(responseData => {
+				if(responseData.success){
+					return responseData.user;
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
 
-		return _makeRequest(`/usage/records/${user.id}/${recordType}/${recordId}`, {
-			query: { archive: archive },
-			needsAuth: true,
-			method: 'PATCH'
-		})
-		.then(() => {
-			this.getUsage();
-		})
-		.catch((error) => {
-			console.error(error);
-		});
+	/**
+	 * Internal function to get plan info
+	 */
+	fetchPlanInfo(planType) {
+		return _makeRequest('/plans/' + planType, {needsAuth: true})
+			.then(responseData => {
+
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	/**
+	 * Internal function to get product info
+	 */
+	fetchProductInfo(productType) {
+		return _makeRequest('/products/' + productType, {needsAuth: true})
+			.then(responseData => {
+				return responseData.product;
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	purchase(productSkus = [], planSkus = [], appStoreDetails) {
+		const cart = {
+			productSkus,
+			planSkus
+		};
+
+		if(appStoreDetails) cart.appStoreDetails = appStoreDetails;
+
+		return _makeRequest('/purchase', {needsAuth: true, method: 'POST', body: cart})
+			.then(responseData => {
+				if(responseData.success) {
+					return responseData.order;
+				} else {
+					// Throw an erro for downstream
+					throw new Error(responseData.errors[0]);
+				}
+			});
+	}
+
+	updateRecord(recordId, updates) {
+		const user = _userFromAccessToken(_accessToken);
+
+		// Only allow archive/unarchive and premium upgrade for now
+		let data = {};
+
+		if(updates.hasOwnProperty('isArchived')) data.isArchived = Boolean(updates.isArchived);
+		if(updates.isPremium) data.isPremium = true;
+
+		return _makeRequest('/users/' + user.id + '/records/' + recordId, {needsAuth: true, method: 'PATCH', body: data});
+	}
+
+	purchasePremiumRecord(premiumUpsell) {
+		let order;
+
+		// Switch between pubrec purchase and in app purchase
+		// In app products will not have a 'sku' property
+		if(premiumUpsell.premiumUpsellProduct.sku) {
+			order = this.purchase([premiumUpsell.premiumUpsellProduct.sku]);
+		} else {
+			// Wrap the wonky plugin promise with a real promise
+			order = new Promise((resolve, reject) => {
+				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
+					.then(p => resolve(p))
+					.error(error => reject(error));
+			});
+
+			// Promisify the product event callbacks, then unregister them as needed
+			let res, rej;
+			order = order.then(p => {
+				return new Promise((resolve, reject) => {
+					// Save them to the outer scope to deregister later
+					res = p => resolve(p);
+					rej = error => reject(error);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
+					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
+				});
+			})
+			.then(p => {
+				appStoreAPI.unregister(rej);
+				return p;
+			})
+			.catch(error => {
+				appStoreAPI.unregister(res);
+				throw error;
+			});
+		}
+
+		return order
+				.catch(error => {
+					setTimeout(() => serverActions.purchaseError(error));
+					// Skip the rest of the chain
+					throw error;
+				})
+				.then(o => {
+					return this.upgradeToPremiumRecord(premiumUpsell.record.id[2]);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+	}
+
+	upgradeToPremiumRecord(recordId) {
+		return this.updateRecord(recordId, {isPremium: true})
+				.then(() => this.fetchRecord({recordId}, true))
+				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
+				.catch(error => {
+					console.error(error);
+				});
 	}
 
 	purchasePackage(packageData, skipVerification) {
-		let user = _userFromAccessToken(_accessToken);
+		const user = _userFromAccessToken(_accessToken);
 
 		if(!skipVerification) {
 			switch(packageData.item_type){
@@ -702,7 +817,7 @@ class PubRecAPI {
 						query: {verify: true, ...packageData.original_criteria},
 						needsAuth: true
 					})
-					.then((responseData) => {
+					.then(responseData => {
 						if(!responseData.results.length){
 							setTimeout(() => serverActions.purchaseError('Report Not Found'));
 							return console.log(JSON.stringify(responseData));
@@ -710,8 +825,8 @@ class PubRecAPI {
 						this.purchasePackage(packageData, true);
 						setTimeout(() => this.fetchAccountInfo(), 0);
 					})
-					.catch((err) => {
-						console.error(err);
+					.catch(error => {
+						console.error(error);
 					});
 
 				case 'email_report':
@@ -720,7 +835,7 @@ class PubRecAPI {
 						query: {verify: true, ...packageData.original_criteria},
 						needsAuth: true
 					})
-					.then((responseData) => {
+					.then(responseData => {
 						if(!responseData.results.length){
 							setTimeout(() => serverActions.purchaseError('Report Not Found'));
 							return console.log(JSON.stringify(responseData));
@@ -728,8 +843,8 @@ class PubRecAPI {
 						this.purchasePackage(packageData, true);
 						setTimeout(() => this.fetchAccountInfo(), 0);
 					})
-					.catch((err) => {
-						console.error(err);
+					.catch(error => {
+						console.error(error);
 					});
 
 				default:
@@ -738,7 +853,7 @@ class PubRecAPI {
 		}
 
 		return _makeRequest('/users/' + user.id + '/purchase-package', {needsAuth: true, method: 'POST', body: {sku: packageData.sku}})
-			.then((responseData) => {
+			.then(responseData => {
 				if(responseData.success) {
 					_haltedRequest = decodeURIComponent(_haltedRequest);
 					switch(packageData.item_type){
@@ -762,11 +877,25 @@ class PubRecAPI {
 					setTimeout(() => serverActions.purchaseError(responseData.errors));
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(error);
 				setTimeout(() => serverActions.purchaseError(error));
 			});
 
+	}
+
+	/**
+	 * Sets the record's archive status
+	 */
+	setRecordArchiveStatus(recordId, isArchived) {
+		// Remove the cached record
+		_.remove(_recordCache, record => record.id[2] === recordId);
+
+		return this.updateRecord(recordId, {isArchived: Boolean(isArchived)})
+		.then(() => this.getUsage())
+		.catch(error => {
+			console.error(error);
+		});
 	}
 }
 

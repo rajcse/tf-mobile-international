@@ -176,21 +176,27 @@ export default {
 		pubRecAPI.fetchAccountInfo();
 	},
 
-	showPremiumUpsell(recordId) {
+	showPremiumUpsell(record) {
 		dispatcher.dispatch({
-			actionType: constants.actions.SHOW_PREMIUM_UPSELL,
-			recordId
+			actionType: constants.actions.SHOW_PREMIUM_UPSELL
 		});
+		pubRecAPI.fetchPremiumUpsellInfo(record);
 	},
 
-	confirmPremiumUpsell(recordId) {
+	purchasePremiumRecord(premiumUpsell) {
 		dispatcher.dispatch({
-			actionType: constants.actions.CONFIRM_PREMIUM_UPSELL,
+			actionType: constants.actions.PURCHASE_PREMIUM_RECORD,
+			premiumUpsell
+		});
+		pubRecAPI.purchasePremiumRecord(premiumUpsell);
+	},
+
+	upgradeToPremiumRecord(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.UPGRADE_TO_PREMIUM_RECORD,
 			recordId
 		});
-		//APP STORE INTEGRATION NOT READY YET!!!
-		//appStoreAPI.purchaseSubscription(product);
-		pubRecAPI.purchasePremium(recordId);
+		pubRecAPI.upgradeToPremiumRecord(recordId);
 	},
 
 	cancelPremiumUpsell() {
@@ -204,8 +210,6 @@ export default {
 			actionType: constants.actions.CONFIRM_CROSS_SELL,
 			sku
 		});
-		//APP STORE INTEGRATION NOT READY YET!!!
-		//appStoreAPI.purchaseSubscription(product);
 		pubRecAPI.purchasePackage(sku);
 	},
 
@@ -234,5 +238,12 @@ export default {
 			actionType: constants.actions.GET_USAGE
 		});
 		pubRecAPI.getUsage();
+	},
+
+	archiveRecord(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.ARCHIVE_RECORD
+		});
+		pubRecAPI.setRecordArchiveStatus(recordId, true);
 	}
 };

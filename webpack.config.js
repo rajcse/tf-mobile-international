@@ -79,7 +79,11 @@ if (process.env.NODE_ENV === 'production') {
 					NODE_ENV: JSON.stringify('production')
 				}
 			}),
-			new webpack.optimize.UglifyJsPlugin(),
+			new webpack.optimize.UglifyJsPlugin({
+			    compress: {
+			        warnings: false
+			    }
+			}),
 			new webpack.ProvidePlugin({
 				_: 'lodash',
 				$: 'jquery',

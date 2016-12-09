@@ -1,38 +1,82 @@
 import React from 'react';
 import _ from 'lodash';
-import pubRecAPI from 'utils/PubRecAPI';
+import { createFilter } from 'react-search-input';
 import constants from 'constants/pubRecConstants';
+import viewActions from 'actions/viewActions';
 import Header from 'components/Header';
 import Svg from 'components/svg/Svg';
 import Link from 'components/Link';
 import DashboardRow from './components/DashboardRow';
+
+const KEYS_TO_FILTERS = [
+	'data.name.first',
+	'data.name.last',
+	'data.location.address.city',
+	'data.location.address.state',
+	'data.phone.number',
+	'data.email.address'
+];
 
 export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			searchTerm: '',
+			records: [],
 			filter: 'ALL',
 			isArchived: false,
-			confirmArchive: false
+			confirmArchive: false,
+			isSearching: false
 		};
 
+		this.handleSearch = this.handleSearch.bind(this);
+		this.toggleSearch = this.toggleSearch.bind(this);
+		this.searchRecords = this.searchRecords.bind(this);
 		this.handleFilterChange = this.handleFilterChange.bind(this);
 		this.archiveAllRecords = this.archiveAllRecords.bind(this);
 		this.archiveStatusToggle = this.archiveStatusToggle.bind(this);
 	}
 
-	handleFilterChange() {
-		this.setState({filter: event.target.value});
+	handleFilterChange(event) {
+		this.setState({
+			filter: event.target.value
+		});
+	}
+
+	/**
+	* Update search term
+	**/
+	handleSearch(term) {
+		this.setState({
+			searchTerm: term,
+			filter: 'ALL'
+		});
+	}
+
+	/**
+	 * Toggle Search Records
+	 */
+	toggleSearch() {
+		this.setState({
+			isSearching: !this.state.isSearching
+		});
+	}
+
+	/**
+	* Filter Services
+	*/
+	searchRecords(records) {
+		let filtered = records.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+
+		return filtered;
 	}
 
 	/**
 	 * Archive All Reports
 	 */
 	archiveAllRecords(records) {
-		records.map(record => {
-			pubRecAPI.toggleArchiveRecord(record.id[2], record.id[1], true);
-		});
+		records.map(record => viewActions.archiveRecord(record.id[2]));
 	}
 
 	/**
@@ -54,22 +98,15 @@ export default class Dashboard extends React.Component {
 	}
 
 	render() {
-		let records = _.chain(this.props.appState.usage)
-			.filter((record) => {
-				return !_.isNull(record.data.pointer);
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports by people with valid ids
-				return record.id[1] !== 'people';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Hide address look ups
-				return record.id[1] !== 'location';
-			})
-			.filter((record) => {
-				// Filter Dashboard Reports: Archived Record
-				return !record.data.isArchived;
-			}).value();
+		let records = this.props.appState.usage.filter(record => {
+			return (
+				record.data.pointer &&
+				!['people', 'location'].includes(record.id[1]) &&
+				!record.data.isArchived
+			);
+		});
+
+		records = this.searchRecords(records);
 
 		return (
 			<div id="dashboard">
@@ -77,50 +114,62 @@ export default class Dashboard extends React.Component {
 					title="My Reports"
 					archiveStatus={this.state.isArchived}
 					archiveStatusToggle={this.archiveStatusToggle}
+					searchFilter={this.handleSearch}
+					searchTerm={this.state.searchTerm}
+					isSearching={this.state.isSearching}
+					toggleSearch={this.toggleSearch}
 				/>
 
-				<div id="record-filter" className={records.length ? '' : 'disabled'}>
-					<label htmlFor="dashboard-filter">FILTER BY</label>
-					<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
-						<option value="ALL" >All Reports</option>
-						<option value={constants.recordTypes.PERSON}>Person Reports</option>
-						<option value={constants.recordTypes.PHONE}>Phone Reports</option>
-						<option value={constants.recordTypes.EMAIL}>Email Reports</option>
-					</select>
-				</div>
+				{ _.isEmpty(this.state.searchTerm) ?
+					<div id="record-filter" className={records.length ? '' : 'disabled'}>
+						<label htmlFor="dashboard-filter">FILTER BY</label>
+						<select disabled={records.length ? false : true} id="dashboard-filter" name="dashboard-filter" defaultValue={'ALL'} onChange={this.handleFilterChange}>
+							<option value="ALL">All Reports</option>
+							<option value={constants.recordTypes.PERSON}>Person Reports</option>
+							<option value={constants.recordTypes.PHONE}>Phone Reports</option>
+							<option value={constants.recordTypes.EMAIL}>Email Reports</option>
+						</select>
+					</div>
+				: null }
 
-				{ records.length ?
-					<h6>Sorted by most recently viewed</h6> :
-					<h6>No Reports</h6>
+				{ _.isEmpty(this.state.searchTerm) ? records.length ?
+					<h6>Sorted by most recently viewed</h6>
+					: <h6>No Reports</h6>
+					: <h6>Search Records for "{this.state.searchTerm}"</h6>
 				}
 
 				<ul id="record-history">
-					{ records.map(record => this.state.filter === 'ALL' || record.id[1] === this.state.filter ?
+					{ records.map(record => (this.state.filter === 'ALL' || record.id[1] === this.state.filter) &&
 						<DashboardRow
 							key={JSON.stringify(record.id[2])}
 							archiveStatus={this.state.isArchived}
 							{...record}
-						/>
-					: null) }
+						/>)
+					}
+
 
 					{/* Fallback if no records exist on dashboard or recently archived all records */}
-					{ records.length ? null
-						: <div className="no-records">
-							<h3>No Reports Available</h3>
+					{ !records.length &&
+						<div className="no-records">
+							<h3>No Report History</h3>
 							<p>
 								<Link to="/search">Do a New Search!</Link>
 							</p>
 						</div>
 					}
+
+					{ _.isEmpty(this.state.searchTerm) ? null
+						: <button className="btn btn-primary btn-upgrade" onClick={() => this.handleSearch('')}>Show All Reports</button>
+					}
 				</ul>
 
-				{ this.state.isArchived ?
+				{ this.state.isArchived &&
 					<div className="archive-all">
-						<button className="btn" onClick={() => { this.archiveModalToggle(); this.archiveStatusToggle(); }}>Clear All Report History</button>
+						<button className="btn" onClick={() => this.archiveModalToggle()}>Clear All Report History</button>
 					</div>
-				: null }
+				}
 
-				{ this.state.confirmArchive ?
+				{ this.state.confirmArchive &&
 					<div id="archive-prompt">
 						<div className="modal-bg" />
 						<div className="modal modal-prompt">
@@ -138,7 +187,7 @@ export default class Dashboard extends React.Component {
 							</div>
 						</div>
 					</div>
-				: null }
+				}
 			</div>
 		);
 	}

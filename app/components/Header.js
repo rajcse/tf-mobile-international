@@ -1,23 +1,57 @@
 import React from 'react';
 import _ from 'lodash';
+import SearchInput from 'react-search-input';
 import {hashHistory} from 'react-router';
 import Svg from 'components/svg/Svg';
 
 const Header = (props) => {
 	const limitLength = (str, length) => `${str.substring(0, length)}...`;
-	let title = props.title ? <h1>{props.title.length > 20 ? limitLength(props.title, 20) : props.title}</h1> : <Svg className="logo" svg="tfLogo" />;
+
+	let {
+		title,
+		buttonHandler,
+		backButton,
+		archiveStatus,
+		archiveStatusToggle,
+		searchFilter,
+		searchTerm,
+		toggleSearch,
+		isSearching
+	} = props;
+
+	title = title ? <h1>{title.length > 20 ? limitLength(title, 20) : title}</h1>
+		: <Svg className="logo" svg="tfLogo" />;
 
 	return (
 		<header>
-			{props.backButton ?
-				<span className="header-btn" onClick={props.buttonHandler ? props.buttonHandler : () => hashHistory.goBack()} />
+			{ backButton ?
+				<span className="header-btn" onClick={buttonHandler ? buttonHandler : () => hashHistory.goBack()} />
 			: null }
+
+			{ _.isUndefined(searchFilter) ? null
+				: <div id="searchFilter">
+					<span className="header-search" onClick={() => toggleSearch()}>
+						<Svg svg="search" className="header-search-icon" />
+					</span>
+
+					<SearchInput
+						className={`search-input ${isSearching ? '' : 'hidden'}`}
+						fuzzy={true}
+						value={searchTerm}
+						onChange={searchFilter}
+					/>
+				</div>
+			}
 
 			{title}
 
-			{ _.isUndefined(props.archiveStatus) && _.isUndefined(props.archiveStatusToggle) ? null :
-				props.archiveStatus ? <span className="archive-done" onClick={() => props.archiveStatusToggle()}>Done</span>
-				: <span className="archive-edit" onClick={() => props.archiveStatusToggle()}>Edit</span>
+			{ _.isUndefined(searchFilter) || !isSearching ? null
+				: <span className="header-done" onClick={() => toggleSearch()}>Done</span>
+			}
+
+			{ _.isUndefined(archiveStatus) && _.isUndefined(archiveStatusToggle) || isSearching ? null :
+				archiveStatus ? <span className="header-done" onClick={() => archiveStatusToggle()}>Done</span>
+				: <span className="header-edit" onClick={() => archiveStatusToggle()}>Edit</span>
 			}
 		</header>
 	);
@@ -25,10 +59,14 @@ const Header = (props) => {
 
 Header.propTypes = {
 	title: React.PropTypes.string,
+	searchTerm: React.PropTypes.string,
 	backButton: React.PropTypes.bool,
 	archiveStatus: React.PropTypes.bool,
+	isSearching: React.PropTypes.bool,
+	toggleSearch: React.PropTypes.func,
 	archiveStatusToggle: React.PropTypes.func,
-	buttonHandler: React.PropTypes.func
+	buttonHandler: React.PropTypes.func,
+	searchFilter: React.PropTypes.func
 };
 
 export default Header;
