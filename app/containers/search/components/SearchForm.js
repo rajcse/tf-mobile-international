@@ -36,23 +36,30 @@ export default class SearchForm extends React.Component {
 		super(props);
 
 		this.state = {
-			error: null
+			error: null,
+			toggleState: false
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handlePhoneKeyPress = this.handlePhoneKeyPress.bind(this);
 		this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
 		this.doSearch = this.doSearch.bind(this);
+		this.toggleState = this.toggleState.bind(this);
 	}
 
 	handleInputChange(e) {
+		// Focus on button to reset state toggle
+		this.button.focus();
+
 		// Format the phone number
 		if(this.props.criteria.type === constants.recordTypes.PHONE) e.target.value = _formatPhone(e.target.value);
 
 		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
 
 		// Reset the error until they try to submit again
-		this.setState({error: null});
+		this.setState({
+			error: null
+		});
 	}
 
 	handlePhoneKeyPress(e) {
@@ -70,6 +77,12 @@ export default class SearchForm extends React.Component {
 	handleSearchTypeChange(searchType) {
 		viewActions.updateSearchCriteria({field: 'type', value: searchType});
 		this.setState({error: null});
+	}
+
+	toggleState() {
+		this.setState({
+			toggleState: !this.state.toggleState
+		});
 	}
 
 	doSearch(e) {
@@ -115,12 +128,6 @@ export default class SearchForm extends React.Component {
 	}
 
 	renderPersonForm() {
-		let statesList = [];
-
-		for(let state in STATES) {
-			statesList.push(<option key={state} value={state}>{state}</option>);
-		}
-
 		return (
 			<div id="person-search">
 				<div className="row">
@@ -175,8 +182,17 @@ export default class SearchForm extends React.Component {
 
 					<div className="controls">
 						<label>State</label>
-						<select name="state" disabled={this.props.searching} defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'} onChange={this.handleInputChange}>
-							{statesList}
+						<select
+							name="state"
+							disabled={this.props.searching}
+							defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
+							onFocus={() => { this.toggleState(); }}
+							onChange={() => { this.toggleState(); this.handleInputChange(); }} >
+							{ _.map(STATES, (state, index) => {
+								return (<option key={index} value={index} onClick={() => { this.toggleState(); }}>
+									{ this.state.toggleState ? state : index}
+								</option>);
+							}) }
 						</select>
 					</div>
 				</div>
@@ -230,8 +246,7 @@ export default class SearchForm extends React.Component {
 				},{
 					label: 'Phone',
 					value: constants.recordTypes.PHONE
-				},
-				{
+				}, {
 					label: 'Email',
 					value: constants.recordTypes.EMAIL
 				}
@@ -267,7 +282,7 @@ export default class SearchForm extends React.Component {
 
 				{form}
 
-				<button disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
+				<button ref={button => this.button = button} disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
 			</form>
 		);
 	}
