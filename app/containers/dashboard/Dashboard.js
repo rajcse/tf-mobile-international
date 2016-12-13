@@ -98,13 +98,8 @@ export default class Dashboard extends React.Component {
 	}
 
 	render() {
-		let records = this.props.appState.usage.filter(record => {
-			return (
-				record.data.pointer &&
-				!['people', 'location'].includes(record.id[1]) &&
-				!record.data.isArchived
-			);
-		});
+		// Filter out bad records with missing pointers, archived records, and location records
+		let records = this.props.appState.usage.filter(record => record.data.pointer && record.id[1] !== 'location' && !record.data.isArchived);
 
 		records = this.searchRecords(records);
 
@@ -112,7 +107,7 @@ export default class Dashboard extends React.Component {
 			<div id="dashboard">
 				<Header
 					title="My Reports"
-					archiveStatus={this.state.isArchived}
+					isArchived={this.state.isArchived}
 					archiveStatusToggle={this.archiveStatusToggle}
 					searchFilter={this.handleSearch}
 					searchTerm={this.state.searchTerm}

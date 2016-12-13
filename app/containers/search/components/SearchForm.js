@@ -37,20 +37,18 @@ export default class SearchForm extends React.Component {
 
 		this.state = {
 			error: null,
-			toggleState: false
+			fullStateNames: false
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleStateSelectorChange = this.handleStateSelectorChange.bind(this);
 		this.handlePhoneKeyPress = this.handlePhoneKeyPress.bind(this);
 		this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
 		this.doSearch = this.doSearch.bind(this);
-		this.toggleState = this.toggleState.bind(this);
+		this.showFullStateNames = this.showFullStateNames.bind(this);
 	}
 
 	handleInputChange(e) {
-		// Focus on button to reset state toggle
-		this.button.focus();
-
 		// Format the phone number
 		if(this.props.criteria.type === constants.recordTypes.PHONE) e.target.value = _formatPhone(e.target.value);
 
@@ -58,6 +56,17 @@ export default class SearchForm extends React.Component {
 
 		// Reset the error until they try to submit again
 		this.setState({
+			error: null
+		});
+	}
+
+	handleStateSelectorChange(e) {
+		// Focus on button to reset state toggle
+		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
+
+		// Reset the error until they try to submit again
+		this.setState({
+			fullStateNames: false,
 			error: null
 		});
 	}
@@ -79,9 +88,9 @@ export default class SearchForm extends React.Component {
 		this.setState({error: null});
 	}
 
-	toggleState() {
+	showFullStateNames() {
 		this.setState({
-			toggleState: !this.state.toggleState
+			fullStateNames: true
 		});
 	}
 
@@ -105,10 +114,10 @@ export default class SearchForm extends React.Component {
 			default:
 				if(!this.props.criteria[constants.recordTypes.PERSON].firstName || !this.props.criteria[constants.recordTypes.PERSON].lastName) return this.setState({error: true});
 
-				firstName = this.props.criteria[constants.recordTypes.PERSON].firstName.trim(),
-					middleInitial = this.props.criteria[constants.recordTypes.PERSON].middleInitial.trim(),
-					lastName = this.props.criteria[constants.recordTypes.PERSON].lastName.trim(),
-					city = _.has(this.props.criteria[constants.recordTypes.PERSON],'city') ? this.props.criteria[constants.recordTypes.PERSON].city.trim() : '';
+				firstName = this.props.criteria[constants.recordTypes.PERSON].firstName.trim();
+				middleInitial = this.props.criteria[constants.recordTypes.PERSON].middleInitial.trim();
+				lastName = this.props.criteria[constants.recordTypes.PERSON].lastName.trim();
+				city = _.has(this.props.criteria[constants.recordTypes.PERSON],'city') ? this.props.criteria[constants.recordTypes.PERSON].city.trim() : '';
 				search.query = {firstName: firstName, middleInitial: middleInitial,lastName: lastName, state: this.props.criteria[constants.recordTypes.PERSON].state, city: city};
 				break;
 
@@ -186,11 +195,12 @@ export default class SearchForm extends React.Component {
 							name="state"
 							disabled={this.props.searching}
 							defaultValue={this.props.criteria[constants.recordTypes.PERSON].state || 'ALL'}
-							onFocus={() => { this.toggleState(); }}
-							onChange={() => { this.toggleState(); this.handleInputChange(); }} >
+							onFocus={this.showFullStateNames}
+							onChange={this.handleStateSelectorChange}
+						>
 							{ _.map(STATES, (state, index) => {
-								return (<option key={index} value={index} onClick={() => { this.toggleState(); }}>
-									{ this.state.toggleState ? state : index}
+								return (<option key={index} value={index}>
+									{ this.state.fullStateNames ? state : index}
 								</option>);
 							}) }
 						</select>
@@ -282,7 +292,7 @@ export default class SearchForm extends React.Component {
 
 				{form}
 
-				<button ref={button => this.button = button} disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
+				<button disabled={this.props.searching} type="search" onClick={this.doSearch}>{this.props.searching ? 'Searching...' : 'Search'}</button>
 			</form>
 		);
 	}

@@ -1,7 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
 import SearchInput from 'react-search-input';
-import {hashHistory} from 'react-router';
+import { hashHistory } from 'react-router';
 import Svg from 'components/svg/Svg';
 
 const Header = (props) => {
@@ -11,7 +10,7 @@ const Header = (props) => {
 		title,
 		buttonHandler,
 		backButton,
-		archiveStatus,
+		isArchived,
 		archiveStatusToggle,
 		searchFilter,
 		searchTerm,
@@ -22,15 +21,19 @@ const Header = (props) => {
 	title = title ? <h1>{title.length > 20 ? limitLength(title, 20) : title}</h1>
 		: <Svg className="logo" svg="tfLogo" />;
 
+	// Set the toggle action and text
+	let toggleAction = isSearching ? toggleSearch : archiveStatusToggle,
+		toggleText = isSearching || isArchived ? 'Done' : 'Edit';
+
 	return (
 		<header>
-			{ backButton ?
+			{ backButton &&
 				<span className="header-btn" onClick={buttonHandler ? buttonHandler : () => hashHistory.goBack()} />
-			: null }
+			}
 
-			{ _.isUndefined(searchFilter) ? null
-				: <div id="searchFilter">
-					<span className="header-search" onClick={() => toggleSearch()}>
+			{ searchFilter &&
+				<div id="searchFilter">
+					<span className="header-search" onClick={toggleSearch}>
 						<Svg svg="search" className="header-search-icon" />
 					</span>
 
@@ -45,13 +48,8 @@ const Header = (props) => {
 
 			{title}
 
-			{ _.isUndefined(searchFilter) || !isSearching ? null
-				: <span className="header-done" onClick={() => toggleSearch()}>Done</span>
-			}
-
-			{ _.isUndefined(archiveStatus) && _.isUndefined(archiveStatusToggle) || isSearching ? null :
-				archiveStatus ? <span className="header-done" onClick={() => archiveStatusToggle()}>Done</span>
-				: <span className="header-edit" onClick={() => archiveStatusToggle()}>Edit</span>
+			{ (archiveStatusToggle || toggleSearch) &&
+				<span className="header-toggle" onClick={toggleAction}>{toggleText}</span>
 			}
 		</header>
 	);
@@ -61,7 +59,7 @@ Header.propTypes = {
 	title: React.PropTypes.string,
 	searchTerm: React.PropTypes.string,
 	backButton: React.PropTypes.bool,
-	archiveStatus: React.PropTypes.bool,
+	isArchived: React.PropTypes.bool,
 	isSearching: React.PropTypes.bool,
 	toggleSearch: React.PropTypes.func,
 	archiveStatusToggle: React.PropTypes.func,
