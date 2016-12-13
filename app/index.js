@@ -6,6 +6,9 @@ import 'whatwg-fetch';
 // Promise polyfill
 require('es6-promise').polyfill();
 
+// Custom polyfills
+import 'utils/polyfills';
+
 import React from 'react';
 import config from 'config';
 import ReactDOM from 'react-dom';
