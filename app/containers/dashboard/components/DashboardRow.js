@@ -5,6 +5,7 @@ import Swipeable from 'react-swipeable';
 import Svg from 'components/svg/Svg';
 import constants from 'constants/pubRecConstants';
 import Link from 'components/Link';
+import Loader from 'components/Loader';
 import viewActions from 'actions/viewActions';
 
 // Global Functions File
@@ -16,7 +17,8 @@ class DashboardRow extends React.Component {
 
 		this.state = {
 			left: 0,
-			swiped: false
+			swiped: false,
+			isArchiving: false
 		};
 
 		this.swipedLeft = this.swipedLeft.bind(this);
@@ -26,31 +28,38 @@ class DashboardRow extends React.Component {
 	}
 
 	swipedLeft() {
-		this.setState({
-			left: '-75px',
-			swiped: true
-		});
+		if (!this.state.isArchiving) {
+			this.setState({
+				left: '-75px',
+				swiped: true
+			});
+		}
 	}
 
 	swipingLeft(e, left) {
-		this.setState({
-			left: `-${left}px`,
-			swiped: false
-		});
+		if (!this.state.isArchiving) {
+			this.setState({
+				left: `-${left}px`,
+				swiped: false
+			});
+		}
 	}
 
 	archiveAnimation() {
 		this.setState({
-			left: '-9999px',
-			swiped: true
+			left: '0',
+			swiped: true,
+			isArchiving: true
 		});
 	}
 
 	resetSwipe() {
-		this.setState({
-			left: '0px',
-			swiped: false
-		});
+		if (!this.state.isArchiving) {
+			this.setState({
+				left: '0px',
+				swiped: false
+			});
+		}
 	}
 
 	render() {
@@ -131,14 +140,21 @@ class DashboardRow extends React.Component {
 				onSwipingLeft={this.swipingLeft}
 				onSwipedLeft={this.swipedLeft}
 				onSwipedRight={this.resetSwipe} >
-				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped })}>
-					{ archiveStatus && !this.state.swiped ?
+
+				{ this.state.isArchiving ?
+					<span className="archiving-record">
+						<Loader />
+					</span>
+				: null }
+
+				<li style={style} className={classNames('history-item', id[1], { premium: data.isPremium }, { swiped: this.state.swiped }, { archiving: this.state.isArchiving })}>
+					{ (!this.state.isArchiving && archiveStatus) && !this.state.swiped ?
 						<span className="archive-record" onClick={() => { this.archiveAnimation(), viewActions.archiveRecord(id[2]); }}>
 							<Svg svg="closeGreyCircle" />
 						</span>
 					: null }
 
-					{ this.state.swiped ?
+					{ this.state.swiped && !this.state.isArchiving ?
 						<p className="archive-text" onClick={() => { this.archiveAnimation(), viewActions.archiveRecord(id[2]); }}>
 							<span>Tap To Delete</span>
 						</p>

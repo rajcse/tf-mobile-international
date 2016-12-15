@@ -146,7 +146,7 @@ export default class Dashboard extends React.Component {
 					{/* Fallback if no records exist on dashboard or recently archived all records */}
 					{ !records.length &&
 						<div className="no-records">
-							<h3>No Report History</h3>
+							<h3>Your report history is empty</h3>
 							<p>
 								<Link to="/search">Do a New Search!</Link>
 							</p>
