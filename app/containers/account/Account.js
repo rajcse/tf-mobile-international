@@ -78,7 +78,7 @@ export default class Support extends Component {
 			// There's a tiny chance this will not be present in the event of accounts service error
             if(this.state.accountInfo.payment_options) {
                 defaultPaymentOption = _.find(this.state.accountInfo.payment_options, (paymentOption) => (
-                    /*paymentOption.id === this.state.accountInfo.default_payment_option_id &&*/ (paymentOption.payment_processor == 'orange' || paymentOption.payment_processor == 'paypal')
+                    paymentOption.id === this.state.accountInfo.default_payment_option_id && (paymentOption.payment_processor == 'orange' || paymentOption.payment_processor == 'paypal')
                 ));
             }
 		} else {
