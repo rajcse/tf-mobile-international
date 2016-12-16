@@ -76,9 +76,11 @@ export default class Support extends Component {
 			premiumBalance = this.state.accountInfo.balances.premium_person_report === null ? 'Unlimited' : this.state.accountInfo.balances.premium_person_report + ' credits';
 
 			// There's a tiny chance this will not be present in the event of accounts service error
-			if(this.state.accountInfo.payment_options) {
-				defaultPaymentOption = _.find(this.state.accountInfo.payment_options, {id: this.state.accountInfo.default_payment_option_id});
-			}
+            if(this.state.accountInfo.payment_options) {
+                defaultPaymentOption = _.find(this.state.accountInfo.payment_options, (paymentOption) => (
+                    /*paymentOption.id === this.state.accountInfo.default_payment_option_id &&*/ (paymentOption.payment_processor == 'orange' || paymentOption.payment_processor == 'paypal')
+                ));
+            }
 		} else {
 			// Don't assign these by default above to save the overhead of rendering 3 Loader components on every Account render
 			personBalance = <Loader />;
