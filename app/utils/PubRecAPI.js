@@ -897,6 +897,28 @@ class PubRecAPI {
 			console.error(error);
 		});
 	}
+
+	/**
+	 * Deactives user's account
+	 */
+	deleteAccount() {
+		const user = _userFromAccessToken(_accessToken);
+
+		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'DELETE'})
+			.then(responseData => {
+				if(responseData.success) {
+					pubRecAPI.logout();
+					//setTimeout(() => serverActions.deleteAccountSuccessful());
+				} else {
+					console.error(responseData.errors);
+					//setTimeout(() => serverActions.deleteAccountError(responseData.errors));
+				}
+			})
+			.catch(error => {
+				console.error(error);
+				//setTimeout(() => serverActions.deleteAccountError(error));
+			});
+	}
 }
 
 let pubRecAPI = new PubRecAPI();
