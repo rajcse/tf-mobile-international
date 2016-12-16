@@ -63,7 +63,7 @@ class PremiumUpsellPrompt extends Component {
 	}
 
 	render() {
-		const { premiumUpsellProduct, record, accountInfo } = this.props.premiumUpsell,
+		const { product, record, accountInfo } = this.props.premiumUpsell,
 			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
 		return (
@@ -107,7 +107,7 @@ class PremiumUpsellPrompt extends Component {
 								</button>
 
 								: <button className="continue" onClick={this.confirmPurchaseAndUpgrade}>Continue
-									<span>Upgrade this report for ${String(premiumUpsellProduct.price).replace('$', '')/* Fix for difference between IAP and Accounts Service */}</span>
+									<span>Upgrade this report for ${String(product.price).replace('$', '')/* Fix for difference between IAP and Accounts Service */}</span>
 								</button>
 							}
 							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>

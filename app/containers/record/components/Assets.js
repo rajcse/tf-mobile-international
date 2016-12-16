@@ -1,8 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
+import uuid from 'uuid';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import uuid from 'uuid';
+import firebaseClient from 'utils/firebaseClient';
 
 import * as libs from 'utils/libs';
 
@@ -10,9 +11,13 @@ const Assets = (props) => {
 	let {
 		assets,
 		isPremium,
-		name,
-		showPremiumUpsell
+		name
 	} = props;
+
+	const showPremiumUpsell = () => {
+		props.showPremiumUpsell();
+		firebaseClient.logEvent('premium_upsell_trigger', {trigger_category: 'user', trigger_element: 'Assets.button'});
+	};
 
 	if (!isPremium) {
 		return (

@@ -38,7 +38,6 @@ export default {
 		'LOGIN_FAILED',
 		'CHECK_LOCAL_USER',
 		'RECEIVE_USER',
-		'FETCH_ACCOUNT_INFO',
 		'RECEIVE_ACCOUNT_INFO',
 		'LOGOUT',
 		'LOGGED_OUT',
@@ -65,7 +64,7 @@ export default {
 		'SEARCH_ERROR',
 		'CLEAR_SEARCH_ERROR',
 		'CLEAR_SUCCESS',
-		'RATE',
+		'MARK_USER_AS_RATED',
 		'CONFIRM_WELCOME',
 		'SET_WELCOME_STATUS',
 		'DELETE_ACCOUNT'
@@ -103,6 +102,16 @@ export default {
 	inAppPaymentProcessors: {
 		APPLE: 'apple_iap',
 		GOOGLE: 'google_play'
+	},
+
+	// These map to the predefined event constants in Firebase - custom events should use strings
+	// https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event
+	firebase: {
+		LOGIN: 'login',
+		PRESENT_OFFER: 'present_offer', // {item_id, item_name, item_category, quantity, price} - ex. Premium Upsell prompt
+		SEARCH: 'search', // {search_term}
+		SIGN_UP: 'sign_up', // {sign_up_method}
+		VIEW_ITEM: 'view_item' // {item_id, item_name, item_category} - ex. record view
 	},
 
 	months: {

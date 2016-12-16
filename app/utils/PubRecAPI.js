@@ -2,7 +2,8 @@ import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
-import appStoreAPI from './AppStoreAPI';
+import appStoreClient from './appStoreClient';
+import firebaseClient from './firebaseClient';
 import config from 'config';
 
 const RECORD_CACHE_LIMIT = 25;
@@ -209,16 +210,16 @@ function _makeRequest(path, options) {
  */
 class PubRecAPI {
 	init() {
-		appStoreAPI.setValidator((product, cb) => {
+		appStoreClient.setValidator((product, cb) => {
 			const productSkus = [],
 				planSkus = [],
 				appStoreDetails = {
-					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR,
+					paymentProcessor: appStoreClient.PAYMENT_PROCESSOR,
 					...product.transaction
 				};
 
 			// Check whether we need a plan or product, and if we have a sku mapped
-			if(appStoreAPI.PLANS.includes(product.type)) {
+			if(appStoreClient.PLANS.includes(product.type)) {
 				planSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
 			} else {
 				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
@@ -341,6 +342,9 @@ class PubRecAPI {
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
+					// Fire Event
+					firebaseClient.logEvent(constants.firebase.SIGN_UP, {sign_up_method: 'Mobile App'});
+
 				} else {
 					// TODO: Switch error messages based on error response
 					let online = window.navigator.onLine;
@@ -374,7 +378,7 @@ class PubRecAPI {
 		return _makeRequest('/login', {method: 'POST', body: credentials})
 			.then(responseData => {
 				if(responseData.success) {
-						// Set the access token for future calls
+					// Set the access token for future calls
 					_accessToken = responseData.accessToken;
 
 					// Set the refresh token to get new access tokens
@@ -385,7 +389,6 @@ class PubRecAPI {
 					window.localStorage.setItem('refreshToken', _refreshToken);
 
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
-					setTimeout(() => this.fetchAccountInfo(), 0);
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
@@ -395,6 +398,9 @@ class PubRecAPI {
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
+
+					// Fire event
+					firebaseClient.logEvent(constants.firebase.LOGIN);
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -661,11 +667,11 @@ class PubRecAPI {
 				if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				} else {
-					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
+					return appStoreClient.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
 				}
 			})
-			.then(premiumUpsellProduct => {
-				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, premiumUpsellProduct, accountInfo}), 0);
+			.then(product => {
+				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, product, accountInfo}), 0);
 			})
 			.catch(error => {
 				console.error(error);
@@ -750,12 +756,12 @@ class PubRecAPI {
 
 		// Switch between pubrec purchase and in app purchase
 		// In app products will not have a 'sku' property
-		if(premiumUpsell.premiumUpsellProduct.sku) {
-			order = this.purchase([premiumUpsell.premiumUpsellProduct.sku]);
+		if(premiumUpsell.product.sku) {
+			order = this.purchase([premiumUpsell.product.sku]);
 		} else {
 			// Wrap the wonky plugin promise with a real promise
 			order = new Promise((resolve, reject) => {
-				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
+				appStoreClient.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
 					.then(p => resolve(p))
 					.error(error => reject(error));
 			});
@@ -767,18 +773,18 @@ class PubRecAPI {
 					// Save them to the outer scope to deregister later
 					res = p => resolve(p);
 					rej = error => reject(error);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
 				});
 			})
 			.then(p => {
-				appStoreAPI.unregister(rej);
+				appStoreClient.unregister(rej);
 				return p;
 			})
 			.catch(error => {
-				appStoreAPI.unregister(res);
+				appStoreClient.unregister(res);
 				throw error;
 			});
 		}

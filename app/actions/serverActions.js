@@ -2,6 +2,7 @@ import {hashHistory} from 'react-router';
 import constants from 'constants/pubRecConstants';
 import dispatcher from 'dispatcher';
 import pubRecAPI from 'utils/PubRecAPI';
+import firebaseClient from 'utils/firebaseClient';
 
 export default {
 	receiveSearchResults(results, type) {
@@ -49,6 +50,8 @@ export default {
 			actionType: constants.actions.RECEIVE_RECORD,
 			record
 		});
+		// Fire view record event whenever we receive a record (cached or uncached)
+		firebaseClient.logEvent(constants.firebase.VIEW_ITEM, {item_name: 'Record', item_id: record.id[2], item_category: record.id[1]});
 	},
 
 	viewUncachedRecord() {
@@ -77,6 +80,7 @@ export default {
 			actionType: constants.actions.RECEIVE_USER,
 			user
 		});
+		firebaseClient.setUserId(user.id);
 	},
 
 	receiveAccountInfo(account) {
@@ -144,6 +148,8 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGGED_OUT
 		});
+		firebaseClient.logEvent('logout');
+		firebaseClient.setUserId(null);
 		if(redirect) hashHistory.push('/');
 	},
 
@@ -165,6 +171,12 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.RECEIVE_PREMIUM_UPSELL,
 			premiumUpsell
+		});
+		firebaseClient.logEvent(constants.firebase.PRESENT_OFFER, {
+			item_id: premiumUpsell.product.sku || premiumUpsell.product.id,
+			item_category: 'Premium Person Report',
+			quantity: 1,
+			price: Number(String(premiumUpsell.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
 		});
 	},
 

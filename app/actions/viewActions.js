@@ -2,6 +2,7 @@ import {hashHistory} from 'react-router';
 import constants from 'constants/pubRecConstants';
 import dispatcher from 'dispatcher';
 import pubRecAPI from 'utils/PubRecAPI';
+import firebaseClient from 'utils/firebaseClient';
 
 export default {
 	search(criteria) {
@@ -9,6 +10,7 @@ export default {
 			actionType: constants.actions.SEARCH,
 			criteria
 		});
+		firebaseClient.logEvent(constants.firebase.SEARCH, {search_term: JSON.stringify(criteria)});
 		pubRecAPI.search(criteria);
 	},
 
@@ -22,18 +24,13 @@ export default {
 		pubRecAPI.search(criteria);
 	},
 
-	goToDashboard() {
-		hashHistory.push('/');
-		this.clearSearchResults();
-	},
-
 	goToSupport() {
 		hashHistory.push('/support');
 	},
 
-	rate() {
+	markUserAsRated() {
 		dispatcher.dispatch({
-			actionType: constants.actions.RATE
+			actionType: constants.actions.MARK_USER_AS_RATED
 		});
 	},
 
@@ -159,6 +156,7 @@ export default {
 			actionType: constants.actions.LOGIN,
 			credentials
 		});
+		firebaseClient.logEvent('login_attempt');
 		pubRecAPI.login(credentials);
 	},
 
@@ -167,13 +165,6 @@ export default {
 			actionType: constants.actions.LOGOUT
 		});
 		pubRecAPI.logout();
-	},
-
-	fetchAccountInfo() {
-		dispatcher.dispatch({
-			actionType: constants.actions.FETCH_ACCOUNT_INFO
-		});
-		pubRecAPI.fetchAccountInfo();
 	},
 
 	showPremiumUpsell(record) {
@@ -244,6 +235,7 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.ARCHIVE_RECORD
 		});
+		firebaseClient.logEvent('archive_record', {record_id: recordId});
 		pubRecAPI.setRecordArchiveStatus(recordId, true);
 	},
 
