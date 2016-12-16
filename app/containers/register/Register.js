@@ -92,7 +92,7 @@ export default class Register extends Component {
 						{this.state.registerErrors ? <p className="error-message">{this.state.registerErrors}</p> : null}
 					</Transition>
 
-					<label>Create Free Account</label>
+					<label>Create A New Account</label>
 
 					<input
 						type="text"

@@ -12,11 +12,16 @@ export default class Support extends Component {
 
 		// This component should always mount without account info
 		this.state = {
-			accountInfo: null
+			accountInfo: null,
+			deleteAccountModal: false,
+			deleteConfirmationModal: false
 		};
 
 		this.onUserChange = this.onUserChange.bind(this);
 		this.doLogout = this.doLogout.bind(this);
+		this.deleteAccountModal = this.deleteAccountModal.bind(this);
+		this.deleteAccount = this.deleteAccount.bind(this);
+		this.cancelDeleteModal = this.cancelDeleteModal.bind(this);
 	}
 
 	componentWillMount() {
@@ -39,6 +44,22 @@ export default class Support extends Component {
 
 	doLogout() {
 		viewActions.logout();
+	}
+
+	deleteAccountModal() {
+		this.setState({
+			deleteAccountModal: true
+		});
+	}
+
+	cancelDeleteModal() {
+		this.setState({
+			deleteAccountModal: false
+		});
+	}
+
+	deleteAccount() {
+		viewActions.deleteAccount();
 	}
 
 	render() {
@@ -66,7 +87,17 @@ export default class Support extends Component {
 			premiumBalance = <Loader />;
 		}
 
-		return (
+		return ( 
+				this.state.deleteAccountModal ?
+					<div className="modal">
+						<h3>Warning!</h3>
+						<p>Are you sure you want to delete your account?</p>
+						<p className="confirm">
+							<button className="continue" onClick={this.cancelDeleteModal}>No, I want to look up more reports.</button>
+							<a className="cancel" onClick={this.deleteAccount}>Yes, delete my account.</a>
+						</p>
+					</div> 
+					:
 			<div id="account">
 				<Header title="Account Info" />
 
@@ -95,6 +126,12 @@ export default class Support extends Component {
 						<dt>Premium Reports</dt>
 						<dd>{premiumBalance}</dd>
 					</dl>
+
+					{!defaultPaymentOption ?
+						<dl>
+							<dd id="delete-account"><button onClick={this.deleteAccountModal}>Delete Account</button></dd>
+						</dl> : null
+					}
 
 				</div>
 

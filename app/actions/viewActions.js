@@ -245,5 +245,12 @@ export default {
 			actionType: constants.actions.ARCHIVE_RECORD
 		});
 		pubRecAPI.setRecordArchiveStatus(recordId, true);
+	},
+
+	deleteAccount() {
+		dispatcher.dispatch({
+			actionType: constants.actions.DELETE_ACCOUNT
+		});
+		pubRecAPI.deleteAccount();
 	}
 };

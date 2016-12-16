@@ -67,7 +67,8 @@ export default {
 		'CLEAR_SUCCESS',
 		'RATE',
 		'CONFIRM_WELCOME',
-		'SET_WELCOME_STATUS'
+		'SET_WELCOME_STATUS',
+		'DELETE_ACCOUNT'
 	]),
 
 	// These must match what usage-service is expecting
