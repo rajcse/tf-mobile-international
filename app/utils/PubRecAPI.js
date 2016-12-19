@@ -317,6 +317,7 @@ class PubRecAPI {
 		// Append the device uuid or user agent to the credentials - this is used for refresh tokens
 		credentials.deviceId = window.device.uuid || navigator.userAgent;
 		credentials.cordovaDevice = window.device;
+		credentials.firebaseToken = firebaseClient.deviceToken;
 
 		return _makeRequest('/register', {method: 'POST', body: credentials})
 			.then(responseData => {
@@ -342,8 +343,10 @@ class PubRecAPI {
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
-					// Fire Event
-					firebaseClient.logEvent(constants.firebase.SIGN_UP, {sign_up_method: 'Mobile App'});
+					// Fire Event and subscribe to topics
+					firebaseClient.logEvent(constants.firebase.events.SIGN_UP, {sign_up_method: 'Mobile App'});
+					firebaseClient.subscribe(constants.firebase.topics.MOBILE_REGISTERED_USERS);
+					firebaseClient.subscribe(constants.firebase.topics.NO_PURCHASES_MADE);
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -374,6 +377,7 @@ class PubRecAPI {
 		// Append the device uuid or user agent to the credentials - this is used for refresh tokens
 		credentials.deviceId = window.device.uuid || navigator.userAgent;
 		credentials.cordovaDevice = window.device;
+		credentials.firebaseToken = firebaseClient.deviceToken;
 
 		return _makeRequest('/login', {method: 'POST', body: credentials})
 			.then(responseData => {
@@ -400,7 +404,7 @@ class PubRecAPI {
 					setTimeout(() => serverActions.redirectToSearch(), 0);
 
 					// Fire event
-					firebaseClient.logEvent(constants.firebase.LOGIN);
+					firebaseClient.logEvent(constants.firebase.events.LOGIN);
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -452,6 +456,10 @@ class PubRecAPI {
 		_recordIdCache = [];
 		window.localStorage.removeItem('accessToken');
 		window.localStorage.removeItem('refreshToken');
+
+		// Unsubscribe from all topics
+		firebaseClient.unsubscribeAll();
+
 		serverActions.loggedOut(redirect);
 	}
 
@@ -731,6 +739,9 @@ class PubRecAPI {
 		return _makeRequest('/purchase', {needsAuth: true, method: 'POST', body: cart})
 			.then(responseData => {
 				if(responseData.success) {
+					// Unsubscribe from no_purchases_made topic
+					firebaseClient.unsubscribe(constants.firebase.topics.NO_PURCHASES_MADE);
+
 					return responseData.order;
 				} else {
 					// Throw an erro for downstream

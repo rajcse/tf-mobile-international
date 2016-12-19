@@ -104,14 +104,21 @@ export default {
 		GOOGLE: 'google_play'
 	},
 
-	// These map to the predefined event constants in Firebase - custom events should use strings
-	// https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event
 	firebase: {
-		LOGIN: 'login',
-		PRESENT_OFFER: 'present_offer', // {item_id, item_name, item_category, quantity, price} - ex. Premium Upsell prompt
-		SEARCH: 'search', // {search_term}
-		SIGN_UP: 'sign_up', // {sign_up_method}
-		VIEW_ITEM: 'view_item' // {item_id, item_name, item_category} - ex. record view
+		events: {
+			// These map to the predefined event constants in Firebase - custom events should use strings
+			// https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event
+			LOGIN: 'login',
+			PRESENT_OFFER: 'present_offer', // {item_id, item_name, item_category, quantity, price} - ex. Premium Upsell prompt
+			SEARCH: 'search', // {search_term}
+			SIGN_UP: 'sign_up', // {sign_up_method}
+			VIEW_ITEM: 'view_item' // {item_id, item_name, item_category} - ex. record view
+		},
+		topics: mirror([
+			// Stored here so we can loop them and unsubscribe a user from all topics easily
+			'MOBILE_REGISTERED_USERS',
+			'NO_PURCHASES_MADE'
+		])
 	},
 
 	months: {

@@ -51,7 +51,7 @@ export default {
 			record
 		});
 		// Fire view record event whenever we receive a record (cached or uncached)
-		firebaseClient.logEvent(constants.firebase.VIEW_ITEM, {item_name: 'Record', item_id: record.id[2], item_category: record.id[1]});
+		firebaseClient.logEvent(constants.firebase.events.VIEW_ITEM, {item_name: 'Record', item_id: record.id[2], item_category: record.id[1]});
 	},
 
 	viewUncachedRecord() {
@@ -172,7 +172,7 @@ export default {
 			actionType: constants.actions.RECEIVE_PREMIUM_UPSELL,
 			premiumUpsell
 		});
-		firebaseClient.logEvent(constants.firebase.PRESENT_OFFER, {
+		firebaseClient.logEvent(constants.firebase.events.PRESENT_OFFER, {
 			item_id: premiumUpsell.product.sku || premiumUpsell.product.id,
 			item_category: 'Premium Person Report',
 			quantity: 1,
