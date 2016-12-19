@@ -101,6 +101,20 @@
             }
         }
 
+        > div {
+            position: relative;
+        }
+
+        .archiving-record {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 0;
+            right: 0;
+            top: 40%;
+            margin: 0 auto;
+        }
+
         li.history-item {
             border-radius: @input-border-radius;
             margin-bottom: 10px;
@@ -110,6 +124,11 @@
 			&.swiped {
 				transition: all .5s ease;
 			}
+
+            &.archiving {
+                opacity: .4;
+                position: relative;
+            }
 
             h3 {
                 color: @brand-blue;
