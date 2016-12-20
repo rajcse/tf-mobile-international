@@ -17,6 +17,7 @@ const common = {
 		app: path.join(__dirname, 'app'),
 		vendor: [
 			'jquery',
+			'lodash',
 			'react',
 			'react-addons-css-transition-group',
 			'react-dom',
@@ -80,9 +81,9 @@ if (process.env.NODE_ENV === 'production') {
 				}
 			}),
 			new webpack.optimize.UglifyJsPlugin({
-			    compress: {
-			        warnings: false
-			    }
+				compress: {
+					warnings: false
+				}
 			}),
 			new webpack.ProvidePlugin({
 				_: 'lodash',
@@ -95,7 +96,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
 	module.exports = merge(common, {
 		debug: true,
-		devtool: 'source-map',
+		devtool: 'eval-source-map',
 		devServer: {
 			contentBase: path.join(__dirname, 'www'),
 			port: 3000,

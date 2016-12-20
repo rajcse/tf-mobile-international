@@ -33,8 +33,12 @@ class RecordLoader extends Component {
 		return (
 			<div id="record-loader">
 				<div>
-					{this.props.isPremium ? <p>Congratulations! Your upgrade was successful and we're now loading a Premium Report for...</p> : 
-						<div><p>Loading Report...</p><p>{constants.reportLoaderTeasers[Math.floor(Math.random()*constants.reportLoaderTeasers.length)]}</p></div>
+					{this.props.isPremium
+						? <p>Congratulations! Your upgrade was successful and we're now loading a Premium Report for...</p>
+						: <div>
+							<p>Loading Report...</p>
+							<p>{constants.reportLoaderTeasers[Math.floor(Math.random()*constants.reportLoaderTeasers.length)]}</p>
+						</div>
 					}
 					{this.props.reportName ? <h3>{this.props.reportName}</h3> : null}
 					<Loader />
