@@ -148,8 +148,6 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGGED_OUT
 		});
-		firebaseClient.logEvent('logout');
-		firebaseClient.setUserId(null);
 		if(redirect) hashHistory.push('/');
 	},
 

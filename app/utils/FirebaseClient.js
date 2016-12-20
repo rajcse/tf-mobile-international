@@ -20,10 +20,14 @@ class FirebaseClient {
 		// window.FirebasePlugin.grantPermission();
 
 		// Get the initial token value (this should available by deviceReady)
-		window.FirebasePlugin.getToken(token => {console.log('Initial Token', token); this.deviceToken = token;}, e => console.error(e));
+		window.FirebasePlugin.getToken(token => {
+			this.deviceToken = token;
+		}, e => console.error(e));
 
 		// Set the device token if it changes
-		window.FirebasePlugin.onTokenRefresh(token => {console.log('Token Refreshed', token); this.deviceToken = token;}, e => console.error(e));
+		window.FirebasePlugin.onTokenRefresh(token => {
+			this.deviceToken = token;
+		}, e => console.error(e));
 
 		// Trigger notification action
 		window.FirebasePlugin.onNotificationOpen(notification => {

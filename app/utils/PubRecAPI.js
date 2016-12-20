@@ -167,8 +167,9 @@ function _makeRequest(path, options) {
 			if(error.statusCode === 401 && requestCount++ < 10) {
 				return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
 			} else if(error.statusCode === 401){
-					// After 10 attempts, they should be logged out
-				pubRecAPI.logout();
+				// After 10 attempts, clear the user data and fire a logout
+				this.clearUserData();
+				serverActions.loggedOut();
 			}
 
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
@@ -185,7 +186,8 @@ function _makeRequest(path, options) {
 			}
 
 			if(error.statusCode === 403) {
-				pubRecAPI.logout();
+				this.clearUserData();
+				serverActions.loggedOut();
 			}
 
 			if(error.statusCode > 400) throw error;
@@ -259,12 +261,14 @@ class PubRecAPI {
 				this.getUsage();
 
 			} catch(e) {
-				// Force a logout - the access token was malformed
-				return this.logout();
+				// Clear user data - the access token was malformed
+				this.clearUserData();
+				return serverActions.loggedOut();
 			}
 		} else {
-			// If we can't log the user in, trigger a logout and remove any leftover info
-			return this.logout(false);
+			// If we can't log the user in, clear all the user data and trigger a logout
+			this.clearUserData();
+			return serverActions.loggedOut(false);
 		}
 	}
 
@@ -448,7 +452,10 @@ class PubRecAPI {
 			});
 	}
 
-	logout(redirect) {
+	/**
+	 * Internal function to clear user data
+	 */
+	clearUserData() {
 		// Null out the _accessToken, _refreshToken, and local items
 		_accessToken = null;
 		_refreshToken = null;
@@ -459,8 +466,29 @@ class PubRecAPI {
 
 		// Unsubscribe from all topics
 		firebaseClient.unsubscribeAll();
+	}
 
-		serverActions.loggedOut(redirect);
+	logout(redirect) {
+		// Delete the firebase token for the device
+		return this.updateUser({
+			devices: [{
+				id: window.device.uuid || navigator.userAgent,
+				firebase_token: null
+			}]
+		})
+		// Same actions need to fire regardless of success response for user update
+		.then(user => {
+			this.clearUserData();
+			firebaseClient.logEvent('logout');
+			firebaseClient.setUserId(null);
+			setTimeout(serverActions.loggedOut(redirect), 0);
+		})
+		.catch(error => {
+			this.clearUserData();
+			firebaseClient.logEvent('logout');
+			firebaseClient.setUserId(null);
+			setTimeout(serverActions.loggedOut(redirect), 0);
+		});
 	}
 
 	fetchAccountInfo() {
@@ -703,6 +731,20 @@ class PubRecAPI {
 	}
 
 	/**
+	 * Internal function to update users
+	 */
+	updateUser(updates) {
+		const user = _userFromAccessToken(_accessToken);
+
+		// Only allow device updates for now
+		let data = {
+			devices: updates.devices
+		};
+
+		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'PATCH', body: data});
+	}
+
+	/**
 	 * Internal function to get plan info
 	 */
 	fetchPlanInfo(planType) {
@@ -924,7 +966,7 @@ class PubRecAPI {
 		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'DELETE'})
 			.then(responseData => {
 				if(responseData.success) {
-					pubRecAPI.logout();
+					this.logout();
 					//setTimeout(() => serverActions.deleteAccountSuccessful());
 				} else {
 					console.error(responseData.errors);
