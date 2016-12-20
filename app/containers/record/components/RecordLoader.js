@@ -1,6 +1,7 @@
 import Loader from 'components/Loader';
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
+import constants from 'constants/pubRecConstants';
 
 class RecordLoader extends Component {
 
@@ -32,7 +33,9 @@ class RecordLoader extends Component {
 		return (
 			<div id="record-loader">
 				<div>
-					{this.props.isPremium ? <p>Congratulations! Your upgrade was successful and we're now loading a Premium Report for...</p> : <p>Loading Report...</p>}
+					{this.props.isPremium ? <p>Congratulations! Your upgrade was successful and we're now loading a Premium Report for...</p> : 
+						<div><p>Loading Report...</p><p>{constants.reportLoaderTeasers[Math.floor(Math.random()*constants.reportLoaderTeasers.length)]}</p></div>
+					}
 					{this.props.reportName ? <h3>{this.props.reportName}</h3> : null}
 					<Loader />
 					<br/>
