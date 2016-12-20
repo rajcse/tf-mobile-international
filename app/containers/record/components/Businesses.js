@@ -2,15 +2,20 @@ import React from 'react';
 import _ from 'lodash';
 import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
-import {STATES} from 'utils/states';
+import { STATES } from 'utils/states';
+import firebaseClient from 'utils/firebaseClient';
 
 const Businesses = (props) => {
 	let {
 		businesses,
 		isPremium,
-		name,
-		showPremiumUpsell
+		name
 	} = props;
+
+	const showPremiumUpsell = () => {
+		props.showPremiumUpsell();
+		firebaseClient.logEvent('premium_upsell_trigger', {trigger_category: 'user', trigger_element: 'Businesses.button'});
+	};
 
 	if (!isPremium) {
 		return (

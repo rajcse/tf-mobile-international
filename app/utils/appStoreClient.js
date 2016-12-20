@@ -5,7 +5,7 @@
 
 import constants from 'constants/pubRecConstants';
 
-class AppStoreAPI {
+class AppStoreClient {
 	constructor() {
 
 	}
@@ -76,8 +76,10 @@ class AppStoreAPI {
 	 * Set a custom validator method. This gets called from pubRecAPI in its constructor
 	 */
 	setValidator(validator) {
-		// Make sure store is available
-		if(window.store) return window.store.validator = validator;
+		// Cleanly return if store is missing
+		if(!window.store) return;
+
+		return window.store.validator = validator;
 	}
 
 	/**
@@ -131,6 +133,6 @@ class AppStoreAPI {
 	}
 }
 
-let appStoreAPI = new AppStoreAPI();
+let appStoreClient = new AppStoreClient();
 
-export default appStoreAPI;
+export default appStoreClient;

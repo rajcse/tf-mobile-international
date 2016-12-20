@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { createFilter } from 'react-search-input';
 import constants from 'constants/pubRecConstants';
 import viewActions from 'actions/viewActions';
+import firebaseClient from 'utils/firebaseClient';
 import Header from 'components/Header';
 import Svg from 'components/svg/Svg';
 import Link from 'components/Link';
@@ -77,6 +78,7 @@ export default class Dashboard extends React.Component {
 	 */
 	archiveAllRecords(records) {
 		records.map(record => viewActions.archiveRecord(record.id[2]));
+		firebaseClient.logEvent('archive_all_records');
 	}
 
 	/**

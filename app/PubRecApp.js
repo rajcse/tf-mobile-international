@@ -42,7 +42,6 @@ export default class PubRecApp extends React.Component {
 				errors: searchStore.getSearchErrors()
 			},
 			user: userStore.getUser(),
-			accountInfo: userStore.getAccountInfo(),
 			premiumUpsell: userStore.getPremiumUpsell(),
 			productCrossSell: userStore.getProductCrossSell(),
 			purchasePending: userStore.getPurchasePending(),
@@ -53,7 +52,7 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
-			userRated: userStore.getRated(),
+			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModalStatus()
 		};
 
@@ -92,7 +91,6 @@ export default class PubRecApp extends React.Component {
 	onUserChange() {
 		this.setState({
 			user: userStore.getUser(),
-			accountInfo: userStore.getAccountInfo(),
 			premiumUpsell: userStore.getPremiumUpsell(),
 			productCrossSell: userStore.getProductCrossSell(),
 			purchasePending: userStore.getPurchasePending(),
@@ -102,7 +100,7 @@ export default class PubRecApp extends React.Component {
 			purchaseErrors: userStore.getPurchaseErrors(),
 			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
-			userRated: userStore.getRated(),
+			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModalStatus()
 		});
 	}
@@ -121,29 +119,8 @@ export default class PubRecApp extends React.Component {
 		window.scrollTo(0, 0);
 	}
 
-	goToSupport() {
-		//redirect to support page
-		viewActions.goToSupport();
-
-		//marks the user as rated
-		viewActions.rate();
-	}
-
-	cancelRating() {
-		//marks the user as rated
-		viewActions.rate();
-	}
-
 	confirmWelcome() {
 		viewActions.confirmWelcome();
-	}
-
-	confirmRating() {
-		//marks the user as rated
-		viewActions.rate();
-
-		//REDIRECT HERE
-		window.open('market://details?id=com.truthfinder.app', '_system');
 	}
 
 	render() {
@@ -179,7 +156,10 @@ export default class PubRecApp extends React.Component {
 
 				{this.state.purchaseErrors &&
 					<ErrorPrompt
-						message={'An error occured while making your purchase. Please visit <a href="https://www.truthfinder.com/dashboard/account/my-billing">www.truthfinder.com</a> to review your settings.'}
+						message={
+							`An error occured while making your purchase. Please visit
+							<a href="https://www.truthfinder.com/dashboard/account/my-billing?referer=mobile-app">www.truthfinder.com</a> to review your settings.`
+						}
 						confirmError={ this.state.premiumUpsell
 							? () => { viewActions.clearUserErrors(); viewActions.cancelPremiumUpsell(); }
 							: this.cancelCrossSell
@@ -202,13 +182,10 @@ export default class PubRecApp extends React.Component {
 				}
 
 				{ // pop up the ratings modal when reports looked at is 5 and user has not rated before
-					this.state.recordsViewed === 5 && !this.state.userRated &&
+					this.state.recordsViewed === 5 && !this.state.userHasRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
 							message2="If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!"
-							confirm={this.confirmRating}
-							support={this.goToSupport}
-							cancel={this.cancelRating}
 						/>
 				}
 

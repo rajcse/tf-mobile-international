@@ -24,8 +24,8 @@ import Account from 'containers/account/Account';
 import Record from 'containers/record/Record';
 
 import pubRecAPI from 'utils/PubRecAPI';
-import appStoreAPI from 'utils/AppStoreAPI';
-import firebaseClient from 'utils/FirebaseClient';
+import appStoreClient from 'utils/appStoreClient';
+import firebaseClient from 'utils/firebaseClient';
 
 // Modal Routes
 import LocationModal from 'containers/record/components/LocationModal';
@@ -38,7 +38,7 @@ window.initializeApp = () => {
 	// 1 - Initialize the PubRec API
 	pubRecAPI.init();
 	// 2 - Initialize the app store plugin
-	appStoreAPI.init();
+	appStoreClient.init();
 
 	/**
 	 * Sets the app version as quickly as possible - this is async for reasons unknown, blame the plugin author

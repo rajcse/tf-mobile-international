@@ -4,12 +4,14 @@ import Svg from 'components/svg/Svg';
 import moment from 'moment';
 import { RouteTransition } from 'react-router-transition';
 import Header from 'components/Header';
-import ReportHeaderUpsell from 'components/ReportHeaderUpsell';
+
 
 // Global Functions File
 import * as libs from 'utils/libs';
 
 import RecordHeader from '../components/RecordHeader';
+import PremiumUpsellHeader from '../components/PremiumUpsellHeader';
+import PremiumUpsellFooter from '../components/PremiumUpsellFooter';
 import CriminalRecords from '../components/CriminalRecords';
 import Personal from '../components/Personal';
 import Contact from '../components/Contact';
@@ -81,7 +83,7 @@ class PersonRecord extends Component {
 				>
 					{/* Premium Upsell Sticky Header */}
 					{ !isPremium &&
-						<ReportHeaderUpsell showPremiumUpsell={this.showPremiumUpsell} />
+						<PremiumUpsellHeader showPremiumUpsell={this.showPremiumUpsell} />
 					}
 
 					<RecordHeader
@@ -253,37 +255,10 @@ class PersonRecord extends Component {
 					}
 
 					{ !isPremium &&
-						<section id="premiumUpsell" className="widget premium">
-							<h2 className="title" >
-								PREMIUM DATA
-							</h2>
-							<p className="intro">
-								Premium Data may be available and could include additional <span>potentially sensitive information </span>
-								about {record.reportData.names[0].first}. In order to view Premium Data, you must first authorize this access.
-							</p>
-							<p className="includes">Premium Data May Include:</p>
-							<ul>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Bankruptcy Filings</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Properties Owned</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Civil Judgments</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Tax Liens</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Foreclosures</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Corporate Affiliations</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Water Craft Owned</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Voter Registration</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Education Information</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Professional Licenses</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Hunting/Fishing Permits</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Weapons Permits</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Prior Addresses</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Auto Accident Information</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Information on Neighbors</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Business Associates</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>Additional Phone Numbers</li>
-								<li><Svg svg="premiumStarIcon" style={{width: 10}}/>And More!!</li>
-							</ul>
-							<button onClick={this.showPremiumUpsell} className="btn btn-upgrade">View More Information</button>
-						</section>
+						<PremiumUpsellFooter
+							showPremiumUpsell={this.showPremiumUpsell}
+							record={record}
+						/>
 					}
 				</RouteTransition>
 			</main>

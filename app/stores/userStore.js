@@ -16,9 +16,8 @@ let _user = null,
 	_premiumUpsell = null,
 	_productCrossSell = null,
 	_purchaseSuccess = false,
-	_rated = false,
-	// Just in case our value gets borked, we need to check to make sure it's a number before coercing, otherwise we'll be incrementing NaN forever
-	_recordsViewed = !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) ? Number(window.localStorage.getItem('recordsViewed')) : 0,
+	_userHasRated = false,
+	_recordsViewed = 0,
 	_welcomeModalStatus = false,
 	_notifications = [],
 	_usage = [];
@@ -40,12 +39,27 @@ class UserStore extends EventEmitter {
 		return _recordsViewed;
 	}
 
-	incrementRecordsViewed() {
-		window.localStorage.setItem('recordsViewed', ++_recordsViewed);
+	checkRecordsViewed(userId) {
+		let recordsViewed = !Number.isNaN(Number(window.localStorage.getItem(userId + ':recordsViewed'))) ? Number(window.localStorage.getItem(userId + ':recordsViewed')) : 0;
+
+		// If there are no records views, check for and convert legacy values to namespaced values
+		if(!recordsViewed && !Number.isNaN(Number(window.localStorage.getItem('recordsViewed'))) && Number(window.localStorage.getItem('recordsViewed'))) {
+			recordsViewed = Number(window.localStorage.getItem('recordsViewed'));
+			window.localStorage.setItem(userId + ':recordsViewed', recordsViewed);
+		}
+
+		// Delete the old value
+		window.localStorage.removeItem('recordsViewed');
+
+		return recordsViewed;
 	}
 
-	getRated() {
-		return _rated;
+	incrementRecordsViewed() {
+		window.localStorage.setItem(_user.id + ':recordsViewed', ++_recordsViewed);
+	}
+
+	getUserHasRated() {
+		return _userHasRated;
 	}
 
 	getAccountInfo() {
@@ -147,6 +161,8 @@ dispatcher.register(action => {
 			_loggingIn = false;
 			_loginErrors = null;
 			_user = action.user;
+			_recordsViewed = userStore.checkRecordsViewed(action.user.id);
+			_userHasRated = window.localStorage.getItem(action.user.id + ':userHasRated') || false;
 			userStore.emitChange();
 			break;
 
@@ -165,19 +181,9 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.SHOW_PREMIUM_UPSELL:
-			// _premiumUpsell = action.recordId;
-			// userStore.emitChange();
-			break;
-
 		case constants.actions.RECEIVE_PREMIUM_UPSELL:
 			_premiumUpsell = action.premiumUpsell;
 			userStore.emitChange();
-			break;
-
-		case constants.actions.PURCHASE_PREMIUM_RECORD:
-			// _purchasePending = true;
-			// userStore.emitChange();
 			break;
 
 		case constants.actions.CANCEL_PREMIUM_UPSELL:
@@ -238,8 +244,9 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.RATE:
-			_rated = true;
+		case constants.actions.MARK_USER_AS_RATED:
+			_userHasRated = true;
+			window.localStorage.setItem(_user.id + ':userHasRated', 'true');
 			userStore.emitChange();
 			break;
 
@@ -270,7 +277,6 @@ dispatcher.register(action => {
 			_purchasePending = false;
 			_usage = [];
 			_recordsViewed = 0;
-			window.localStorage.removeItem('recordsViewed');
 			userStore.emitChange();
 			break;
 

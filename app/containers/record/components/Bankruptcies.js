@@ -6,6 +6,7 @@ import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import SimpleInline from 'components/SimpleInline';
 import {STATES} from 'utils/states';
+import firebaseClient from 'utils/firebaseClient';
 
 function getFileDate(date) {
 	if(_.isNull(date)) {
@@ -21,9 +22,13 @@ const Bankruptcies = (props) => {
 	let {
 		bankruptcies,
 		isPremium,
-		name,
-		showPremiumUpsell
+		name
 	} = props;
+
+	const showPremiumUpsell = () => {
+		props.showPremiumUpsell();
+		firebaseClient.logEvent('premium_upsell_trigger', {trigger_category: 'user', trigger_element: 'Bankruptcies.button'});
+	};
 
 	if (!isPremium) {
 		return (

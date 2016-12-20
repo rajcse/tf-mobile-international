@@ -2,7 +2,8 @@ import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
-import appStoreAPI from './AppStoreAPI';
+import appStoreClient from './appStoreClient';
+import firebaseClient from './firebaseClient';
 import config from 'config';
 
 const RECORD_CACHE_LIMIT = 25;
@@ -166,8 +167,9 @@ function _makeRequest(path, options) {
 			if(error.statusCode === 401 && requestCount++ < 10) {
 				return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
 			} else if(error.statusCode === 401){
-					// After 10 attempts, they should be logged out
-				pubRecAPI.logout();
+				// After 10 attempts, clear the user data and fire a logout
+				this.clearUserData();
+				serverActions.loggedOut();
 			}
 
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
@@ -184,7 +186,8 @@ function _makeRequest(path, options) {
 			}
 
 			if(error.statusCode === 403) {
-				pubRecAPI.logout();
+				this.clearUserData();
+				serverActions.loggedOut();
 			}
 
 			if(error.statusCode > 400) throw error;
@@ -209,16 +212,16 @@ function _makeRequest(path, options) {
  */
 class PubRecAPI {
 	init() {
-		appStoreAPI.setValidator((product, cb) => {
+		appStoreClient.setValidator((product, cb) => {
 			const productSkus = [],
 				planSkus = [],
 				appStoreDetails = {
-					paymentProcessor: appStoreAPI.PAYMENT_PROCESSOR,
+					paymentProcessor: appStoreClient.PAYMENT_PROCESSOR,
 					...product.transaction
 				};
 
 			// Check whether we need a plan or product, and if we have a sku mapped
-			if(appStoreAPI.PLANS.includes(product.type)) {
+			if(appStoreClient.PLANS.includes(product.type)) {
 				planSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
 			} else {
 				productSkus.push(product.additionalData && product.additionalData.pubrec_sku ? product.additionalData.pubrec_sku : product.id);
@@ -258,12 +261,14 @@ class PubRecAPI {
 				this.getUsage();
 
 			} catch(e) {
-				// Force a logout - the access token was malformed
-				return this.logout();
+				// Clear user data - the access token was malformed
+				this.clearUserData();
+				return serverActions.loggedOut();
 			}
 		} else {
-			// If we can't log the user in, trigger a logout and remove any leftover info
-			return this.logout(false);
+			// If we can't log the user in, clear all the user data and trigger a logout
+			this.clearUserData();
+			return serverActions.loggedOut(false);
 		}
 	}
 
@@ -316,6 +321,7 @@ class PubRecAPI {
 		// Append the device uuid or user agent to the credentials - this is used for refresh tokens
 		credentials.deviceId = window.device.uuid || navigator.userAgent;
 		credentials.cordovaDevice = window.device;
+		credentials.firebaseToken = firebaseClient.deviceToken;
 
 		return _makeRequest('/register', {method: 'POST', body: credentials})
 			.then(responseData => {
@@ -340,6 +346,11 @@ class PubRecAPI {
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
+
+					// Fire Event and subscribe to topics
+					firebaseClient.logEvent(constants.firebase.events.SIGN_UP, {sign_up_method: 'Mobile App'});
+					firebaseClient.subscribe(constants.firebase.topics.MOBILE_REGISTERED_USERS);
+					firebaseClient.subscribe(constants.firebase.topics.NO_PURCHASES_MADE);
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -370,11 +381,12 @@ class PubRecAPI {
 		// Append the device uuid or user agent to the credentials - this is used for refresh tokens
 		credentials.deviceId = window.device.uuid || navigator.userAgent;
 		credentials.cordovaDevice = window.device;
+		credentials.firebaseToken = firebaseClient.deviceToken;
 
 		return _makeRequest('/login', {method: 'POST', body: credentials})
 			.then(responseData => {
 				if(responseData.success) {
-						// Set the access token for future calls
+					// Set the access token for future calls
 					_accessToken = responseData.accessToken;
 
 					// Set the refresh token to get new access tokens
@@ -385,7 +397,6 @@ class PubRecAPI {
 					window.localStorage.setItem('refreshToken', _refreshToken);
 
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
-					setTimeout(() => this.fetchAccountInfo(), 0);
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
@@ -395,6 +406,9 @@ class PubRecAPI {
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch(), 0);
+
+					// Fire event
+					firebaseClient.logEvent(constants.firebase.events.LOGIN);
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -438,7 +452,10 @@ class PubRecAPI {
 			});
 	}
 
-	logout(redirect) {
+	/**
+	 * Internal function to clear user data
+	 */
+	clearUserData() {
 		// Null out the _accessToken, _refreshToken, and local items
 		_accessToken = null;
 		_refreshToken = null;
@@ -446,7 +463,32 @@ class PubRecAPI {
 		_recordIdCache = [];
 		window.localStorage.removeItem('accessToken');
 		window.localStorage.removeItem('refreshToken');
-		serverActions.loggedOut(redirect);
+
+		// Unsubscribe from all topics
+		firebaseClient.unsubscribeAll();
+	}
+
+	logout(redirect) {
+		// Delete the firebase token for the device
+		return this.updateUser({
+			devices: [{
+				id: window.device.uuid || navigator.userAgent,
+				firebase_token: null
+			}]
+		})
+		// Same actions need to fire regardless of success response for user update
+		.then(user => {
+			this.clearUserData();
+			firebaseClient.logEvent('logout');
+			firebaseClient.setUserId(null);
+			setTimeout(serverActions.loggedOut(redirect), 0);
+		})
+		.catch(error => {
+			this.clearUserData();
+			firebaseClient.logEvent('logout');
+			firebaseClient.setUserId(null);
+			setTimeout(serverActions.loggedOut(redirect), 0);
+		});
 	}
 
 	fetchAccountInfo() {
@@ -661,11 +703,11 @@ class PubRecAPI {
 				if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT);
 				} else {
-					return appStoreAPI.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
+					return appStoreClient.getProductInfo(constants.productTypes.PREMIUM_PERSON_REPORT_IAP);
 				}
 			})
-			.then(premiumUpsellProduct => {
-				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, premiumUpsellProduct, accountInfo}), 0);
+			.then(product => {
+				setTimeout(() => serverActions.receivePremiumUpsellInfo({record, product, accountInfo}), 0);
 			})
 			.catch(error => {
 				console.error(error);
@@ -686,6 +728,20 @@ class PubRecAPI {
 			.catch(error => {
 				console.error(error);
 			});
+	}
+
+	/**
+	 * Internal function to update users
+	 */
+	updateUser(updates) {
+		const user = _userFromAccessToken(_accessToken);
+
+		// Only allow device updates for now
+		let data = {
+			devices: updates.devices
+		};
+
+		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'PATCH', body: data});
 	}
 
 	/**
@@ -725,6 +781,9 @@ class PubRecAPI {
 		return _makeRequest('/purchase', {needsAuth: true, method: 'POST', body: cart})
 			.then(responseData => {
 				if(responseData.success) {
+					// Unsubscribe from no_purchases_made topic
+					firebaseClient.unsubscribe(constants.firebase.topics.NO_PURCHASES_MADE);
+
 					return responseData.order;
 				} else {
 					// Throw an erro for downstream
@@ -750,12 +809,12 @@ class PubRecAPI {
 
 		// Switch between pubrec purchase and in app purchase
 		// In app products will not have a 'sku' property
-		if(premiumUpsell.premiumUpsellProduct.sku) {
-			order = this.purchase([premiumUpsell.premiumUpsellProduct.sku]);
+		if(premiumUpsell.product.sku) {
+			order = this.purchase([premiumUpsell.product.sku]);
 		} else {
 			// Wrap the wonky plugin promise with a real promise
 			order = new Promise((resolve, reject) => {
-				appStoreAPI.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
+				appStoreClient.purchaseProduct(constants.productTypes.PREMIUM_PERSON_REPORT_IAP)
 					.then(p => resolve(p))
 					.error(error => reject(error));
 			});
@@ -767,18 +826,18 @@ class PubRecAPI {
 					// Save them to the outer scope to deregister later
 					res = p => resolve(p);
 					rej = error => reject(error);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
-					appStoreAPI.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'verified', res);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'cancelled', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'unverified', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_PERSON_REPORT_IAP, 'error', rej);
 				});
 			})
 			.then(p => {
-				appStoreAPI.unregister(rej);
+				appStoreClient.unregister(rej);
 				return p;
 			})
 			.catch(error => {
-				appStoreAPI.unregister(res);
+				appStoreClient.unregister(res);
 				throw error;
 			});
 		}
@@ -907,7 +966,7 @@ class PubRecAPI {
 		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'DELETE'})
 			.then(responseData => {
 				if(responseData.success) {
-					pubRecAPI.logout();
+					this.logout();
 					//setTimeout(() => serverActions.deleteAccountSuccessful());
 				} else {
 					console.error(responseData.errors);

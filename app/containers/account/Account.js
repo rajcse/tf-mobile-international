@@ -76,11 +76,11 @@ export default class Support extends Component {
 			premiumBalance = this.state.accountInfo.balances.premium_person_report === null ? 'Unlimited' : this.state.accountInfo.balances.premium_person_report + ' credits';
 
 			// There's a tiny chance this will not be present in the event of accounts service error
-            if(this.state.accountInfo.payment_options) {
-                defaultPaymentOption = _.find(this.state.accountInfo.payment_options, (paymentOption) => (
-                    paymentOption.id === this.state.accountInfo.default_payment_option_id && (paymentOption.payment_processor == 'orange' || paymentOption.payment_processor == 'paypal')
-                ));
-            }
+			if(this.state.accountInfo.payment_options) {
+				defaultPaymentOption = _.find(this.state.accountInfo.payment_options, (paymentOption) => (
+				    paymentOption.id === this.state.accountInfo.default_payment_option_id && (paymentOption.payment_processor == 'orange' || paymentOption.payment_processor == 'paypal')
+				));
+			}
 		} else {
 			// Don't assign these by default above to save the overhead of rendering 3 Loader components on every Account render
 			personBalance = <Loader />;
@@ -89,77 +89,77 @@ export default class Support extends Component {
 			premiumBalance = <Loader />;
 		}
 
-		return ( 
-				this.state.deleteAccountModal ?
-					<div className="modal">
-						<h3>Warning!</h3>
-						<p>Are you sure you want to delete your account?</p>
-						<p className="confirm">
-							<button className="continue" onClick={this.cancelDeleteModal}>No, I want to look up more reports.</button>
-							<a className="cancel" onClick={this.deleteAccount}>Yes, delete my account.</a>
-						</p>
-					</div> 
-					:
-			<div id="account">
-				<Header title="Account Info" />
+		return (
+				this.state.deleteAccountModal
+				? <div className="modal">
+					<h3>Warning!</h3>
+					<p>Are you sure you want to delete your account?</p>
+					<p className="confirm">
+						<button className="continue" onClick={this.cancelDeleteModal}>No, I want to look up more reports.</button>
+						<a className="cancel" onClick={this.deleteAccount}>Yes, delete my account.</a>
+					</p>
+				</div>
 
-				<div id="account-details" className="content-block">
-					<h3>Account Details</h3>
+				: <div id="account">
+					<Header title="Account Info" />
 
-					<h5>User</h5>
-					<dl>
-						<dt>Username</dt>
-						<dd>{this.props.appState.user.email}</dd>
-						<dd id="logout"><button onClick={this.doLogout}>Log Out</button></dd>
-					</dl>
+					<div id="account-details" className="content-block">
+						<h3>Account Details</h3>
 
-
-					<h5>Report Access</h5>
-					<dl className="balances">
-						<dt>Person Reports</dt>
-						<dd>{personBalance}</dd>
-
-						<dt>Phone Reports</dt>
-						<dd>{phoneBalance}</dd>
-
-						<dt>Email Reports</dt>
-						<dd>{emailBalance}</dd>
-
-						<dt>Premium Reports</dt>
-						<dd>{premiumBalance}</dd>
-					</dl>
-
-					{!defaultPaymentOption ?
+						<h5>User</h5>
 						<dl>
-							<dd id="delete-account"><button onClick={this.deleteAccountModal}>Delete Account</button></dd>
-						</dl> : null
-					}
+							<dt>Username</dt>
+							<dd>{this.props.appState.user.email}</dd>
+							<dd id="logout"><button onClick={this.doLogout}>Log Out</button></dd>
+						</dl>
 
+
+						<h5>Report Access</h5>
+						<dl className="balances">
+							<dt>Person Reports</dt>
+							<dd>{personBalance}</dd>
+
+							<dt>Phone Reports</dt>
+							<dd>{phoneBalance}</dd>
+
+							<dt>Email Reports</dt>
+							<dd>{emailBalance}</dd>
+
+							<dt>Premium Reports</dt>
+							<dd>{premiumBalance}</dd>
+						</dl>
+
+						{!defaultPaymentOption ?
+							<dl>
+								<dd id="delete-account"><button onClick={this.deleteAccountModal}>Delete Account</button></dd>
+							</dl> : null
+						}
+
+					</div>
+
+					<div id="payment-details" className="content-block">
+						<h3>Payment Details</h3>
+
+						<h5>Default Payment Option</h5>
+						{defaultPaymentOption ?
+							<dl>
+								<dt>{defaultPaymentOption.name}</dt>
+								<dd>
+									{ defaultPaymentOption.payment_processor !== 'paypal'
+										? `EXP: ${defaultPaymentOption.payment_processor_details.exp_month}/${defaultPaymentOption.payment_processor_details.exp_year}`
+										: 'PayPal Account'
+									}
+								</dd>
+							</dl> : <Loader />
+						}
+					</div>
+
+					<div id="legal" className="content-block">
+						<h3>Legal</h3>
+						<h4><a href="https://www.truthfinder.com/privacy-policy">Privacy Policy</a></h4>
+						<h4><a href="https://www.truthfinder.com/terms-of-use">Terms of Use</a></h4>
+					</div>
 				</div>
-
-				<div id="payment-details" className="content-block">
-					<h3>Payment Details</h3>
-
-					<h5>Default Payment Option</h5>
-					{defaultPaymentOption ?
-						<dl>
-							<dt>{defaultPaymentOption.name}</dt>
-							<dd>
-								{ defaultPaymentOption.payment_processor !== 'paypal'
-									? `EXP: ${defaultPaymentOption.payment_processor_details.exp_month}/${defaultPaymentOption.payment_processor_details.exp_year}`
-									: 'PayPal Account'
-								}
-							</dd>
-						</dl> : <Loader />
-					}
-				</div>
-
-				<div id="legal" className="content-block">
-					<h3>Legal</h3>
-					<h4><a href="https://www.truthfinder.com/privacy-policy">Privacy Policy</a></h4>
-					<h4><a href="https://www.truthfinder.com/terms-of-use">Terms of Use</a></h4>
-				</div>
-			</div>
 		);
 	}
 }
