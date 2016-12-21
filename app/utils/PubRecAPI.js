@@ -164,11 +164,12 @@ function _makeRequest(path, options) {
 			// Catch the HTTP status errors, throw again to let the caller deal with the response
 
 			// If it was a 401, get a new access token here, then make the original request again
-			if(error.statusCode === 401 && requestCount++ < 10) {
+			// If there is no refresh token (user has been logged out already for a 403), skip the request
+			if(error.statusCode === 401 && requestCount++ < 10 && _refreshToken) {
 				return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
 			} else if(error.statusCode === 401){
 				// After 10 attempts, clear the user data and fire a logout
-				this.clearUserData();
+				pubRecAPI.clearUserData();
 				serverActions.loggedOut();
 			}
 
@@ -186,7 +187,7 @@ function _makeRequest(path, options) {
 			}
 
 			if(error.statusCode === 403) {
-				this.clearUserData();
+				pubRecAPI.clearUserData();
 				serverActions.loggedOut();
 			}
 
