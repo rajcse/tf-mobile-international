@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import uuid from 'uuid';
-const Chart = require('react-chartjs-2');
+import Chart from 'react-chartjs-2';
 const Bar = Chart.Bar;
 
 export default class ChartBar extends Component {
