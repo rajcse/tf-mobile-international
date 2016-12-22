@@ -176,14 +176,15 @@ function _makeRequest(path, options) {
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
 			if(error.statusCode === 402) {
 				error.responseBody.then(responseData => {
-
 					_haltedRequest = queryString.substr(1).split('=')[1];
-					if(!_haltedRequest){
+					if(!_haltedRequest && fetchOpts.body){
 						_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
 					}
 					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
 					setTimeout(() => serverActions.clearSearchState());
-				});
+				})
+				// Catch JSON parse errors
+				.catch(error => console.error(error));
 			}
 
 			if(error.statusCode === 403) {
