@@ -6,7 +6,7 @@ import uuid from 'uuid';
 
 class CriminalRecords extends Component {
 	render() {
-		let { name, filteredCrimes, openCrime } = this.props;
+		let { name, filteredCrimes, openCrime, showStandardUpsell } = this.props;
 
 		// Fallback Details
 		let fallback = {
@@ -22,6 +22,7 @@ class CriminalRecords extends Component {
 						key={`records-${uuid.v4()}`}
 						filteredCrimes={filteredCrimes}
 						openCrime={openCrime}
+						showStandardUpsell={showStandardUpsell}
 					/>
 						: <DefaultColumn
 							name={name}
@@ -39,6 +40,7 @@ class CriminalRecords extends Component {
 CriminalRecords.propTypes = {
 	filteredCrimes: PropTypes.array.isRequired,
 	openCrime: PropTypes.func.isRequired,
+	showStandardUpsell: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired
 };
 

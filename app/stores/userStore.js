@@ -14,6 +14,7 @@ let _user = null,
 	_purchasePending = false,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
+	_standardUpsell = null,
 	_productCrossSell = null,
 	_purchaseSuccess = false,
 	_userHasRated = false,
@@ -72,6 +73,10 @@ class UserStore extends EventEmitter {
 
 	getPremiumUpsell() {
 		return _premiumUpsell;
+	}
+
+	getStandardUpsell() {
+		return _standardUpsell;
 	}
 
 	getPurchasePending() {
@@ -196,6 +201,21 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
+		case constants.actions.RECEIVE_STANDARD_UPSELL:
+			_standardUpsell = action.standardUpsell;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.CANCEL_STANDARD_UPSELL:
+			_standardUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.STANDARD_UPGRADE_SUCCESSFUL:
+			_standardUpsell = null;
+			userStore.emitChange();
+			break;
+
 		case constants.actions.PURCHASE_SUCCESSFUL:
 			_productCrossSell = null;
 			_purchasePending = false;
@@ -273,6 +293,7 @@ dispatcher.register(action => {
 			_loginErrors = null;
 			_productCrossSell = null;
 			_premiumUpsell = null;
+			_standardUpsell = null;
 			_purchaseSuccess = false;
 			_purchasePending = false;
 			_usage = [];

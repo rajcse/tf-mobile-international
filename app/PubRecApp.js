@@ -8,6 +8,7 @@ import searchStore from 'stores/searchStore';
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
+import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
 import SuccessPrompt from 'components/SuccessPrompt';
@@ -43,6 +44,7 @@ export default class PubRecApp extends React.Component {
 			},
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
+			standardUpsell: userStore.getStandardUpsell(),
 			productCrossSell: userStore.getProductCrossSell(),
 			purchasePending: userStore.getPurchasePending(),
 			purchaseErrors: userStore.getPurchaseErrors(),
@@ -92,6 +94,7 @@ export default class PubRecApp extends React.Component {
 		this.setState({
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
+			standardUpsell: userStore.getStandardUpsell(),
 			productCrossSell: userStore.getProductCrossSell(),
 			purchasePending: userStore.getPurchasePending(),
 			usage: userStore.getUsage(),
@@ -142,6 +145,12 @@ export default class PubRecApp extends React.Component {
 				{ this.state.premiumUpsell && !this.state.purchaseErrors &&
 					<PremiumUpsellPrompt
 						premiumUpsell={this.state.premiumUpsell}
+					/>
+				}
+
+				{ this.state.standardUpsell && !this.state.purchaseErrors &&
+					<StandardUpsellPrompt
+						standardUpsell={this.state.standardUpsell}
 					/>
 				}
 

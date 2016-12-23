@@ -50,6 +50,12 @@ export default {
 		'UPGRADE_TO_PREMIUM_RECORD',
 		'PREMIUM_UPGRADE_SUCCESSFUL',
 		'CANCEL_PREMIUM_UPSELL',
+		'SHOW_STANDARD_UPSELL',
+		'RECEIVE_STANDARD_UPSELL',
+		'PURCHASE_STANDARD_RECORD',
+		'UPGRADE_TO_STANDARD_RECORD',
+		'STANDARD_UPGRADE_SUCCESSFUL',
+		'CANCEL_STANDARD_UPSELL',
 		'CONFIRM_CROSS_SELL',
 		'CANCEL_CROSS_SELL',
 		'PURCHASE_SUCCESSFUL',
@@ -95,7 +101,9 @@ export default {
 	// These values must mirror the mappings in site JSON
 	productTypes: {
 		PREMIUM_PERSON_REPORT: 'premium_person_report',
-		PREMIUM_PERSON_REPORT_IAP: 'premium_person_report_iap'
+		PREMIUM_PERSON_REPORT_IAP: 'premium_person_report_iap',
+		STANDARD_PERSON_REPORT: 'standard_person_report',
+		STANDARD_PERSON_REPORT_IAP: 'standard_person_report_iap'
 	},
 
 	// These must match what accounts service expects

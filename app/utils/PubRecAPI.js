@@ -714,6 +714,33 @@ class PubRecAPI {
 			});
 	}
 
+	fetchStandardUpsellInfo(record) {
+		let accountInfo;
+
+		this.fetchUser()
+			.then(user => {
+				// Set the account info for down the line
+				accountInfo = user;
+
+				const paymentOptions = user.payment_options || [],
+					paymentOptionOnFile = paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
+
+					//REVISIT THIS BEFORE LAUNCHING STND REPORTS
+				 if(paymentOptionOnFile) {
+					return this.fetchProductInfo(constants.productTypes.STANDARD_PERSON_REPORT);
+				 } else {
+					return this.fetchProductInfo(constants.productTypes.STANDARD_PERSON_REPORT);
+				// 	return appStoreClient.getProductInfo(constants.productTypes.STANDARD_PERSON_REPORT_IAP);
+				 }
+			})
+			.then(product => {
+				setTimeout(() => serverActions.receiveStandardUpsellInfo({record, product, accountInfo}), 0);
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
 	/**
 	 * Internal function used to fetch user info
 	 */
