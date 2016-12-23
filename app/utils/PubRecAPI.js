@@ -524,11 +524,19 @@ class PubRecAPI {
 	 */
 	createRecord(recordData, recordType, redirect, forceRefresh) {
 		const user = _userFromAccessToken(_accessToken);
+
+		// Usage service currently doesn't support email report pointer so we have
+		// to use the actual email addresses for now.
+		if(recordType === constants.recordTypes.EMAIL) recordData.pointer = recordData.email.address;
+
+		// Fill in empty pointers for phone reports
+		if(recordType === constants.recordTypes.PHONE && !recordData.pointer) recordData.pointer = recordData.phone.number;
+
 		if(!forceRefresh) {
 			// Check for a cached recordId to serve immediately
-			let cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
+			const cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
 
-			if(cachedRecordIndex >= 0) {
+			if(~cachedRecordIndex) {
 				let cachedRecordId = _recordIdCache.splice(cachedRecordIndex, 1)[0];
 				_recordIdCache.push(cachedRecordId);
 
@@ -540,11 +548,6 @@ class PubRecAPI {
 					return serverActions.receiveRecordId(user.id, cachedRecordId.recordId);
 				}
 			}
-		}
-
-		//Usage service currently doesn't support email report pointer so we have to use the actual email addresses for now
-		if(recordType === 'email') {
-			recordData.pointer = recordData.email.address;
 		}
 
 		return _makeRequest('/users/' + user.id + '/records', {
