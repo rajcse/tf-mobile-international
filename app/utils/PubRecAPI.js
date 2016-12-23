@@ -164,29 +164,31 @@ function _makeRequest(path, options) {
 			// Catch the HTTP status errors, throw again to let the caller deal with the response
 
 			// If it was a 401, get a new access token here, then make the original request again
-			if(error.statusCode === 401 && requestCount++ < 10) {
+			// If there is no refresh token (user has been logged out already for a 403), skip the request
+			if(error.statusCode === 401 && requestCount++ < 10 && _refreshToken) {
 				return pubRecAPI.refreshAccessToken().then(() => _makeRequest(path, Object.assign(options, {requestCount})));
 			} else if(error.statusCode === 401){
 				// After 10 attempts, clear the user data and fire a logout
-				this.clearUserData();
+				pubRecAPI.clearUserData();
 				serverActions.loggedOut();
 			}
 
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
 			if(error.statusCode === 402) {
 				error.responseBody.then(responseData => {
-
 					_haltedRequest = queryString.substr(1).split('=')[1];
-					if(!_haltedRequest){
+					if(!_haltedRequest && fetchOpts.body){
 						_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
 					}
 					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
 					setTimeout(() => serverActions.clearSearchState());
-				});
+				})
+				// Catch JSON parse errors
+				.catch(error => console.error(error));
 			}
 
 			if(error.statusCode === 403) {
-				this.clearUserData();
+				pubRecAPI.clearUserData();
 				serverActions.loggedOut();
 			}
 
@@ -522,11 +524,19 @@ class PubRecAPI {
 	 */
 	createRecord(recordData, recordType, redirect, forceRefresh) {
 		const user = _userFromAccessToken(_accessToken);
+
+		// Usage service currently doesn't support email report pointer so we have
+		// to use the actual email addresses for now.
+		if(recordType === constants.recordTypes.EMAIL) recordData.pointer = recordData.email.address;
+
+		// Fill in empty pointers for phone reports
+		if(recordType === constants.recordTypes.PHONE && !recordData.pointer) recordData.pointer = recordData.phone.number;
+
 		if(!forceRefresh) {
 			// Check for a cached recordId to serve immediately
-			let cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
+			const cachedRecordIndex = _.findIndex(_recordIdCache, {pointer: recordData.pointer});
 
-			if(cachedRecordIndex >= 0) {
+			if(~cachedRecordIndex) {
 				let cachedRecordId = _recordIdCache.splice(cachedRecordIndex, 1)[0];
 				_recordIdCache.push(cachedRecordId);
 
@@ -538,11 +548,6 @@ class PubRecAPI {
 					return serverActions.receiveRecordId(user.id, cachedRecordId.recordId);
 				}
 			}
-		}
-
-		//Usage service currently doesn't support email report pointer so we have to use the actual email addresses for now
-		if(recordType === 'email') {
-			recordData.pointer = recordData.email.address;
 		}
 
 		return _makeRequest('/users/' + user.id + '/records', {
