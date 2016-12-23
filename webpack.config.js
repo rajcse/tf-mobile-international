@@ -16,19 +16,25 @@ const common = {
 	entry: {
 		app: path.join(__dirname, 'app'),
 		vendor: [
+			'classnames',
+			'es6-promise',
+			'flux',
 			'jquery',
+			'jwt-decode',
 			'lodash',
+			'moment',
 			'react',
 			'react-addons-css-transition-group',
+			'react-chartjs-2',
 			'react-dom',
 			'react-owl-carousel',
 			'react-router',
 			'react-router-scroll',
 			'react-router-transition',
 			'react-scroll',
+			'react-search-input',
+			'react-swipeable',
 			'uuid',
-			'flux',
-			'jwt-decode',
 			'whatwg-fetch'
 		]
 	},
@@ -96,7 +102,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
 	module.exports = merge(common, {
 		debug: true,
-		devtool: 'eval-source-map',
+		devtool: 'source-map',
 		devServer: {
 			contentBase: path.join(__dirname, 'www'),
 			port: 3000,

@@ -225,12 +225,12 @@ export default {
 		});
 	},
 
-	confirmCrossSell(sku) {
+	confirmCrossSell(product) {
 		dispatcher.dispatch({
 			actionType: constants.actions.CONFIRM_CROSS_SELL,
-			sku
+			product
 		});
-		pubRecAPI.purchasePackage(sku);
+		pubRecAPI.purchasePackage(product);
 	},
 
 	cancelCrossSell() {
