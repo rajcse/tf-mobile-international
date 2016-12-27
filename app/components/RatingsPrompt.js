@@ -34,10 +34,10 @@ export default class RatingsPrompt extends Component {
 		// Marks the user as rated
 		viewActions.markUserAsRated();
 
-		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.props.message2, prompt_response: 'YES!'});
-
 		//REDIRECT HERE
 		window.open('market://details?id=com.truthfinder.app', '_system');
+
+		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.props.message2, prompt_response: 'YES!'});
 	}
 
 	declineAppStoreRating() {
