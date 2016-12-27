@@ -12,6 +12,8 @@ export default class RatingsPrompt extends Component {
 
 		this.handlePositiveResponse = this.handlePositiveResponse.bind(this);
 		this.handleNegativeResponse = this.handleNegativeResponse.bind(this);
+		this.confirmAppStoreRating = this.confirmAppStoreRating.bind(this);
+		this.declineAppStoreRating = this.declineAppStoreRating.bind(this);
 	}
 
 	handlePositiveResponse() {
