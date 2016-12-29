@@ -101,6 +101,9 @@ class DashboardRow extends React.Component {
 							<p className="location">
 								{_.get(data,'location.address.city') ? data.location.address.city + ', ': ''} {_.has(data,'location.address.state') ? data.location.address.state : ''}
 							</p>
+							{ data.isLite &&
+								<p>Free</p>
+							}
 						</div>
 					);
 				}

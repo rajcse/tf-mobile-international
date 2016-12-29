@@ -213,6 +213,7 @@ dispatcher.register(action => {
 
 		case constants.actions.STANDARD_UPGRADE_SUCCESSFUL:
 			_standardUpsell = null;
+			_premiumUpsell = null;
 			userStore.emitChange();
 			break;
 

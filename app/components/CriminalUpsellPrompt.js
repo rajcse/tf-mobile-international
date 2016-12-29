@@ -36,7 +36,7 @@ class CriminalUpsellPrompt extends Component {
 			confirmationModal: false,
 			upgradingModal: true
 		}, () => {
-			viewActions.purchasePremiumRecord(this.props.premiumUpsell);
+			viewActions.purchaseStandardRecord(this.props.standardUpsell);
 			this.blurRecord();
 		});
 	}
@@ -46,7 +46,7 @@ class CriminalUpsellPrompt extends Component {
 			confirmationModal: false,
 			upgradingModal: true
 		}, () => {
-			viewActions.upgradeToPremiumRecord(this.props.premiumUpsell.record.id[2]);
+			viewActions.upgradeToStandardRecord(this.props.standardUpsell.record.id[2]);
 			this.blurRecord();
 		});
 	}

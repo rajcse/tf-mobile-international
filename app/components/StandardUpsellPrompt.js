@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Loader from 'components/Loader';
 import viewActions from 'actions/viewActions';
+import Svg from 'components/svg/Svg';
 
 class StandardUpsellPrompt extends Component {
 	constructor(props) {
@@ -8,13 +9,14 @@ class StandardUpsellPrompt extends Component {
 
 		this.state = {
 			introModal: true,
-			confirmationModal: false,
 			upgradingModal: false
 		};
 
-		this.continueToConfirmation = this.continueToConfirmation.bind(this);
-		this.confirmPurchaseAndUpgrade = this.confirmPurchaseAndUpgrade.bind(this);
-		this.confirmUpgradeWithCredits = this.confirmUpgradeWithCredits.bind(this);
+		this.confirmPremiumPurchaseAndUpgrade = this.confirmPremiumPurchaseAndUpgrade.bind(this);
+		this.confirmPremiumUpgradeWithCredits = this.confirmPremiumUpgradeWithCredits.bind(this);
+		this.confirmStandardPurchaseAndUpgrade = this.confirmStandardPurchaseAndUpgrade.bind(this);
+		this.confirmStandardUpgradeWithCredits = this.confirmStandardUpgradeWithCredits.bind(this);
+
 		this.cancelStandardUpsell = this.cancelStandardUpsell.bind(this);
 	}
 
@@ -24,16 +26,32 @@ class StandardUpsellPrompt extends Component {
 		if(visibleRecord) visibleRecord.classList.remove('blur');
 	}
 
-	continueToConfirmation() {
+	confirmPremiumPurchaseAndUpgrade() {
 		this.setState({
 			introModal: false,
-			confirmationModal: true
+			upgradingModal: true
+		}, () => {
+			viewActions.purchasePremiumRecord(this.props.premiumUpsell);
+			this.blurRecord();
 		});
+		// viewActions.cancelStandardUpsell();
 	}
 
-	confirmPurchaseAndUpgrade() {
+	confirmPremiumUpgradeWithCredits() {
 		this.setState({
-			confirmationModal: false,
+			introModal: false,
+			upgradingModal: true
+		}, () => {
+			viewActions.upgradeToPremiumRecord(this.props.premiumUpsell.record.id[2]);
+			this.blurRecord();
+		});
+		// viewActions.cancelStandardUpsell();
+	}
+
+	confirmStandardPurchaseAndUpgrade() {
+		// viewActions.cancelPremiumUpsell();
+		this.setState({
+			introModal: false,
 			upgradingModal: true
 		}, () => {
 			viewActions.purchaseStandardRecord(this.props.standardUpsell);
@@ -41,9 +59,10 @@ class StandardUpsellPrompt extends Component {
 		});
 	}
 
-	confirmUpgradeWithCredits() {
+	confirmStandardUpgradeWithCredits() {
+		// viewActions.cancelPremiumUpsell();
 		this.setState({
-			confirmationModal: false,
+			introModal: false,
 			upgradingModal: true
 		}, () => {
 			viewActions.upgradeToStandardRecord(this.props.standardUpsell.record.id[2]);
@@ -54,6 +73,7 @@ class StandardUpsellPrompt extends Component {
 	cancelStandardUpsell() {
 		viewActions.clearUserErrors();
 		viewActions.cancelStandardUpsell();
+		viewActions.cancelPremiumUpsell();
 	}
 
 	blurRecord() {
@@ -64,53 +84,33 @@ class StandardUpsellPrompt extends Component {
 
 	render() {
 		const { product, record, accountInfo } = this.props.standardUpsell,
-			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
+			fullName = `${record.data.name.first} ${record.data.name.last}`,// This will always be present
+			premiumProduct = this.props.premiumUpsell.product; 
 
 		return (
 			<div id="payment-prompt">
-				{/* First Step - Show intro text to upsell */}
 				{ this.state.introModal ?
 					<div className="modal">
-						<h3>Important Report Info</h3>
-						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
-						<p>
-							Thank you for being a valued TruthFinder user. One of our top priorities is helping you get as much information
-							as possible in every report so that you can have a more complete understanding about the people you search.
-						</p>
-						<p>
-							Remember, your subscription gives you access to all of the data in an unlimited number of Standard Reports but you should
-							know that more information could be available and you have the option to search for more information by upgrading your report
-							to a Premium Report. This information can include sensitive personal information such as bankruptcies, liens, and mortgages.
-						</p>
-						<p>
-							This Premium Data is valuable and costs us money. Because this upgrade requires an additional fee to access, we require your
-							personal authorization to continue. Click the “CONTINUE” button below to add all available Premium Data to your report and
-							learn as much about {fullName} as possible.
-						</p>
+						<h3>Important Report Info
+							<a className="cancel" onClick={this.cancelStandardUpsell}>
+								<Svg svg="closePhoto"/>
+							</a>
+						</h3>
+						<p className="intro">To view case details on {fullName}'s Report:</p>
+						
 						<p className="confirm">
-							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToConfirmation}>Continue</button>
-							<a className="cancel" onClick={this.cancelStandardUpsell}>No Thanks, I don't want more info.</a>
-						</p>
-					</div>
-				: null }
-
-				{/* Continue to Purchase */}
-				{ this.state.confirmationModal ?
-					<div className="modal">
-						<h3>Important Report Info</h3>
-						<p>Click <strong>CONTINUE</strong> to add available Premium Data to this report and see what else you can uncover. <strong>Our data providers update their databases daily!!</strong></p>
-
-						<p className="confirm">
-							{ accountInfo.balances.premium_person_report > 0
-								? <button className="continue" onClick={this.confirmUpgradeWithCredits}>Continue
-									<span>Upgrade this report using 1 Premium credit</span>
-								</button>
-
-								: <button className="continue" onClick={this.confirmPurchaseAndUpgrade}>Continue
-									<span>Upgrade this report for ${String(product.price).replace('$', '')/* Fix for difference between IAP and Accounts Service */}</span>
-								</button>
+							{ accountInfo.balances.premium_person_report > 0 ?
+								<button type="button" className="continue btn btn-primary btn-upgrade" 
+									onClick={this.confirmPremiumUpgradeWithCredits}>Upgrade this report and unlock all Premium Data using 1 Premium credit}</button>
+							:
+								<button type="button" className="continue btn btn-primary btn-upgrade"
+									onClick={this.confirmPremiumPurchaseAndUpgrade}>Unlock all Premium Data for ${String(premiumProduct.price).replace('$', '')}</button>
 							}
-							<a className="cancel" onClick={this.cancelStandardUpsell}>No Thanks, I don't want more info.</a>
+							{ accountInfo.balances.person_report > 0 ?
+								<a className="cancel" onClick={this.confirmStandardUpgradeWithCredits}>I just want to see this section details using 1 Person Report Credit</a>
+								:
+								<a className="cancel" onClick={this.confirmStandardPurchaseAndUpgrade}>I just want to see this section details for ${String(product.price).replace('$', '')}</a>
+							}
 						</p>
 					</div>
 				: null }
@@ -120,7 +120,7 @@ class StandardUpsellPrompt extends Component {
 					<div className="modal modal-transparent">
 						<Loader />
 						<h3>Upgrading Your Report</h3>
-						<p>Please wait while we add premium data to your report...</p>
+						<p>Please wait while we add more data to your report...</p>
 					</div>
 				: null }
 			</div>
@@ -131,5 +131,6 @@ class StandardUpsellPrompt extends Component {
 export default StandardUpsellPrompt;
 
 StandardUpsellPrompt.propTypes = {
-	standardUpsell: PropTypes.object
+	standardUpsell: PropTypes.object,
+	premiumUpsell: PropTypes.object
 };

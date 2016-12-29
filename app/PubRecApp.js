@@ -142,15 +142,16 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.premiumUpsell && !this.state.purchaseErrors &&
-					<PremiumUpsellPrompt
+				{ this.state.standardUpsell && !this.state.purchaseErrors &&
+					<StandardUpsellPrompt
+						standardUpsell={this.state.standardUpsell}
 						premiumUpsell={this.state.premiumUpsell}
 					/>
 				}
 
-				{ this.state.standardUpsell && !this.state.purchaseErrors &&
-					<StandardUpsellPrompt
-						standardUpsell={this.state.standardUpsell}
+				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell &&
+					<PremiumUpsellPrompt
+						premiumUpsell={this.state.premiumUpsell}
 					/>
 				}
 
@@ -170,7 +171,7 @@ export default class PubRecApp extends React.Component {
 							<a href="https://www.truthfinder.com/dashboard/account/my-billing?referer=mobile-app">www.truthfinder.com</a> to review your settings.`
 						}
 						confirmError={ this.state.premiumUpsell
-							? () => { viewActions.clearUserErrors(); viewActions.cancelPremiumUpsell(); }
+							? () => { viewActions.clearUserErrors(); viewActions.cancelPremiumUpsell(); viewActions.cancelStandardUpsell(); }
 							: this.cancelCrossSell
 						}
 					/>

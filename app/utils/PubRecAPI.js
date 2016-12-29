@@ -832,6 +832,7 @@ class PubRecAPI {
 
 		if(updates.hasOwnProperty('isArchived')) data.isArchived = Boolean(updates.isArchived);
 		if(updates.isPremium) data.isPremium = true;
+		if(updates.isStandard) data.isStandard = true;
 
 		return _makeRequest('/users/' + user.id + '/records/' + recordId, {needsAuth: true, method: 'PATCH', body: data});
 	}
@@ -888,10 +889,71 @@ class PubRecAPI {
 				});
 	}
 
+	purchaseStandardRecord(standardUpsell) {
+		let order;
+
+		// Switch between pubrec purchase and in app purchase
+		// In app products will not have a 'sku' property
+		if(standardUpsell.product.sku) {
+			order = this.purchase([standardUpsell.product.sku]);
+		} else {
+			// Wrap the wonky plugin promise with a real promise
+			order = new Promise((resolve, reject) => {
+				appStoreClient.purchaseProduct(constants.productTypes.STANDARD_PERSON_REPORT_IAP)
+					.then(p => resolve(p))
+					.error(error => reject(error));
+			});
+
+			// Promisify the product event callbacks, then unregister them as needed
+			let res, rej;
+			order = order.then(p => {
+				return new Promise((resolve, reject) => {
+					// Save them to the outer scope to deregister later
+					res = p => resolve(p);
+					rej = error => reject(error);
+					appStoreClient.registerOnce(constants.productTypes.STANDARD_PERSON_REPORT_IAP, 'verified', res);
+					appStoreClient.registerOnce(constants.productTypes.STANDARD_PERSON_REPORT_IAP, 'cancelled', rej);
+					appStoreClient.registerOnce(constants.productTypes.STANDARD_PERSON_REPORT_IAP, 'unverified', rej);
+					appStoreClient.registerOnce(constants.productTypes.STANDARD_PERSON_REPORT_IAP, 'error', rej);
+				});
+			})
+			.then(p => {
+				appStoreClient.unregister(rej);
+				return p;
+			})
+			.catch(error => {
+				appStoreClient.unregister(res);
+				throw error;
+			});
+		}
+
+		return order
+				.catch(error => {
+					setTimeout(() => serverActions.purchaseError(error));
+					// Skip the rest of the chain
+					throw error;
+				})
+				.then(o => {
+					return this.upgradeToStandardRecord(standardUpsell.record.id[2]);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+	}
+
 	upgradeToPremiumRecord(recordId) {
 		return this.updateRecord(recordId, {isPremium: true})
 				.then(() => this.fetchRecord({recordId}, true))
 				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
+				.catch(error => {
+					console.error(error);
+				});
+	}
+
+	upgradeToStandardRecord(recordId) {
+		return this.updateRecord(recordId, {isStandard: true})
+				.then(() => this.fetchRecord({recordId}, true))
+				.then(() => setTimeout(serverActions.standardUpgradeSuccessful))
 				.catch(error => {
 					console.error(error);
 				});

@@ -54,6 +54,7 @@ class PersonRecord extends Component {
 
 	showStandardUpsell() {
 		viewActions.showStandardUpsell(this.props.record);
+		viewActions.showPremiumUpsell(this.props.record);
 	}
 
 	render() {
