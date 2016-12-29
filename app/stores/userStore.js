@@ -11,12 +11,10 @@ let _user = null,
 	_registerErrors = null,
 	_loggingIn = false,
 	_loginErrors = null,
-	_purchasePending = false,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
 	_standardUpsell = null,
-	_productCrossSell = null,
-	_purchaseSuccess = false,
+	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
 	_welcomeModalStatus = false,
@@ -67,8 +65,8 @@ class UserStore extends EventEmitter {
 		return _accountInfo;
 	}
 
-	getProductCrossSell() {
-		return _productCrossSell;
+	getCrossSell() {
+		return _crossSell;
 	}
 
 	getPremiumUpsell() {
@@ -79,16 +77,8 @@ class UserStore extends EventEmitter {
 		return _standardUpsell;
 	}
 
-	getPurchasePending() {
-		return _purchasePending;
-	}
-
 	getPurchaseErrors() {
 		return _purchaseErrors;
-	}
-
-	getPurchaseSuccess() {
-		return _purchaseSuccess;
 	}
 
 	isRegistering() {
@@ -182,7 +172,7 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.PAYMENT_REQUIRED:
-			_productCrossSell = action.product;
+			_crossSell = action.crossSell;
 			userStore.emitChange();
 			break;
 
@@ -218,31 +208,26 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.PURCHASE_SUCCESSFUL:
-			_productCrossSell = null;
-			_purchasePending = false;
-			_purchaseSuccess = true;
+		case constants.actions.CROSS_SELL_SUCCESSFUL:
+			_crossSell = null;
 			userStore.emitChange();
 			break;
 
 		case constants.actions.PURCHASE_ERROR:
-			_purchasePending = false;
 			_purchaseErrors = action.errors;
 			userStore.emitChange();
 			break;
 
 		case constants.actions.CANCEL_CROSS_SELL:
-			_productCrossSell = null;
-			_purchasePending = false;
+			_crossSell = null;
 			userStore.emitChange();
 			break;
 
-		case constants.actions.CONFIRM_CROSS_SELL:
-			_purchasePending = true;
+		case constants.actions.PURCHASE_CROSS_SELL:
 			userStore.emitChange();
 			break;
 
-		case constants.actions.CLEAR_USER_ERRORS:
+		case constants.actions.CLEAR_PURCHASE_ERRORS:
 			_purchaseErrors = null;
 			userStore.emitChange();
 			break;
@@ -258,11 +243,6 @@ dispatcher.register(action => {
 
 		case constants.actions.CLEAR_NOTIFICATION:
 			_.remove(_notifications, {id: action.id});
-			userStore.emitChange();
-			break;
-
-		case constants.actions.CLEAR_SUCCESS:
-			_purchaseSuccess = false;
 			userStore.emitChange();
 			break;
 
@@ -293,11 +273,9 @@ dispatcher.register(action => {
 			_accountInfo = null;
 			_loggingIn = false;
 			_loginErrors = null;
-			_productCrossSell = null;
+			_crossSell = null;
 			_premiumUpsell = null;
 			_standardUpsell = null;
-			_purchaseSuccess = false;
-			_purchasePending = false;
 			_usage = [];
 			_recordsViewed = 0;
 			userStore.emitChange();

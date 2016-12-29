@@ -12,7 +12,6 @@ const RECORDID_CACHE_LIMIT = 100;
 let _accessToken = null,
 	_refreshToken = null,
 	_recordIdCache = [],
-	_haltedRequest = null,
 	_recordCache = [];
 
 /**
@@ -176,15 +175,9 @@ function _makeRequest(path, options) {
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
 			if(error.statusCode === 402) {
 				error.responseBody.then(responseData => {
-					_haltedRequest = queryString.substr(1).split('=')[1];
-					if(!_haltedRequest && fetchOpts.body){
-						_haltedRequest = JSON.parse(fetchOpts.body).record.pointer;
-					}
-					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item), 0);
+					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item));
 					setTimeout(() => serverActions.clearSearchState());
-				})
-				// Catch JSON parse errors
-				.catch(error => console.error(error));
+				});
 			}
 
 			if(error.statusCode === 403) {
@@ -573,6 +566,8 @@ class PubRecAPI {
 					// This simply announces the record was created
 					setTimeout(() => serverActions.receiveRecordId(user.id, responseData.recordId), 0);
 				}
+
+				return responseData.recordId;
 			} else {
 				console.log(responseData.errors);
 			}
@@ -802,6 +797,9 @@ class PubRecAPI {
 			});
 	}
 
+	/**
+	 * Internal function to make purchases
+	 */
 	purchase(productSkus = [], planSkus = [], appStoreDetails) {
 		const cart = {
 			productSkus,
@@ -824,6 +822,9 @@ class PubRecAPI {
 			});
 	}
 
+	/**
+	 * Internal function to update records
+	 */
 	updateRecord(recordId, updates) {
 		const user = _userFromAccessToken(_accessToken);
 
@@ -959,82 +960,85 @@ class PubRecAPI {
 				});
 	}
 
-	purchasePackage(packageData, skipVerification) {
-		const user = _userFromAccessToken(_accessToken);
+	purchaseCrossSell(crossSell, skipVerification) {
+		// Original criteria from the 402 is needed
+		if (!crossSell.original_criteria || !crossSell.original_criteria.type) {
+			setTimeout(() => serverActions.purchaseError('Unknown purchase error'));
+		}
 
 		if(!skipVerification) {
-			switch(packageData.item_type){
-				case 'phone_report':
-					// This should only happen from the phones endpoint, and never on record creation
-					return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PHONE], {
-						query: {verify: true, ...packageData.original_criteria},
-						needsAuth: true
-					})
-					.then(responseData => {
-						if(!responseData.results.length){
-							setTimeout(() => serverActions.purchaseError('Report Not Found'));
-							return console.log(JSON.stringify(responseData));
-						}
-						this.purchasePackage(packageData, true);
-						setTimeout(() => this.fetchAccountInfo(), 0);
-					})
-					.catch(error => {
-						console.error(error);
-					});
+			switch(crossSell.original_criteria.type){
+				case constants.recordTypes.PHONE:
+					if(crossSell.original_criteria.phone) {
+						// This should only happen from the phones endpoint, and never on record creation
+						return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PHONE], {
+							query: {verify: true, phone: crossSell.original_criteria.phone},
+							needsAuth: true
+						})
+						.then(responseData => {
+							if(!responseData.results.length){
+								setTimeout(() => serverActions.purchaseError('Report Not Found'));
+								return console.log(JSON.stringify(responseData));
+							}
 
-				case 'email_report':
-					// This should only happen from the email endpoint, and never on record creation
-					return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.EMAIL], {
-						query: {verify: true, ...packageData.original_criteria},
-						needsAuth: true
-					})
-					.then(responseData => {
-						if(!responseData.results.length){
-							setTimeout(() => serverActions.purchaseError('Report Not Found'));
-							return console.log(JSON.stringify(responseData));
-						}
-						this.purchasePackage(packageData, true);
-						setTimeout(() => this.fetchAccountInfo(), 0);
-					})
-					.catch(error => {
-						console.error(error);
-					});
+							// Assign the record data from the search
+							const newCrossSell = Object.assign({}, crossSell, {original_criteria: Object.assign({}, crossSell.original_criteria, {recordData: responseData.results[0].recordData})});
+							this.purchaseCrossSell(newCrossSell, true);
+						})
+						.catch(error => {
+							console.error(error);
+						});
+					}
+					break;
+
+				case constants.recordTypes.EMAIL:
+					if(crossSell.original_criteria.email) {
+						// This should only happen from the email endpoint, and never on record creation
+						return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.EMAIL], {
+							query: {verify: true, email: crossSell.original_criteria.email},
+							needsAuth: true
+						})
+						.then(responseData => {
+							if(!responseData.results.length){
+								setTimeout(() => serverActions.purchaseError('Report Not Found'));
+								return console.log(JSON.stringify(responseData));
+							}
+
+							// Assign the record data from the search
+							const newCrossSell = Object.assign({}, crossSell, {original_criteria: Object.assign({}, crossSell.original_criteria, {recordData: responseData.results[0].recordData})});
+							this.purchaseCrossSell(newCrossSell, true);
+						})
+						.catch(error => {
+							console.error(error);
+						});
+					}
+					break;
 
 				default:
 					break;
 			}
 		}
 
-		return _makeRequest('/users/' + user.id + '/purchase-package', {needsAuth: true, method: 'POST', body: {sku: packageData.sku}})
+		const plans = [],
+			products = [];
+
+		if(crossSell.hasOwnProperty('recurring_price')) plans.push(crossSell.sku);
+		if(crossSell.hasOwnProperty('price')) products.push(crossSell.sku);
+
+		return this.purchase(products, plans)
 			.then(responseData => {
-				if(responseData.success) {
-					_haltedRequest = decodeURIComponent(_haltedRequest);
-					switch(packageData.item_type){
-						case 'person_report':
-							this.createRecord({pointer: _haltedRequest}, constants.recordTypes.PERSON, true);
-							break;
-
-						case 'email_report':
-							this.createEmailRecordFromAddress(_haltedRequest);
-							break;
-
-						case 'phone_report':
-							this.createPhoneRecordFromNumber(_haltedRequest);
-							break;
-					}
-					_haltedRequest = null;
-					//Don't need this anymore since we're going directly to the report
-					setTimeout(() => serverActions.purchaseSuccessful());
-				} else {
-					console.error(responseData.errors);
-					setTimeout(() => serverActions.purchaseError(responseData.errors));
-				}
+				// Even if they are trying to access a record already in usage, this will work
+				return this.createRecord(crossSell.original_criteria.recordData, crossSell.original_criteria.type, true, true);
+			})
+			.then(recordId => {
+				setTimeout(() => serverActions.crossSellSuccessful());
+				// Fetch the record, to refresh records already navigated to but errored
+				return this.fetchRecord({recordId});
 			})
 			.catch(error => {
 				console.error(error);
 				setTimeout(() => serverActions.purchaseError(error));
 			});
-
 	}
 
 	/**
@@ -1061,15 +1065,12 @@ class PubRecAPI {
 			.then(responseData => {
 				if(responseData.success) {
 					this.logout();
-					//setTimeout(() => serverActions.deleteAccountSuccessful());
 				} else {
 					console.error(responseData.errors);
-					//setTimeout(() => serverActions.deleteAccountError(responseData.errors));
 				}
 			})
 			.catch(error => {
 				console.error(error);
-				//setTimeout(() => serverActions.deleteAccountError(error));
 			});
 	}
 }

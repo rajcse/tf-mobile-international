@@ -101,7 +101,13 @@ export default class Dashboard extends React.Component {
 
 	render() {
 		// Filter out bad records with missing pointers, archived records, and location records
-		let records = this.props.appState.usage.filter(record => record.data.pointer && record.id[1] !== 'location' && !record.data.isArchived);
+		let records = this.props.appState.usage.filter(record => {
+			return (
+				(record.data.pointer || record.id[1] !== constants.recordTypes.PERSON) &&
+				record.id[1] !== constants.recordTypes.LOCATION &&
+				!record.data.isArchived
+			);
+		});
 
 		records = this.searchRecords(records);
 

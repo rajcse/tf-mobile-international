@@ -108,23 +108,15 @@ export default {
 		if(redirectToHome) hashHistory.push('/');
 	},
 
-	clearUserErrors(redirectToHome = false) {
+	clearPurchaseErrors() {
 		dispatcher.dispatch({
-			actionType: constants.actions.CLEAR_USER_ERRORS
+			actionType: constants.actions.CLEAR_PURCHASE_ERRORS
 		});
-
-		if(redirectToHome) hashHistory.push('/');
 	},
 
 	clearSearchError() {
 		dispatcher.dispatch({
 			actionType: constants.actions.CLEAR_SEARCH_ERROR
-		});
-	},
-
-	clearSuccess() {
-		dispatcher.dispatch({
-			actionType: constants.actions.CLEAR_SUCCESS
 		});
 	},
 
@@ -225,19 +217,20 @@ export default {
 		});
 	},
 
-	confirmCrossSell(product) {
+	purchaseCrossSell(crossSell) {
 		dispatcher.dispatch({
-			actionType: constants.actions.CONFIRM_CROSS_SELL,
-			product
+			actionType: constants.actions.PURCHASE_CROSS_SELL,
+			crossSell
 		});
-		pubRecAPI.purchasePackage(product);
+		pubRecAPI.purchaseCrossSell(crossSell);
 	},
 
 	cancelCrossSell() {
 		dispatcher.dispatch({
 			actionType: constants.actions.CANCEL_CROSS_SELL
 		});
-		this.clearSearchResults();
+		// Redirect them to home from everywhere
+		hashHistory.push('/');
 	},
 
 	refreshProductUpsell() {

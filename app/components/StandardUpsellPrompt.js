@@ -71,7 +71,7 @@ class StandardUpsellPrompt extends Component {
 	}
 
 	cancelStandardUpsell() {
-		viewActions.clearUserErrors();
+		// viewActions.clearUserErrors();
 		viewActions.cancelStandardUpsell();
 		viewActions.cancelPremiumUpsell();
 	}
@@ -93,17 +93,17 @@ class StandardUpsellPrompt extends Component {
 					<div className="modal">
 						<h3>Important Report Info
 							<a className="cancel" onClick={this.cancelStandardUpsell}>
-								<Svg svg="closePhoto"/>
+								<Svg className="close-modal" svg="closePhoto"/>
 							</a>
 						</h3>
-						<p className="intro">To view case details on {fullName}'s Report:</p>
+						<p>To view case details on {fullName}'s Report, you must upgrade your report.</p>
 						
 						<p className="confirm">
 							{ accountInfo.balances.premium_person_report > 0 ?
-								<button type="button" className="continue btn btn-primary btn-upgrade" 
+								<button type="button" className="continue btn btn-primary btn-upgrade orange" 
 									onClick={this.confirmPremiumUpgradeWithCredits}>Upgrade this report and unlock all Premium Data using 1 Premium credit}</button>
 							:
-								<button type="button" className="continue btn btn-primary btn-upgrade"
+								<button type="button" className="continue btn btn-primary btn-upgrade orange"
 									onClick={this.confirmPremiumPurchaseAndUpgrade}>Unlock all Premium Data for ${String(premiumProduct.price).replace('$', '')}</button>
 							}
 							{ accountInfo.balances.person_report > 0 ?
