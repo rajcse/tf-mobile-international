@@ -119,6 +119,7 @@ dispatcher.register(action => {
 			searchStore.emitChange();
 			break;
 
+		case constants.actions.CANCEL_CROSS_SELL:
 		case constants.actions.CLEAR_SEARCH_RESULTS:
 			_results = defaultResults();
 			_criteria = defaultCriteria();
