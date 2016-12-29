@@ -104,16 +104,16 @@ export default {
 		});
 	},
 
-	paymentRequired(product) {
+	paymentRequired(crossSell) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PAYMENT_REQUIRED,
-			product
+			crossSell
 		});
 	},
 
-	purchaseSuccessful() {
+	crossSellSuccessful() {
 		dispatcher.dispatch({
-			actionType: constants.actions.PURCHASE_SUCCESSFUL
+			actionType: constants.actions.CROSS_SELL_SUCCESSFUL
 		});
 	},
 

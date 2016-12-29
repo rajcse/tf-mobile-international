@@ -286,7 +286,7 @@ export default class SearchForm extends React.Component {
 						items={searchTypePills}
 						name="search-type"
 						onChange={this.handleSearchTypeChange}
-						defaultValue={this.props.criteria.type || constants.recordTypes.PERSON}
+						value={this.props.criteria.type || constants.recordTypes.PERSON}
 					/>
 				</div>
 

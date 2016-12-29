@@ -52,7 +52,6 @@ class PremiumUpsellPrompt extends Component {
 	}
 
 	cancelPremiumUpsell() {
-		viewActions.clearUserErrors();
 		viewActions.cancelPremiumUpsell();
 	}
 

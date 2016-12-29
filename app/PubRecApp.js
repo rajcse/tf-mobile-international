@@ -10,7 +10,6 @@ import Login from 'containers/login/Login';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
-import SuccessPrompt from 'components/SuccessPrompt';
 import RatingsPrompt from 'components/RatingsPrompt';
 import WelcomePrompt from 'components/WelcomePrompt';
 import NotificationPrompt from 'components/NotificationPrompt';
@@ -43,14 +42,12 @@ export default class PubRecApp extends React.Component {
 			},
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
-			productCrossSell: userStore.getProductCrossSell(),
-			purchasePending: userStore.getPurchasePending(),
+			crossSell: userStore.getCrossSell(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			usage: userStore.getUsage(),
 			notifications: userStore.getNotifications(),
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
-			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModalStatus()
@@ -58,17 +55,11 @@ export default class PubRecApp extends React.Component {
 
 		this.onResultsChange = this.onResultsChange.bind(this);
 		this.onUserChange = this.onUserChange.bind(this);
-		this.confirmCrossSell = this.confirmCrossSell.bind(this);
-		this.cancelCrossSell = this.cancelCrossSell.bind(this);
 	}
 
 	componentWillMount() {
 		searchStore.addChangeListener(this.onResultsChange);
 		userStore.addChangeListener(this.onUserChange);
-	}
-
-	shouldComponentUpdate() {
-		return true;
 	}
 
 	componentWillUnmount() {
@@ -92,31 +83,15 @@ export default class PubRecApp extends React.Component {
 		this.setState({
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
-			productCrossSell: userStore.getProductCrossSell(),
-			purchasePending: userStore.getPurchasePending(),
+			crossSell: userStore.getCrossSell(),
 			usage: userStore.getUsage(),
 			loggingIn: userStore.isLoggingIn(),
 			loginErrors: userStore.getLoginErrors(),
 			purchaseErrors: userStore.getPurchaseErrors(),
-			success: userStore.getPurchaseSuccess(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModalStatus()
 		});
-	}
-
-	confirmCrossSell() {
-		viewActions.confirmCrossSell(this.state.productCrossSell);
-	}
-
-	cancelCrossSell() {
-		viewActions.clearUserErrors();
-		viewActions.cancelCrossSell();
-	}
-
-	confirmSuccess() {
-		viewActions.clearSuccess();
-		window.scrollTo(0, 0);
 	}
 
 	confirmWelcome() {
@@ -145,12 +120,9 @@ export default class PubRecApp extends React.Component {
 					/>
 				}
 
-				{ this.state.productCrossSell && !this.state.purchaseErrors &&
+				{ this.state.crossSell && !this.state.purchaseErrors &&
 					<PaymentPrompt
-						confirmCrossSell={this.confirmCrossSell}
-						purchasePending={this.state.purchasePending}
-						cancelCrossSell={this.cancelCrossSell}
-						{...this.state.productCrossSell}
+						crossSell={this.state.crossSell}
 					/>
 				}
 
@@ -161,8 +133,8 @@ export default class PubRecApp extends React.Component {
 							<a href="https://www.truthfinder.com/dashboard/account/my-billing?referer=mobile-app">www.truthfinder.com</a> to review your settings.`
 						}
 						confirmError={ this.state.premiumUpsell
-							? () => { viewActions.clearUserErrors(); viewActions.cancelPremiumUpsell(); }
-							: this.cancelCrossSell
+							? () => { viewActions.clearPurchaseErrors(); viewActions.cancelPremiumUpsell(); }
+							: () => { viewActions.clearPurchaseErrors(); viewActions.cancelCrossSell(); }
 						}
 					/>
 				}
@@ -171,13 +143,6 @@ export default class PubRecApp extends React.Component {
 					<ErrorPrompt
 						message="Report Not Found"
 						confirmError={viewActions.clearSearchError}
-					/>
-				}
-
-				{this.state.success &&
-					<SuccessPrompt
-						message="Purchase Successful"
-						confirmSuccess={this.confirmSuccess}
 					/>
 				}
 
