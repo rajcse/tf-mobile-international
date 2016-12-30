@@ -41,6 +41,14 @@ class AppStoreClient {
 			p.finish();
 		});
 
+		window.store.when(constants.productTypes.STANDARD_PERSON_REPORT_IAP).approved(p => {
+			p.verify();
+		});
+
+		window.store.when(constants.productTypes.STANDARD_PERSON_REPORT_IAP).verified(p => {
+			p.finish();
+		});
+
 		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).approved(p => {
 		// 	p.verify();
 		// });
@@ -114,6 +122,12 @@ class AppStoreClient {
 		window.store.register({
 			id: 'premium_person_report_9_99',
 			alias: constants.productTypes.PREMIUM_PERSON_REPORT_IAP,
+			type: window.store.CONSUMABLE
+		});
+
+		window.store.register({
+			id: 'person_report_0_99',
+			alias: constants.productTypes.STANDARD_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
 	}

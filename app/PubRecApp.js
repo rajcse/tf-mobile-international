@@ -8,6 +8,7 @@ import searchStore from 'stores/searchStore';
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
+import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
 import RatingsPrompt from 'components/RatingsPrompt';
@@ -42,6 +43,7 @@ export default class PubRecApp extends React.Component {
 			},
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
+			standardUpsell: userStore.getStandardUpsell(),
 			crossSell: userStore.getCrossSell(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			usage: userStore.getUsage(),
@@ -83,6 +85,7 @@ export default class PubRecApp extends React.Component {
 		this.setState({
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
+			standardUpsell: userStore.getStandardUpsell(),
 			crossSell: userStore.getCrossSell(),
 			usage: userStore.getUsage(),
 			loggingIn: userStore.isLoggingIn(),
@@ -114,7 +117,14 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.premiumUpsell && !this.state.purchaseErrors &&
+				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell &&
+					<StandardUpsellPrompt
+						standardUpsell={this.state.standardUpsell}
+						premiumUpsell={this.state.premiumUpsell}
+					/>
+				}
+
+				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell &&
 					<PremiumUpsellPrompt
 						premiumUpsell={this.state.premiumUpsell}
 					/>
@@ -133,7 +143,7 @@ export default class PubRecApp extends React.Component {
 							<a href="https://www.truthfinder.com/dashboard/account/my-billing?referer=mobile-app">www.truthfinder.com</a> to review your settings.`
 						}
 						confirmError={ this.state.premiumUpsell
-							? () => { viewActions.clearPurchaseErrors(); viewActions.cancelPremiumUpsell(); }
+							? () => { viewActions.clearPurchaseErrors(); viewActions.cancelPremiumUpsell(); viewActions.cancelStandardUpsell();}
 							: () => { viewActions.clearPurchaseErrors(); viewActions.cancelCrossSell(); }
 						}
 					/>

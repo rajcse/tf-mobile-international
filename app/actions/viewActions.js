@@ -188,6 +188,35 @@ export default {
 		});
 	},
 
+	showStandardUpsell(record) {
+		dispatcher.dispatch({
+			actionType: constants.actions.SHOW_STANDARD_UPSELL
+		});
+		pubRecAPI.fetchStandardUpsellInfo(record);
+	},
+
+	purchaseStandardRecord(standardUpsell) {
+		dispatcher.dispatch({
+			actionType: constants.actions.PURCHASE_STANDARD_RECORD,
+			standardUpsell
+		});
+		pubRecAPI.purchaseStandardRecord(standardUpsell);
+	},
+
+	upgradeToStandardRecord(recordId) {
+		dispatcher.dispatch({
+			actionType: constants.actions.UPGRADE_TO_STANDARD_RECORD,
+			recordId
+		});
+		pubRecAPI.upgradeToStandardRecord(recordId);
+	},
+
+	cancelStandardUpsell() {
+		dispatcher.dispatch({
+			actionType: constants.actions.CANCEL_STANDARD_UPSELL
+		});
+	},
+
 	purchaseCrossSell(crossSell) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_CROSS_SELL,

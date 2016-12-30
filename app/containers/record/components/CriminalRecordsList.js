@@ -8,7 +8,7 @@ import uuid from 'uuid';
 
 class CriminalRecordsList extends Component {
 	render() {
-		let { filteredCrimes, openCrime } = this.props;
+		let { filteredCrimes, openCrime, showStandardUpsell } = this.props;
 		return (
 			<div className="criminal-results simple-column" key={uuid.v4()}>
 				{ filteredCrimes.map((matchType, index) => {
@@ -64,8 +64,11 @@ class CriminalRecordsList extends Component {
 												? <p>{moment(`${crimeDate.month}/${crimeDate.day}/${crimeDate.year}`, 'MM/DD/YYYY').format('ll')}</p>
 												: null
 											}
-
-											<button onClick={ () => { openCrime(crime); } } className="btn btn-link">Case Details</button>
+											{ showStandardUpsell ? 
+												<button onClick={ () => { showStandardUpsell(); } } className="btn btn-link">Case Details</button>
+												:
+												<button onClick={ () => { openCrime(crime); } } className="btn btn-link">Case Details</button>
+											}
 										</div>
 									);
 								})  }
@@ -80,7 +83,8 @@ class CriminalRecordsList extends Component {
 
 CriminalRecordsList.propTypes = {
 	openCrime: React.PropTypes.func.isRequired,
-	filteredCrimes: React.PropTypes.array.isRequired
+	filteredCrimes: React.PropTypes.array.isRequired,
+	showStandardUpsell: React.PropTypes.func.isRequired
 };
 
 export default CriminalRecordsList;
