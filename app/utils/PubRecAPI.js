@@ -318,7 +318,26 @@ class PubRecAPI {
 		credentials.cordovaDevice = window.device;
 		credentials.firebaseToken = firebaseClient.deviceToken;
 
-		return _makeRequest('/register', {method: 'POST', body: credentials})
+		// Set welcome message defaults
+		const welcomeMessages = {
+			message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
+			message2: `To celebrate the launch of our new Mobile App we're granting each new user 50 FREE Person reports,
+					30 FREE Phone Number lookups, and 30 FREE Email address lookups. As a bonus, you will also have
+					access to our website where you can look people up and view reports on your desktop or laptop!`
+		};
+
+		return firebaseClient.getConfigValue('signup_sku')
+			.then(signupSku => {
+				if(signupSku) {
+					firebaseClient.setUserProperty('signup_sku', signupSku);
+					credentials.signupSku = signupSku;
+
+					// FIXME: This is gross and hacky and hardcoded - use this only for the lite person testing
+					welcomeMessages.message2 = 'Your account includes unlimited FREE person reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!';
+				}
+
+				return _makeRequest('/register', {method: 'POST', body: credentials});
+			})
 			.then(responseData => {
 				if(responseData.success) {
 						// Set the access token for future calls
@@ -331,16 +350,16 @@ class PubRecAPI {
 					window.localStorage.setItem('accessToken', _accessToken);
 					window.localStorage.setItem('refreshToken', _refreshToken);
 
-					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
+					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)));
 
 					// Get the usage for the user
 					this.getUsage();
 
 					// Set welcome modal status for new users
-					serverActions.setWelcomeStatus();
+					setTimeout(() => serverActions.setWelcomeStatus(welcomeMessages));
 
 					//Redirect to Search page on inital login
-					setTimeout(() => serverActions.redirectToSearch(), 0);
+					setTimeout(() => serverActions.redirectToSearch());
 
 					// Fire Event and subscribe to topics
 					firebaseClient.logEvent(constants.firebase.events.SIGN_UP, {sign_up_method: 'Mobile App'});

@@ -41,6 +41,9 @@ class FirebaseClient {
 
 			serverActions.receiveNotification(clientData);
 		});
+
+		// Fetch remote config and activate the values
+		this.refreshRemoteConfig();
 	}
 
 	logEvent(eventName, eventData) {
@@ -83,6 +86,21 @@ class FirebaseClient {
 		if(!window.FirebasePlugin) return;
 
 		Object.keys(constants.firebase.topics).forEach(key => window.FirebasePlugin.unsubscribe(constants.firebase.topics[key]));
+	}
+
+	refreshRemoteConfig() {
+		window.FirebasePlugin.fetch(() => {
+			window.FirebasePlugin.activateFetched();
+		}, error => console.error(error));
+	}
+
+	getConfigValue(key) {
+		// Cleanly return if Firebase plugin is missing
+		if(!window.FirebasePlugin) return new Promise(resolve => resolve());
+
+		return new Promise((resolve, reject) => {
+			window.FirebasePlugin.getValue(key, value => resolve(value), error => reject(error));
+		});
 	}
 }
 
