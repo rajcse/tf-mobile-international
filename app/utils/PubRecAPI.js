@@ -729,8 +729,7 @@ class PubRecAPI {
 				 if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.STANDARD_PERSON_REPORT);
 				 } else {
-					return this.fetchProductInfo(constants.productTypes.STANDARD_PERSON_REPORT);
-				// 	return appStoreClient.getProductInfo(constants.productTypes.STANDARD_PERSON_REPORT_IAP);
+					return appStoreClient.getProductInfo(constants.productTypes.STANDARD_PERSON_REPORT_IAP);
 				 }
 			})
 			.then(product => {
