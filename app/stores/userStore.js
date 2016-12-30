@@ -13,6 +13,7 @@ let _user = null,
 	_loginErrors = null,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
+	_standardUpsell = null,
 	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
@@ -70,6 +71,10 @@ class UserStore extends EventEmitter {
 
 	getPremiumUpsell() {
 		return _premiumUpsell;
+	}
+
+	getStandardUpsell() {
+		return _standardUpsell;
 	}
 
 	getPurchaseErrors() {
@@ -183,6 +188,23 @@ dispatcher.register(action => {
 
 		case constants.actions.PREMIUM_UPGRADE_SUCCESSFUL:
 			_premiumUpsell = null;
+			_standardUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RECEIVE_STANDARD_UPSELL:
+			_standardUpsell = action.standardUpsell;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.CANCEL_STANDARD_UPSELL:
+			_standardUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.STANDARD_UPGRADE_SUCCESSFUL:
+			_standardUpsell = null;
+			_premiumUpsell = null;
 			userStore.emitChange();
 			break;
 
@@ -253,6 +275,7 @@ dispatcher.register(action => {
 			_loginErrors = null;
 			_crossSell = null;
 			_premiumUpsell = null;
+			_standardUpsell = null;
 			_usage = [];
 			_recordsViewed = 0;
 			userStore.emitChange();

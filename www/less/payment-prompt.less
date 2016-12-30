@@ -8,6 +8,11 @@
 	z-index: 99999;
 	overflow-y: scroll;
 
+		.close-modal{
+				position: absolute;
+				width: 25px;
+		}
+
 		.modal {
 				background: @brand-white;
 				position: absolute;
@@ -16,7 +21,13 @@
 				width: 90%;
 				transform: translateX(-50%);
 				border-radius: @input-border-radius;
-
+				h3 {
+					a {
+					    float: right;
+					    margin-right: 20px;
+					}
+				}
+				
 				&.modal-transparent {
 					text-align: center;
 					background: transparent;
@@ -100,6 +111,10 @@
 									text-transform: uppercase;
 									color: @brand-white;
 								}
+						}
+						button.continue.orange{
+							background: @brand-orange;
+							font-size: 15px;
 						}
 						a.cancel {
 							font-size: 14px;

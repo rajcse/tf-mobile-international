@@ -123,6 +123,12 @@ export default {
 		});
 	},
 
+	standardUpgradeSuccessful() {
+		dispatcher.dispatch({
+			actionType: constants.actions.STANDARD_UPGRADE_SUCCESSFUL
+		});
+	},
+
 	purchaseError(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_ERROR,
@@ -176,6 +182,19 @@ export default {
 			quantity: 1,
 			price: Number(String(premiumUpsell.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
 		});
+	},
+
+	receiveStandardUpsellInfo(standardUpsell) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_STANDARD_UPSELL,
+			standardUpsell
+		});
+		// firebaseClient.logEvent(constants.firebase.events.PRESENT_OFFER, {
+		// 	item_id: standardUpsell.product.sku || standardUpsell.product.id,
+		// 	item_category: 'Premium Person Report',
+		// 	quantity: 1,
+		// 	price: Number(String(standardUpsell.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
+		// });
 	},
 
 	setWelcomeStatus({message1, message2}) {
