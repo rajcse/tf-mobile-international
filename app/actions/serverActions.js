@@ -178,9 +178,11 @@ export default {
 		});
 	},
 
-	setWelcomeStatus() {
+	setWelcomeStatus({message1, message2}) {
 		dispatcher.dispatch({
-			actionType: constants.actions.SET_WELCOME_STATUS
+			actionType: constants.actions.SET_WELCOME_STATUS,
+			message1,
+			message2
 		});
 	}
 };

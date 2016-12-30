@@ -96,7 +96,7 @@ class FirebaseClient {
 
 	getConfigValue(key) {
 		// Cleanly return if Firebase plugin is missing
-		if(!window.FirebasePlugin) return;
+		if(!window.FirebasePlugin) return new Promise(resolve => resolve());
 
 		return new Promise((resolve, reject) => {
 			window.FirebasePlugin.getValue(key, value => resolve(value), error => reject(error));

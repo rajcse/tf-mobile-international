@@ -50,7 +50,7 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModalStatus()
+			welcomeModal: userStore.getWelcomeModal()
 		};
 
 		this.onResultsChange = this.onResultsChange.bind(this);
@@ -90,12 +90,8 @@ export default class PubRecApp extends React.Component {
 			purchaseErrors: userStore.getPurchaseErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModalStatus()
+			welcomeModal: userStore.getWelcomeModal()
 		});
-	}
-
-	confirmWelcome() {
-		viewActions.confirmWelcome();
 	}
 
 	render() {
@@ -154,16 +150,11 @@ export default class PubRecApp extends React.Component {
 						/>
 				}
 
-				{ //welcome modal that has the free credit info
+				{ // welcome modal that has the free credit info
 					this.state.welcomeModal &&
 						<WelcomePrompt
-							message1="Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available."
-							message2={
-								`To celebrate the launch of our new Mobile App we're granting each new user 50 FREE Person reports,
-								30 FREE Phone Number lookups, and 30 FREE Email address lookups. As a bonus, you will also have
-								access to our website where you can look people up and view reports on your desktop or laptop!`
-							}
-							confirmWelcome={this.confirmWelcome}
+							message1={this.state.welcomeModal.message1}
+							message2={this.state.welcomeModal.message2}
 						/>
 				}
 

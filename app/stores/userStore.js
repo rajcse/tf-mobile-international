@@ -16,7 +16,7 @@ let _user = null,
 	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
-	_welcomeModalStatus = false,
+	_welcomeModal = null,
 	_notifications = [],
 	_usage = [];
 
@@ -29,8 +29,8 @@ class UserStore extends EventEmitter {
 		return _usage;
 	}
 
-	getWelcomeModalStatus() {
-		return _welcomeModalStatus;
+	getWelcomeModal() {
+		return _welcomeModal;
 	}
 
 	getrecordsViewed() {
@@ -231,12 +231,12 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.CONFIRM_WELCOME:
-			_welcomeModalStatus = false;
+			_welcomeModal = null;
 			userStore.emitChange();
 			break;
 
 		case constants.actions.SET_WELCOME_STATUS:
-			_welcomeModalStatus = true;
+			_welcomeModal = {message1: action.message1, message2: action.message2};
 			userStore.emitChange();
 			break;
 
