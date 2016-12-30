@@ -62,7 +62,6 @@ export default class Search extends React.Component {
 		return (
 			<div id="search">
 				<Header title="Search" />
-				{search.gettingRecord ? <p>Going to your report...</p> : null}
 				<SearchForm searching={search.searching} criteria={search.criteria} />
 				{results}
 			</div>

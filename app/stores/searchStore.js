@@ -7,8 +7,7 @@ const CHANGE_EVENT = 'change';
 let _results = defaultResults(),
 	_criteria = defaultCriteria(),
 	_searching = false,
-	_searchErrors = null,
-	_gettingRecord = false;
+	_searchErrors = null;
 
 function defaultResults() {
 	let resultsSet = {};
@@ -64,10 +63,6 @@ class SearchStore extends EventEmitter {
 		return _searching;
 	}
 
-	isGettingRecord() {
-		return _gettingRecord;
-	}
-
 	emitChange() {
 		this.emit(CHANGE_EVENT);
 	}
@@ -120,6 +115,7 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.CANCEL_CROSS_SELL:
+		case constants.actions.CROSS_SELL_SUCCESSFUL:
 		case constants.actions.CLEAR_SEARCH_RESULTS:
 			_results = defaultResults();
 			_criteria = defaultCriteria();
@@ -130,22 +126,6 @@ dispatcher.register(action => {
 		case constants.actions.RECEIVE_SEARCH_RESULTS:
 			_searching = false;
 			_results[action.type] = action.results;
-			searchStore.emitChange();
-			break;
-
-		// Catch the outgoing request to create a record so we can prep for a redirect
-		case constants.actions.SELECT_TEASER:
-			_gettingRecord = true;
-			searchStore.emitChange();
-			break;
-
-		case constants.actions.RECEIVE_RECORD_ID:
-			_gettingRecord = false;
-			searchStore.emitChange();
-			break;
-
-		case constants.actions.CLEAR_SEARCH_STATE:
-			_gettingRecord = false;
 			searchStore.emitChange();
 			break;
 
@@ -165,7 +145,6 @@ dispatcher.register(action => {
 			_criteria = defaultCriteria();
 			_searching = false;
 			_searchErrors = null;
-			_gettingRecord = false;
 			searchStore.emitChange();
 			break;
 

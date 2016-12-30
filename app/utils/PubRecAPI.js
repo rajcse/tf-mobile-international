@@ -176,7 +176,6 @@ function _makeRequest(path, options) {
 			if(error.statusCode === 402) {
 				error.responseBody.then(responseData => {
 					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item));
-					setTimeout(() => serverActions.clearSearchState());
 				});
 			}
 
