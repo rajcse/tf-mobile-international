@@ -92,7 +92,7 @@ export default class Login extends Component {
 					{this.props.loggingIn ? <Loader /> : null}
 				</form>
 				<p id="not-a-member">
-					<Link to="/register">Create a free account!</Link>
+					<Link to="/register">Create a new account!</Link>
 				</p>
 			</div>
 		);
