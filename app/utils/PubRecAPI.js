@@ -725,7 +725,6 @@ class PubRecAPI {
 				const paymentOptions = user.payment_options || [],
 					paymentOptionOnFile = paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
 
-					//REVISIT THIS BEFORE LAUNCHING STND REPORTS
 				 if(paymentOptionOnFile) {
 					return this.fetchProductInfo(constants.productTypes.STANDARD_PERSON_REPORT);
 				 } else {
