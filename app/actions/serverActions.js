@@ -136,13 +136,6 @@ export default {
 		});
 	},
 
-	//This is to clear the search state where it hungs up trying to load the report, get an 402 and go through the crossell flow
-	clearSearchState() {
-		dispatcher.dispatch({
-			actionType: constants.actions.CLEAR_SEARCH_STATE
-		});
-	},
-
 	searchError(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.SEARCH_ERROR,

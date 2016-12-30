@@ -37,7 +37,6 @@ export default class PubRecApp extends React.Component {
 			search: {
 				results: searchStore.getAllResults(),
 				searching: searchStore.isSearching(),
-				gettingRecord: searchStore.isGettingRecord(),
 				criteria: searchStore.getCriteria(),
 				errors: searchStore.getSearchErrors()
 			},
@@ -74,7 +73,6 @@ export default class PubRecApp extends React.Component {
 			search: {
 				results: searchStore.getAllResults(),
 				searching: searchStore.isSearching(),
-				gettingRecord: searchStore.isGettingRecord(),
 				criteria: searchStore.getCriteria(),
 				errors: searchStore.getSearchErrors()
 			}
