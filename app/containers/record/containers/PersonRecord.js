@@ -76,7 +76,7 @@ class PersonRecord extends Component {
 		deathYear = age.deathday ? null : moment(age.deathday, 'MM/DD/YYYY').year();
 
 		return (
-			<main className={ (!isPremium) ? 'no-premium' : 'has-premium'}>
+			<main className={`person ${isPremium ? 'premium' : ''}`}>
 				<Header title={`${record.reportData.names[0].first}'s Report`} backButton />
 
 				<RouteTransition

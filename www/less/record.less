@@ -297,6 +297,13 @@
 		}
 	}
 }
+
+.person {
+	.report-header.standard {
+		padding-top: 42px;
+	}
+}
+
 // Progress Bars
 .progress {
 	position: relative;
@@ -1298,7 +1305,7 @@
 }
 
 .premium {
-	 &.report-header,
+	&.report-header,
 	.title {
 		border: none;
 		background: #c39511!important;
@@ -1378,12 +1385,17 @@ li {
 		font-size: 10px;
 	}
 }
+
 // Premium Upsell
 .premium-header {
 	background: #EAC800;
 	padding: 10px;
 	color: @brand-white;
-	margin: 0 -10px;
+	box-sizing: border-box;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	z-index: 999;
 
 	.icon-exclamation {
 		float: left;
