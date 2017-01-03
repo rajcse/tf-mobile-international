@@ -91,12 +91,12 @@ class StandardUpsellPrompt extends Component {
 			<div id="payment-prompt">
 				{ this.state.introModal ?
 					<div className="modal">
-						<h3>Important Report Info
+						<h3>Unlock Case Details Now!
 							<a className="cancel" onClick={this.cancelStandardUpsell}>
 								<Svg className="close-modal" svg="closePhoto"/>
 							</a>
 						</h3>
-						<p>To view case details on {fullName}'s Report, you must upgrade your report.</p>
+						<p>Upgrade your report to unlock the details of {fullName}'s criminal records.  Case details may include the name of the offense, whether or not an arrest was made, sentencing information, and more! You might even see a mugshot!</p>
 						
 						<p className="confirm">
 							{ accountInfo.balances.premium_person_report > 0 ?
@@ -104,12 +104,12 @@ class StandardUpsellPrompt extends Component {
 									onClick={this.confirmPremiumUpgradeWithCredits}>Upgrade this report and unlock all Premium Data using 1 Premium credit}</button>
 							:
 								<button type="button" className="continue btn btn-primary btn-upgrade orange"
-									onClick={this.confirmPremiumPurchaseAndUpgrade}>Unlock all Premium Data for ${String(premiumProduct.price).replace('$', '')}</button>
+									onClick={this.confirmPremiumPurchaseAndUpgrade}>Unlock Criminal Records + Premium Data for ${String(premiumProduct.price).replace('$', '')}</button>
 							}
 							{ accountInfo.balances.person_report > 0 ?
-								<a className="cancel" onClick={this.confirmStandardUpgradeWithCredits}>I just want to see this section details using 1 Person Report Credit</a>
+								<a className="cancel" onClick={this.confirmStandardUpgradeWithCredits}>I just want to see criminal record details using 1 Person Report Credit</a>
 								:
-								<a className="cancel" onClick={this.confirmStandardPurchaseAndUpgrade}>I just want to see this section details for ${String(product.price).replace('$', '')}</a>
+								<a className="cancel" onClick={this.confirmStandardPurchaseAndUpgrade}>I just want to see criminal record details for ${String(product.price).replace('$', '')}</a>
 							}
 						</p>
 					</div>
