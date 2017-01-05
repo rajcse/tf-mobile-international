@@ -328,11 +328,13 @@ class PubRecAPI {
 		return firebaseClient.getConfigValue('signup_sku')
 			.then(signupSku => {
 				if(signupSku) {
-					firebaseClient.setUserProperty('signup_sku', signupSku);
+					// FIXME: This is gross and hacky and hardcoded - use this only for the lite person testing
+					firebaseClient.setUserProperty('signup_product', 'lite_reports');
 					credentials.signupSku = signupSku;
 
-					// FIXME: This is gross and hacky and hardcoded - use this only for the lite person testing
 					welcomeMessages.message2 = 'Your account includes unlimited FREE person reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!';
+				} else {
+					firebaseClient.setUserProperty('signup_product', 'standard_credits');
 				}
 
 				return _makeRequest('/register', {method: 'POST', body: credentials});
