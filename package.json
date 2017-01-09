@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "android": "yarn build && cordova run android --device",
-		"ios": "yarn build && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
+    "ios": "yarn build && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
     "release": "yarn build && cordova build --release --buildConfig=./build.json android && cordova build ios && open platforms/ios/TruthFinder.xcodeproj",
     "build": "eslint app && NODE_ENV=production webpack",
     "start": "NODE_ENV=development webpack-dev-server",
@@ -80,12 +80,13 @@
     "react-search-input": "^0.10.3",
     "react-swipeable": "^3.7.0",
     "sinon": "^1.17.6",
+		"source-map": "^0.5.6",
     "style-loader": "^0.13.1",
     "svg-fill-loader": "0.0.4",
     "svg-url-loader": "^1.1.0",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.2",
-    "webpack": "^1.13.3",
+    "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^0.15.0",
     "whatwg-fetch": "^1.0.0"
