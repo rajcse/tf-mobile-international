@@ -6,8 +6,16 @@ import 'whatwg-fetch';
 // Promise polyfill
 require('es6-promise').polyfill();
 
+/* eslint-disable */
+// Expose jQuery for owl-carousel
+window.jQuery = window.$ = jQuery;
+/* eslint-enable */
+
 // Custom polyfills
 import 'utils/polyfills';
+
+// Source map parser for error reporting
+import sourceMap from 'source-map';
 
 import React from 'react';
 import config from 'config';
@@ -86,25 +94,68 @@ window.initializeApp = () => {
 	);
 };
 
-// Log all client errors - self contained VanillaJS, matches endpoint used in the funnel
-window.onerror = (message, file, line, column, err) => {
-	let httpRequest = new XMLHttpRequest(),
-		data = 'message=' + encodeURIComponent(message) +
-							'&file=' + encodeURIComponent(file) +
-							'&line=' + encodeURIComponent(line) +
-							'&column=' + encodeURIComponent(column) +
-							'&url=' + encodeURIComponent(location.href);
+/**
+ * Client error logging
+ */
 
-	// Some browsers give us the actuall error instance, and that's cool
+window.onerror = (message, file, line, column, err) => {
+	const errorRequest = new XMLHttpRequest(),
+		mapRequest = new XMLHttpRequest(),
+		errorData = {
+			message,
+			path: location.href
+		};
+
+	// Some browsers give us the actual error instance, and that's cool
 	if(err && err.stack) {
-		data += '&stack=' + encodeURIComponent(err.stack);
+		errorData.stack = err.stack;
 	}
 
 	// Don't do anything - the user doesn't need to see this
-	httpRequest.onreadystatechange = () => {};
+	errorRequest.onreadystatechange = () => {};
 
-	// Send it off
-	httpRequest.open('POST', config.API_ROOT + '/errors');
-	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	httpRequest.send(data);
+	// We have to fetch the source map first
+	// Don't send client errors unless we can map
+	mapRequest.onreadystatechange = () => {
+		if(mapRequest.readyState == 4 && mapRequest.status == 200) {
+			let mapText = mapRequest.responseText,
+				mapJSON,
+				smc,
+				sourceData;
+
+			// Can we parse it?
+			try {
+				mapJSON = JSON.parse(mapText);
+			} catch(e) {
+				mapJSON = null;
+			}
+
+			if(mapJSON) {
+				smc = new sourceMap.SourceMapConsumer(mapJSON);
+				sourceData = smc.originalPositionFor({
+					line,
+					column
+				});
+
+				errorData.file = sourceData.source;
+				errorData.line = sourceData.line;
+				errorData.column = sourceData.column;
+				errorData.name = sourceData.name;
+			} else {
+				// Default to the original file/line/column
+				errorData.file = file;
+				errorData.line = line;
+				errorData.column = column;
+			}
+
+			// Send it off
+			errorRequest.open('POST', config.API_ROOT + '/errors');
+			errorRequest.setRequestHeader('Content-Type', 'application/json');
+			errorRequest.send(JSON.stringify(errorData));
+		}
+	};
+
+	// Request the source map
+	mapRequest.open('GET', 'app.js.map');
+	mapRequest.send();
 };

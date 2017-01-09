@@ -13,35 +13,10 @@ const common = {
 			config: path.join(__dirname, 'config', process.env.NODE_ENV)
 		}
 	},
-	entry: {
-		app: path.join(__dirname, 'app'),
-		vendor: [
-			'classnames',
-			'es6-promise',
-			'flux',
-			'jquery',
-			'jwt-decode',
-			'lodash',
-			'moment',
-			'react',
-			'react-addons-css-transition-group',
-			'react-chartjs-2',
-			'react-dom',
-			'react-owl-carousel',
-			'react-router',
-			'react-router-scroll',
-			'react-router-transition',
-			'react-scroll',
-			'react-search-input',
-			'react-swipeable',
-			'uuid',
-			'whatwg-fetch'
-		]
-	},
+	entry: path.join(__dirname, 'app'),
 	output: {
 		path: path.join(__dirname, 'www'),
-		filename: '[name].js',
-		publicPath: '/'
+		filename: 'app.js'
 	},
 	node: {
 		fs: 'empty'
@@ -69,7 +44,7 @@ const common = {
 			loader: 'json-loader'
 		}, {
 			test: require.resolve('jquery'),
-			loader: 'expose?$!expose?jQuery'
+			loader: 'expose-loader?$!expose-loader?jQuery'
 		}]
 	},
 	cache: true,
@@ -80,29 +55,29 @@ const common = {
 if (process.env.NODE_ENV === 'production') {
 	// config can be added here for minifying / etc
 	module.exports = merge(common, {
+		devtool: 'source-map',
 		plugins: [
 			new webpack.DefinePlugin({
 				'process.env': {
 					NODE_ENV: JSON.stringify('production')
 				}
 			}),
+			new webpack.optimize.OccurenceOrderPlugin(),
+			new webpack.ProvidePlugin({
+				$: 'jquery',
+				jQuery: 'jquery'
+			}),
 			new webpack.optimize.UglifyJsPlugin({
 				compress: {
 					warnings: false
 				}
-			}),
-			new webpack.ProvidePlugin({
-				_: 'lodash',
-				$: 'jquery',
-				jQuery: 'jquery'
-			}),
-			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+			})
 		]
 	});
 } else {
 	module.exports = merge(common, {
 		debug: true,
-		devtool: 'source-map',
+		devtool: 'cheap-module-eval-source-map',
 		devServer: {
 			contentBase: path.join(__dirname, 'www'),
 			port: 3000,
@@ -132,11 +107,9 @@ if (process.env.NODE_ENV === 'production') {
 			new webpack.optimize.OccurenceOrderPlugin(),
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.ProvidePlugin({
-				_: 'lodash',
 				$: 'jquery',
 				jQuery: 'jquery'
-			}),
-			new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+			})
 		]
 	});
 }
