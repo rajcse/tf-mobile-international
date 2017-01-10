@@ -1082,7 +1082,10 @@ class PubRecAPI {
 		return _makeRequest('/users/' + user.id, {needsAuth: true, method: 'DELETE'})
 			.then(responseData => {
 				if(responseData.success) {
-					this.logout();
+					this.clearUserData();
+					firebaseClient.logEvent('delete_account');
+					firebaseClient.setUserId(null);
+					setTimeout(serverActions.loggedOut(), 0);
 				} else {
 					console.error(responseData.errors);
 				}
