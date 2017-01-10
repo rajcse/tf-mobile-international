@@ -155,6 +155,8 @@ dispatcher.register(action => {
 		case constants.actions.RECEIVE_USER:
 			_loggingIn = false;
 			_loginErrors = null;
+			_registering = false;
+			_registerErrors = null;
 			_user = action.user;
 			_recordsViewed = userStore.checkRecordsViewed(action.user.id);
 			_userHasRated = window.localStorage.getItem(action.user.id + ':userHasRated') || false;
@@ -278,6 +280,12 @@ dispatcher.register(action => {
 			_standardUpsell = null;
 			_usage = [];
 			_recordsViewed = 0;
+			_registering = false;
+			_registerErrors = null;
+			_purchaseErrors = null;
+			_userHasRated = false;
+			_welcomeModal = null;
+			_notifications = [];
 			userStore.emitChange();
 			break;
 
