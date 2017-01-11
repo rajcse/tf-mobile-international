@@ -4,6 +4,7 @@ import _ from 'lodash';
 import viewActions from 'actions/viewActions';
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
+import firebaseClient from './firebaseClient';
 
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
@@ -154,7 +155,8 @@ export default class PubRecApp extends React.Component {
 					this.state.recordsViewed === 5 && !this.state.userHasRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
-							message2="If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!"
+							message2={ firebaseClient.getConfigValue('rating_text') ? firebaseClient.getConfigValue('rating_text') : 
+								'If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!'}
 						/>
 				}
 
