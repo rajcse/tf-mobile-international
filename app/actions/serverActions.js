@@ -151,6 +151,8 @@ export default {
 			actionType: constants.actions.LOGGED_OUT
 		});
 		if(redirect) hashHistory.push('/');
+
+		window.userIdForErrorLogging = null;
 	},
 
 	receiveUsage(usage) {
