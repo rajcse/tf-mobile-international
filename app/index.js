@@ -103,6 +103,8 @@ window.onerror = (message, file, line, column, err) => {
 		mapRequest = new XMLHttpRequest(),
 		errorData = {
 			message,
+			userId: window.userIdForErrorLogging || 'User not logged in',
+			device: window.device || null,
 			path: location.href
 		};
 
@@ -151,6 +153,8 @@ window.onerror = (message, file, line, column, err) => {
 			// Send it off
 			errorRequest.open('POST', config.API_ROOT + '/errors');
 			errorRequest.setRequestHeader('Content-Type', 'application/json');
+			errorRequest.setRequestHeader('App-Version', window.appVersion || '0.0.0');
+			errorRequest.setRequestHeader('App-Build', window.appBuild || '0');
 			errorRequest.send(JSON.stringify(errorData));
 		}
 	};

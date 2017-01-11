@@ -81,6 +81,9 @@ export default {
 			user
 		});
 		firebaseClient.setUserId(user.id);
+
+		// This is purely for client error logging - DO NOT ACCESS THIS VALUE ELSEWHERE
+		window.userIdForErrorLogging = user.id;
 	},
 
 	receiveAccountInfo(account) {
@@ -148,6 +151,8 @@ export default {
 			actionType: constants.actions.LOGGED_OUT
 		});
 		if(redirect) hashHistory.push('/');
+
+		window.userIdForErrorLogging = null;
 	},
 
 	receiveUsage(usage) {
