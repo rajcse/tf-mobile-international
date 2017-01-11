@@ -42,6 +42,9 @@ class FirebaseClient {
 			serverActions.receiveNotification(clientData);
 		});
 
+		//set Default values on the client
+		window.FirebasePlugin.setDefaults({rating_text: 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!'});
+
 		// Fetch remote config and activate the values
 		this.refreshRemoteConfig();
 	}

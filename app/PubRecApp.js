@@ -4,7 +4,7 @@ import _ from 'lodash';
 import viewActions from 'actions/viewActions';
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
-import firebaseClient from './firebaseClient';
+import firebaseClient from 'utils/firebaseClient';
 
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
@@ -52,7 +52,8 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModal()
+			welcomeModal: userStore.getWelcomeModal(),
+			ratingText: ''
 		};
 
 		this.onResultsChange = this.onResultsChange.bind(this);
@@ -94,6 +95,14 @@ export default class PubRecApp extends React.Component {
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModal()
 		});
+	}
+
+	getRatingText() {
+		firebaseClient.getConfigValue('rating_text')
+			.then(ratingText => {
+				return this.setState({ratingText: ratingText});
+			});
+		return this.state.ratingText;
 	}
 
 	render() {
@@ -152,11 +161,10 @@ export default class PubRecApp extends React.Component {
 				}
 
 				{ // pop up the ratings modal when reports looked at is 5 and user has not rated before
-					this.state.recordsViewed === 5 && !this.state.userHasRated &&
+					(this.state.recordsViewed === 5 || this.state.recordsViewed === 15) && !this.state.userHasRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
-							message2={ firebaseClient.getConfigValue('rating_text') ? firebaseClient.getConfigValue('rating_text') : 
-								'If you enjoy using TruthFinder, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!'}
+							message2={this.getRatingText()}
 						/>
 				}
 
