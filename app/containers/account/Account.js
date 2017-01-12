@@ -136,12 +136,10 @@ export default class Support extends Component {
 						}
 
 					</div>
-
-					<div id="payment-details" className="content-block">
-						<h3>Payment Details</h3>
-
-						<h5>Default Payment Option</h5>
-						{defaultPaymentOption ?
+					{defaultPaymentOption &&
+						<div id="payment-details" className="content-block">
+							<h3>Payment Details</h3>
+							<h5>Default Payment Option</h5>
 							<dl>
 								<dt>{defaultPaymentOption.name}</dt>
 								<dd>
@@ -150,9 +148,9 @@ export default class Support extends Component {
 										: 'PayPal Account'
 									}
 								</dd>
-							</dl> : <Loader />
-						}
-					</div>
+							</dl> 
+						</div>
+					}
 
 					<div id="legal" className="content-block">
 						<h3>Legal</h3>
