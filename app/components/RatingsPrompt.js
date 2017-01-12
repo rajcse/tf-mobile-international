@@ -7,13 +7,21 @@ export default class RatingsPrompt extends Component {
 		super(props);
 
 		this.state = {
-			initialModal: true
+			initialModal: true,
+			message2: false
 		};
 
 		this.handlePositiveResponse = this.handlePositiveResponse.bind(this);
 		this.handleNegativeResponse = this.handleNegativeResponse.bind(this);
 		this.confirmAppStoreRating = this.confirmAppStoreRating.bind(this);
 		this.declineAppStoreRating = this.declineAppStoreRating.bind(this);
+	}
+
+	componentWillMount() {
+		firebaseClient.getConfigValue('rating_text')
+			.then(ratingText => {
+				this.setState({message2: ratingText});
+			});
 	}
 
 	handlePositiveResponse() {
@@ -39,14 +47,14 @@ export default class RatingsPrompt extends Component {
 		//REDIRECT HERE
 		window.open('market://details?id=com.truthfinder.app', '_system');
 
-		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.props.message2, prompt_response: 'YES!'});
+		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.state.message2, prompt_response: 'YES!'});
 	}
 
 	declineAppStoreRating() {
 		// Marks the user as rated
 		viewActions.markUserAsRated();
 
-		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.props.message2, prompt_response: 'NO'});
+		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.state.message2, prompt_response: 'NO'});
 	}
 
 	render() {
@@ -70,7 +78,7 @@ export default class RatingsPrompt extends Component {
 			<div id="ratings-prompt">
 				<div className="modal">
 					<h3>Help us get better!</h3>
-					<p>{this.props.message2}</p>
+					<p>{this.state.message2}</p>
 
 					<div className="confirm">
 						<button className="continue" onClick={this.confirmAppStoreRating}>YES!</button>
@@ -83,6 +91,5 @@ export default class RatingsPrompt extends Component {
 }
 
 RatingsPrompt.propTypes = {
-	message: PropTypes.string.isRequired,
-	message2: PropTypes.string.isRequired
+	message: PropTypes.string.isRequired
 };
