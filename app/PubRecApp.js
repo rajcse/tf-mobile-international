@@ -4,7 +4,6 @@ import _ from 'lodash';
 import viewActions from 'actions/viewActions';
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
-import firebaseClient from 'utils/firebaseClient';
 
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
@@ -52,8 +51,7 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModal(),
-			ratingText: ''
+			welcomeModal: userStore.getWelcomeModal()
 		};
 
 		this.onResultsChange = this.onResultsChange.bind(this);
@@ -95,14 +93,6 @@ export default class PubRecApp extends React.Component {
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModal()
 		});
-	}
-
-	getRatingText() {
-		firebaseClient.getConfigValue('rating_text')
-			.then(ratingText => {
-				return this.setState({ratingText: ratingText});
-			});
-		return this.state.ratingText;
 	}
 
 	render() {
@@ -164,7 +154,6 @@ export default class PubRecApp extends React.Component {
 					(this.state.recordsViewed === 5 || this.state.recordsViewed === 15) && !this.state.userHasRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
-							message2={this.getRatingText()}
 						/>
 				}
 
