@@ -20,6 +20,11 @@ export default class RatingsPrompt extends Component {
 	componentWillMount() {
 		firebaseClient.getConfigValue('rating_text')
 			.then(ratingText => {
+				if(ratingText == 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!') {
+					firebaseClient.setUserProperty('rating_text', '5_stars');
+				} else {
+					firebaseClient.setUserProperty('rating_text', 'no_stars');
+				}
 				this.setState({message2: ratingText});
 			});
 	}
