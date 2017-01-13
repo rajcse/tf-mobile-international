@@ -157,12 +157,9 @@ export default class PubRecApp extends React.Component {
 						/>
 				}
 
-				{ // welcome modal that has the free credit info
+				{ // Welcome modal that has a message set by Remote Config
 					this.state.welcomeModal &&
-						<WelcomePrompt
-							message1={this.state.welcomeModal.message1}
-							message2={this.state.welcomeModal.message2}
-						/>
+						<WelcomePrompt />
 				}
 
 				{ !!this.state.notifications.length &&

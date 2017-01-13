@@ -195,11 +195,9 @@ export default {
 		// });
 	},
 
-	setWelcomeStatus({message1, message2}) {
+	showWelcomeModal() {
 		dispatcher.dispatch({
-			actionType: constants.actions.SET_WELCOME_STATUS,
-			message1,
-			message2
+			actionType: constants.actions.SHOW_WELCOME_MODAL
 		});
 	}
 };
