@@ -11,8 +11,8 @@ const PremiumUpsellHeader = (props) => {
 	return (
 		<div className="header-upsell">
 			<div onClick={showPremiumUpsell} className="premium-header">
-				<p className="pull-left"><Svg className="icon-exclamation" svg="exclamationWhite" /> More Info Available!</p>
-				<p className="pull-right">Read More <Svg className="icon-arrow-right" svg="arrowRight" /></p>
+				<p className="pull-left"><Svg className="icon-exclamation" svg="exclamationWhite" /> Upgrade this report now!</p>
+				<p className="pull-right"><Svg className="icon-arrow-right" svg="arrowRight" /></p>
 			</div>
 		</div>
 	);
