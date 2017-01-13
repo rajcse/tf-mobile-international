@@ -10,6 +10,11 @@ import uuid from 'uuid';
 class FirebaseClient {
 	constructor() {
 		this.deviceToken = null;
+		this.remoteConfigDefaults = {
+			rating_text: 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!',
+			welcome_message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
+			welcome_message2: 'Your account includes unlimited FREE Person Reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!'
+		};
 	}
 
 	/**
@@ -42,8 +47,8 @@ class FirebaseClient {
 			serverActions.receiveNotification(clientData);
 		});
 
-		//set Default values on the client
-		window.FirebasePlugin.setDefaults({rating_text: 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!'});
+		// Set default values on the client for all Remote Configs being used
+		window.FirebasePlugin.setDefaults(this.remoteConfigDefaults);
 
 		// Fetch remote config and activate the values
 		this.refreshRemoteConfig();
@@ -98,8 +103,8 @@ class FirebaseClient {
 	}
 
 	getConfigValue(key) {
-		// Cleanly return if Firebase plugin is missing
-		if(!window.FirebasePlugin) return new Promise(resolve => resolve());
+		// Cleanly return config default if Firebase plugin is missing
+		if(!window.FirebasePlugin) return new Promise(resolve => resolve(this.remoteConfigDefaults[key] || ''));
 
 		return new Promise((resolve, reject) => {
 			window.FirebasePlugin.getValue(key, value => resolve(value), error => reject(error));

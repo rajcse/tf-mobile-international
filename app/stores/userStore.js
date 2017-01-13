@@ -17,7 +17,7 @@ let _user = null,
 	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
-	_welcomeModal = null,
+	_welcomeModal = false,
 	_notifications = [],
 	_usage = [];
 
@@ -255,12 +255,12 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.CONFIRM_WELCOME:
-			_welcomeModal = null;
+			_welcomeModal = false;
 			userStore.emitChange();
 			break;
 
-		case constants.actions.SET_WELCOME_STATUS:
-			_welcomeModal = {message1: action.message1, message2: action.message2};
+		case constants.actions.SHOW_WELCOME_MODAL:
+			_welcomeModal = true;
 			userStore.emitChange();
 			break;
 
@@ -284,7 +284,7 @@ dispatcher.register(action => {
 			_registerErrors = null;
 			_purchaseErrors = null;
 			_userHasRated = false;
-			_welcomeModal = null;
+			_welcomeModal = false;
 			_notifications = [];
 			userStore.emitChange();
 			break;

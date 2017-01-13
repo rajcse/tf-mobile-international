@@ -317,31 +317,17 @@ class PubRecAPI {
 		credentials.cordovaDevice = window.device;
 		credentials.firebaseToken = firebaseClient.deviceToken;
 
-		// Set welcome message defaults
-		const welcomeMessages = {
-			message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
-			message2: `To celebrate the launch of our new Mobile App we're granting each new user 50 FREE Person reports,
-					30 FREE Phone Number lookups, and 30 FREE Email address lookups. As a bonus, you will also have
-					access to our website where you can look people up and view reports on your desktop or laptop!`
-		};
-
 		return firebaseClient.getConfigValue('signup_sku')
 			.then(signupSku => {
-				if(signupSku) {
-					// FIXME: This is gross and hacky and hardcoded - use this only for the lite person testing
-					firebaseClient.setUserProperty('signup_product', 'lite_reports');
-					credentials.signupSku = signupSku;
-
-					welcomeMessages.message2 = 'Your account includes unlimited FREE person reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!';
-				} else {
-					firebaseClient.setUserProperty('signup_product', 'standard_credits');
-				}
+				if(signupSku) credentials.signupSku = signupSku;
 
 				return _makeRequest('/register', {method: 'POST', body: credentials});
 			})
 			.then(responseData => {
 				if(responseData.success) {
-						// Set the access token for future calls
+					firebaseClient.setUserProperty('signup_product', 'lite_reports');
+
+					// Set the access token for future calls
 					_accessToken = responseData.accessToken;
 
 					// Set the refresh token to get new access tokens
@@ -357,7 +343,7 @@ class PubRecAPI {
 					this.getUsage();
 
 					// Set welcome modal status for new users
-					setTimeout(() => serverActions.setWelcomeStatus(welcomeMessages));
+					setTimeout(() => serverActions.showWelcomeModal());
 
 					//Redirect to Search page on inital login
 					setTimeout(() => serverActions.redirectToSearch());
