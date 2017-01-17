@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import Loader from 'components/Loader';
 import viewActions from 'actions/viewActions';
+import Svg from 'components/svg/Svg';
+import PremiumFunnel from 'components/PremiumFunnel';
+import _ from 'lodash';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			introModal: true,
+			initialModal: true,
 			confirmationModal: false,
 			upgradingModal: false
 		};
@@ -26,7 +28,7 @@ class PremiumUpsellPrompt extends Component {
 
 	continueToConfirmation() {
 		this.setState({
-			introModal: false,
+			initialModal: false,
 			confirmationModal: true
 		});
 	}
@@ -65,37 +67,59 @@ class PremiumUpsellPrompt extends Component {
 		const { product, record, accountInfo } = this.props.premiumUpsell,
 			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
+		let slides = [{
+			title: 'Finances',
+			content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
+			list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures']
+		}, {
+			title: 'Assets',
+			content: `Asset information can show you about ${fullName}’s lifestyle and where his money goes.`,
+			list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties']
+		}, {
+			title: 'Licenses',
+			content: `This information can show you what ${fullName} is licensed to do/possess.`,
+			list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses']
+		}, {
+			title: 'Additional Relationships',
+			content: `This section provides names of people that are connected to and live near ${fullName}.`,
+			list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates']
+		}];
+
 		return (
-			<div id="payment-prompt">
+			<div id="premium-upsell">
 				{/* First Step - Show intro text to upsell */}
-				{ this.state.introModal ?
-					<div className="modal">
-						<h3>Important Report Info</h3>
-						<p className="intro">Please read this important notice about {fullName}'s Report:</p>
-						<p>
-							Thank you for being a valued TruthFinder user. One of our top priorities is helping you get as much information
-							as possible in every report so that you can have a more complete understanding about the people you search.
-						</p>
-						<p>
-							Remember, your subscription gives you access to all of the data in an unlimited number of Standard Reports but you should
-							know that more information could be available and you have the option to search for more information by upgrading your report
-							to a Premium Report. This information can include sensitive personal information such as bankruptcies, liens, and mortgages.
-						</p>
-						<p>
-							This Premium Data is valuable and costs us money. Because this upgrade requires an additional fee to access, we require your
-							personal authorization to continue. Click the “CONTINUE” button below to add all available Premium Data to your report and
-							learn as much about {fullName} as possible.
-						</p>
-						<p className="confirm">
-							<button type="button" className="continue btn btn-primary btn-upgrade" onClick={this.continueToConfirmation}>Continue</button>
-							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
-						</p>
+				{ this.state.initialModal ?
+					<div className="funnel initial">
+						<div className="content">
+							<Svg svg="premiumIcon" className="premium-icon"/>
+							<p>Upgrading to a Premium Report is a fantastic way to see additional data on <strong>{fullName}</strong> that isn't available in Free or Full Reports.</p>
+							<p>Please tap "Continue" to see the data that's included in Premium</p>
+							<div className="confirm">
+								<button type="button" className="btn btn-primary btn-upgrade" onClick={this.continueToConfirmation}>Continue</button>
+							</div>
+						</div>
 					</div>
 				: null }
 
 				{/* Continue to Purchase */}
 				{ this.state.confirmationModal ?
-					<div className="modal">
+					<div className="funnel confirmation">
+						<div className="slides">
+							<Svg svg="premiumIcon" className="premium-icon"/>
+							<h3>Premium reports include</h3>
+
+							{ _.map(slides, (slide, index) => {
+								return (<PremiumFunnel
+									slide={slide}
+								/>);
+							})}
+						</div>
+					</div>
+				: null }
+
+				{/* Upgrading Modal */}
+				{ this.state.upgradingModal ?
+					<div className="funnel upgrade">
 						<h3>Important Report Info</h3>
 						<p>Click <strong>CONTINUE</strong> to add available Premium Data to this report and see what else you can uncover. <strong>Our data providers update their databases daily!!</strong></p>
 
@@ -111,15 +135,6 @@ class PremiumUpsellPrompt extends Component {
 							}
 							<a className="cancel" onClick={this.cancelPremiumUpsell}>No Thanks, I don't want more info.</a>
 						</p>
-					</div>
-				: null }
-
-				{/* Upgrading Modal */}
-				{ this.state.upgradingModal ?
-					<div className="modal modal-transparent">
-						<Loader />
-						<h3>Upgrading Your Report</h3>
-						<p>Please wait while we add premium data to your report...</p>
 					</div>
 				: null }
 			</div>
