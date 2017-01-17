@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import viewActions from 'actions/viewActions';
 import Svg from 'components/svg/Svg';
 import PremiumFunnel from 'components/PremiumFunnel';
-import _ from 'lodash';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
@@ -67,22 +66,26 @@ class PremiumUpsellPrompt extends Component {
 		const { product, record, accountInfo } = this.props.premiumUpsell,
 			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
-		let slides = [{
+		let funnels = [{
 			title: 'Finances',
 			content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
-			list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures']
+			list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures'],
+			split: true
 		}, {
 			title: 'Assets',
 			content: `Asset information can show you about ${fullName}’s lifestyle and where his money goes.`,
-			list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties']
+			list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties'],
+			split: true
 		}, {
 			title: 'Licenses',
 			content: `This information can show you what ${fullName} is licensed to do/possess.`,
-			list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses']
+			list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses'],
+			split: false
 		}, {
 			title: 'Additional Relationships',
 			content: `This section provides names of people that are connected to and live near ${fullName}.`,
-			list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates']
+			list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates'],
+			split: false
 		}];
 
 		return (
@@ -104,15 +107,13 @@ class PremiumUpsellPrompt extends Component {
 				{/* Continue to Purchase */}
 				{ this.state.confirmationModal ?
 					<div className="funnel confirmation">
-						<div className="slides">
+						<div className="funnels-wrapper">
 							<Svg svg="premiumIcon" className="premium-icon"/>
 							<h3>Premium reports include</h3>
 
-							{ _.map(slides, (slide, index) => {
-								return (<PremiumFunnel
-									slide={slide}
-								/>);
-							})}
+							<PremiumFunnel
+								funnels={funnels}
+							/>
 						</div>
 					</div>
 				: null }

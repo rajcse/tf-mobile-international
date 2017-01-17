@@ -23,6 +23,10 @@
 			svg {
 				width: 20px;
 			}
+
+			.cls-1 {
+				fill: #fff;
+			}
 		}
 
 		.btn {
@@ -40,7 +44,7 @@
 			padding: 1em;
 		}
 
-		.slides {
+		.funnels-wrapper {
 			position: relative;
 			padding: 5em 1em 1em;
 			box-sizing: border-box;
@@ -52,7 +56,7 @@
 				margin-bottom: 15px;
 			}
 
-			.slide-card {
+			.funnel-card {
 				background: @brand-white;
 				border-radius: 6px;
 				overflow: hidden;
@@ -69,14 +73,20 @@
 					padding: 0 1em .5em;
 					box-sizing: border-box;
 					list-style: none;
-					display: inline-flex;
-					flex-flow: row wrap;
-					justify-content: flex-start;
 
-					li {
+					&.split {
+						li {
+							width: 50%;
+							float: left;
+						}
+					}
+
+					li, li.default {
 						position: relative;
 						margin: auto 0 .5em;
 						text-align: left;
+						width: 100%;
+						float: left;
 
 						svg {
 							width: 16px;
@@ -85,14 +95,19 @@
 						}
 					}
 				}
+			}
 
-				.slide-title {
-					color: @brand-white;
-					background-color: @brand-orange;
-					padding: 1em;
-					text-align: left;
-					font-weight: 400;
-				}
+			.funnel-title {
+				color: @brand-white;
+				background-color: @brand-orange;
+				padding: 1em;
+				text-align: left;
+				font-weight: 400;
+			}
+
+			.funnel-nav {
+				margin: 1em 0;
+				text-align: center;
 			}
 		}
 	}
