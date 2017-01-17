@@ -10,6 +10,7 @@ import uuid from 'uuid';
 class FirebaseClient {
 	constructor() {
 		this.deviceToken = null;
+		this.isAndroid = false; // TEMP: Remove this when iOS support is available for remote config
 		this.remoteConfigDefaults = {
 			rating_text: 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!',
 			welcome_message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
@@ -22,7 +23,9 @@ class FirebaseClient {
 	 */
 	init() {
 		// Affects iOS only
-		// window.FirebasePlugin.grantPermission();
+		if(window.device.platform === 'iOS') window.FirebasePlugin.grantPermission();
+
+		this.isAndroid = window.device.platform === 'Android'; // TEMP: Remove this when iOS support is available for remote config
 
 		// Get the initial token value (this should available by deviceReady)
 		window.FirebasePlugin.getToken(token => {
@@ -47,17 +50,20 @@ class FirebaseClient {
 			serverActions.receiveNotification(clientData);
 		});
 
-		// Set default values on the client for all Remote Configs being used
-		window.FirebasePlugin.setDefaults(this.remoteConfigDefaults);
+		if(this.isAndroid) {
+			// Set default values on the client for all Remote Configs being used
+			window.FirebasePlugin.setDefaults(this.remoteConfigDefaults);
 
-		// Fetch remote config and activate the values
-		this.refreshRemoteConfig();
+			// Fetch remote config and activate the values
+			this.refreshRemoteConfig();
+		}
 	}
 
-	logEvent(eventName, eventData) {
+	logEvent(eventName, eventData = {}) {
 		// Cleanly return if Firebase plugin is missing
 		if(!window.FirebasePlugin) return;
 
+		// Event data must be present (non-null), one level, keys are limited to 40 characters and values may be String or Number, with a limit of 100 characters
 		window.FirebasePlugin.logEvent(eventName, eventData);
 	}
 
@@ -65,14 +71,16 @@ class FirebaseClient {
 		// Cleanly return if Firebase plugin is missing
 		if(!window.FirebasePlugin) return;
 
-		window.FirebasePlugin.setUserId(id);
+		// Value must be a string
+		window.FirebasePlugin.setUserId(String(id));
 	}
 
 	setUserProperty(prop, value) {
 		// Cleanly return if Firebase plugin is missing
 		if(!window.FirebasePlugin) return;
 
-		window.FirebasePlugin.setUserProperty(prop, value);
+		// Value must be a string - 36 character max
+		window.FirebasePlugin.setUserProperty(prop, String(value));
 	}
 
 	subscribe(topic) {
@@ -104,7 +112,7 @@ class FirebaseClient {
 
 	getConfigValue(key) {
 		// Cleanly return config default if Firebase plugin is missing
-		if(!window.FirebasePlugin) return new Promise(resolve => resolve(this.remoteConfigDefaults[key] || ''));
+		if(!window.FirebasePlugin || !this.isAndroid) return new Promise(resolve => resolve(this.remoteConfigDefaults[key] || ''));
 
 		return new Promise((resolve, reject) => {
 			window.FirebasePlugin.getValue(key, value => resolve(value), error => reject(error));

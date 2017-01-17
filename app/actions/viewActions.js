@@ -10,7 +10,11 @@ export default {
 			actionType: constants.actions.SEARCH,
 			criteria
 		});
-		firebaseClient.logEvent(constants.firebase.events.SEARCH, {search_term: JSON.stringify(criteria)});
+
+		firebaseClient.logEvent(constants.firebase.events.SEARCH, {
+			type: criteria.type,
+			...criteria.query
+		});
 		pubRecAPI.search(criteria);
 	},
 
