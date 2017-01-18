@@ -14,6 +14,7 @@ import ErrorPrompt from 'components/ErrorPrompt';
 import RatingsPrompt from 'components/RatingsPrompt';
 import WelcomePrompt from 'components/WelcomePrompt';
 import NotificationPrompt from 'components/NotificationPrompt';
+import firebaseClient from 'utils/firebaseClient';
 
 export default class PubRecApp extends React.Component {
 
@@ -51,7 +52,8 @@ export default class PubRecApp extends React.Component {
 			loginErrors: userStore.getLoginErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModal()
+			welcomeModal: userStore.getWelcomeModal(),
+			premiumFlow: ''
 		};
 
 		this.onResultsChange = this.onResultsChange.bind(this);
@@ -61,6 +63,16 @@ export default class PubRecApp extends React.Component {
 	componentWillMount() {
 		searchStore.addChangeListener(this.onResultsChange);
 		userStore.addChangeListener(this.onUserChange);
+
+		firebaseClient.getConfigValue('premium_prompt')
+			.then(response => {
+				console.log(response);
+				this.setState({
+					premiumFlow: response
+				}, () => {
+					console.log('updated state');
+				});
+			});
 	}
 
 	componentWillUnmount() {
@@ -104,6 +116,9 @@ export default class PubRecApp extends React.Component {
 		}
 
 		let { children } = this.props;
+
+		console.log(this.state.premiumFlow);
+
 		return (
 			<div>
 

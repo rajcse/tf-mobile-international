@@ -1,122 +1,129 @@
-#premium-upsell {
+#payment-prompt {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
+	background-color: rgba(0, 0, 0, .8);
 	z-index: 99999;
 	overflow-y: scroll;
 
-	.funnel {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		color: @brand-white;
-		background: #c49511;
-		background: -moz-linear-gradient(left,  #c49511 0%, #f1b515 100%);
-		background: -webkit-linear-gradient(left,  #c49511 0%,#f1b515 100%);
-		background: linear-gradient(to right,  #c49511 0%,#f1b515 100%);
-
-
-		&.light {
-			background: rgba(0,0,0,.85);
+		.close-modal{
+				position: absolute;
+				width: 25px;
 		}
 
-		.premium-icon {
-			svg {
-				width: 20px;
-			}
-
-			.cls-1 {
-				fill: #fff;
-			}
-		}
-
-		.btn {
-			&.btn-cancel {
-				background: transparent;
-				border: none;
-				color: @brand-white;
-				margin-top: 2em;
-				font-weight: 700;
-			}
-		}
-
-		.content {
-			position: absolute;
-		  top: 50%;
-		  transform: translateY(-50%);
-			box-sizing: border-box;
-			width: 100%;
-			padding: 1em;
-		}
-
-		.funnels-wrapper {
-			position: relative;
-			padding: 5em 1em 1em;
-			box-sizing: border-box;
-
-			> h3 {
-				color: @brand-white;
-				text-transform: uppercase;
-				margin-top: 15px;
-				margin-bottom: 15px;
-			}
-
-			.funnel-card {
+		.modal {
 				background: @brand-white;
-				border-radius: 6px;
-				overflow: hidden;
-				color: @text-color;
-
-				> p {
-					padding: 1em 0;
-					margin: 0 1em 1em;
-					border-bottom: 1px solid #CCCCCC;
+				position: absolute;
+				top: 20px;
+				left: 50%;
+				width: 90%;
+				transform: translateX(-50%);
+				border-radius: @input-border-radius;
+				h3 {
+					a {
+					    float: right;
+					    margin-right: 20px;
+					}
 				}
 
-				> ul {
-					margin: 0;
-					padding: 0 1em .5em;
-					box-sizing: border-box;
-					list-style: none;
+				&.modal-transparent {
+					text-align: center;
+					background: transparent;
+					color: @brand-white;
+					margin-top: 3em;
 
-					&.split {
+					h3 {
+						background: transparent;
+						text-transform: uppercase;
+					}
+
+					svg {
+						width: 30px;
+					}
+				}
+
+				.icon-close {
+					background-image: url('/img/ui/close.svg');
+					background-repeat: no-repeat;
+					background-size: 14px auto;
+					background-position: center;
+					position: absolute;
+					right: 0px;
+					top: 0px;
+					padding: .825em;
+					width: 14px;
+					height: 14px;
+					display: block;
+				}
+
+				h3 {
+						margin: 0 0 .5em;
+						padding: .5em 1em;
+						background: @brand-green;
+						color: @brand-white;
+						line-height:22px;
+				}
+
+			p {
+				margin: 1em;
+						font-size: 16px;
+						&.intro {
+								font-weight:700;
+						}
+						&.includes {
+								font-size:14px;
+						}
+						span {
+								color:@brand-error;
+						}
+			}
+
+				ul {
+						overflow: hidden;
+						list-style: none;
+						padding-left:0;
 						li {
-							width: 50%;
-							float: left;
+								float:left;
+								width:40%;
+								font-size:12px;
+								font-weight:600;
+								margin-bottom:5px;
+								padding-left:20px;
 						}
-					}
-
-					li, li.default {
-						position: relative;
-						margin: auto 0 .5em;
-						text-align: left;
-						width: 100%;
-						float: left;
-
-						svg {
-							width: 16px;
-							height: 16px;
-							margin-right: .5em;
-						}
-					}
 				}
-			}
-
-			.funnel-title {
-				color: @brand-white;
-				background-color: @brand-orange;
-				padding: 1em;
-				text-align: left;
-				font-weight: 400;
-			}
-
-			.funnel-nav {
-				margin: 1em 0;
-				text-align: center;
-			}
+				.billing-details {
+						font-size:12px;
+				}
+				.confirm {
+						text-align: center;
+						margin-bottom: 1em;
+						button.continue {
+								font-size:20px;
+								width:80%;
+								padding:15px;
+								font-weight:700;
+								span {
+									font-size: 14px;
+									display: block;
+									font-weight: 400;
+									text-transform: uppercase;
+									color: @brand-white;
+								}
+						}
+						button.continue.orange{
+							background: @brand-orange;
+							font-size: 15px;
+						}
+						a.cancel {
+							font-size: 14px;
+							text-decoration: underline;
+							display:block;
+							margin-top:20px;
+							color: #979797;
+							font-weight: 700;
+						}
+				}
 		}
-	}
 }
