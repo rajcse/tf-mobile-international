@@ -19,7 +19,7 @@
 		background: linear-gradient(to right,  #c49511 0%,#f1b515 100%);
 
 
-		&.confirmation {
+		&.light {
 			background: rgba(0,0,0,.85);
 		}
 
@@ -34,8 +34,12 @@
 		}
 
 		.btn {
-			&.btn-primary {
-				  box-shadow: 0 -2px 12px 0 @shadow-color;
+			&.btn-cancel {
+				background: transparent;
+				border: none;
+				color: @brand-white;
+				margin-top: 2em;
+				font-weight: 700;
 			}
 		}
 

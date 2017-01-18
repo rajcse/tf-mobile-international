@@ -25,7 +25,11 @@ class CarouselCard extends Component {
 	handleClick(e) {
 		e.preventDefault();
 
-		this.nextSlide();
+		if (this.state.current !== this.state.end) {
+			this.nextSlide();
+		} else {
+			this.props.onComplete();
+		}
 	}
 
 	nextSlide() {
@@ -90,7 +94,8 @@ class CarouselCard extends Component {
 }
 
 CarouselCard.propTypes = {
-	cards: PropTypes.array.isRequired
+	cards: PropTypes.array.isRequired,
+	onComplete: PropTypes.func
 };
 
 export default CarouselCard;
