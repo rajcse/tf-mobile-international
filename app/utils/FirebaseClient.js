@@ -14,7 +14,8 @@ class FirebaseClient {
 		this.remoteConfigDefaults = {
 			rating_text: 'Would you mind taking a moment to rate us 5 stars? Thanks for your support!',
 			welcome_message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
-			welcome_message2: 'Your account includes unlimited FREE Person Reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!'
+			welcome_message2: 'Your account includes unlimited FREE Person Reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!',
+			premium_prompt: 'default'
 		};
 	}
 

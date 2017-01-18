@@ -8,6 +8,7 @@ import searchStore from 'stores/searchStore';
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
+import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
 import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
@@ -114,8 +115,6 @@ export default class PubRecApp extends React.Component {
 
 		let { children } = this.props;
 
-		console.log(this.state.premiumFlow);
-
 		return (
 			<div>
 
@@ -123,18 +122,24 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell &&
+				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell ?
 					<StandardUpsellPrompt
 						standardUpsell={this.state.standardUpsell}
 						premiumUpsell={this.state.premiumUpsell}
 					/>
-				}
+				: null }
 
-				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell &&
-					<PremiumUpsellPrompt
-						premiumUpsell={this.state.premiumUpsell}
-					/>
-				}
+				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell ?
+					this.state.premiumFlow !== 'default' ?
+						<PremiumUpsellFunnel
+							premiumUpsell={this.state.premiumUpsell}
+						/>
+					:
+						<PremiumUpsellPrompt
+							premiumUpsell={this.state.premiumUpsell}
+						/>
+					:
+				null }
 
 				{ this.state.crossSell && !this.state.purchaseErrors &&
 					<PaymentPrompt
