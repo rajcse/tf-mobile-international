@@ -66,11 +66,8 @@ export default class PubRecApp extends React.Component {
 
 		firebaseClient.getConfigValue('premium_prompt')
 			.then(response => {
-				console.log(response);
 				this.setState({
 					premiumFlow: response
-				}, () => {
-					console.log('updated state');
 				});
 			});
 	}
