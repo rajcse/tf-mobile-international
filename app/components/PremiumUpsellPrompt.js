@@ -1,16 +1,39 @@
 import React, { Component, PropTypes } from 'react';
 import viewActions from 'actions/viewActions';
 import Svg from 'components/svg/Svg';
-import PremiumFunnel from 'components/PremiumFunnel';
+import CarouselCard from 'components/CarouselCard';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
 		super(props);
 
+		const fullName = `${this.props.premiumUpsell.record.data.name.first} ${this.props.premiumUpsell.record.data.name.last}`;
+
 		this.state = {
 			initialModal: true,
 			confirmationModal: false,
-			upgradingModal: false
+			upgradingModal: false,
+			cards: [{
+				title: 'Finances',
+				content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
+				list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures'],
+				split: true
+			}, {
+				title: 'Assets',
+				content: `Asset information can show you about ${fullName}’s lifestyle and where his money goes.`,
+				list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties'],
+				split: true
+			}, {
+				title: 'Licenses',
+				content: `This information can show you what ${fullName} is licensed to do/possess.`,
+				list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses'],
+				split: false
+			}, {
+				title: 'Additional Relationships',
+				content: `This section provides names of people that are connected to and live near ${fullName}.`,
+				list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates'],
+				split: false
+			}]
 		};
 
 		this.continueToConfirmation = this.continueToConfirmation.bind(this);
@@ -66,28 +89,6 @@ class PremiumUpsellPrompt extends Component {
 		const { product, record, accountInfo } = this.props.premiumUpsell,
 			fullName = `${record.data.name.first} ${record.data.name.last}`; // This will always be present
 
-		let funnels = [{
-			title: 'Finances',
-			content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
-			list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures'],
-			split: true
-		}, {
-			title: 'Assets',
-			content: `Asset information can show you about ${fullName}’s lifestyle and where his money goes.`,
-			list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties'],
-			split: true
-		}, {
-			title: 'Licenses',
-			content: `This information can show you what ${fullName} is licensed to do/possess.`,
-			list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses'],
-			split: false
-		}, {
-			title: 'Additional Relationships',
-			content: `This section provides names of people that are connected to and live near ${fullName}.`,
-			list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates'],
-			split: false
-		}];
-
 		return (
 			<div id="premium-upsell">
 				{/* First Step - Show intro text to upsell */}
@@ -111,8 +112,8 @@ class PremiumUpsellPrompt extends Component {
 							<Svg svg="premiumIcon" className="premium-icon"/>
 							<h3>Premium reports include</h3>
 
-							<PremiumFunnel
-								funnels={funnels}
+							<CarouselCard
+								cards={this.state.cards}
 							/>
 						</div>
 					</div>
