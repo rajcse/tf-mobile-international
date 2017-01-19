@@ -65,7 +65,6 @@ class PersonRecord extends Component {
 		} = this.props;
 
 		let	isPremium = _.get(record.data, 'isPremium', false),
-			isLite = _.get(record.data, 'isLite', false),
 			age = null,
 			deathYear = null,
 			location = '';
@@ -144,7 +143,7 @@ class PersonRecord extends Component {
 						name={record.reportData.names[0].first}
 						filteredCrimes={record.reportData.filteredCriminalRecords}
 						openCrime={openCrime}
-						showStandardUpsell={isLite && this.showStandardUpsell}
+						showStandardUpsell={this.showStandardUpsell}
 					/>
 
 					{ !_.isEmpty(record.reportData.sources) &&

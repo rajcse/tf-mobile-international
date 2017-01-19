@@ -44,11 +44,15 @@ class CarouselCard extends Component {
 	 * Touch Controls
 	 */
 	swipedLeft() {
-		this.nextSlide();
+		if (this.state.enableTouch) {
+			this.nextSlide();
+		}
 	}
 
 	swipedRight() {
-		this.previousSlide();
+		if (this.state.enableTouch) {
+			this.previousSlide();
+		}
 	}
 
 	/**
