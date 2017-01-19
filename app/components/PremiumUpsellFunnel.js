@@ -15,6 +15,27 @@ class PremiumUpsellFunnel extends Component {
 			reviewModal: false,
 			isWorking: false,
 			fullName: fullName,
+			// cards: [{
+			// 	title: 'Finances',
+			// 	content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
+			// 	list: [ 'Bankruptcies', 'Tax Liens', 'Evictions', 'Foreclosures'],
+			// 	split: true
+			// }, {
+			// 	title: 'Assets',
+			// 	content: `Asset information can show you about ${fullName}’s lifestyle and where his money goes.`,
+			// 	list: [ 'Houses', 'Watercraft', 'Mortgages', 'Properties'],
+			// 	split: true
+			// }, {
+			// 	title: 'Licenses',
+			// 	content: `This information can show you what ${fullName} is licensed to do/possess.`,
+			// 	list: [ 'Hunting & Weapon Licenses', 'Pharmaceutical Licenses', 'Professional Licenses'],
+			// 	split: false
+			// }, {
+			// 	title: 'Additional Relationships',
+			// 	content: `This section provides names of people that are connected to and live near ${fullName}.`,
+			// 	list: [ 'Social Media Connections', 'Related Persons', 'Neighbors', 'Roomates'],
+			// 	split: false
+			// }]
 			cards: [{
 				title: 'Finances',
 				content: `Financial information can tell you a lot about ${fullName}’s character and spending habits.`,
@@ -105,6 +126,8 @@ class PremiumUpsellFunnel extends Component {
 
 							<CarouselCard
 								cards={this.state.cards}
+								cardsType="fullscreen"
+								classNames=""
 								onComplete={this.continueToReview}
 							/>
 						</div>

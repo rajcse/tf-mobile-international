@@ -130,14 +130,13 @@ export default class PubRecApp extends React.Component {
 				: null }
 
 				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell ?
-					this.state.premiumFlow !== 'default' ?
-						<PremiumUpsellFunnel
-							premiumUpsell={this.state.premiumUpsell}
-						/>
-					:
+					this.state.premiumFlow === 'default' ?
 						<PremiumUpsellPrompt
 							premiumUpsell={this.state.premiumUpsell}
 						/>
+					: <PremiumUpsellFunnel
+						premiumUpsell={this.state.premiumUpsell}
+					/>
 					:
 				null }
 
