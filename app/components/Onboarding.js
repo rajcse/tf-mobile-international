@@ -5,6 +5,7 @@ class Onboarding extends Component {
 	constructor(props) {
 		super(props);
 
+		// This is default content and should be changed!
 		this.state = {
 			cards: [{
 				title: 'Congratulations',

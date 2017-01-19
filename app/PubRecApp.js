@@ -122,12 +122,12 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell ?
+				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell &&
 					<StandardUpsellPrompt
 						standardUpsell={this.state.standardUpsell}
 						premiumUpsell={this.state.premiumUpsell}
 					/>
-				: null }
+				}
 
 				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell ?
 					this.state.premiumFlow !== 'default' ?
