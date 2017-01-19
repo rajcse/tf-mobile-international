@@ -40,7 +40,10 @@ class CriminalRecords extends Component {
 CriminalRecords.propTypes = {
 	filteredCrimes: PropTypes.array.isRequired,
 	openCrime: PropTypes.func.isRequired,
-	showStandardUpsell: PropTypes.func.isRequired,
+	showStandardUpsell: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.bool
+	]).isRequired,
 	name: PropTypes.string.isRequired
 };
 

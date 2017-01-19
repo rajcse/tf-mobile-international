@@ -64,7 +64,7 @@ class CriminalRecordsList extends Component {
 												? <p>{moment(`${crimeDate.month}/${crimeDate.day}/${crimeDate.year}`, 'MM/DD/YYYY').format('ll')}</p>
 												: null
 											}
-											{ showStandardUpsell ? 
+											{ showStandardUpsell ?
 												<button onClick={ () => { showStandardUpsell(); } } className="btn btn-link">Case Details</button>
 												:
 												<button onClick={ () => { openCrime(crime); } } className="btn btn-link">Case Details</button>
@@ -84,7 +84,10 @@ class CriminalRecordsList extends Component {
 CriminalRecordsList.propTypes = {
 	openCrime: React.PropTypes.func.isRequired,
 	filteredCrimes: React.PropTypes.array.isRequired,
-	showStandardUpsell: React.PropTypes.func.isRequired
+	showStandardUpsell: React.PropTypes.oneOfType([
+		React.PropTypes.func,
+		React.PropTypes.bool
+	]).isRequired
 };
 
 export default CriminalRecordsList;

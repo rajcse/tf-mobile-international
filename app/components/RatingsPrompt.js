@@ -33,7 +33,11 @@ export default class RatingsPrompt extends Component {
 		this.setState({
 			initialModal: false
 		});
-		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.props.message, prompt_response: 'IT\'S GREAT!'});
+		
+		firebaseClient.logEvent('ratings_prompt_response', {
+			prompt_question: this.props.message,
+			prompt_response: 'IT\'S GREAT!'
+		});
 	}
 
 	handleNegativeResponse() {
