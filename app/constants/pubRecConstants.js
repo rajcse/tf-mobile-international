@@ -71,7 +71,9 @@ export default {
 		'MARK_USER_AS_RATED',
 		'CONFIRM_WELCOME',
 		'SHOW_WELCOME_MODAL',
-		'DELETE_ACCOUNT'
+		'DELETE_ACCOUNT',
+		'FETCH_SITE_CONFIG',
+		'TRIGGER_EVENT'
 	]),
 
 	// These must match what usage-service is expecting

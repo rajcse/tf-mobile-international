@@ -270,5 +270,12 @@ export default {
 			actionType: constants.actions.DELETE_ACCOUNT
 		});
 		pubRecAPI.deleteAccount();
+	},
+
+	triggerEvent(event) {
+		dispatcher.dispatch({
+			actionType: constants.actions.TRIGGER_EVENT
+		});
+		pubRecAPI.triggerEvent(event);
 	}
 };

@@ -772,6 +772,36 @@ class PubRecAPI {
 	}
 
 	/**
+	 * Fetch site config values
+	 */
+	fetchSiteConfig(...keyPaths) {
+		return _makeRequest('/site-config', {query: {q: keyPaths.join('|')}})
+			.then(responseData => {
+				if(responseData.success){
+					return responseData.data;
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	/**
+	 * Trigger events on PubRec
+	 */
+	triggerEvent(event) {
+		return _makeRequest('/events', {method: 'POST', body: {event}})
+			.then(responseData => {
+				if(responseData.success){
+					console.log('Event Sent', event);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	/**
 	 * Internal function used to fetch user info
 	 */
 	fetchUser() {

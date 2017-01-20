@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import viewActions from 'actions/viewActions';
 import firebaseClient from 'utils/firebaseClient';
+import pubRecAPI from 'utils/PubRecAPI';
 
 export default class RatingsPrompt extends Component {
 	constructor(props) {
@@ -27,17 +28,23 @@ export default class RatingsPrompt extends Component {
 				}
 				this.setState({message2: ratingText});
 			});
+
+		// Faux test
+		pubRecAPI.fetchSiteConfig('ratingsPromptGroup.test')
+			.then(data => console.log(data['ratingsPromptGroup.test']));
 	}
 
 	handlePositiveResponse() {
 		this.setState({
 			initialModal: false
 		});
-		
+
 		firebaseClient.logEvent('ratings_prompt_response', {
 			prompt_question: this.props.message,
 			prompt_response: 'IT\'S GREAT!'
 		});
+
+		viewActions.triggerEvent('mobile-app:behavior:positive-rating-response');
 	}
 
 	handleNegativeResponse() {
