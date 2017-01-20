@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Loader from 'components/Loader';
 import viewActions from 'actions/viewActions';
+import firebaseClient from 'utils/firebaseClient';
 
 class PremiumUpsellPrompt extends Component {
 	constructor(props) {
@@ -11,6 +12,8 @@ class PremiumUpsellPrompt extends Component {
 			confirmationModal: false,
 			upgradingModal: false
 		};
+
+		firebaseClient.progressFunnel('PREMIUM_PROMPT_VIEWED_NO_PURCHASE');
 
 		this.continueToConfirmation = this.continueToConfirmation.bind(this);
 		this.confirmPurchaseAndUpgrade = this.confirmPurchaseAndUpgrade.bind(this);
