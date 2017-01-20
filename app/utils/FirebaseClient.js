@@ -119,6 +119,29 @@ class FirebaseClient {
 			window.FirebasePlugin.getValue(key, value => resolve(value), error => reject(error));
 		});
 	}
+
+	progressFunnel(topic) {
+		const currentLevel = constants.firebase.funnelSteps.indexOf(window.localStorage.getItem('currentFunnelTopic')),
+			nextLevel = constants.firebase.funnelSteps.indexOf(topic);
+
+		if(window.localStorage.getItem('skipFunnel') === 'true') {
+			window.localStorage.removeItem('currentFunnelTopic');
+			constants.firebase.funnelSteps.forEach(key => this.unsubscribe(key));
+			return;
+		}
+
+		if(~currentLevel && nextLevel > currentLevel) {
+			window.localStorage.setItem('currentFunnelTopic', topic);
+
+			constants.firebase.funnelSteps.forEach(key => this.unsubscribe(key));
+			this.subscribe(topic);
+		} else if(!~currentLevel && nextLevel === 0) {
+			window.localStorage.setItem('currentFunnelTopic', topic);
+
+			constants.firebase.funnelSteps.forEach(key => this.unsubscribe(key));
+			this.subscribe(topic);
+		}
+	}
 }
 
 let firebaseClient = new FirebaseClient();

@@ -124,7 +124,15 @@ export default {
 			// Stored here so we can loop them and unsubscribe a user from all topics easily
 			'MOBILE_REGISTERED_USERS',
 			'NO_PURCHASES_MADE'
-		])
+		]),
+		funnelSteps: [
+			'INSTALLED_NEVER_LOGGED_IN',
+			'REGISTERED_NO_PERSON_SEARCHES',
+			'SEARCHED_NO_PERSON_REPORT_VIEWS',
+			'PERSON_REPORT_VIEWED_NO_PREMIUM_PROMPT_VIEWS',
+			'PREMIUM_PROMPT_VIEWED_NO_PURCHASE',
+			'PREMIUM_REPORT_VIEWED'
+		]
 	},
 
 	months: {

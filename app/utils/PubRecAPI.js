@@ -113,7 +113,8 @@ function _makeRequest(path, options) {
 				'App-Version': window.appVersion || '0.0.0',
 				'App-Build': window.appBuild || '0'
 			},
-			method: options.method || 'GET'
+			method: options.method || 'GET',
+			credentials: 'include'
 		},
 		requestCount = options.requestCount || 0;
 
@@ -239,7 +240,7 @@ class PubRecAPI {
 			user = null;
 
 		if(accessToken && refreshToken && !_isTokenExpired(refreshToken)) {
-			// If we have both tokens, and the refresh expired, just log the user in
+			// If we have both tokens, and the refresh is not expired, just log the user in
 			try {
 				_accessToken = accessToken;
 				_refreshToken = refreshToken;
@@ -254,6 +255,12 @@ class PubRecAPI {
 				// If the access token is expired, it will refresh itself automatically on 401
 				this.getUsage();
 
+				// Make sure the loggedInOnce flag is set
+				window.localStorage.setItem('loggedInOnce', 'true');
+
+				// If the user has already logged in, but has no funnel going, turn the funnel off
+				if(!window.localStorage.getItem('currentFunnelTopic')) window.localStorage.setItem('skipFunnel', 'true');
+
 			} catch(e) {
 				// Clear user data - the access token was malformed
 				this.clearUserData();
@@ -262,6 +269,11 @@ class PubRecAPI {
 		} else {
 			// If we can't log the user in, clear all the user data and trigger a logout
 			this.clearUserData();
+
+			if(window.localStorage.getItem('loggedInOnce') !== 'true') {
+				firebaseClient.progressFunnel('INSTALLED_NEVER_LOGGED_IN');
+			}
+
 			return serverActions.loggedOut(false);
 		}
 	}
@@ -337,6 +349,9 @@ class PubRecAPI {
 					window.localStorage.setItem('accessToken', _accessToken);
 					window.localStorage.setItem('refreshToken', _refreshToken);
 
+					// Set a permanent flag that the user has logged in at least once
+					window.localStorage.setItem('loggedInOnce', 'true');
+
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)));
 
 					// Get the usage for the user
@@ -352,6 +367,7 @@ class PubRecAPI {
 					firebaseClient.logEvent(constants.firebase.events.SIGN_UP, {sign_up_method: 'Mobile App'});
 					firebaseClient.subscribe(constants.firebase.topics.MOBILE_REGISTERED_USERS);
 					firebaseClient.subscribe(constants.firebase.topics.NO_PURCHASES_MADE);
+					firebaseClient.progressFunnel('REGISTERED_NO_PERSON_SEARCHES');
 
 				} else {
 					// TODO: Switch error messages based on error response
@@ -396,6 +412,12 @@ class PubRecAPI {
 					// Set the tokens in local storage
 					window.localStorage.setItem('accessToken', _accessToken);
 					window.localStorage.setItem('refreshToken', _refreshToken);
+
+					// Set a permanent flag that the user has logged in at least once
+					window.localStorage.setItem('loggedInOnce', 'true');
+
+					// Once the logout/login cycle has happened, or this is an existing member, just skip the funnel
+					window.localStorage.setItem('skipFunnel', 'true');
 
 					setTimeout(() => serverActions.receiveUser(_userFromAccessToken(_accessToken)), 0);
 
@@ -508,6 +530,8 @@ class PubRecAPI {
 	}
 
 	search(criteria) {
+		if(criteria.type === constants.recordTypes.PERSON) firebaseClient.progressFunnel('SEARCHED_NO_PERSON_REPORT_VIEWS');
+
 		return _makeRequest('/' + constants.recordEndpoints[criteria.type], {query: criteria.query, needsAuth: true})
 			.then(responseData => {
 				setTimeout(() => serverActions.receiveSearchResults(responseData.results, criteria.type), 0);
@@ -655,6 +679,8 @@ class PubRecAPI {
 					if(_recordCache.length > RECORD_CACHE_LIMIT) _recordCache.shift();
 					setTimeout(serverActions.viewUncachedRecord, 0);
 					setTimeout(() => serverActions.receiveRecord(responseData.record), 0);
+
+					if(responseData.record.id[1] === constants.recordTypes.PERSON) firebaseClient.progressFunnel('PERSON_REPORT_VIEWED_NO_PREMIUM_PROMPT_VIEWS');
 				} else {
 					console.log(responseData.errors);
 				}
@@ -950,6 +976,7 @@ class PubRecAPI {
 		return this.updateRecord(recordId, {isPremium: true})
 				.then(() => this.fetchRecord({recordId}, true))
 				.then(() => setTimeout(serverActions.premiumUpgradeSuccessful))
+				.then(() => firebaseClient.progressFunnel('PREMIUM_REPORT_VIEWED'))
 				.catch(error => {
 					console.error(error);
 				});
