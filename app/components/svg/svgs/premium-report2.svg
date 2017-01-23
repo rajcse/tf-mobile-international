@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="3579 -481 263 354">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-_3b-outline);
+      }
+
+      .cls-2 {
+        opacity: 0.3;
+      }
+
+      .cls-3 {
+        fill: #ededed;
+      }
+
+      .cls-4 {
+        fill: #209dd2;
+      }
+
+      .cls-5{
+        fill: transparent;
+      }
+
+      .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        fill: #57bf93;
+      }
+
+      .cls-7 {
+        fill: #afafaf;
+      }
+
+      .cls-8 {
+        fill: #95989a;
+      }
+
+      .cls-9 {
+        stroke: rgba(0,0,0,0);
+        stroke-width: 1px;
+      }
+
+      .cls-10 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-11 {
+        fill: #f1b515;
+      }
+
+      .cls-12 {
+        filter: url(#Rectangle_1599);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c49511"/>
+      <stop offset="1" stop-color="#f1b515"/>
+    </linearGradient>
+    <filter id="Rectangle_1599" x="3579" y="-294.667" width="192" height="169.333" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-_3b-outline">
+      <rect x="3579" y="-481" width="263" height="354"/>
+    </clipPath>
+  </defs>
+  <g id="_3b-outline" data-name="3b-outline" class="cls-1">
+    <rect class="cls-5" x="3579" y="-481" width="263" height="354"/>
+    <g id="Group_240" data-name="Group 240" class="cls-2" transform="translate(3562 -554)">
+      <g id="Group_239" data-name="Group 239" transform="translate(-5 24)">
+        <rect id="Rectangle_1449" data-name="Rectangle 1449" class="cls-3" width="70" height="116.667" transform="translate(45 49)"/>
+        <rect id="Rectangle_1450" data-name="Rectangle 1450" class="cls-4" width="70" height="23.333" transform="translate(45 58.333)"/>
+        <g id="Group_236" data-name="Group 236" transform="translate(59 63)">
+          <circle id="Ellipse_126" data-name="Ellipse 126" class="cls-5" cx="7" cy="7" r="7" transform="translate(0)"/>
+          <rect id="Rectangle_1451" data-name="Rectangle 1451" class="cls-5" width="22.167" height="2.333" transform="translate(18.667 3.5)"/>
+          <rect id="Rectangle_1452" data-name="Rectangle 1452" class="cls-5" width="14" height="2.333" transform="translate(18.667 9.333)"/>
+        </g>
+        <rect id="Rectangle_1453" data-name="Rectangle 1453" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(50.833 87.5)"/>
+        <rect id="Rectangle_1454" data-name="Rectangle 1454" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(50.833 126)"/>
+        <path id="Rectangle_1455" data-name="Rectangle 1455" class="cls-6" d="M2,0H56.333a2,2,0,0,1,2,2V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(50.833 87.5)"/>
+        <path id="Rectangle_1456" data-name="Rectangle 1456" class="cls-6" d="M2,0H56.333a2,2,0,0,1,2,2V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(50.833 126)"/>
+        <rect id="Rectangle_1457" data-name="Rectangle 1457" class="cls-5" width="22.167" height="2.333" transform="translate(54.333 91)"/>
+        <rect id="Rectangle_1458" data-name="Rectangle 1458" class="cls-5" width="22.167" height="2.333" transform="translate(54.333 129.5)"/>
+        <rect id="Rectangle_1459" data-name="Rectangle 1459" class="cls-7" width="22.167" height="2.333" transform="translate(54.333 101.5)"/>
+        <g id="Group_237" data-name="Group 237" transform="translate(55.5 52.5)">
+          <rect id="Rectangle_1460" data-name="Rectangle 1460" class="cls-8" width="22.167" height="2.333" transform="translate(0)"/>
+          <rect id="Rectangle_1461" data-name="Rectangle 1461" class="cls-8" width="22.167" height="2.333" transform="translate(25.667)"/>
+        </g>
+        <rect id="Rectangle_1462" data-name="Rectangle 1462" class="cls-7" width="22.167" height="2.333" transform="translate(54.333 140)"/>
+        <rect id="Rectangle_1463" data-name="Rectangle 1463" class="cls-7" width="23.333" height="2.333" transform="translate(82.333 140)"/>
+        <rect id="Rectangle_1464" data-name="Rectangle 1464" class="cls-7" width="9.333" height="9.333" transform="translate(54.333 147)"/>
+        <rect id="Rectangle_1465" data-name="Rectangle 1465" class="cls-7" width="9.333" height="9.333" transform="translate(82.333 147)"/>
+        <rect id="Rectangle_1466" data-name="Rectangle 1466" class="cls-7" width="9.333" height="9.333" transform="translate(68.333 147)"/>
+        <rect id="Rectangle_1467" data-name="Rectangle 1467" class="cls-7" width="9.333" height="9.333" transform="translate(96.333 147)"/>
+        <rect id="Rectangle_1468" data-name="Rectangle 1468" class="cls-7" width="33.833" height="2.333" transform="translate(54.333 107.333)"/>
+        <rect id="Rectangle_1469" data-name="Rectangle 1469" class="cls-7" width="28" height="2.333" transform="translate(54.333 113.167)"/>
+        <rect id="Rectangle_1470" data-name="Rectangle 1470" class="cls-5" width="70" height="9.333" transform="translate(45 49)"/>
+        <g id="Group_238" data-name="Group 238" transform="translate(68.333 52.5)">
+          <rect id="Rectangle_1471" data-name="Rectangle 1471" class="cls-8" width="23.333" height="2.333" transform="translate(0)"/>
+        </g>
+      </g>
+      <path id="Path_123" data-name="Path 123" class="cls-9" d="M-13.477,0V-3.883h4.013V-5.517h-4.013V-8.162h4.4v-1.7h-6.46V0ZM-5.8-8.251h1.791A1.513,1.513,0,0,1-2.341-6.679,1.48,1.48,0,0,1-3.989-5.106H-5.8Zm0,4.642h1.688L-2.273,0H.065L-2.013-3.917A2.9,2.9,0,0,0-.222-6.72c0-1.948-1.3-3.145-3.568-3.145H-7.865V0H-5.8Zm13.467,1.9H3.2V-4.2H7.414V-5.783H3.2V-8.162H7.667v-1.7H1.131V0H7.667Zm8.025,0H11.221V-4.2h4.218V-5.783H11.221V-8.162h4.471v-1.7H9.157V0h6.535Z" transform="translate(75 209)"/>
+    </g>
+    <g id="Group_245" data-name="Group 245" class="cls-2" transform="translate(3602 -481)">
+      <g id="Group_244" data-name="Group 244" transform="translate(-45 -49)">
+        <rect id="Rectangle_1472" data-name="Rectangle 1472" class="cls-3" width="70" height="169.167" transform="translate(130 49)"/>
+        <rect id="Rectangle_1473" data-name="Rectangle 1473" class="cls-4" width="70" height="23.333" transform="translate(130 58.333)"/>
+        <g id="Group_241" data-name="Group 241" transform="translate(144 63)">
+          <circle id="Ellipse_127" data-name="Ellipse 127" class="cls-5" cx="7" cy="7" r="7"/>
+          <rect id="Rectangle_1474" data-name="Rectangle 1474" class="cls-5" width="22.167" height="2.333" transform="translate(18.667 3.5)"/>
+          <rect id="Rectangle_1475" data-name="Rectangle 1475" class="cls-5" width="14" height="2.333" transform="translate(18.667 9.333)"/>
+        </g>
+        <rect id="Rectangle_1476" data-name="Rectangle 1476" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(135.833 87.5)"/>
+        <rect id="Rectangle_1477" data-name="Rectangle 1477" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(135.833 126)"/>
+        <rect id="Rectangle_1478" data-name="Rectangle 1478" class="cls-5" width="58.333" height="45.5" rx="2" transform="translate(135.833 164.5)"/>
+        <path id="Rectangle_1479" data-name="Rectangle 1479" class="cls-6" d="M2,0H56.333a2,2,0,0,1,2,2V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(135.833 87.5)"/>
+        <path id="Rectangle_1480" data-name="Rectangle 1480" class="cls-6" d="M2,0H56.333a2,2,0,0,1,2,2V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(135.833 126)"/>
+        <path id="Rectangle_1481" data-name="Rectangle 1481" class="cls-6" d="M2,0H56.333a2,2,0,0,1,2,2V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(135.833 164.5)"/>
+        <rect id="Rectangle_1482" data-name="Rectangle 1482" class="cls-5" width="22.167" height="2.333" transform="translate(139.333 91)"/>
+        <rect id="Rectangle_1483" data-name="Rectangle 1483" class="cls-5" width="22.167" height="2.333" transform="translate(139.333 129.5)"/>
+        <rect id="Rectangle_1484" data-name="Rectangle 1484" class="cls-5" width="22.167" height="2.333" transform="translate(139.333 168)"/>
+        <rect id="Rectangle_1485" data-name="Rectangle 1485" class="cls-7" width="22.167" height="2.333" transform="translate(139.333 101.5)"/>
+        <g id="Group_242" data-name="Group 242" transform="translate(140.5 52.5)">
+          <rect id="Rectangle_1486" data-name="Rectangle 1486" class="cls-8" width="22.167" height="2.333" transform="translate(0)"/>
+          <rect id="Rectangle_1487" data-name="Rectangle 1487" class="cls-8" width="22.167" height="2.333" transform="translate(25.667)"/>
+        </g>
+        <rect id="Rectangle_1488" data-name="Rectangle 1488" class="cls-7" width="22.167" height="2.333" transform="translate(139.333 140)"/>
+        <rect id="Rectangle_1489" data-name="Rectangle 1489" class="cls-7" width="51.333" height="2.333" transform="translate(139.333 178.5)"/>
+        <rect id="Rectangle_1490" data-name="Rectangle 1490" class="cls-7" width="32.667" height="2.333" transform="translate(139.333 184.333)"/>
+        <rect id="Rectangle_1491" data-name="Rectangle 1491" class="cls-7" width="39.667" height="2.333" transform="translate(139.333 190.167)"/>
+        <rect id="Rectangle_1492" data-name="Rectangle 1492" class="cls-7" width="28" height="2.333" transform="translate(139.333 196)"/>
+        <rect id="Rectangle_1493" data-name="Rectangle 1493" class="cls-7" width="30.333" height="2.333" transform="translate(139.333 201.833)"/>
+        <rect id="Rectangle_1494" data-name="Rectangle 1494" class="cls-7" width="23.333" height="2.333" transform="translate(167.333 140)"/>
+        <rect id="Rectangle_1495" data-name="Rectangle 1495" class="cls-7" width="9.333" height="9.333" transform="translate(139.333 147)"/>
+        <rect id="Rectangle_1496" data-name="Rectangle 1496" class="cls-7" width="9.333" height="9.333" transform="translate(167.333 147)"/>
+        <rect id="Rectangle_1497" data-name="Rectangle 1497" class="cls-7" width="9.333" height="9.333" transform="translate(153.333 147)"/>
+        <rect id="Rectangle_1498" data-name="Rectangle 1498" class="cls-7" width="9.333" height="9.333" transform="translate(181.333 147)"/>
+        <rect id="Rectangle_1499" data-name="Rectangle 1499" class="cls-7" width="33.833" height="2.333" transform="translate(139.333 107.333)"/>
+        <rect id="Rectangle_1500" data-name="Rectangle 1500" class="cls-7" width="28" height="2.333" transform="translate(139.333 113.167)"/>
+        <rect id="Rectangle_1501" data-name="Rectangle 1501" class="cls-5" width="70" height="9.333" transform="translate(130 49)"/>
+        <g id="Group_243" data-name="Group 243" transform="translate(153.333 52.5)">
+          <rect id="Rectangle_1502" data-name="Rectangle 1502" class="cls-8" width="23.333" height="2.333" transform="translate(0)"/>
+        </g>
+      </g>
+      <path id="Path_122" data-name="Path 122" class="cls-9" d="M-13.508,0V-3.883H-9.5V-5.517h-4.013V-8.162h4.4v-1.7h-6.46V0Zm7.677-9.864H-7.9v6.378C-7.9-1.312-6.289.171-3.76.171S.369-1.312.369-3.486V-9.864H-1.7v6.173A1.918,1.918,0,0,1-3.76-1.6,1.92,1.92,0,0,1-5.831-3.691ZM8.388-1.709H4.074V-9.864H2.01V0H8.388Zm7.6,0H11.676V-9.864H9.611V0h6.378Z" transform="translate(120 189)"/>
+    </g>
+    <g id="Group_249" data-name="Group 249" transform="translate(3562 -554)">
+      <g id="Group_248" data-name="Group 248" transform="translate(-5 24)">
+        <rect id="Rectangle_1503" data-name="Rectangle 1503" class="cls-3" width="70" height="274.167" transform="translate(215 49)"/>
+        <rect id="Rectangle_1504" data-name="Rectangle 1504" class="cls-5" width="70" height="9.333" transform="translate(215 49)"/>
+        <rect id="Rectangle_1505" data-name="Rectangle 1505" class="cls-10" width="23.333" height="70" transform="translate(215 81.667) rotate(-90)"/>
+        <g id="Group_246" data-name="Group 246" transform="translate(229 63)">
+          <circle id="Ellipse_128" data-name="Ellipse 128" class="cls-5" cx="7" cy="7" r="7" transform="translate(0)"/>
+          <rect id="Rectangle_1506" data-name="Rectangle 1506" class="cls-5" width="22.167" height="2.333" transform="translate(18.667 3.5)"/>
+          <rect id="Rectangle_1507" data-name="Rectangle 1507" class="cls-5" width="14" height="2.333" transform="translate(18.667 9.333)"/>
+        </g>
+        <rect id="Rectangle_1508" data-name="Rectangle 1508" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 87.5)"/>
+        <rect id="Rectangle_1509" data-name="Rectangle 1509" class="cls-5" width="58.333" height="63" rx="2" transform="translate(220.833 253.167)"/>
+        <rect id="Rectangle_1510" data-name="Rectangle 1510" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 126)"/>
+        <rect id="Rectangle_1511" data-name="Rectangle 1511" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 214.667)"/>
+        <path id="Rectangle_1512" data-name="Rectangle 1512" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 96.833) rotate(-90)"/>
+        <path id="Rectangle_1513" data-name="Rectangle 1513" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 262.5) rotate(-90)"/>
+        <path id="Rectangle_1514" data-name="Rectangle 1514" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 135.333) rotate(-90)"/>
+        <path id="Rectangle_1515" data-name="Rectangle 1515" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 224) rotate(-90)"/>
+        <rect id="Rectangle_1516" data-name="Rectangle 1516" class="cls-5" width="58.333" height="45.5" rx="2" transform="translate(220.833 164.5)"/>
+        <path id="Rectangle_1517" data-name="Rectangle 1517" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 173.833) rotate(-90)"/>
+        <rect id="Rectangle_1518" data-name="Rectangle 1518" class="cls-5" width="29.167" height="2.333" transform="translate(224.333 91)"/>
+        <rect id="Rectangle_1519" data-name="Rectangle 1519" class="cls-5" width="26.833" height="2.333" transform="translate(224.333 256.667)"/>
+        <rect id="Rectangle_1520" data-name="Rectangle 1520" class="cls-5" width="22.167" height="2.333" transform="translate(224.333 129.5)"/>
+        <rect id="Rectangle_1521" data-name="Rectangle 1521" class="cls-5" width="17.5" height="2.333" transform="translate(224.333 218.167)"/>
+        <rect id="Rectangle_1522" data-name="Rectangle 1522" class="cls-5" width="24.5" height="2.333" transform="translate(224.333 168)"/>
+        <rect id="Rectangle_1523" data-name="Rectangle 1523" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 101.5)"/>
+        <rect id="Rectangle_1524" data-name="Rectangle 1524" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 267.167)"/>
+        <rect id="Rectangle_1525" data-name="Rectangle 1525" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 289.333)"/>
+        <g id="Group_247" data-name="Group 247" transform="translate(238.333 52.5)">
+          <rect id="Rectangle_1526" data-name="Rectangle 1526" class="cls-8" width="23.333" height="2.333" transform="translate(0)"/>
+        </g>
+        <rect id="Rectangle_1527" data-name="Rectangle 1527" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 140)"/>
+        <rect id="Rectangle_1528" data-name="Rectangle 1528" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 228.667)"/>
+        <rect id="Rectangle_1529" data-name="Rectangle 1529" class="cls-7" width="51.333" height="2.333" transform="translate(224.333 178.5)"/>
+        <rect id="Rectangle_1530" data-name="Rectangle 1530" class="cls-7" width="32.667" height="2.333" transform="translate(224.333 184.333)"/>
+        <rect id="Rectangle_1531" data-name="Rectangle 1531" class="cls-7" width="39.667" height="2.333" transform="translate(224.333 190.167)"/>
+        <rect id="Rectangle_1532" data-name="Rectangle 1532" class="cls-7" width="28" height="2.333" transform="translate(224.333 196)"/>
+        <rect id="Rectangle_1533" data-name="Rectangle 1533" class="cls-7" width="30.333" height="2.333" transform="translate(224.333 201.833)"/>
+        <rect id="Rectangle_1534" data-name="Rectangle 1534" class="cls-7" width="23.333" height="2.333" transform="translate(252.333 140)"/>
+        <rect id="Rectangle_1535" data-name="Rectangle 1535" class="cls-7" width="23.333" height="2.333" transform="translate(252.333 228.667)"/>
+        <rect id="Rectangle_1536" data-name="Rectangle 1536" class="cls-7" width="9.333" height="9.333" transform="translate(224.333 147)"/>
+        <rect id="Rectangle_1537" data-name="Rectangle 1537" class="cls-7" width="9.333" height="9.333" transform="translate(224.333 235.667)"/>
+        <rect id="Rectangle_1538" data-name="Rectangle 1538" class="cls-7" width="9.333" height="9.333" transform="translate(252.333 147)"/>
+        <rect id="Rectangle_1539" data-name="Rectangle 1539" class="cls-7" width="9.333" height="9.333" transform="translate(252.333 235.667)"/>
+        <rect id="Rectangle_1540" data-name="Rectangle 1540" class="cls-7" width="9.333" height="9.333" transform="translate(238.333 147)"/>
+        <rect id="Rectangle_1541" data-name="Rectangle 1541" class="cls-7" width="9.333" height="9.333" transform="translate(238.333 235.667)"/>
+        <rect id="Rectangle_1542" data-name="Rectangle 1542" class="cls-7" width="9.333" height="9.333" transform="translate(266.333 147)"/>
+        <rect id="Rectangle_1543" data-name="Rectangle 1543" class="cls-7" width="9.333" height="9.333" transform="translate(266.333 235.667)"/>
+        <rect id="Rectangle_1544" data-name="Rectangle 1544" class="cls-7" width="33.833" height="2.333" transform="translate(224.333 107.333)"/>
+        <rect id="Rectangle_1545" data-name="Rectangle 1545" class="cls-7" width="49" height="2.333" transform="translate(224.333 273)"/>
+        <rect id="Rectangle_1546" data-name="Rectangle 1546" class="cls-7" width="33.833" height="2.333" transform="translate(224.333 295.167)"/>
+        <rect id="Rectangle_1547" data-name="Rectangle 1547" class="cls-7" width="28" height="2.333" transform="translate(224.333 113.167)"/>
+        <rect id="Rectangle_1548" data-name="Rectangle 1548" class="cls-7" width="28" height="2.333" transform="translate(224.333 278.833)"/>
+        <rect id="Rectangle_1549" data-name="Rectangle 1549" class="cls-7" width="28" height="2.333" transform="translate(224.333 301)"/>
+        <rect id="Rectangle_1550" data-name="Rectangle 1550" class="cls-7" width="44.333" height="2.333" transform="translate(224.333 306.833)"/>
+        <path id="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 914)"/>
+        <path id="path-22-2" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 876)"/>
+        <path id="path-22-3" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 826)"/>
+        <path id="path-22-4" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 787)"/>
+        <path id="path-22-5" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 749)"/>
+      </g>
+      <path id="Path_121" data-name="Path 121" class="cls-9" d="M-30.957-9.864V0h2.064V-3.11h1.948a3.28,3.28,0,0,0,3.521-3.377,3.222,3.222,0,0,0-3.418-3.377Zm2.064,1.634h1.5a1.646,1.646,0,0,1,1.866,1.75A1.653,1.653,0,0,1-27.4-4.724h-1.5Zm8.75-.021h1.791a1.513,1.513,0,0,1,1.668,1.572,1.48,1.48,0,0,1-1.647,1.572h-1.812Zm0,4.642h1.688L-16.615,0h2.338l-2.078-3.917a2.9,2.9,0,0,0,1.791-2.8c0-1.948-1.3-3.145-3.568-3.145h-4.074V0h2.064Zm13.467,1.9h-4.471V-4.2h4.218V-5.783h-4.218V-8.162h4.471v-1.7H-13.21V0h6.535ZM5.26,0V-9.864H2.868L.065-2.871H.01l-2.8-6.993H-5.185V0h1.839V-6.658h.055L-.612-.1h1.3l2.68-6.562h.055V0ZM8.965,0V-9.864H6.9V0ZM12.67-9.864H10.606v6.378c0,2.174,1.606,3.657,4.136,3.657s4.129-1.483,4.129-3.657V-9.864H16.806v6.173A1.918,1.918,0,0,1,14.742-1.6,1.92,1.92,0,0,1,12.67-3.691ZM30.957,0V-9.864H28.564l-2.8,6.993h-.055L22.9-9.864H20.511V0H22.35V-6.658H22.4L25.084-.1h1.3l2.68-6.562h.055V0Z" transform="translate(245 367)"/>
+      <path id="path-22-6" data-name="path-22" class="cls-5" d="M-1375.5-641.1l-7.5,3.333V-659h15v21.23Zm-3.12-3.883h2.527v-2.873h1.63v0a3.22,3.22,0,0,0,3.467-3.377,3.231,3.231,0,0,0-3.44-3.42h-4.184Zm2.52-4.743v-3h1.04a1.359,1.359,0,0,1,1.483,1.507c0,1.046-.64,1.494-1.667,1.494Z" transform="translate(1620.001 1036.253)"/>
+    </g>
+    <g id="Group_252" data-name="Group 252" transform="translate(3557 -530)">
+      <rect id="Rectangle_1551" data-name="Rectangle 1551" class="cls-3" width="70" height="274.167" transform="translate(215 49)"/>
+      <rect id="Rectangle_1552" data-name="Rectangle 1552" class="cls-5" width="70" height="9.333" transform="translate(215 49)"/>
+      <rect id="Rectangle_1553" data-name="Rectangle 1553" class="cls-10" width="23.333" height="70" transform="translate(215 81.667) rotate(-90)"/>
+      <g id="Group_250" data-name="Group 250" transform="translate(229 63)">
+        <circle id="Ellipse_129" data-name="Ellipse 129" class="cls-5" cx="7" cy="7" r="7" transform="translate(0)"/>
+        <rect id="Rectangle_1554" data-name="Rectangle 1554" class="cls-5" width="22.167" height="2.333" transform="translate(18.667 3.5)"/>
+        <rect id="Rectangle_1555" data-name="Rectangle 1555" class="cls-5" width="14" height="2.333" transform="translate(18.667 9.333)"/>
+      </g>
+      <rect id="Rectangle_1556" data-name="Rectangle 1556" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 87.5)"/>
+      <rect id="Rectangle_1557" data-name="Rectangle 1557" class="cls-5" width="58.333" height="63" rx="2" transform="translate(220.833 253.167)"/>
+      <rect id="Rectangle_1558" data-name="Rectangle 1558" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 126)"/>
+      <rect id="Rectangle_1559" data-name="Rectangle 1559" class="cls-5" width="58.333" height="33.833" rx="2" transform="translate(220.833 214.667)"/>
+      <path id="Rectangle_1560" data-name="Rectangle 1560" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 96.833) rotate(-90)"/>
+      <path id="Rectangle_1561" data-name="Rectangle 1561" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 262.5) rotate(-90)"/>
+      <path id="Rectangle_1562" data-name="Rectangle 1562" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 135.333) rotate(-90)"/>
+      <path id="Rectangle_1563" data-name="Rectangle 1563" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 224) rotate(-90)"/>
+      <rect id="Rectangle_1564" data-name="Rectangle 1564" class="cls-5" width="58.333" height="45.5" rx="2" transform="translate(220.833 164.5)"/>
+      <path id="Rectangle_1565" data-name="Rectangle 1565" class="cls-10" d="M0,0H7.333a2,2,0,0,1,2,2V56.333a2,2,0,0,1-2,2H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(220.833 173.833) rotate(-90)"/>
+      <rect id="Rectangle_1566" data-name="Rectangle 1566" class="cls-5" width="29.167" height="2.333" transform="translate(224.333 91)"/>
+      <rect id="Rectangle_1567" data-name="Rectangle 1567" class="cls-5" width="26.833" height="2.333" transform="translate(224.333 256.667)"/>
+      <rect id="Rectangle_1568" data-name="Rectangle 1568" class="cls-5" width="22.167" height="2.333" transform="translate(224.333 129.5)"/>
+      <rect id="Rectangle_1569" data-name="Rectangle 1569" class="cls-5" width="17.5" height="2.333" transform="translate(224.333 218.167)"/>
+      <rect id="Rectangle_1570" data-name="Rectangle 1570" class="cls-5" width="24.5" height="2.333" transform="translate(224.333 168)"/>
+      <rect id="Rectangle_1571" data-name="Rectangle 1571" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 101.5)"/>
+      <rect id="Rectangle_1572" data-name="Rectangle 1572" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 267.167)"/>
+      <rect id="Rectangle_1573" data-name="Rectangle 1573" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 289.333)"/>
+      <g id="Group_251" data-name="Group 251" transform="translate(238.333 52.5)">
+        <rect id="Rectangle_1574" data-name="Rectangle 1574" class="cls-8" width="23.333" height="2.333" transform="translate(0)"/>
+      </g>
+      <rect id="Rectangle_1575" data-name="Rectangle 1575" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 140)"/>
+      <rect id="Rectangle_1576" data-name="Rectangle 1576" class="cls-7" width="22.167" height="2.333" transform="translate(224.333 228.667)"/>
+      <rect id="Rectangle_1577" data-name="Rectangle 1577" class="cls-7" width="51.333" height="2.333" transform="translate(224.333 178.5)"/>
+      <rect id="Rectangle_1578" data-name="Rectangle 1578" class="cls-7" width="32.667" height="2.333" transform="translate(224.333 184.333)"/>
+      <rect id="Rectangle_1579" data-name="Rectangle 1579" class="cls-7" width="39.667" height="2.333" transform="translate(224.333 190.167)"/>
+      <rect id="Rectangle_1580" data-name="Rectangle 1580" class="cls-7" width="28" height="2.333" transform="translate(224.333 196)"/>
+      <rect id="Rectangle_1581" data-name="Rectangle 1581" class="cls-7" width="30.333" height="2.333" transform="translate(224.333 201.833)"/>
+      <rect id="Rectangle_1582" data-name="Rectangle 1582" class="cls-7" width="23.333" height="2.333" transform="translate(252.333 140)"/>
+      <rect id="Rectangle_1583" data-name="Rectangle 1583" class="cls-7" width="23.333" height="2.333" transform="translate(252.333 228.667)"/>
+      <rect id="Rectangle_1584" data-name="Rectangle 1584" class="cls-7" width="9.333" height="9.333" transform="translate(224.333 147)"/>
+      <rect id="Rectangle_1585" data-name="Rectangle 1585" class="cls-7" width="9.333" height="9.333" transform="translate(224.333 235.667)"/>
+      <rect id="Rectangle_1586" data-name="Rectangle 1586" class="cls-7" width="9.333" height="9.333" transform="translate(252.333 147)"/>
+      <rect id="Rectangle_1587" data-name="Rectangle 1587" class="cls-7" width="9.333" height="9.333" transform="translate(252.333 235.667)"/>
+      <rect id="Rectangle_1588" data-name="Rectangle 1588" class="cls-7" width="9.333" height="9.333" transform="translate(238.333 147)"/>
+      <rect id="Rectangle_1589" data-name="Rectangle 1589" class="cls-7" width="9.333" height="9.333" transform="translate(238.333 235.667)"/>
+      <rect id="Rectangle_1590" data-name="Rectangle 1590" class="cls-7" width="9.333" height="9.333" transform="translate(266.333 147)"/>
+      <rect id="Rectangle_1591" data-name="Rectangle 1591" class="cls-7" width="9.333" height="9.333" transform="translate(266.333 235.667)"/>
+      <rect id="Rectangle_1592" data-name="Rectangle 1592" class="cls-7" width="33.833" height="2.333" transform="translate(224.333 107.333)"/>
+      <rect id="Rectangle_1593" data-name="Rectangle 1593" class="cls-7" width="49" height="2.333" transform="translate(224.333 273)"/>
+      <rect id="Rectangle_1594" data-name="Rectangle 1594" class="cls-7" width="33.833" height="2.333" transform="translate(224.333 295.167)"/>
+      <rect id="Rectangle_1595" data-name="Rectangle 1595" class="cls-7" width="28" height="2.333" transform="translate(224.333 113.167)"/>
+      <rect id="Rectangle_1596" data-name="Rectangle 1596" class="cls-7" width="28" height="2.333" transform="translate(224.333 278.833)"/>
+      <rect id="Rectangle_1597" data-name="Rectangle 1597" class="cls-7" width="28" height="2.333" transform="translate(224.333 301)"/>
+      <rect id="Rectangle_1598" data-name="Rectangle 1598" class="cls-7" width="44.333" height="2.333" transform="translate(224.333 306.833)"/>
+      <path id="path-22-7" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 914)"/>
+      <path id="path-22-8" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 876)"/>
+      <path id="path-22-9" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 826)"/>
+      <path id="path-22-10" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 787)"/>
+      <path id="path-22-11" data-name="path-22" class="cls-5" d="M-1381.1-654.46l-1.9.845V-659h3.8v5.385Z" transform="translate(1655.896 749)"/>
+    </g>
+    <g id="Group_254" data-name="Group 254" transform="translate(3562 -554)">
+      <g id="Group_253" data-name="Group 253">
+        <g class="cls-12" transform="matrix(1, 0, 0, 1, -3562, 554)">
+          <rect id="Rectangle_1599-2" data-name="Rectangle 1599" class="cls-10" width="151.333" height="174" rx="3" transform="translate(3588 -137.33) rotate(-90)"/>
+        </g>
+        <path id="Path_109" data-name="Path 109" class="cls-11" d="M0,0H16.526V16.526Z" transform="translate(198.214 350.314) rotate(45)"/>
+      </g>
+      <path id="Path_120" data-name="Path 120" class="cls-9" d="M2.344,3.431H1.025v6.863c0,2.256,1.575,3.882,4.2,3.882s4.2-1.626,4.2-3.882V3.431H8.1v6.775A2.638,2.638,0,0,1,5.222,12.96a2.638,2.638,0,0,1-2.878-2.754ZM15.1,6.031a2.922,2.922,0,0,0-2.556,1.355h-.029V6.1H11.309V16.637h1.274V12.718h.029a2.778,2.778,0,0,0,2.52,1.355c1.992,0,3.354-1.611,3.354-4.021S17.117,6.031,15.1,6.031Zm-.234,6.907c-1.362,0-2.292-1.165-2.292-2.886s.93-2.886,2.292-2.886c1.392,0,2.314,1.143,2.314,2.886S16.26,12.938,14.868,12.938Zm8.152-.073c-1.377,0-2.278-1.121-2.278-2.842s.9-2.856,2.278-2.856,2.322,1.157,2.322,2.856S24.4,12.865,23.02,12.865Zm.044,4.109c2.168,0,3.552-1.252,3.552-3.135V6.1H25.4V7.386h-.022a2.905,2.905,0,0,0-2.571-1.355c-2.029,0-3.369,1.582-3.369,3.992,0,2.388,1.34,3.977,3.34,3.977a2.834,2.834,0,0,0,2.534-1.355h.029v1.238a1.975,1.975,0,0,1-2.219,1.992,2.059,2.059,0,0,1-2.051-1.216H19.753A3.134,3.134,0,0,0,23.064,16.974ZM28.345,14h1.274V9.115a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073V6.075a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V6.1h-1.2Zm7.185-1.033c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V11A2.051,2.051,0,0,1,35.53,12.967Zm-.271,1.106A2.814,2.814,0,0,0,37.8,12.63h.029V14h1.208V8.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351H34.2a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,35.259,14.073Zm8.467,0a2.785,2.785,0,0,0,2.556-1.406H46.3V14H47.52V2.97H46.245V7.386h-.029A2.754,2.754,0,0,0,43.7,6.031c-1.963,0-3.354,1.611-3.354,4.021S41.741,14.073,43.726,14.073Zm.227-6.907c1.37,0,2.3,1.172,2.3,2.886s-.93,2.886-2.3,2.886-2.307-1.135-2.307-2.886S42.568,7.167,43.953,7.167ZM49.395,14h1.274V6.1H49.395Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,50.032,4.83ZM52.471,14h1.274V9.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V14h1.274V8.939A2.829,2.829,0,0,0,53.7,7.386h-.029V6.1h-1.2Zm11.36-1.135c-1.377,0-2.278-1.121-2.278-2.842s.9-2.856,2.278-2.856,2.322,1.157,2.322,2.856S65.215,12.865,63.831,12.865Zm.044,4.109c2.168,0,3.552-1.252,3.552-3.135V6.1H66.211V7.386h-.022a2.905,2.905,0,0,0-2.571-1.355c-2.029,0-3.369,1.582-3.369,3.992,0,2.388,1.34,3.977,3.34,3.977a2.834,2.834,0,0,0,2.534-1.355h.029v1.238a1.975,1.975,0,0,1-2.219,1.992,2.059,2.059,0,0,1-2.051-1.216H60.564A3.134,3.134,0,0,0,63.875,16.974ZM82.734,6.1h-1.26l-1.6,6.453h-.029L78.032,6.1H76.8l-1.809,6.453h-.029L73.359,6.1H72.1L74.312,14H75.6l1.8-6.138h.029L79.233,14h1.289ZM83.892,14h1.274V6.1H83.892Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,84.529,4.83ZM87.041,14h1.274V2.97H87.041Zm3.149,0h1.274V2.97H90.19ZM4.658,26.031A2.922,2.922,0,0,0,2.1,27.386H2.073V26.1H.864V36.637H2.139V32.718h.029a2.778,2.778,0,0,0,2.52,1.355c1.992,0,3.354-1.611,3.354-4.021S6.672,26.031,4.658,26.031Zm-.234,6.907c-1.362,0-2.292-1.165-2.292-2.886s.93-2.886,2.292-2.886c1.392,0,2.314,1.143,2.314,2.886S5.815,32.938,4.424,32.938Zm8.21,1.135c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021-3.64,1.567-3.64,4.021S10.415,34.073,12.634,34.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S14.106,32.938,12.634,32.938Zm5.4-8.613V26.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V32.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V27.159h1.538V26.1H19.307v-1.78Zm7.156,2.827a2.092,2.092,0,0,1,2.124,2.234H22.969A2.211,2.211,0,0,1,25.188,27.152Zm2.095,4.592A1.933,1.933,0,0,1,25.3,32.953a2.26,2.26,0,0,1-2.329-2.476V30.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329ZM29.978,34h1.274V29.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V34h1.274V28.939a2.6,2.6,0,0,0-2.739-2.908,2.6,2.6,0,0,0-2.5,1.355h-.029V26.1h-1.2Zm8.584-9.675V26.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V32.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V27.159h1.538V26.1H39.836v-1.78ZM42.861,34h1.274V26.1H42.861Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,43.5,24.83Zm5.017,8.137c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V31A2.051,2.051,0,0,1,48.516,32.967Zm-.271,1.106a2.814,2.814,0,0,0,2.542-1.443h.029V34h1.208V28.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351H47.19a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,48.245,34.073ZM53.789,34h1.274V22.97H53.789Zm3.149,0h1.274V22.97H56.938Zm3.75,2.864c1.4,0,2.029-.549,2.7-2.38L66.482,26.1h-1.34L62.93,32.7H62.9l-2.212-6.6H59.333l2.922,7.9-.154.469c-.322.952-.718,1.3-1.45,1.3a2.928,2.928,0,0,1-.52-.044v1.077A3.5,3.5,0,0,0,60.688,36.864ZM77.556,26.1H76.282v4.585a2.021,2.021,0,0,1-2.08,2.249c-1.238,0-1.846-.7-1.846-1.992V26.1H71.082v5.061A2.821,2.821,0,0,0,76.326,32.7h.029V34h1.2ZM79.285,34h1.274V29.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V34h1.274V28.939a2.829,2.829,0,0,0-5.244-1.553h-.029V26.1h-1.2Zm14.692-5.325a3.113,3.113,0,0,0-3.311-2.644c-2.161,0-3.6,1.6-3.6,4.021,0,2.483,1.45,4.021,3.618,4.021a3.1,3.1,0,0,0,3.311-2.6H92.739a1.885,1.885,0,0,1-2.051,1.465c-1.377,0-2.329-1.091-2.329-2.886,0-1.743.938-2.886,2.314-2.886a1.91,1.91,0,0,1,2.051,1.509Zm4.49,5.4c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021-3.64,1.567-3.64,4.021S96.248,34.073,98.467,34.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S99.939,32.938,98.467,32.938ZM103.447,34h1.274V29.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V34h1.274V28.939a2.829,2.829,0,0,0-5.244-1.553h-.029V26.1h-1.2Zm14.6-7.9h-1.326l-2.219,6.519h-.029L112.266,26.1h-1.333l2.915,7.9h1.289Zm3.977,1.047a2.092,2.092,0,0,1,2.124,2.234H119.81A2.211,2.211,0,0,1,122.029,27.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V30.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.7,2.256h1.274V29.115a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073V26.075a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V26.1h-1.2ZM4.746,54.073c2.014,0,3.369-1.6,3.369-4.021s-1.355-4.021-3.34-4.021a2.8,2.8,0,0,0-2.534,1.355H2.212V42.97H.938V54H2.146V52.667h.029A2.8,2.8,0,0,0,4.746,54.073Zm-.227-6.907c1.384,0,2.292,1.135,2.292,2.886S5.9,52.938,4.519,52.938,2.2,51.766,2.2,50.052,3.142,47.167,4.519,47.167Zm7.515,5.8c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V51A2.051,2.051,0,0,1,12.034,52.967Zm-.271,1.106A2.814,2.814,0,0,0,14.3,52.63h.029V54h1.208V48.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351h1.223a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132C10.137,49.6,9.1,50.4,9.1,51.751A2.366,2.366,0,0,0,11.763,54.073ZM17.234,54h1.274V49.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V54h1.274V48.939a2.6,2.6,0,0,0-2.739-2.908,2.6,2.6,0,0,0-2.5,1.355h-.029V46.1h-1.2Zm9.514-4.365V42.97H25.474V54h1.274V51l.747-.7L30.461,54h1.479l-3.552-4.482,3.45-3.413H30.286ZM32.915,54h1.274V49.115a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073V46.075a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V46.1h-1.2Zm11.191-7.9H42.832v4.585a2.021,2.021,0,0,1-2.08,2.249c-1.238,0-1.846-.7-1.846-1.992V46.1H37.632v5.061A2.821,2.821,0,0,0,42.876,52.7h.029V54h1.2Zm5.522-.073a2.922,2.922,0,0,0-2.556,1.355h-.029V46.1H45.835V56.637h1.274V52.718h.029a2.778,2.778,0,0,0,2.52,1.355c1.992,0,3.354-1.611,3.354-4.021S51.643,46.031,49.629,46.031Zm-.234,6.907c-1.362,0-2.292-1.165-2.292-2.886s.93-2.886,2.292-2.886c1.392,0,2.314,1.143,2.314,2.886S50.786,52.938,49.395,52.938Zm5.376-8.613V46.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V52.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V47.159h1.538V46.1H56.045v-1.78ZM65.3,48.675a3.113,3.113,0,0,0-3.311-2.644c-2.161,0-3.6,1.6-3.6,4.021,0,2.483,1.45,4.021,3.618,4.021a3.1,3.1,0,0,0,3.311-2.6H64.065a1.885,1.885,0,0,1-2.051,1.465c-1.377,0-2.329-1.091-2.329-2.886,0-1.743.938-2.886,2.314-2.886a1.91,1.91,0,0,1,2.051,1.509ZM66.614,54h1.274V46.1H66.614Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,67.251,44.83Zm5.588,2.322a2.092,2.092,0,0,1,2.124,2.234H70.62A2.211,2.211,0,0,1,72.839,47.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V50.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329ZM77.5,48.309c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H77.278c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C78.706,46.039,77.5,46.976,77.5,48.309Zm8.167,7.573,1.1-3.362H85.408l-.732,3.362ZM92.307,54h1.274V42.97H92.307Zm3.149,0h1.274V46.1H95.457Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,96.094,44.83Zm5.588,2.322a2.092,2.092,0,0,1,2.124,2.234H99.463A2.211,2.211,0,0,1,101.682,47.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V50.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.7,2.256h1.274V49.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V54h1.274V48.939a2.829,2.829,0,0,0-5.244-1.553h-.029V46.1h-1.2Zm8.035-5.691c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238h-1.282c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2H120.3a2.605,2.605,0,0,0-2.871-2.256C115.715,46.039,114.507,46.976,114.507,48.309Zm8.167,7.573,1.1-3.362h-1.355l-.732,3.362ZM.864,74H2.139V69.1A1.834,1.834,0,0,1,3.97,67.167,1.519,1.519,0,0,1,5.61,68.749V74H6.885V69.034a1.774,1.774,0,0,1,1.809-1.868A1.554,1.554,0,0,1,10.356,68.9V74h1.274V68.609A2.413,2.413,0,0,0,9.06,66.031a2.662,2.662,0,0,0-2.483,1.494H6.548a2.211,2.211,0,0,0-2.212-1.494,2.357,2.357,0,0,0-2.241,1.355H2.065V66.1H.864Zm15.71.073c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021-3.64,1.567-3.64,4.021S14.355,74.073,16.575,74.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S18.047,72.938,16.575,72.938ZM21.555,74H22.83V69.115a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073V66.075a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V66.1h-1.2Zm5.171-9.675V66.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V72.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V67.159h1.538V66.1H28v-1.78Zm7.2,8.54c-1.377,0-2.278-1.121-2.278-2.842s.9-2.856,2.278-2.856,2.322,1.157,2.322,2.856S35.31,72.865,33.926,72.865Zm.044,4.109c2.168,0,3.552-1.252,3.552-3.135V66.1H36.306v1.282h-.022a2.905,2.905,0,0,0-2.571-1.355c-2.029,0-3.369,1.582-3.369,3.992,0,2.388,1.34,3.977,3.34,3.977a2.834,2.834,0,0,0,2.534-1.355h.029v1.238a1.975,1.975,0,0,1-2.219,1.992,2.059,2.059,0,0,1-2.051-1.216H30.659A3.134,3.134,0,0,0,33.97,76.974Zm7.859-4.006c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V71A2.051,2.051,0,0,1,41.829,72.967Zm-.271,1.106A2.814,2.814,0,0,0,44.1,72.63h.029V74h1.208V68.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351H40.5a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,41.558,74.073Zm8.665-1.208c-1.377,0-2.278-1.121-2.278-2.842s.9-2.856,2.278-2.856,2.322,1.157,2.322,2.856S51.606,72.865,50.222,72.865Zm.044,4.109c2.168,0,3.552-1.252,3.552-3.135V66.1H52.6v1.282h-.022a2.905,2.905,0,0,0-2.571-1.355c-2.029,0-3.369,1.582-3.369,3.992,0,2.388,1.34,3.977,3.34,3.977a2.834,2.834,0,0,0,2.534-1.355h.029v1.238a1.975,1.975,0,0,1-2.219,1.992,2.059,2.059,0,0,1-2.051-1.216H46.956A3.134,3.134,0,0,0,50.266,76.974Zm8.43-9.822a2.092,2.092,0,0,1,2.124,2.234H56.477A2.211,2.211,0,0,1,58.7,67.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V70.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.563-3.435c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H63.135c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C64.563,66.039,63.354,66.976,63.354,68.309Zm8.167,7.573,1.1-3.362H71.265l-.732,3.362Zm6.438-7.573c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H77.739c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C79.167,66.039,77.959,66.976,77.959,68.309Zm11.133-2.278a2.922,2.922,0,0,0-2.556,1.355h-.029V66.1H85.3V76.637h1.274V72.718H86.6a2.778,2.778,0,0,0,2.52,1.355c1.992,0,3.354-1.611,3.354-4.021S91.106,66.031,89.092,66.031Zm-.234,6.907c-1.362,0-2.292-1.165-2.292-2.886s.93-2.886,2.292-2.886c1.392,0,2.314,1.143,2.314,2.886S90.249,72.938,88.857,72.938Zm8.108-5.786a2.092,2.092,0,0,1,2.124,2.234H94.746A2.211,2.211,0,0,1,96.965,67.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V70.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm9.221-3.069a3.113,3.113,0,0,0-3.311-2.644c-2.161,0-3.6,1.6-3.6,4.021,0,2.483,1.45,4.021,3.618,4.021a3.1,3.1,0,0,0,3.311-2.6h-1.252a1.885,1.885,0,0,1-2.051,1.465c-1.377,0-2.329-1.091-2.329-2.886,0-1.743.938-2.886,2.314-2.886a1.91,1.91,0,0,1,2.051,1.509ZM109.592,74h1.274V66.1h-1.274Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,110.229,64.83Zm5.017,8.137c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V71A2.051,2.051,0,0,1,115.247,72.967Zm-.271,1.106a2.814,2.814,0,0,0,2.542-1.443h.029V74h1.208V68.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351h1.223a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,114.976,74.073ZM120.52,74h1.274V62.97H120.52ZM7.39,88.675A3.113,3.113,0,0,0,4.08,86.031c-2.161,0-3.6,1.6-3.6,4.021,0,2.483,1.45,4.021,3.618,4.021a3.1,3.1,0,0,0,3.311-2.6H6.152A1.885,1.885,0,0,1,4.1,92.938c-1.377,0-2.329-1.091-2.329-2.886,0-1.743.938-2.886,2.314-2.886a1.91,1.91,0,0,1,2.051,1.509Zm4.49,5.4c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021S8.24,87.6,8.24,90.052,9.661,94.073,11.88,94.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S13.352,92.938,11.88,92.938ZM16.86,94h1.274V89.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V94h1.274V88.939A2.6,2.6,0,0,0,20.6,86.031a2.6,2.6,0,0,0-2.5,1.355h-.029V86.1h-1.2Zm8.584-9.675V86.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V92.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V87.159h1.538V86.1H26.719v-1.78Zm6.731,8.643c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V91A2.051,2.051,0,0,1,32.175,92.967ZM31.9,94.073a2.814,2.814,0,0,0,2.542-1.443h.029V94h1.208V88.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351H30.85a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,31.9,94.073Zm12-5.4a3.113,3.113,0,0,0-3.311-2.644c-2.161,0-3.6,1.6-3.6,4.021,0,2.483,1.45,4.021,3.618,4.021a3.1,3.1,0,0,0,3.311-2.6H42.664a1.885,1.885,0,0,1-2.051,1.465c-1.377,0-2.329-1.091-2.329-2.886,0-1.743.938-2.886,2.314-2.886a1.91,1.91,0,0,1,2.051,1.509Zm1.655-4.351V86.1h-1.1v1.055h1.1v4.79c0,1.516.557,2.109,1.985,2.109a4.61,4.61,0,0,0,.82-.066V92.916a5.279,5.279,0,0,1-.549.037c-.674,0-.981-.33-.981-1.055V87.159h1.538V86.1H46.831v-1.78ZM53.445,94h1.274V86.1H53.445Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,54.082,84.83ZM56.521,94H57.8V89.415a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V94H63V88.939a2.829,2.829,0,0,0-5.244-1.553h-.029V86.1h-1.2ZM65.1,94h1.274V87.159h1.538V86.1H66.379v-.732c.007-.74.286-1.047.945-1.047a3.017,3.017,0,0,1,.593.059V83.329a3.827,3.827,0,0,0-.71-.066c-1.465,0-2.1.652-2.1,2.109V86.1h-1.1v1.055h1.1Zm7.075.073c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021-3.64,1.567-3.64,4.021S69.961,94.073,72.18,94.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S73.652,92.938,72.18,92.938ZM80.823,94H82.1V82.97H80.823Zm3.149,0h1.274V86.1H83.972Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,84.609,84.83Zm3.787,4.8V82.97H87.122V94H88.4V91l.747-.7L92.109,94h1.479l-3.552-4.482,3.45-3.413H91.934Zm8.95-2.483a2.092,2.092,0,0,1,2.124,2.234H95.127A2.211,2.211,0,0,1,97.346,87.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V90.4H100.8v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm9.434-4.592A2.092,2.092,0,0,1,111,89.386h-4.343A2.211,2.211,0,0,1,108.875,87.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V90.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.7,2.256h1.274V89.1a1.834,1.834,0,0,1,1.831-1.934,1.519,1.519,0,0,1,1.641,1.582V94h1.274V89.034a1.774,1.774,0,0,1,1.809-1.868,1.554,1.554,0,0,1,1.663,1.736V94h1.274V88.609a2.413,2.413,0,0,0-2.571-2.578,2.662,2.662,0,0,0-2.483,1.494h-.029a2.211,2.211,0,0,0-2.212-1.494,2.357,2.357,0,0,0-2.241,1.355h-.029V86.1h-1.2ZM128.7,92.967c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V91A2.051,2.051,0,0,1,128.7,92.967Zm-.271,1.106a2.814,2.814,0,0,0,2.542-1.443H131V94h1.208V88.58c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351h1.223a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,128.43,94.073ZM133.975,94h1.274V86.1h-1.274Zm.637-9.17a.806.806,0,1,0-.806-.806A.808.808,0,0,0,134.612,84.83ZM137.124,94H138.4V82.97h-1.274ZM3.442,112.967c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V111A2.051,2.051,0,0,1,3.442,112.967Zm-.271,1.106a2.814,2.814,0,0,0,2.542-1.443h.029V114H6.951v-5.42c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351H2.117a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,3.171,114.073Zm8.467,0a2.785,2.785,0,0,0,2.556-1.406h.022V114h1.216V102.97H14.158v4.417h-.029a2.754,2.754,0,0,0-2.52-1.355c-1.963,0-3.354,1.611-3.354,4.021S9.653,114.073,11.638,114.073Zm.227-6.907c1.37,0,2.3,1.172,2.3,2.886s-.93,2.886-2.3,2.886-2.307-1.135-2.307-2.886S10.481,107.167,11.865,107.167Zm8.364,6.907a2.785,2.785,0,0,0,2.556-1.406h.022V114h1.216V102.97H22.749v4.417H22.72a2.754,2.754,0,0,0-2.52-1.355c-1.963,0-3.354,1.611-3.354,4.021S18.245,114.073,20.229,114.073Zm.227-6.907c1.37,0,2.3,1.172,2.3,2.886s-.93,2.886-2.3,2.886-2.307-1.135-2.307-2.886S19.072,107.167,20.457,107.167ZM25.825,114H27.1v-4.885a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073v-1.252a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V106.1h-1.2Zm7.537-6.848a2.092,2.092,0,0,1,2.124,2.234H31.143A2.211,2.211,0,0,1,33.362,107.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V110.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.563-3.435c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H37.8c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C39.229,106.039,38.02,106.976,38.02,108.309Zm7.207,0c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H45.007c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C46.436,106.039,45.227,106.976,45.227,108.309Zm10.488-1.157a2.092,2.092,0,0,1,2.124,2.234H53.5A2.211,2.211,0,0,1,55.715,107.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V110.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm2.563-3.435c0,1.055.674,1.75,2.058,2.109l1.384.359c.9.234,1.23.527,1.23,1.084,0,.71-.674,1.157-1.75,1.157s-1.729-.432-1.86-1.238H60.154c.125,1.37,1.355,2.292,3.054,2.292,1.824,0,3.12-.952,3.12-2.3,0-1.15-.571-1.707-2.168-2.109l-1.2-.3c-.908-.227-1.333-.586-1.333-1.121,0-.688.652-1.15,1.626-1.15s1.611.461,1.692,1.2h1.223a2.605,2.605,0,0,0-2.871-2.256C61.582,106.039,60.374,106.976,60.374,108.309Zm8.167,7.573,1.1-3.362H68.284l-.732,3.362Zm9.148-2.915c-1,0-1.633-.476-1.633-1.208,0-.762.615-1.194,1.8-1.267l2.065-.132V111A2.051,2.051,0,0,1,77.688,112.967Zm-.271,1.106a2.814,2.814,0,0,0,2.542-1.443h.029V114H81.2v-5.42c0-1.553-1.2-2.549-3.069-2.549-1.655,0-2.952,1.018-2.988,2.351h1.223a1.636,1.636,0,0,1,1.75-1.216c1.165,0,1.809.542,1.809,1.523v.659l-2.212.132c-1.919.117-2.959.916-2.959,2.271A2.366,2.366,0,0,0,77.417,114.073ZM82.888,114h1.274v-4.585a2.021,2.021,0,0,1,2.08-2.249c1.245,0,1.846.7,1.846,1.992V114h1.274v-5.061a2.829,2.829,0,0,0-5.244-1.553h-.029V106.1h-1.2Zm11.162.073a2.785,2.785,0,0,0,2.556-1.406h.022V114h1.216V102.97H96.57v4.417h-.029a2.754,2.754,0,0,0-2.52-1.355c-1.963,0-3.354,1.611-3.354,4.021S92.065,114.073,94.05,114.073Zm.227-6.907c1.37,0,2.3,1.172,2.3,2.886s-.93,2.886-2.3,2.886-2.307-1.135-2.307-2.886S92.893,107.167,94.277,107.167ZM103.235,114h1.274v-4.9a1.834,1.834,0,0,1,1.831-1.934,1.519,1.519,0,0,1,1.641,1.582V114h1.274v-4.966a1.774,1.774,0,0,1,1.809-1.868,1.554,1.554,0,0,1,1.663,1.736V114H114v-5.391a2.413,2.413,0,0,0-2.571-2.578,2.662,2.662,0,0,0-2.483,1.494h-.029a2.211,2.211,0,0,0-2.212-1.494,2.357,2.357,0,0,0-2.241,1.355h-.029V106.1h-1.2Zm15.71.073c2.219,0,3.64-1.575,3.64-4.021s-1.421-4.021-3.64-4.021-3.64,1.567-3.64,4.021S116.726,114.073,118.945,114.073Zm0-1.135c-1.465,0-2.344-1.077-2.344-2.886s.872-2.886,2.344-2.886,2.344,1.069,2.344,2.886S120.417,112.938,118.945,112.938Zm4.98,1.062H125.2v-4.885a1.685,1.685,0,0,1,1.7-1.86,2.656,2.656,0,0,1,.7.073v-1.252a2.879,2.879,0,0,0-.527-.044,1.905,1.905,0,0,0-1.912,1.355h-.029V106.1h-1.2Zm7.537-6.848a2.092,2.092,0,0,1,2.124,2.234h-4.343A2.211,2.211,0,0,1,131.462,107.152Zm2.095,4.592a1.933,1.933,0,0,1-1.985,1.208,2.26,2.26,0,0,1-2.329-2.476V110.4h5.669v-.5c0-2.388-1.318-3.875-3.428-3.875-2.153,0-3.56,1.6-3.56,4.05s1.4,3.992,3.618,3.992a3.109,3.109,0,0,0,3.274-2.329Zm3.171-8.313.088,7.061h1.143l.088-7.061Zm.659,10.642a.835.835,0,1,0-.835-.835A.821.821,0,0,0,137.388,114.073Z" transform="translate(45 282)"/>
+    </g>
+  </g>
+</svg>

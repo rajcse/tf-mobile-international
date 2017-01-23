@@ -13,7 +13,8 @@ class CarouselCard extends Component {
 			current: 0,
 			end: this.props.cards.length - 1,
 			carouselType: this.props.carouselType || 'card', // or board
-			enableTouch: this.props.enableTouch || false
+			enableTouch: this.props.enableTouch || false,
+			isActive: false
 		};
 
 		this.renderList = this.renderList.bind(this);
@@ -25,6 +26,41 @@ class CarouselCard extends Component {
 		this.previousSlide = this.previousSlide.bind(this);
 		this.swipedLeft = this.swipedLeft.bind(this);
 		this.swipedRight = this.swipedRight.bind(this);
+	}
+
+	/**
+	 * Delay displaying board to add animation
+	 */
+	componentWillMount() {
+		setTimeout(
+			this.setState({
+				'isActive': true
+			})
+		, 750);
+		
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		/**
+		 * Trigger rerender
+		 */
+		if (nextState.current !== this.state.current) {
+			this.setState({
+				'isActive': false
+			});
+
+			setTimeout(
+				this.setState({
+					'isActive': true
+				})
+			, 750);
+		}
+	}
+
+	componentWillUnmount() {
+		this.setState({
+			'isActive': false
+		});
 	}
 
 	/**
@@ -61,7 +97,8 @@ class CarouselCard extends Component {
 	nextSlide() {
 		if (this.state.current !== this.state.end) {
 			this.setState({
-				current: this.state.current + 1
+				current: this.state.current + 1,
+				isActive: false
 			});
 		}
 	}
@@ -69,7 +106,8 @@ class CarouselCard extends Component {
 	previousSlide() {
 		if (this.state.current !== 0) {
 			this.setState({
-				current: this.state.current -1
+				current: this.state.current -1,
+				isActive: false
 			});
 		}
 	}
@@ -116,37 +154,44 @@ class CarouselCard extends Component {
 			left: this.state.left
 		};
 
+		let board;
+
 		return _.map(this.props.cards, (card, key) => {
-			return (<div
-				className={ key === this.state.current ? 'active board' : 'board' }
-				key={key}
-				style={style}>
-				<div className="board-title">
-					{ card.sub_title ?
-						<h3>{card.sub_title}</h3>
+			if (key === this.state.current) {
+				board = (<div className={ this.state.isActive ? 'active board' : 'board' }
+					key={key}
+					style={style}>
+					<div className="board-title">
+						{ card.sub_title ?
+							<h3>{card.sub_title}</h3>
+						: null }
+
+						{ card.image ?
+							<div className="image-container">
+								<Svg svg={card.image} />
+							</div>
+						: null }
+
+						<Svg svg={card.icon} />
+
+						{ card.title ?
+							<h3>{card.title}</h3>
+						: null }
+					</div>
+
+					<p>{card.content}</p>
+
+					{card.content2 && <p>{card.content2}</p>}
+					
+					{ key === this.state.end ?
+						<button className="btn btn-upgrade" onClick={this.props.onComplete}>
+							{this.props.onCompleteText}
+						</button>
 					: null }
+				</div>);
 
-					{ card.image ?
-						<div className="image-container">
-							<Svg svg={card.image}/>
-						</div>
-					: null }
-
-					<Svg svg={card.icon}/>
-
-					{ card.title ?
-						<h3>{card.title}</h3>
-					: null }
-				</div>
-
-				<p>{card.content}</p>
-
-				{ key === this.state.end ?
-					<button className="btn btn-upgrade" onClick={this.props.onComplete}>
-						{this.props.onCompleteText}
-					</button>
-				: null }
-			</div>);
+				return board;
+			}
 		});
 	}
 
