@@ -39,7 +39,7 @@ class CarouselCard extends Component {
 				'isActive': true
 			})
 		, 750);
-		
+
 	}
 
 	componentWillUpdate(nextProps, nextState) {
@@ -170,17 +170,12 @@ class CarouselCard extends Component {
 	}
 
 	renderBoard() {
-		const style = {
-			left: this.state.left
-		};
-
 		let board;
 
 		return _.map(this.props.cards, (card, key) => {
 			if (key === this.state.current) {
 				board = (<div className={ this.state.isActive ? 'active board' : 'board' }
-					key={key}
-					style={style}>
+					key={key}>
 					<div className="board-title">
 						{ card.sub_title ?
 							<h3>{card.sub_title}</h3>
@@ -202,7 +197,7 @@ class CarouselCard extends Component {
 					<p>{card.content}</p>
 
 					{card.content2 && <p>{card.content2}</p>}
-					
+
 					{ key === this.state.end ?
 						<button className="btn btn-upgrade" onClick={this.props.onComplete}>
 							{this.props.onCompleteText}
@@ -218,6 +213,10 @@ class CarouselCard extends Component {
 	render() {
 		const id = `${this.state.carouselType}-container`;
 
+		const style = {
+			left: this.state.left
+		};
+
 		return (
 			<div id={id} className={this.props.classNames}>
 				{/* Touch Controls */}
@@ -229,7 +228,7 @@ class CarouselCard extends Component {
 
 					{/* Render Cards */}
 					{ this.state.carouselType === 'board' ?
-						<div className="content">
+						<div className="content" style={style}>
 							<div className="holder">
 								{this.renderBoard()}
 							</div>
