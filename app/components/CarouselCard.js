@@ -26,6 +26,8 @@ class CarouselCard extends Component {
 		this.previousSlide = this.previousSlide.bind(this);
 		this.swipedLeft = this.swipedLeft.bind(this);
 		this.swipedRight = this.swipedRight.bind(this);
+		this.swipingLeft = this.swipingLeft.bind(this);
+		this.swipingRight = this.swipingRight.bind(this);
 	}
 
 	/**
@@ -83,12 +85,30 @@ class CarouselCard extends Component {
 		if (this.state.enableTouch) {
 			this.nextSlide();
 		}
+		this.setState({
+			left: '0'
+		});
 	}
 
 	swipedRight() {
 		if (this.state.enableTouch) {
 			this.previousSlide();
 		}
+		this.setState({
+			left: '0'
+		});
+	}
+
+	swipingLeft(e, left) {
+		this.setState({
+			left: `-${left}px`
+		});
+	}
+
+	swipingRight(e, right) {
+		this.setState({
+			left: `${right}px`
+		});
 	}
 
 	/**
@@ -203,6 +223,8 @@ class CarouselCard extends Component {
 				{/* Touch Controls */}
 				<Swipeable
 					onSwipedLeft={this.swipedLeft}
+					onSwipingLeft={this.swipingLeft}
+					onSwipingRight={this.swipingRight}
 					onSwipedRight={this.swipedRight} >
 
 					{/* Render Cards */}

@@ -7,13 +7,12 @@ class Onboarding extends Component {
 	constructor(props) {
 		super(props);
 
-		// This is default content and should be changed!
 		this.state = {
 			message2: '',
 			cards: [{
 				title: 'Congratulations',
 				sub_title: null,
-				content: 'Your account has been successfully created and you now have acces to one of the most powerful people search apps available.',
+				content: 'Your account has been successfully created and you now have access to one of the most powerful people search apps available.',
 				content2: 'There are a few things you should know when using the TruthFinder app. Swipe through the next screens to learn more.',
 				icon: 'noticeCheck',
 				image: null
@@ -44,7 +43,7 @@ class Onboarding extends Component {
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'PREMIUM Reports cost us money to do additional searches on a aperson. We will ask for your confirmation per upgrade.',
+				content: 'Premium Reports are our most comprehensive reports available.  For a small fee, you can upgrade any report and gain additional insight into the person you’re investigating.',
 				icon: 'navAccount',
 				image: 'premiumReport2'
 			}, {
