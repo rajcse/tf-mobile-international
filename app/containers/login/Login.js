@@ -83,6 +83,7 @@ export default class Login extends Component {
 					this.state.isVisible ? null :
 					<Carousel items={this.state.onboarding} />
 				}
+
 				<div className="fullscreen-bg">
 					<video
 						loop
@@ -96,6 +97,7 @@ export default class Login extends Component {
 						<source src="/video/559533633.ogv" type="video/ogg" />
 					</video>
 				</div>
+
 				{
 					this.state.isVisible ? null : <div className="login-actions">
 						<button

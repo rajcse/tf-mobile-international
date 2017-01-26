@@ -87,6 +87,21 @@ export default class Register extends Component {
 		return (
 			<div id="register">
 				<Svg svg="tfLogoWhite" />
+				
+				<div className="fullscreen-bg">
+					<video
+						loop
+						muted
+						autoPlay
+						poster="/img/pexels-photo-297755.jpeg"
+						className="fullscreen-bg__video"
+					>
+						<source src="/video/559533633.webm" type="video/webm" />
+						<source src="/video/559533633.mp4" type="video/mp4" />
+						<source src="/video/559533633.ogv" type="video/ogg" />
+					</video>
+				</div>
+
 				<form onSubmit={this.doRegister} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
 					<Transition transitionName="register-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
 						{this.state.registerErrors ? <p className="error-message">{this.state.registerErrors}</p> : null}
@@ -137,7 +152,7 @@ export default class Register extends Component {
 					{this.state.registering ? <Loader /> : null}
 				</form>
 				<p id="already-a-member">
-					<Link to="/">Already a member? Log in here!</Link>
+					Already have an account? <Link to="/">Log In Here</Link>
 				</p>
 			</div>
 		);
