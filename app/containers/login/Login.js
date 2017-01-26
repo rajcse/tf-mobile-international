@@ -11,19 +11,23 @@ export default class Login extends Component {
 		super(props);
 
 		this.state = {
-			email : '',
+			email: '',
 			password: '',
 			isVisible: false,
-			onboarding: [{
-				title: 'Unlimited Search',
-				content: 'Search People, Phone Numbers, and Email Addresses'
-			}, {
-				title: 'Simple Design',
-				content: 'This app makes searching and navigation effortless.'
-			}, {
-				title: 'Brace Yourself',
-				content: 'Uncover pictures, criminal records, social profiles, and more!'
-			}]
+			onboarding: [
+				{
+					title: 'Unlimited Search',
+					content: 'Search People, Phone Numbers, and Email Addresses'
+				},
+				{
+					title: 'Simple Design',
+					content: 'This app makes searching and navigation effortless.'
+				},
+				{
+					title: 'Brace Yourself',
+					content: 'Uncover pictures, criminal records, social profiles, and more!'
+				}
+			]
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -34,7 +38,7 @@ export default class Login extends Component {
 
 	componentDidMount() {
 		// Handle some app status bar style changes
-		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+		if (window.StatusBar && window.device && window.device.platform === 'iOS') {
 			window.StatusBar.backgroundColorByHexString('#57BF93');
 			window.StatusBar.styleLightContent();
 		}
@@ -42,16 +46,14 @@ export default class Login extends Component {
 
 	componentWillUnmount() {
 		// Set the status bar back to normal
-		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
+		if (window.StatusBar && window.device && window.device.platform === 'iOS') {
 			window.StatusBar.backgroundColorByHexString('#ffffff');
 			window.StatusBar.styleDefault();
 		}
 	}
 
 	toggleLogin() {
-		this.setState({
-			isVisible: !this.state.isVisible
-		});
+		this.setState({ isVisible: !this.state.isVisible });
 	}
 
 	handleSubmit(e) {
@@ -77,64 +79,87 @@ export default class Login extends Component {
 		return (
 			<div id="login">
 				<Svg svg="tfLogoWhite" />
-
-				<Carousel
-					items={this.state.onboarding}
-				/>
-
+				{
+					this.state.isVisible ? null :
+					<Carousel items={this.state.onboarding} />
+				}
 				<div className="fullscreen-bg">
-					<video loop muted autoPlay poster="/img/pexels-photo-297755.jpeg" className="fullscreen-bg__video">
+					<video
+						loop
+						muted
+						autoPlay
+						poster="/img/pexels-photo-297755.jpeg"
+						className="fullscreen-bg__video"
+					>
 						<source src="/video/559533633.webm" type="video/webm" />
 						<source src="/video/559533633.mp4" type="video/mp4" />
 						<source src="/video/559533633.ogv" type="video/ogg" />
 					</video>
 				</div>
-
-
-				{ this.state.isVisible ? null
-					: <div className="login-actions">
-						<button className="btn btn-primary">
-							<Link to="/register" >Create a free account</Link>
+				{
+					this.state.isVisible ? null : <div className="login-actions">
+						<button
+							type="button"
+							onClick={() => this.toggleLogin()}
+							className="btn btn-default"
+						>
+							Log In
 						</button>
-						<button type="button" onClick={() => this.toggleLogin()} className="btn btn-default">Log In</button>
+						<button className="btn btn-primary">
+							<Link to="/register">Sign Up Free</Link>
+						</button>
 					</div>
 				}
-
-				{ this.state.isVisible ?
-					<div id="login-form">
-						<form onSubmit={this.doLogin} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
-							<Transition transitionName="login-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-								{this.props.loginErrors ? <p className="error-message">{this.props.loginErrors}</p> : null}
+				{
+					this.state.isVisible ? <div id="login-form">
+						<form
+							onSubmit={this.handleSubmit}
+							onBlur={this.focusOnForm}
+							onFocus={this.focusOnForm}
+							className="input-fields"
+						>
+							<Transition
+								transitionName="login-error"
+								transitionEnterTimeout={300}
+								transitionLeaveTimeout={300}
+							>
+								{
+									this.props.loginErrors ? <p className="error-message">
+										{this.props.loginErrors}
+									</p> : null
+								}
 							</Transition>
-
-							<label>Log In</label>
-
+							<label>Please Log In</label>
 							<input
 								type="email"
 								placeholder="Email Address"
 								defaultValue={this.state.email}
 								name="email"
 								disabled={this.props.loggingIn}
-								onChange={this.handleChange} />
-
+								onChange={this.handleChange}
+							/>
 							<input
 								type="password"
 								placeholder="Password"
 								defaultValue={this.state.password}
 								name="password"
 								disabled={this.props.loggingIn}
-								onChange={this.handleChange} />
-
-							<button className="login-btn" disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
+								onChange={this.handleChange}
+							/>
+							<button
+								className="login-btn"
+								disabled={this.props.loggingIn}
+								type="submit"
+							>
 								{this.props.loggingIn ? 'Logging In...' : 'Log In'}
 							</button>
 							{this.props.loggingIn ? <Loader /> : null}
 						</form>
 						<p id="not-a-member">
-							<Link to="/register">Create a new account!</Link>
+							Don't have an account? <Link to="/register">Sign up here</Link>
 						</p>
-					</div>
-				: null }
+					</div> : null
+				}
 			</div>
 		);
 	}
