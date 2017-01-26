@@ -3,6 +3,7 @@
     <style>
       .cls-1 {
         fill: #545454;
+        height: 35px;
       }
     </style>
   </defs>

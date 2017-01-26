@@ -207,6 +207,8 @@ class CarouselCard extends Component {
 						<div className="image-container">
 							{ card.image && <Svg svg={card.image} /> }
 						</div>
+						{ !card.sub_title &&
+							<h3 className="empty"></h3> }
 
 						<Svg svg={card.icon} />
 
