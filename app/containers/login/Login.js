@@ -4,6 +4,7 @@ import Transition from 'components/Transition';
 import viewActions from 'actions/viewActions';
 import Loader from 'components/Loader';
 import Svg from 'components/svg/Svg';
+import Carousel from 'components/Carousel';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -11,13 +12,24 @@ export default class Login extends Component {
 
 		this.state = {
 			email : '',
-			password: ''
+			password: '',
+			isVisible: false,
+			onboarding: [{
+				title: 'Unlimited Search',
+				content: 'Search People, Phone Numbers, and Email Addresses'
+			}, {
+				title: 'Simple Design',
+				content: 'This app makes searching and navigation effortless.'
+			}, {
+				title: 'Brace Yourself',
+				content: 'Uncover pictures, criminal records, social profiles, and more!'
+			}]
 		};
 
-		this.doLogin = this.doLogin.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggleLogin = this.toggleLogin.bind(this);
 		this.focusOnForm = this.focusOnForm.bind(this);
-		this.blurOnForm = this.blurOnForm.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,7 +48,13 @@ export default class Login extends Component {
 		}
 	}
 
-	doLogin(e) {
+	toggleLogin() {
+		this.setState({
+			isVisible: !this.state.isVisible
+		});
+	}
+
+	handleSubmit(e) {
 		e.preventDefault();
 
 		viewActions.login({
@@ -52,48 +70,71 @@ export default class Login extends Component {
 	}
 
 	focusOnForm() {
-		document.querySelector('#login object').classList.add('focused');
-	}
-
-	blurOnForm() {
-		document.querySelector('#login object').classList.remove('focused');
+		document.querySelector('#login object').classList.toggle('focused');
 	}
 
 	render() {
 		return (
 			<div id="login">
 				<Svg svg="tfLogoWhite" />
-				<form onSubmit={this.doLogin} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
-					<Transition transitionName="login-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-						{this.props.loginErrors ? <p className="error-message">{this.props.loginErrors}</p> : null}
-					</Transition>
 
-					<label>Log In</label>
+				<Carousel
+					items={this.state.onboarding}
+				/>
 
-					<input
-						type="email"
-						placeholder="Email Address"
-						defaultValue={this.state.email}
-						name="email"
-						disabled={this.props.loggingIn}
-						onChange={this.handleChange} />
+				<div className="fullscreen-bg">
+					<video loop muted autoPlay poster="/img/pexels-photo-297755.jpeg" className="fullscreen-bg__video">
+						<source src="/video/559533633.webm" type="video/webm" />
+						<source src="/video/559533633.mp4" type="video/mp4" />
+						<source src="/video/559533633.ogv" type="video/ogg" />
+					</video>
+				</div>
 
-					<input
-						type="password"
-						placeholder="Password"
-						defaultValue={this.state.password}
-						name="password"
-						disabled={this.props.loggingIn}
-						onChange={this.handleChange} />
 
-					<button className="login-btn" disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
-						{this.props.loggingIn ? 'Logging In...' : 'Log In'}
-					</button>
-					{this.props.loggingIn ? <Loader /> : null}
-				</form>
-				<p id="not-a-member">
-					<Link to="/register">Create a new account!</Link>
-				</p>
+				{ this.state.isVisible ? null
+					: <div className="login-actions">
+						<button className="btn btn-primary">
+							<Link to="/register" >Create a free account</Link>
+						</button>
+						<button type="button" onClick={() => this.toggleLogin()} className="btn btn-default">Log In</button>
+					</div>
+				}
+
+				{ this.state.isVisible ?
+					<div id="login-form">
+						<form onSubmit={this.doLogin} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
+							<Transition transitionName="login-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+								{this.props.loginErrors ? <p className="error-message">{this.props.loginErrors}</p> : null}
+							</Transition>
+
+							<label>Log In</label>
+
+							<input
+								type="email"
+								placeholder="Email Address"
+								defaultValue={this.state.email}
+								name="email"
+								disabled={this.props.loggingIn}
+								onChange={this.handleChange} />
+
+							<input
+								type="password"
+								placeholder="Password"
+								defaultValue={this.state.password}
+								name="password"
+								disabled={this.props.loggingIn}
+								onChange={this.handleChange} />
+
+							<button className="login-btn" disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
+								{this.props.loggingIn ? 'Logging In...' : 'Log In'}
+							</button>
+							{this.props.loggingIn ? <Loader /> : null}
+						</form>
+						<p id="not-a-member">
+							<Link to="/register">Create a new account!</Link>
+						</p>
+					</div>
+				: null }
 			</div>
 		);
 	}
