@@ -174,7 +174,7 @@ export default class PubRecApp extends React.Component {
 				}
 
 				{ // Welcome modal that has a message set by Remote Config
-					this.state.welcomeModal &&
+					//this.state.welcomeModal &&
 						<Onboarding />
 				}
 
