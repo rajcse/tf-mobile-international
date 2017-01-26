@@ -7,6 +7,11 @@
 	z-index: 99999;
 	overflow-y: scroll;
 
+	// p {
+	//     font-size: 15px;
+	//     line-height: 1.2;
+	// }
+
 	.wrapper {
 		position: relative;
 		width: 100%;
@@ -14,9 +19,9 @@
 		text-align: center;
 		color: @brand-white;
 		background: @brand-green;
-		background: -moz-linear-gradient(left,  @brand-green 0%, darken(@brand-green, 15%) 100%);
-		background: -webkit-linear-gradient(left,  @brand-green 0%,darken(@brand-green, 15%) 100%);
-		background: linear-gradient(to right,  @brand-green 0%,darken(@brand-green, 15%) 100%);
+		// background: -moz-linear-gradient(left,  @brand-green 0%, darken(@brand-green, 15%) 100%);
+		// background: -webkit-linear-gradient(left,  @brand-green 0%,darken(@brand-green, 15%) 100%);
+		// background: linear-gradient(to right,  @brand-green 0%,darken(@brand-green, 15%) 100%);
 
 		object {
 			svg {
@@ -40,8 +45,8 @@
 
 		.content {
 			position: absolute;
-		  top: 50%;
-		  transform: translateY(-50%);
+			top: 0;
+			// transform: translateY(-50%);
 			box-sizing: border-box;
 			width: 100%;
 			padding: 1em;
@@ -59,16 +64,27 @@
 				color: @brand-white;
 				position: absolute;
 				opacity: 0;
-				top: -1em;
-				left: 0;
-				right: 0;
+				top: 0;
+				left: auto;
+				right: auto;
 				margin: 0 auto;
 				transition: all .175s ease-in;
 
+				&.left {
+					right: -30em;
+					left: auto!important;
+				}
+
+				&.right {
+					left: -30em;
+					right: auto!important;
+				}
+
 				&.active {
 					opacity: 1;
-					top: 0;
-					transition: all .75s ease-in;
+					left: 0;
+					right: 0;
+					transition: all .5s ease-in;
 					position: relative;
 				}
 
@@ -89,7 +105,7 @@
 						> object {
 							svg {
 								max-width: 290px;
-								max-height: 290px;
+								max-height: 330px;
 								width: 100%;
 							}
 						}
@@ -122,6 +138,7 @@
 				bottom: 1em;
 				left: 0;
 				right: 0;
+				bottom: 0;
 
 				> span {
 					width: 6px;

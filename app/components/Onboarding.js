@@ -43,8 +43,7 @@ class Onboarding extends Component {
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'Premium Reports are our most comprehensive reports available, and requires us to dig deeper for added information. \
-				For a small fee, you can upgrade any report and gain additional insight into the person you’re investigating.',
+				content: 'Premium Reports are our most comprehensive reports available. For a small fee, you can upgrade any report and gain additional insight into the person you’re investigating.',
 				icon: 'person',
 				image: 'premiumReport'
 			}, {

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Svg from 'components/svg/Svg';
 import Swipeable from 'react-swipeable';
+import classNames from 'classnames';
 import _ from 'lodash';
 
 class CarouselCard extends Component {
@@ -9,12 +10,14 @@ class CarouselCard extends Component {
 
 		this.state = {
 			left: 0,
+			right: 0,
 			cards: this.props.cards,
 			current: 0,
 			end: this.props.cards.length - 1,
 			carouselType: this.props.carouselType || 'card', // or board
 			enableTouch: this.props.enableTouch || false,
-			isActive: false
+			isActive: false,
+			swipingDirection: 'left'
 		};
 
 		this.renderList = this.renderList.bind(this);
@@ -43,6 +46,20 @@ class CarouselCard extends Component {
 	}
 
 	componentWillUpdate(nextProps, nextState) {
+		/**
+		 * Faux Swipe Direction
+		 * This manipulates the boards movement to swipe in from the far right side rather than the default
+		 **/
+		if (nextState.current < this.state.current) {
+			this.setState({
+				swipingDirection: 'right'
+			});
+		} else if (nextState.current > this.state.current){
+			this.setState({
+				swipingDirection: 'left'
+			});
+		}
+
 		/**
 		 * Trigger rerender
 		 */
@@ -101,13 +118,15 @@ class CarouselCard extends Component {
 
 	swipingLeft(e, left) {
 		this.setState({
-			left: `-${left}px`
+			left: `-${left}px`,
+			right: 'auto'
 		});
 	}
 
 	swipingRight(e, right) {
 		this.setState({
-			left: `${right}px`
+			right: `-${right}px`,
+			left: 'auto'
 		});
 	}
 
@@ -171,10 +190,14 @@ class CarouselCard extends Component {
 
 	renderBoard() {
 		let board;
+		let classes =  classNames('board', 
+			this.state.isActive ? 'active' : '', 
+			this.state.swipingDirection
+		);
 
 		return _.map(this.props.cards, (card, key) => {
 			if (key === this.state.current) {
-				board = (<div className={ this.state.isActive ? 'active board' : 'board' }
+				board = (<div className={classes}
 					key={key}>
 					<div className="board-title">
 						{ card.sub_title ?
@@ -214,7 +237,8 @@ class CarouselCard extends Component {
 		const id = `${this.state.carouselType}-container`;
 
 		const style = {
-			left: this.state.left
+			left: this.state.left,
+			right: this.state.right
 		};
 
 		return (
@@ -222,9 +246,9 @@ class CarouselCard extends Component {
 				{/* Touch Controls */}
 				<Swipeable
 					onSwipedLeft={this.swipedLeft}
+					onSwipedRight={this.swipedRight}
 					onSwipingLeft={this.swipingLeft}
-					onSwipingRight={this.swipingRight}
-					onSwipedRight={this.swipedRight} >
+					onSwipingRight={this.swipingRight} >
 
 					{/* Render Cards */}
 					{ this.state.carouselType === 'board' ?
