@@ -37,13 +37,13 @@ class Onboarding extends Component {
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'PRO Reports contain all of the information we currently have access to for the person.',
+				content: 'PRO Reports contain all of the information we currently have access to, for the person.',
 				icon: 'person',
 				image: 'fullReport'
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'Premium Reports are our most comprehensive reports available. Upgrade any report and gain additional insight into the person you’re investigating, for a small fee.',
+				content: 'PREMIUM Reports are our most comprehensive reports available. Upgrade any report and gain additional insight into the person you’re investigating, for a small fee.',
 				icon: 'person',
 				image: 'premiumReport'
 			}, {
