@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2703 -709 16 16">
+  <defs>
+    <style>
+      .cls-person {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_106" data-name="Group 106" transform="translate(721 516)">
+    <path id="path" class="cls-person" d="M450.2,988.5a14.793,14.793,0,0,1,5.3-1.1,15.237,15.237,0,0,1,5.3,1.1c1.9.7,2.7,1.7,2.7,2.9v2h-16v-2C447.5,990.2,448.4,989.3,450.2,988.5Z" transform="translate(1534.5 -2202.4)"/>
+    <circle id="ellipse-2" class="cls-person" cx="4" cy="4" r="4" transform="translate(1986 -1225)"/>
+  </g>
+</svg>

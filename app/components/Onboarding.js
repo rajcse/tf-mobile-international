@@ -19,13 +19,13 @@ class Onboarding extends Component {
 			}, {
 				title: null,
 				sub_title: null,
-				content: 'Start by searching for someone--It`s easy! Search by Person, Phone Number, and Email. Then select a Result.',
+				content: 'Start by searching for someone – It\'s easy! Search by Person, Phone Number, and Email. Then select a Result.',
 				icon: 'tfSearch',
 				image: 'searchPage'
 			}, {
 				title: null,
 				sub_title: null,
-				content: 'Your results appear in the Reports tab. We offer three types of person reports: Free, Full & Premium.',
+				content: 'Your results appear in the Reports tab. We offer three types of person reports: Free, Pro & Premium.',
 				icon: 'person',
 				image: 'reportsPage'
 			}, {
@@ -37,14 +37,13 @@ class Onboarding extends Component {
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'FULL Reports contain all of the information we currently have access to for the person.',
+				content: 'PRO Reports contain all of the information we currently have access to, for the person.',
 				icon: 'person',
 				image: 'fullReport'
 			}, {
 				title: null,
 				sub_title: 'Report Types',
-				content: 'Premium Reports are our most comprehensive reports available, and requires us to dig deeper for added information. \
-				For a small fee, you can upgrade any report and gain additional insight into the person you’re investigating.',
+				content: 'PREMIUM Reports are our most comprehensive reports available. Upgrade any report and gain additional insight into the person you’re investigating, for a small fee.',
 				icon: 'person',
 				image: 'premiumReport'
 			}, {
