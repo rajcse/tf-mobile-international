@@ -70,6 +70,7 @@ export default class PubRecApp extends React.Component {
 				this.setState({
 					premiumFlow: response
 				});
+				firebaseClient.setUserProperty('premium_prompt', response);
 			});
 	}
 
