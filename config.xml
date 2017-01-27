@@ -12,6 +12,7 @@
     <preference name="android-minSdkVersion" value="19" />
     <preference name="Orientation" value="portrait" />
     <preference name="deployment-target" value="8.0" />
+    <preference name="AllowInlineMediaPlayback" value="true"/>
     <plugin name="cordova-plugin-app-version" source="npm" spec="~0.1.9" />
     <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-device-motion" source="npm" spec="~1.2.0" />

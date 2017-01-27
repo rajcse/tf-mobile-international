@@ -42,6 +42,11 @@ export default class Login extends Component {
 			window.StatusBar.backgroundColorByHexString('#57BF93');
 			window.StatusBar.styleLightContent();
 		}
+
+		const video = document.getElementById('video');
+		video.addEventListener('click', () => {
+		  video.play();
+		}, false);
 	}
 
 	componentWillUnmount() {
@@ -86,15 +91,20 @@ export default class Login extends Component {
 
 				<div className="fullscreen-bg">
 					<video
+						id="video"
+						controls
+						preload="auto"
+						webkit-playsinline
 						loop
 						muted
 						autoPlay
-						poster="/img/pexels-photo-297755.jpeg"
+						poster="http://placehold.it/320x600"
 						className="fullscreen-bg__video"
 					>
-						<source src="/video/559533633.webm" type="video/webm" />
-						<source src="/video/559533633.mp4" type="video/mp4" />
-						<source src="/video/559533633.ogv" type="video/ogg" />
+						<source src={`${location.path}/559533633.webm`} type="video/webm" />
+						<source src="https://dl.dropboxusercontent.com/u/12648103/559533633.mp4" type="video/mp4" />
+						<source src="https://dl.dropboxusercontent.com/u/12648103/559533633.ogv" type="video/ogg" />
+						Your browser does not support the video tag.
 					</video>
 				</div>
 
