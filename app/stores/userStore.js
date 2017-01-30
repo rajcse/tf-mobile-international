@@ -165,7 +165,7 @@ dispatcher.register(action => {
 			_user = action.user;
 			_recordsViewed = userStore.checkRecordsViewed(action.user.id);
 			_userHasRated = window.localStorage.getItem(action.user.id + ':userHasRated') || false;
-			_userSeenTimedUpsell = window.localStorage.getItem(action.user.id + ':_userSeenTimedUpsell') || false;
+			_userSeenTimedUpsell = window.localStorage.getItem(action.user.id + ':userSeenTimedUpsell') || false;
 			userStore.emitChange();
 			break;
 
