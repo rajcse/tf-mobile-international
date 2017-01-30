@@ -721,8 +721,12 @@ class PubRecAPI {
 			});
 	}
 
-	fetchPremiumUpsellInfo(record) {
+	fetchPremiumUpsellInfo(record, timed = false) {
 		let accountInfo;
+
+		if(timed) {
+			setTimeout(() => serverActions.seenTimedUpsell(), 0);
+		}
 
 		this.fetchUser()
 			.then(user => {

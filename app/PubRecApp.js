@@ -54,6 +54,7 @@ export default class PubRecApp extends React.Component {
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModal(),
+			userSeenTimedUpsell: userStore.getUserSeenTimedUpsell(),
 			premiumFlow: ''
 		};
 

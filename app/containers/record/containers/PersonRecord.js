@@ -4,7 +4,7 @@ import Svg from 'components/svg/Svg';
 import moment from 'moment';
 import { RouteTransition } from 'react-router-transition';
 import Header from 'components/Header';
-
+import pubRecAPI from 'utils/PubRecAPI';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -46,6 +46,14 @@ class PersonRecord extends Component {
 
 		this.showPremiumUpsell = this.showPremiumUpsell.bind(this);
 		this.showStandardUpsell = this.showStandardUpsell.bind(this);
+	}
+
+	componentWillMount() {
+		if(this.props.appState.userHasRated 
+			&& !_.get(this.props.record.data, 'isPremium', false)
+			&& !this.props.appState.userSeenTimedUpsell) { 
+			setTimeout(pubRecAPI.fetchPremiumUpsellInfo(this.props.record, true), 3000);
+		}
 	}
 
 	showPremiumUpsell() {

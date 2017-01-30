@@ -38,6 +38,12 @@ export default {
 		});
 	},
 
+	seenTimedUpsell() {
+		dispatcher.dispatch({
+			actionType: constants.actions.SEEN_TIMED_UPSELL
+		});
+	},
+
 	confirmWelcome() {
 		dispatcher.dispatch({
 			actionType: constants.actions.CONFIRM_WELCOME
