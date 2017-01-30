@@ -725,7 +725,7 @@ class PubRecAPI {
 		let accountInfo;
 
 		if(timed) {
-			setTimeout(() => serverActions.seenTimedModal(), 0);
+			setTimeout(() => serverActions.seenTimedUpsell(), 0);
 		}
 
 		this.fetchUser()

@@ -260,7 +260,7 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
-		case constants.actions.SEEN_TIMED_MODAL:
+		case constants.actions.SEEN_TIMED_UPSELL:
 			_userSeenTimedUpsell = true;
 			window.localStorage.setItem(_user.id + ':userSeenTimedUpsell', 'true');
 			userStore.emitChange();

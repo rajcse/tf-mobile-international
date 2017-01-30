@@ -74,7 +74,7 @@ export default {
 		'DELETE_ACCOUNT',
 		'FETCH_SITE_CONFIG',
 		'TRIGGER_EVENT',
-		'SEEN_TIMED_MODAL'
+		'SEEN_TIMED_UPSELL'
 	]),
 
 	// These must match what usage-service is expecting
