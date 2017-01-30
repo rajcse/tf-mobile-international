@@ -14,6 +14,7 @@ let _user = null,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
 	_standardUpsell = null,
+	_timedUpsell = false,
 	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
@@ -36,6 +37,10 @@ class UserStore extends EventEmitter {
 
 	getrecordsViewed() {
 		return _recordsViewed;
+	}
+
+	getTimedUpsell() {
+		return _timedUpsell;
 	}
 
 	checkRecordsViewed(userId) {
@@ -251,6 +256,11 @@ dispatcher.register(action => {
 		case constants.actions.MARK_USER_AS_RATED:
 			_userHasRated = true;
 			window.localStorage.setItem(_user.id + ':userHasRated', 'true');
+			userStore.emitChange();
+			break;
+
+		case constants.actions.SEEN_TIMED_MODAL:
+			_timedUpsell = true;
 			userStore.emitChange();
 			break;
 

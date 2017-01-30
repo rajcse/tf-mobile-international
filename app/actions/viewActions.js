@@ -38,6 +38,12 @@ export default {
 		});
 	},
 
+	seenTimedModal() {
+		dispatcher.dispatch({
+			actionType: constants.actions.SEEN_TIMED_MODAL
+		});
+	},
+
 	confirmWelcome() {
 		dispatcher.dispatch({
 			actionType: constants.actions.CONFIRM_WELCOME

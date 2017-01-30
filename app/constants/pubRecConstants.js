@@ -73,7 +73,8 @@ export default {
 		'SHOW_WELCOME_MODAL',
 		'DELETE_ACCOUNT',
 		'FETCH_SITE_CONFIG',
-		'TRIGGER_EVENT'
+		'TRIGGER_EVENT',
+		'SEEN_TIMED_MODAL'
 	]),
 
 	// These must match what usage-service is expecting
