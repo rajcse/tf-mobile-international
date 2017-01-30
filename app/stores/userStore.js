@@ -14,7 +14,7 @@ let _user = null,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
 	_standardUpsell = null,
-	_timedUpsell = false,
+	_userSeenTimedUpsell = false,
 	_crossSell = null,
 	_userHasRated = false,
 	_recordsViewed = 0,
@@ -39,8 +39,8 @@ class UserStore extends EventEmitter {
 		return _recordsViewed;
 	}
 
-	getTimedUpsell() {
-		return _timedUpsell;
+	getUserSeenTimedUpsell() {
+		return _userSeenTimedUpsell;
 	}
 
 	checkRecordsViewed(userId) {
@@ -165,6 +165,7 @@ dispatcher.register(action => {
 			_user = action.user;
 			_recordsViewed = userStore.checkRecordsViewed(action.user.id);
 			_userHasRated = window.localStorage.getItem(action.user.id + ':userHasRated') || false;
+			_userSeenTimedUpsell = window.localStorage.getItem(action.user.id + ':_userSeenTimedUpsell') || false;
 			userStore.emitChange();
 			break;
 
@@ -260,7 +261,8 @@ dispatcher.register(action => {
 			break;
 
 		case constants.actions.SEEN_TIMED_MODAL:
-			_timedUpsell = true;
+			_userSeenTimedUpsell = true;
+			window.localStorage.setItem(_user.id + ':userSeenTimedUpsell', 'true');
 			userStore.emitChange();
 			break;
 
@@ -294,6 +296,7 @@ dispatcher.register(action => {
 			_registerErrors = null;
 			_purchaseErrors = null;
 			_userHasRated = false;
+			_userSeenTimedUpsell = false;
 			_welcomeModal = false;
 			_notifications = [];
 			userStore.emitChange();
