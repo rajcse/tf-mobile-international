@@ -38,9 +38,9 @@ export default {
 		});
 	},
 
-	seenTimedModal() {
+	seenTimedUpsell() {
 		dispatcher.dispatch({
-			actionType: constants.actions.SEEN_TIMED_MODAL
+			actionType: constants.actions.SEEN_TIMED_UPSELL
 		});
 	},
 
