@@ -195,6 +195,12 @@ export default {
 		// });
 	},
 
+	seenTimedUpsell() {
+		dispatcher.dispatch({
+			actionType: constants.actions.SEEN_TIMED_UPSELL
+		});
+	},
+
 	showWelcomeModal() {
 		dispatcher.dispatch({
 			actionType: constants.actions.SHOW_WELCOME_MODAL
