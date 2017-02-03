@@ -87,18 +87,17 @@ export default class Register extends Component {
 		return (
 			<div id="register">
 				<Svg svg="tfLogoWhite" />
-				
+
 				<div className="fullscreen-bg">
 					<video
 						loop
 						muted
 						autoPlay
-						poster="/img/pexels-photo-297755.jpeg"
+						poster="/img/city-background.png"
 						className="fullscreen-bg__video"
 					>
-						<source src="/video/559533633.webm" type="video/webm" />
-						<source src="/video/559533633.mp4" type="video/mp4" />
-						<source src="/video/559533633.ogv" type="video/ogg" />
+						<source src="/video/city-background.mp4" type="video/mp4" />
+						<source src="/video/city-background.ogv" type="video/ogg" />
 					</video>
 				</div>
 

@@ -98,12 +98,11 @@ export default class Login extends Component {
 						loop
 						muted
 						autoPlay
-						poster="http://placehold.it/320x600"
+						poster="/img/city-background.png"
 						className="fullscreen-bg__video"
 					>
-						<source src={`${location.path}/559533633.webm`} type="video/webm" />
-						<source src="https://dl.dropboxusercontent.com/u/12648103/559533633.mp4" type="video/mp4" />
-						<source src="https://dl.dropboxusercontent.com/u/12648103/559533633.ogv" type="video/ogg" />
+						<source src="https://dl.dropboxusercontent.com/u/12648103/city-background.mp4" type="video/mp4" />
+						<source src="https://dl.dropboxusercontent.com/u/12648103/shutterstock_v9455153.ogv" type="video/ogg" />
 						Your browser does not support the video tag.
 					</video>
 				</div>
