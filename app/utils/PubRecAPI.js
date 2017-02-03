@@ -4,6 +4,7 @@ import constants from 'constants/pubRecConstants';
 import serverActions from 'actions/serverActions';
 import appStoreClient from './appStoreClient';
 import firebaseClient from './firebaseClient';
+import phoneCallClient from './phoneCallClient';
 import config from 'config';
 
 const RECORD_CACHE_LIMIT = 25;
@@ -231,6 +232,9 @@ class PubRecAPI {
 					cb(false, error);
 				});
 		});
+
+		//start listening calls
+		phoneCallClient.listenIncomingCalls();
 	}
 
 	checkLocalUser() {
