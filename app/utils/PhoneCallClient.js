@@ -10,16 +10,20 @@ class PhoneCallClient {
 	}
 
 	init() {
-		window.phoneNumber = false;
+		
 	}
 
 	listenIncomingCalls() {
+		
 		// Cleanly return if PhoneCallTrap plugin is missing
 		if(!window.PhoneCallTrap) return;
 
+		//add an event listener to fire onResume when the app is resumed (get back into foreground)
 		document.addEventListener('resume', onResume, false);
 
 		function onResume() {
+
+			//if we still have the incomingcall variable in local storage go to search for the number
 			if(window.localStorage.getItem('incomingCall')) {
 				setTimeout(() => viewActions.goToSearch({type: 'phone', query: {phone: window.localStorage.getItem('incomingCall')}}), 0);
 			}
@@ -34,13 +38,7 @@ class PhoneCallClient {
 			switch (state) {
 				case 'RINGING':
 					console.log('Phone is ringing', callingNumber);
-					// window.phoneNumber = callingNumber;
 
-					//just test remve this aasp
-					//setTimeout(() => viewActions.goToSearch({type: 'phone', query: {phone: callingNumber}}), 0);
-
-					//unset phonenumber in 30 seconds -- TTL 30 sec
-					// setTimeout(() => window.phoneNumber = false, 30000);
 					window.localStorage.setItem('incomingCall', callingNumber);
 					
 					setTimeout(() => window.localStorage.setItem('incomingCall', false), 30000);
