@@ -752,7 +752,7 @@ class PubRecAPI {
 
 	fetchPremiumBundleInfo() {
 		let accountInfo;
-// console.log('asdasdas');
+
 		this.fetchUser()
 			.then(user => {
 				// Set the account info for down the line
@@ -880,7 +880,6 @@ class PubRecAPI {
 	fetchProductInfo(productType) {
 		return _makeRequest('/products/' + productType, {needsAuth: true})
 			.then(responseData => {
-				console.log(JSON.stringify(responseData.product));
 				return responseData.product;
 			})
 			.catch(error => {

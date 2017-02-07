@@ -283,6 +283,7 @@ dispatcher.register(action => {
 
 		case constants.actions.USED_PREMIUM_BUNDLE:
 			_premiumBundleUsed = true;
+			_premiumBundle = null;
 			window.localStorage.setItem(_user.id + ':premiumBundleUsed', 'true');
 			userStore.emitChange();
 			break;

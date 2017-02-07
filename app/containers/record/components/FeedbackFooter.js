@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import firebaseClient from 'utils/firebaseClient';
 
 class FeedbackFooter extends Component {
@@ -19,16 +19,15 @@ class FeedbackFooter extends Component {
 
 		this.props.showPremiumBundle();
 		
-		firebaseClient.logEvent('premium_response', {prompt_question: 'Did you like the premium report?', prompt_response: 'YES'});
+		firebaseClient.logEvent('premium_response', {prompt_question: 'like the premium report', prompt_response: 'YES'});
 
-	};
-
+	}
 
 	removeFooter() {
 		this.setState({visible: false});
 
-		firebaseClient.logEvent('premium_response', {prompt_question: 'Did you like the premium report?', prompt_response: 'NO'});
-	};
+		firebaseClient.logEvent('premium_response', {prompt_question: 'like the premium report', prompt_response: 'NO'});
+	}
 
 	render() {
 
@@ -46,11 +45,12 @@ class FeedbackFooter extends Component {
 					<button onClick={this.showPremiumBundle} className="btn btn-feedback yes">Yes</button>
 				</section>
 		);
-	};
+	}
 }
 
 export default FeedbackFooter;
 
 FeedbackFooter.propTypes = {
-	showPremiumBundle: React.PropTypes.func.isRequired
+	showPremiumBundle: React.PropTypes.func.isRequired,
+	record: React.PropTypes.object
 };

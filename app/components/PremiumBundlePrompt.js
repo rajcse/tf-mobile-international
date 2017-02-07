@@ -70,10 +70,12 @@ class PremiumBundlePrompt extends Component {
 
 				{/* Upgrading Modal */}
 				{ this.state.upgradingModal ?
-					<div className="modal modal-transparent">
-						<Loader />
-						<h3>Purchasing credits</h3>
-						<p>Please wait...</p>
+					<div className="funnel">
+						<div className="content">
+							<Loader />
+							<h3>Purchasing credits</h3>
+							<p>Please wait...</p>
+						</div>
 					</div>
 				: null }
 			</div>
@@ -84,5 +86,5 @@ class PremiumBundlePrompt extends Component {
 export default PremiumBundlePrompt;
 
 PremiumBundlePrompt.propTypes = {
-	premiumUpsell: PropTypes.object
+	premiumBundle: PropTypes.object
 };

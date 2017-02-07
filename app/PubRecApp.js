@@ -107,7 +107,9 @@ export default class PubRecApp extends React.Component {
 			purchaseErrors: userStore.getPurchaseErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
-			welcomeModal: userStore.getWelcomeModal()
+			welcomeModal: userStore.getWelcomeModal(),
+			userSeenTimedUpsell: userStore.getUserSeenTimedUpsell(),
+			premiumBundleUsed: userStore.getPremiumBundleUsed()
 		});
 	}
 
@@ -128,7 +130,7 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.premiumBundle && !this.state.purchaseErrors && 
+				{ this.state.premiumBundle && !this.state.purchaseErrors && !this.state.premiumBundleUsed &&
 					<PremiumBundlePrompt
 						premiumBundle={this.state.premiumBundle}
 					/>
