@@ -12,7 +12,6 @@ class PremiumBundlePrompt extends Component {
 			upgradingModal: false
 		};
 
-		// this.continueToConfirmation = this.continueToConfirmation.bind(this);
 		this.confirmPurchaseAndUpgrade = this.confirmPurchaseAndUpgrade.bind(this);
 		this.cancelPremiumBundle = this.cancelPremiumBundle.bind(this);
 	}

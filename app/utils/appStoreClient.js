@@ -49,6 +49,14 @@ class AppStoreClient {
 			p.finish();
 		});
 
+		window.store.when(constants.productTypes.PREMIUM_REPORT_BUNDLE).approved(p => {
+			p.verify();
+		});
+
+		window.store.when(constants.productTypes.PREMIUM_REPORT_BUNDLE).verified(p => {
+			p.finish();
+		});
+
 		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).approved(p => {
 		// 	p.verify();
 		// });
