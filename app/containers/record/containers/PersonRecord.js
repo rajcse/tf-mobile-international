@@ -61,10 +61,6 @@ class PersonRecord extends Component {
 		viewActions.showPremiumUpsell(this.props.record);
 	}
 
-	showPremiumBundle() {
-		viewActions.showPremiumBundle();
-	}
-
 	showStandardUpsell() {
 		viewActions.showStandardUpsell(this.props.record);
 		viewActions.showPremiumUpsell(this.props.record);
@@ -283,9 +279,8 @@ class PersonRecord extends Component {
 					}
 
 					{
-						isPremium && !this.props.appState.premiumBundleUsed &&
+						isPremium && this.props.appState.premiumBundleUsed &&
 						<FeedbackFooter
-							showPremiumBundle={this.showPremiumBundle}
 							record={record}
 						/>	
 					}

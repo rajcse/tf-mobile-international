@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import firebaseClient from 'utils/firebaseClient';
+import viewActions from 'actions/viewActions';
 
 class FeedbackFooter extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			visible: true
+			rated: false
 		};
 
 		this.removeFooter = this.removeFooter.bind(this);
@@ -15,16 +16,16 @@ class FeedbackFooter extends Component {
 	}
 
 	showPremiumBundle() {
-		this.setState({visible: false});
+		this.setState({rated: true});
 
-		this.props.showPremiumBundle();
+		viewActions.showPremiumBundle();
 		
 		firebaseClient.logEvent('premium_response', {prompt_question: 'like the premium report', prompt_response: 'YES'});
 
 	}
 
 	removeFooter() {
-		this.setState({visible: false});
+		this.setState({rated: true});
 
 		firebaseClient.logEvent('premium_response', {prompt_question: 'like the premium report', prompt_response: 'NO'});
 	}
@@ -32,7 +33,7 @@ class FeedbackFooter extends Component {
 	render() {
 
 		return (
-			this.state.visible &&
+			!this.state.rated ?
 				<section id="premiumUpsell" className="widget">
 					<h2 className="title" >
 						Feedback
@@ -44,6 +45,15 @@ class FeedbackFooter extends Component {
 					<button onClick={this.removeFooter} className="btn btn-feedback no">No</button>
 					<button onClick={this.showPremiumBundle} className="btn btn-feedback yes">Yes</button>
 				</section>
+				:
+				<section id="premiumUpsell" className="widget">
+					<h2 className="title" >
+						Feedback
+					</h2>
+					<p className="intro">
+						Thank you for your Feedback!
+					</p>					
+				</section>
 		);
 	}
 }
@@ -51,6 +61,5 @@ class FeedbackFooter extends Component {
 export default FeedbackFooter;
 
 FeedbackFooter.propTypes = {
-	showPremiumBundle: React.PropTypes.func.isRequired,
 	record: React.PropTypes.object
 };
