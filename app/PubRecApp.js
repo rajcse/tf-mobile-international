@@ -1,12 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
 
+import config from 'config';
 import viewActions from 'actions/viewActions';
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
 
 import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
+import FunnelFrame from 'components/FunnelFrame';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
 import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
 import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
@@ -55,6 +57,7 @@ export default class PubRecApp extends React.Component {
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModal(),
 			userSeenTimedUpsell: userStore.getUserSeenTimedUpsell(),
+			premiumIframeFunnelClosed: false,
 			premiumFlow: ''
 		};
 
@@ -131,16 +134,18 @@ export default class PubRecApp extends React.Component {
 					/>
 				}
 
-				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell ?
-					this.state.premiumFlow === 'default' ?
-						<PremiumUpsellPrompt
-							premiumUpsell={this.state.premiumUpsell}
-						/>
-					: <PremiumUpsellFunnel
-						premiumUpsell={this.state.premiumUpsell}
-					/>
-					:
-				null }
+				{ this.state.premiumUpsell && !this.state.purchaseErrors && !this.state.standardUpsell
+					? this.state.premiumFlow === 'iframe'
+						? (!this.state.premiumIframeFunnelClosed &&
+							<FunnelFrame
+								iframeSrc={`${config.API_ROOT}/premium-funnel/?pid=${this.state.premiumUpsell.record.data.pointer}`}
+								onClose={() => this.setState({premiumIframeFunnelClosed: true})}
+							/>) ||
+							<PremiumUpsellPrompt premiumUpsell={this.state.premiumUpsell} onClose={() => this.setState({premiumIframeFunnelClosed: false})} />
+
+						: <PremiumUpsellFunnel premiumUpsell={this.state.premiumUpsell} />
+					: null
+				}
 
 				{ this.state.crossSell && !this.state.purchaseErrors &&
 					<PaymentPrompt
