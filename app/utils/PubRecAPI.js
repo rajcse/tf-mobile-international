@@ -750,6 +750,32 @@ class PubRecAPI {
 			});
 	}
 
+	fetchPremiumBundleInfo() {
+		let accountInfo;
+// console.log('asdasdas');
+		this.fetchUser()
+			.then(user => {
+				// Set the account info for down the line
+				accountInfo = user;
+
+				const paymentOptions = user.payment_options || [],
+					paymentOptionOnFile = paymentOptions.some(p => p.status === 'active' && ![constants.inAppPaymentProcessors.APPLE, constants.inAppPaymentProcessors.GOOGLE].includes(p.payment_processor));
+
+				if(paymentOptionOnFile) {
+					return this.fetchProductInfo(constants.productTypes.PREMIUM_REPORT_BUNDLE);
+				} else {
+					return appStoreClient.getProductInfo(constants.productTypes.PREMIUM_REPORT_BUNDLE);
+				}
+			})
+			.then(product => {
+				//do a server action here and show invoke something that tells the user they have credits
+				setTimeout(() => serverActions.receivePremiumBundleInfo({product, accountInfo}), 0);
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
 	fetchStandardUpsellInfo(record) {
 		let accountInfo;
 
@@ -854,6 +880,7 @@ class PubRecAPI {
 	fetchProductInfo(productType) {
 		return _makeRequest('/products/' + productType, {needsAuth: true})
 			.then(responseData => {
+				console.log(JSON.stringify(responseData.product));
 				return responseData.product;
 			})
 			.catch(error => {
@@ -953,6 +980,60 @@ class PubRecAPI {
 					console.error(error);
 				});
 	}
+
+	purchasePremiumBundle(premiumBundle) {
+		let order;
+
+		// Switch between pubrec purchase and in app purchase
+		// In app products will not have a 'sku' property
+		if(premiumBundle.product.sku) {
+			order = this.purchase([premiumBundle.product.sku]);
+		} else {
+			// Wrap the wonky plugin promise with a real promise
+			order = new Promise((resolve, reject) => {
+				appStoreClient.purchaseProduct(constants.productTypes.PREMIUM_REPORT_BUNDLE)
+					.then(p => resolve(p))
+					.error(error => reject(error));
+			});
+
+			// Promisify the product event callbacks, then unregister them as needed
+			let res, rej;
+			order = order.then(p => {
+				return new Promise((resolve, reject) => {
+					// Save them to the outer scope to deregister later
+					res = p => resolve(p);
+					rej = error => reject(error);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_REPORT_BUNDLE, 'verified', res);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_REPORT_BUNDLE, 'cancelled', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_REPORT_BUNDLE, 'unverified', rej);
+					appStoreClient.registerOnce(constants.productTypes.PREMIUM_REPORT_BUNDLE, 'error', rej);
+				});
+			})
+			.then(p => {
+				appStoreClient.unregister(rej);
+				return p;
+			})
+			.catch(error => {
+				appStoreClient.unregister(res);
+				throw error;
+			});
+		}
+
+		return order
+				.catch(error => {
+					setTimeout(() => serverActions.purchaseError(error));
+					// Skip the rest of the chain
+					throw error;
+				})
+				.then(o => {
+					setTimeout(() => serverActions.usedPremiumBundle());
+				})
+				.catch(error => {
+					console.error(error);
+				});
+	}
+
+
 
 	purchaseStandardRecord(standardUpsell) {
 		let order;

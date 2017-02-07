@@ -9,6 +9,7 @@ import Navigation from 'components/Navigation';
 import Login from 'containers/login/Login';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
 import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
+import PremiumBundlePrompt from 'components/PremiumBundlePrompt';
 import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
@@ -44,6 +45,7 @@ export default class PubRecApp extends React.Component {
 			},
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
+			premiumBundle: userStore.getPremiumBundle(),
 			standardUpsell: userStore.getStandardUpsell(),
 			crossSell: userStore.getCrossSell(),
 			purchaseErrors: userStore.getPurchaseErrors(),
@@ -55,6 +57,7 @@ export default class PubRecApp extends React.Component {
 			userHasRated: userStore.getUserHasRated(),
 			welcomeModal: userStore.getWelcomeModal(),
 			userSeenTimedUpsell: userStore.getUserSeenTimedUpsell(),
+			premiumBundleUsed: userStore.getPremiumBundleUsed(),
 			premiumFlow: ''
 		};
 
@@ -96,6 +99,7 @@ export default class PubRecApp extends React.Component {
 			user: userStore.getUser(),
 			premiumUpsell: userStore.getPremiumUpsell(),
 			standardUpsell: userStore.getStandardUpsell(),
+			premiumBundle: userStore.getPremiumBundle(),
 			crossSell: userStore.getCrossSell(),
 			usage: userStore.getUsage(),
 			loggingIn: userStore.isLoggingIn(),
@@ -123,6 +127,12 @@ export default class PubRecApp extends React.Component {
 				{ React.cloneElement(children, {
 					appState: this.state
 				}) }
+
+				{ this.state.premiumBundle && !this.state.purchaseErrors && 
+					<PremiumBundlePrompt
+						premiumBundle={this.state.premiumBundle}
+					/>
+				}
 
 				{ this.state.standardUpsell && !this.state.purchaseErrors && this.state.premiumUpsell &&
 					<StandardUpsellPrompt

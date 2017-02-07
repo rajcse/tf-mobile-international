@@ -195,6 +195,19 @@ export default {
 		// });
 	},
 
+	receivePremiumBundleInfo(premiumBundle) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_PREMIUM_BUNDLE,
+			premiumBundle
+		});
+	},
+
+	usedPremiumBundle() {
+		dispatcher.dispatch({
+			actionType: constants.actions.USED_PREMIUM_BUNDLE
+		});
+	},
+
 	seenTimedUpsell() {
 		dispatcher.dispatch({
 			actionType: constants.actions.SEEN_TIMED_UPSELL

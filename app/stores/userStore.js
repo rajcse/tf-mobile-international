@@ -14,6 +14,8 @@ let _user = null,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
 	_standardUpsell = null,
+	_premiumBundleUsed = false,
+	_premiumBundle = null,
 	_userSeenTimedUpsell = false,
 	_crossSell = null,
 	_userHasRated = false,
@@ -37,6 +39,14 @@ class UserStore extends EventEmitter {
 
 	getrecordsViewed() {
 		return _recordsViewed;
+	}
+
+	getPremiumBundleUsed() {
+		return _premiumBundleUsed;
+	}
+
+	getPremiumBundle() {
+		return _premiumBundle;
 	}
 
 	getUserSeenTimedUpsell() {
@@ -165,6 +175,7 @@ dispatcher.register(action => {
 			_user = action.user;
 			_recordsViewed = userStore.checkRecordsViewed(action.user.id);
 			_userHasRated = window.localStorage.getItem(action.user.id + ':userHasRated') || false;
+			_premiumBundleUsed = window.localStorage.getItem(action.user.id + ':premiumBundleUsed') || false;
 			_userSeenTimedUpsell = window.localStorage.getItem(action.user.id + ':userSeenTimedUpsell') || false;
 			userStore.emitChange();
 			break;
@@ -189,8 +200,18 @@ dispatcher.register(action => {
 			userStore.emitChange();
 			break;
 
+		case constants.actions.RECEIVE_PREMIUM_BUNDLE:
+			_premiumBundle = action.premiumBundle;
+			userStore.emitChange();
+			break;
+
 		case constants.actions.CANCEL_PREMIUM_UPSELL:
 			_premiumUpsell = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.CANCEL_PREMIUM_BUNDLE:
+			_premiumBundle = null;
 			userStore.emitChange();
 			break;
 
@@ -257,6 +278,12 @@ dispatcher.register(action => {
 		case constants.actions.MARK_USER_AS_RATED:
 			_userHasRated = true;
 			window.localStorage.setItem(_user.id + ':userHasRated', 'true');
+			userStore.emitChange();
+			break;
+
+		case constants.actions.USED_PREMIUM_BUNDLE:
+			_premiumBundleUsed = true;
+			window.localStorage.setItem(_user.id + ':premiumBundleUsed', 'true');
 			userStore.emitChange();
 			break;
 

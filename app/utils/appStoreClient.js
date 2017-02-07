@@ -130,6 +130,12 @@ class AppStoreClient {
 			alias: constants.productTypes.STANDARD_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
+
+		window.store.register({
+			id: '3_premium_report_reports_9_99',
+			alias: constants.productTypes.PREMIUM_REPORT_BUNDLE,
+			type: window.store.CONSUMABLE
+		});
 	}
 
 	registerAppleProducts() {
