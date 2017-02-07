@@ -142,7 +142,7 @@ class PremiumUpsellFunnel extends Component {
 							<h3>Final Step</h3>
 							<p>You’re one step away from viewing {record.data.name.first}’s Premium Report.
 								Tap "Upgrade Report" to reveal all available Premium Data instantly for only {
-									accountInfo.balances.premium_person_report > 0 ? '1 Premium Credit' : `<$${String(product.price).replace('$', '')}>`
+									accountInfo.balances.premium_person_report > 0 ? '1 Premium Credit' : `$${String(product.price).replace('$', '')}`
 								}.
 							</p>
 							{/* Above: Fix for difference between IAP and Accounts Service */}
