@@ -279,7 +279,7 @@ class PersonRecord extends Component {
 					}
 
 					{
-						isPremium && this.props.appState.premiumBundleUsed &&
+						isPremium &&
 						<FeedbackFooter
 							record={record}
 						/>	
