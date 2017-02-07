@@ -74,7 +74,12 @@ export default {
 		'DELETE_ACCOUNT',
 		'FETCH_SITE_CONFIG',
 		'TRIGGER_EVENT',
-		'SEEN_TIMED_UPSELL'
+		'SEEN_TIMED_UPSELL',
+		'SHOW_PREMIUM_BUNDLE',
+		'PURCHASE_PREMIUM_BUNDLE',
+		'RECEIVE_PREMIUM_BUNDLE',
+		'CANCEL_PREMIUM_BUNDLE',
+		'USED_PREMIUM_BUNDLE'
 	]),
 
 	// These must match what usage-service is expecting
@@ -104,7 +109,8 @@ export default {
 		PREMIUM_PERSON_REPORT: 'premium_person_report',
 		PREMIUM_PERSON_REPORT_IAP: 'premium_person_report_iap',
 		STANDARD_PERSON_REPORT: 'standard_person_report',
-		STANDARD_PERSON_REPORT_IAP: 'standard_person_report_iap'
+		STANDARD_PERSON_REPORT_IAP: 'standard_person_report_iap',
+		PREMIUM_REPORT_BUNDLE: 'premium_report_bundle'
 	},
 
 	// These must match what accounts service expects

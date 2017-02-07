@@ -12,6 +12,7 @@ import * as libs from 'utils/libs';
 import RecordHeader from '../components/RecordHeader';
 import PremiumUpsellHeader from '../components/PremiumUpsellHeader';
 import PremiumUpsellFooter from '../components/PremiumUpsellFooter';
+import FeedbackFooter from '../components/FeedbackFooter';
 import CriminalRecords from '../components/CriminalRecords';
 import Personal from '../components/Personal';
 import Contact from '../components/Contact';
@@ -275,6 +276,13 @@ class PersonRecord extends Component {
 							showPremiumUpsell={this.showPremiumUpsell}
 							record={record}
 						/>
+					}
+
+					{
+						isPremium && this.props.appState.premiumBundleUsed &&
+						<FeedbackFooter
+							record={record}
+						/>	
 					}
 				</RouteTransition>
 			</main>

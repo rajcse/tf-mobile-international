@@ -170,6 +170,21 @@ export default {
 		pubRecAPI.fetchPremiumUpsellInfo(record);
 	},
 
+	showPremiumBundle() {
+		dispatcher.dispatch({
+			actionType: constants.actions.SHOW_PREMIUM_BUNDLE
+		});
+		pubRecAPI.fetchPremiumBundleInfo();
+	},
+
+	purchasePremiumBundle(premiumBundle) {
+		dispatcher.dispatch({
+			actionType: constants.actions.PURCHASE_PREMIUM_BUNDLE,
+			premiumBundle
+		});
+		pubRecAPI.purchasePremiumBundle(premiumBundle);
+	},
+
 	purchasePremiumRecord(premiumUpsell) {
 		dispatcher.dispatch({
 			actionType: constants.actions.PURCHASE_PREMIUM_RECORD,
@@ -189,6 +204,12 @@ export default {
 	cancelPremiumUpsell() {
 		dispatcher.dispatch({
 			actionType: constants.actions.CANCEL_PREMIUM_UPSELL
+		});
+	},
+
+	cancelPremiumBundle() {
+		dispatcher.dispatch({
+			actionType: constants.actions.CANCEL_PREMIUM_BUNDLE
 		});
 	},
 

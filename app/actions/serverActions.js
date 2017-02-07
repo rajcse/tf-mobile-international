@@ -187,12 +187,31 @@ export default {
 			actionType: constants.actions.RECEIVE_STANDARD_UPSELL,
 			standardUpsell
 		});
-		// firebaseClient.logEvent(constants.firebase.events.PRESENT_OFFER, {
-		// 	item_id: standardUpsell.product.sku || standardUpsell.product.id,
-		// 	item_category: 'Premium Person Report',
-		// 	quantity: 1,
-		// 	price: Number(String(standardUpsell.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
-		// });
+		firebaseClient.logEvent(constants.firebase.events.PRESENT_OFFER, {
+			item_id: standardUpsell.product.sku || standardUpsell.product.id,
+			item_category: 'Standard Person Report',
+			quantity: 1,
+			price: Number(String(standardUpsell.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
+		});
+	},
+
+	receivePremiumBundleInfo(premiumBundle) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RECEIVE_PREMIUM_BUNDLE,
+			premiumBundle
+		});
+		firebaseClient.logEvent(constants.firebase.events.PRESENT_OFFER, {
+			item_id: premiumBundle.product.sku || premiumBundle.product.id,
+			item_category: 'Premium Bundle',
+			quantity: 1,
+			price: Number(String(premiumBundle.product.price).replace('$', '')) // Possible values of price are {String}'$xx.xx', and {Number}xx.xx, event requires a number
+		});
+	},
+
+	usedPremiumBundle() {
+		dispatcher.dispatch({
+			actionType: constants.actions.USED_PREMIUM_BUNDLE
+		});
 	},
 
 	seenTimedUpsell() {
