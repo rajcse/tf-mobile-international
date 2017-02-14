@@ -126,9 +126,17 @@ class PaymentPrompt extends Component {
 			<div id="payment-prompt">
 				<div className="modal">
 					{content}
-					<p className="billing-details">*Billing Details: {this.props.crossSell.terms}</p>
+					{this.props.crossSell.terms &&
+						<p className="billing-details">*Billing Details: {this.props.crossSell.terms}</p>
+					}
 					<div className="confirm">
-						<button className="continue" onClick={this.purchaseCrossSell}>I agree <span>yes, charge me ${this.props.crossSell.recurring_price}/mo</span></button>
+						{this.props.crossSell.recurring_price ?
+							<button className="continue" onClick={this.purchaseCrossSell}>I agree 
+								 <span>yes, charge me ${this.props.crossSell.recurring_price}/mo</span>
+							</button>
+						:
+							<button className="continue" onClick={this.purchaseCrossSell}>Access {this.props.crossSell.original_criteria.type} reports</button>
+						}
 						<a className="cancel" onClick={this.cancelCrossSell}>Cancel</a>
 					</div>
 				</div>

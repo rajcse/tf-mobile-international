@@ -175,9 +175,32 @@ function _makeRequest(path, options) {
 
 			// If it's a 402, call the upsell flow now, don't hit the caller's catch block
 			if(error.statusCode === 402) {
-				error.responseBody.then(responseData => {
-					setTimeout(() => serverActions.paymentRequired(responseData.errors[0].item));
-				});
+				error.responseBody
+					.then(responseData => {
+						const crossSellItem = responseData.errors[0].item;
+
+						if(crossSellItem.useInAppProduct) {
+							let crossSellIAP;
+
+							switch(crossSellItem.original_criteria.type) {
+								case constants.recordTypes.PHONE:
+								default:
+									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.PHONE_REPORT_IAP));
+									break;
+								case constants.recordTypes.EMAIL:
+									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.EMAIL_REPORT_IAP));
+									break;
+							}
+
+							return crossSellIAP;
+
+						} else {
+							return crossSellItem;
+						}
+					})
+					.then(crossSellItem => {
+						setTimeout(() => serverActions.paymentRequired(crossSellItem));
+					});
 			}
 
 			if(error.statusCode === 403) {
@@ -1160,17 +1183,53 @@ class PubRecAPI {
 					break;
 
 				default:
-					break;
+					// Don't continue with the purchase
+					return;
 			}
 		}
 
-		const plans = [],
-			products = [];
+		let order;
 
-		if(crossSell.hasOwnProperty('recurring_price')) plans.push(crossSell.sku);
-		if(crossSell.hasOwnProperty('price')) products.push(crossSell.sku);
+		if(crossSell.sku) {
+			const plans = [],
+				products = [];
 
-		return this.purchase(products, plans)
+			if(crossSell.hasOwnProperty('recurring_price')) plans.push(crossSell.sku);
+			if(crossSell.hasOwnProperty('price')) products.push(crossSell.sku);
+
+			order = this.purchase(products, plans);
+		} else {
+			// Wrap the wonky plugin promise with a real promise
+			order = new Promise((resolve, reject) => {
+				appStoreClient.purchaseProduct(crossSell.alias)
+					.then(p => resolve(p))
+					.error(error => reject(error));
+			});
+
+			// Promisify the product event callbacks, then unregister them as needed
+			let res, rej;
+			order = order.then(p => {
+				return new Promise((resolve, reject) => {
+					// Save them to the outer scope to deregister later
+					res = p => resolve(p);
+					rej = error => reject(error);
+					appStoreClient.registerOnce(crossSell.alias, 'verified', res);
+					appStoreClient.registerOnce(crossSell.alias, 'cancelled', rej);
+					appStoreClient.registerOnce(crossSell.alias, 'unverified', rej);
+					appStoreClient.registerOnce(crossSell.alias, 'error', rej);
+				});
+			})
+			.then(p => {
+				appStoreClient.unregister(rej);
+				return p;
+			})
+			.catch(error => {
+				appStoreClient.unregister(res);
+				throw error;
+			});
+		}
+
+		return order
 			.then(responseData => {
 				// Even if they are trying to access a record already in usage, this will work
 				return this.createRecord(crossSell.original_criteria.recordData, crossSell.original_criteria.type, true, true);
