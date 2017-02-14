@@ -57,21 +57,37 @@ class AppStoreClient {
 			p.finish();
 		});
 
-		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).approved(p => {
-		// 	p.verify();
-		// });
-		//
-		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).verified(p => {
-		// 	p.finish();
-		// });
-		//
-		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).unverified(p => {
-		//
-		// });
-		//
-		// window.store.when(constants.planTypes.PERSON_REPORT_1_MONTH_IAP).updated(p => {
-		//
-		// });
+		window.store.when(constants.planTypes.PHONE_REPORT_IAP).approved(p => {
+			p.verify();
+		});
+		
+		window.store.when(constants.planTypes.PHONE_REPORT_IAP).verified(p => {
+			p.finish();
+		});
+		
+		window.store.when(constants.planTypes.PHONE_REPORT_IAP).unverified(p => {
+		
+		});
+		
+		window.store.when(constants.planTypes.PHONE_REPORT_IAP).updated(p => {
+		
+		});
+
+		window.store.when(constants.planTypes.EMAIL_REPORT_IAP).approved(p => {
+			p.verify();
+		});
+		
+		window.store.when(constants.planTypes.EMAIL_REPORT_IAP).verified(p => {
+			p.finish();
+		});
+		
+		window.store.when(constants.planTypes.EMAIL_REPORT_IAP).unverified(p => {
+		
+		});
+		
+		window.store.when(constants.planTypes.EMAIL_REPORT_IAP).updated(p => {
+		
+		});
 
 		// Log all errors
 		window.store.error(error => {
