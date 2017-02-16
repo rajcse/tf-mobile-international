@@ -144,13 +144,13 @@ class AppStoreClient {
 		// });
 
 		window.store.register({
-			id: 'unlimited_phone_report_4_99',
+			id: 'unlimited_phone_reports_4_99',
 			alias: constants.planTypes.PHONE_REPORT_IAP,
 			type: window.store.PAID_SUBSCRIPTION
 		});
 
 		window.store.register({
-			id: 'unlimited_email_report_2_99',
+			id: 'unlimited_email_reports_2_99',
 			alias: constants.planTypes.EMAIL_REPORT_IAP,
 			type: window.store.PAID_SUBSCRIPTION
 		});
