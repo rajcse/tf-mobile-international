@@ -61,5 +61,6 @@ class FeedbackFooter extends Component {
 export default FeedbackFooter;
 
 FeedbackFooter.propTypes = {
-	record: React.PropTypes.object
+	record: React.PropTypes.object,
+	showPremiumBundle: React.PropTypes.func.isRequired
 };
