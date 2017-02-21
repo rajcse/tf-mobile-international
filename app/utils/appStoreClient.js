@@ -89,6 +89,22 @@ class AppStoreClient {
 		
 		});
 
+		window.store.when(constants.planTypes.PERSON_REPORT_IAP).approved(p => {
+			p.verify();
+		});
+		
+		window.store.when(constants.planTypes.PERSON_REPORT_IAP).verified(p => {
+			p.finish();
+		});
+		
+		window.store.when(constants.planTypes.PERSON_REPORT_IAP).unverified(p => {
+		
+		});
+		
+		window.store.when(constants.planTypes.PERSON_REPORT_IAP).updated(p => {
+		
+		});
+
 		// Log all errors
 		window.store.error(error => {
 			console.error('STORE:ERROR', error);
@@ -137,11 +153,11 @@ class AppStoreClient {
 	}
 
 	registerGoogleProducts() {
-		// window.store.register({
-		// 	id: 'unlim_person_28_99_1mo',
-		// 	alias: constants.planTypes.PERSON_REPORT_1_MONTH_IAP,
-		// 	type: window.store.PAID_SUBSCRIPTION
-		// });
+		window.store.register({
+			id: 'unlim_person_28_99_1mo_app',
+			alias: constants.planTypes.PERSON_REPORT_IAP,
+			type: window.store.PAID_SUBSCRIPTION
+		});
 
 		window.store.register({
 			id: 'unlimited_phone_reports_4_99',

@@ -190,6 +190,9 @@ function _makeRequest(path, options) {
 								case constants.recordTypes.EMAIL:
 									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.EMAIL_REPORT_IAP));
 									break;
+								case constants.recordTypes.PERSON:
+									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.PERSON_REPORT_IAP));
+									break;
 							}
 
 							return crossSellIAP;
@@ -1183,8 +1186,7 @@ class PubRecAPI {
 					break;
 
 				default:
-					// Don't continue with the purchase
-					return;
+					break;
 			}
 		}
 
