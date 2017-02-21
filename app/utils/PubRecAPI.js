@@ -190,6 +190,9 @@ function _makeRequest(path, options) {
 								case constants.recordTypes.EMAIL:
 									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.EMAIL_REPORT_IAP));
 									break;
+								case constants.recordTypes.PERSON:
+									crossSellIAP = Object.assign({original_criteria: crossSellItem.original_criteria}, appStoreClient.getProductInfo(constants.planTypes.PERSON_REPORT_IAP));
+									break;
 							}
 
 							return crossSellIAP;
@@ -1164,6 +1167,29 @@ class PubRecAPI {
 						// This should only happen from the email endpoint, and never on record creation
 						return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.EMAIL], {
 							query: {verify: true, email: crossSell.original_criteria.email},
+							needsAuth: true
+						})
+						.then(responseData => {
+							if(!responseData.results.length){
+								setTimeout(() => serverActions.purchaseError('Report Not Found'));
+								return console.log(JSON.stringify(responseData));
+							}
+
+							// Assign the record data from the search
+							const newCrossSell = Object.assign({}, crossSell, {original_criteria: Object.assign({}, crossSell.original_criteria, {recordData: responseData.results[0].recordData})});
+							this.purchaseCrossSell(newCrossSell, true);
+						})
+						.catch(error => {
+							console.error(error);
+						});
+					}
+					break;
+
+				case constants.recordTypes.PERSON:
+					if(crossSell.original_criteria.firstName) {
+						// This should only happen from the email endpoint, and never on record creation
+						return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PERSON], {
+							query: crossSell.original_criteria,
 							needsAuth: true
 						})
 						.then(responseData => {
