@@ -1185,32 +1185,8 @@ class PubRecAPI {
 					}
 					break;
 
-				case constants.recordTypes.PERSON:
-					if(crossSell.original_criteria.firstName) {
-						// This should only happen from the email endpoint, and never on record creation
-						return _makeRequest('/' + constants.recordEndpoints[constants.recordTypes.PERSON], {
-							query: crossSell.original_criteria,
-							needsAuth: true
-						})
-						.then(responseData => {
-							if(!responseData.results.length){
-								setTimeout(() => serverActions.purchaseError('Report Not Found'));
-								return console.log(JSON.stringify(responseData));
-							}
-
-							// Assign the record data from the search
-							const newCrossSell = Object.assign({}, crossSell, {original_criteria: Object.assign({}, crossSell.original_criteria, {recordData: responseData.results[0].recordData})});
-							this.purchaseCrossSell(newCrossSell, true);
-						})
-						.catch(error => {
-							console.error(error);
-						});
-					}
-					break;
-
 				default:
-					// Don't continue with the purchase
-					return;
+					break;
 			}
 		}
 
