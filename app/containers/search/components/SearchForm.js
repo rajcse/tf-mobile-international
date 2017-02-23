@@ -6,7 +6,8 @@ import {STATES} from 'utils/states';
 import PillSelector from 'components/PillSelector';
 
 function _formatPhone(phone) {
-	let numValue = phone.replace(/[^0-9]/g, ''),
+
+	let numValue = phone.replace(/[^0-9]/g, '').substr(-10),
 		numGroups = numValue.match(/([0-9]{0,3}){1}([0-9]{0,3})?([0-9]{0,4})?/),
 		formattedPhone = '';
 
