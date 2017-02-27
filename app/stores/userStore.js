@@ -11,6 +11,8 @@ let _user = null,
 	_registerErrors = null,
 	_loggingIn = false,
 	_loginErrors = null,
+	_resettingPassword = false,
+	_resettingPasswordErrors = null,
 	_purchaseErrors = null,
 	_premiumUpsell = null,
 	_standardUpsell = null,
@@ -112,6 +114,14 @@ class UserStore extends EventEmitter {
 		return _loginErrors;
 	}
 
+	isResettingPassword() {
+		return _resettingPassword;
+	}
+
+	getResetPasswordErrors() {
+		return _resettingPasswordErrors;
+	}
+
 	// This gets called on every single app render, so it needs to be FAST
 	// We don't care if the access token is expired, the API will handle that
 	isLoggedIn() {
@@ -164,6 +174,24 @@ dispatcher.register(action => {
 		case constants.actions.LOGIN_FAILED:
 			_loggingIn = false;
 			_loginErrors = action.errors;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RESET_PASSWORD:
+			_resettingPassword = true;
+			_resettingPasswordErrors = null;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RESET_PASSWORD_FAILED:
+			_resettingPassword = false;
+			_resettingPasswordErrors = action.errors;
+			userStore.emitChange();
+			break;
+
+		case constants.actions.RESET_PASSWORD_SUCCESSFUL:
+			_resettingPassword = false;
+			_resettingPasswordErrors = null;
 			userStore.emitChange();
 			break;
 

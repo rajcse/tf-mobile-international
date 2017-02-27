@@ -24,7 +24,8 @@ import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'r
 import { useScroll } from 'react-router-scroll';
 
 import PubRecApp from './PubRecApp';
-import Register from 'containers/register/Register';
+import Login from 'containers/login/Login';
+import Reset from 'containers/reset/Reset';
 import Dashboard from 'containers/dashboard/Dashboard';
 import Search from 'containers/search/Search';
 import Support from 'containers/support/Support';
@@ -88,7 +89,8 @@ window.initializeApp = () => {
 					<Route path="criminal" component={CrimeModal}/>
 				</Route>
 			</Route>
-			<Route path="/register" component={Register} />
+			<Route path="/login" component={Login} />
+			<Route path="/reset" component={Reset} />
 		</Router>,
 		document.querySelector('#app')
 	);

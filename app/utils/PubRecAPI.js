@@ -475,6 +475,34 @@ class PubRecAPI {
 			});
 	}
 
+	resetPassword(criteria) {
+		if(!criteria.email) {
+			return serverActions.resetPasswordFailed('Please enter your email');
+		}
+
+		return _makeRequest('/reset-password', {method: 'POST', body: criteria})
+			.then(responseData => {
+				if(responseData.success) {
+
+					setTimeout(() => serverActions.resetPasswordSuccessful(), 0);
+
+				} else {
+					// TODO: Switch error messages based on error response
+					let online = window.navigator.onLine;
+					if(!online) {
+						setTimeout(() => serverActions.resetPasswordFailed('No connection to internet'), 0);
+					} else {
+						setTimeout(() => serverActions.resetPasswordFailed('Invalid email and/or password'), 0);
+					}
+				}
+			})
+			.catch(error => {
+				console.error(error);
+				setTimeout(() => serverActions.resetPasswordFailed(error.message), 0);
+			});
+	}
+
+
 	slackPost(message) {
 		const user = _userFromAccessToken(_accessToken);
 
