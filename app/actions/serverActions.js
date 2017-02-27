@@ -163,7 +163,7 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGGED_OUT
 		});
-		if(redirect) hashHistory.push('/');
+		if(redirect) hashHistory.push('/login');
 
 		window.userIdForErrorLogging = null;
 	},
