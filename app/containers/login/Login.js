@@ -112,7 +112,7 @@ export default class Login extends Component {
 					<Link to="/">Create a new account!</Link>
 				</p>
 				<p id="not-a-member">
-					<Link to="/reset">Forgot my password?</Link>
+					<Link to="/reset">Forgot your password?</Link>
 				</p>
 			</div>
 		);

@@ -121,7 +121,6 @@ export default class PubRecApp extends React.Component {
 		if(!userStore.isLoggedIn()) {
 			return (
 				<Register registerErrors={this.state.registerErrors} registering={this.state.registering}/>
-				//	<Login loginErrors={this.state.loginErrors} loggingIn={this.state.loggingIn}/>
 			);
 		}
 
