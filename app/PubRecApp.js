@@ -7,7 +7,7 @@ import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
 
 import Navigation from 'components/Navigation';
-import Login from 'containers/login/Login';
+import Register from 'containers/register/Register';
 import FunnelFrame from 'components/FunnelFrame';
 import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
 import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
@@ -105,8 +105,8 @@ export default class PubRecApp extends React.Component {
 			premiumBundle: userStore.getPremiumBundle(),
 			crossSell: userStore.getCrossSell(),
 			usage: userStore.getUsage(),
-			loggingIn: userStore.isLoggingIn(),
-			loginErrors: userStore.getLoginErrors(),
+			registering: userStore.isRegistering(),
+			registerErrors: userStore.getRegisterErrors(),
 			purchaseErrors: userStore.getPurchaseErrors(),
 			recordsViewed: userStore.getrecordsViewed(),
 			userHasRated: userStore.getUserHasRated(),
@@ -120,7 +120,7 @@ export default class PubRecApp extends React.Component {
 		// If the user isn't logged in, render the login page
 		if(!userStore.isLoggedIn()) {
 			return (
-				<Login loginErrors={this.state.loginErrors} loggingIn={this.state.loggingIn}/>
+				<Register registerErrors={this.state.registerErrors} registering={this.state.registering}/>
 			);
 		}
 

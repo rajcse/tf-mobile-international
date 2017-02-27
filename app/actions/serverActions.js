@@ -100,6 +100,19 @@ export default {
 		});
 	},
 
+	resetPasswordFailed(errors) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RESET_PASSWORD_FAILED,
+			errors
+		});
+	},
+
+	resetPasswordSuccessful() {
+		dispatcher.dispatch({
+			actionType: constants.actions.RESET_PASSWORD_SUCCESSFUL
+		});
+	},
+
 	loginFailed(errors) {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGIN_FAILED,
@@ -150,7 +163,7 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGGED_OUT
 		});
-		if(redirect) hashHistory.push('/');
+		if(redirect) hashHistory.push('/login');
 
 		window.userIdForErrorLogging = null;
 	},

@@ -4,6 +4,7 @@ import Transition from 'components/Transition';
 import viewActions from 'actions/viewActions';
 import Loader from 'components/Loader';
 import Svg from 'components/svg/Svg';
+import userStore from 'stores/userStore';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -11,21 +12,27 @@ export default class Login extends Component {
 
 		this.state = {
 			email : '',
-			password: ''
+			password: '',
+			loggingIn: userStore.isLoggingIn(),
+			loginErrors: userStore.getLoginErrors()
 		};
 
 		this.doLogin = this.doLogin.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.focusOnForm = this.focusOnForm.bind(this);
 		this.blurOnForm = this.blurOnForm.bind(this);
+		this.onUserChange = this.onUserChange.bind(this);
+
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		// Handle some app status bar style changes
 		if(window.StatusBar && window.device && window.device.platform === 'iOS') {
 			window.StatusBar.backgroundColorByHexString('#57BF93');
 			window.StatusBar.styleLightContent();
 		}
+
+		userStore.addChangeListener(this.onUserChange);
 	}
 
 	componentWillUnmount() {
@@ -34,7 +41,17 @@ export default class Login extends Component {
 			window.StatusBar.backgroundColorByHexString('#ffffff');
 			window.StatusBar.styleDefault();
 		}
+
+		userStore.removeChangeListener(this.onUserChange);
 	}
+
+	onUserChange() {
+		this.setState({
+			loggingIn: userStore.isLoggingIn(),
+			loginErrors: userStore.getLoginErrors()
+		});
+	}
+
 
 	doLogin(e) {
 		e.preventDefault();
@@ -65,7 +82,7 @@ export default class Login extends Component {
 				<Svg svg="tfLogoWhite" />
 				<form onSubmit={this.doLogin} onBlur={this.blurOnForm} onFocus={this.focusOnForm} className="input-fields">
 					<Transition transitionName="login-error" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-						{this.props.loginErrors ? <p className="error-message">{this.props.loginErrors}</p> : null}
+						{this.state.loginErrors ? <p className="error-message">{this.state.loginErrors}</p> : null}
 					</Transition>
 
 					<label>Log In</label>
@@ -75,7 +92,7 @@ export default class Login extends Component {
 						placeholder="Email Address"
 						defaultValue={this.state.email}
 						name="email"
-						disabled={this.props.loggingIn}
+						disabled={this.state.loggingIn}
 						onChange={this.handleChange} />
 
 					<input
@@ -83,16 +100,19 @@ export default class Login extends Component {
 						placeholder="Password"
 						defaultValue={this.state.password}
 						name="password"
-						disabled={this.props.loggingIn}
+						disabled={this.state.loggingIn}
 						onChange={this.handleChange} />
 
-					<button className="login-btn" disabled={this.props.loggingIn} type="submit" onClick={this.doLogin}>
-						{this.props.loggingIn ? 'Logging In...' : 'Log In'}
+					<button className="login-btn" disabled={this.state.loggingIn} type="submit" onClick={this.doLogin}>
+						{this.state.loggingIn ? 'Logging In...' : 'Log In'}
 					</button>
-					{this.props.loggingIn ? <Loader /> : null}
+					{this.state.loggingIn ? <Loader /> : null}
 				</form>
 				<p id="not-a-member">
-					<Link to="/register">Create a new account!</Link>
+					<Link to="/">Create a new account!</Link>
+				</p>
+				<p id="not-a-member">
+					<Link to="/reset">Forgot your password?</Link>
 				</p>
 			</div>
 		);

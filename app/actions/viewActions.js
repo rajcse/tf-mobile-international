@@ -156,6 +156,15 @@ export default {
 		pubRecAPI.login(credentials);
 	},
 
+	resetPassword(email) {
+		dispatcher.dispatch({
+			actionType: constants.actions.RESET_PASSWORD,
+			email
+		});
+		firebaseClient.logEvent('resent_password');
+		pubRecAPI.resetPassword(email);
+	},
+
 	logout() {
 		dispatcher.dispatch({
 			actionType: constants.actions.LOGOUT
