@@ -509,6 +509,13 @@
 	&#criminal {
 		padding-bottom: 0;
 
+		> .loader {
+			width: 30px;
+			display: block;
+			padding-bottom: 1em;
+			margin: 0 auto;
+		}
+
 		.matching-records {
 			margin: 0;
 			padding: 0;
@@ -536,6 +543,31 @@
 			padding-bottom: 10px;
 			display: inline-flex;
 			.clearfix();
+		}
+
+		.criminal-upsell {
+			padding-bottom: 1em;
+
+			.warning {
+				display: block;
+				margin: 0 auto 1em;
+				height: 60px;
+				width: 60px;
+
+				.cls-1 {
+					fill: @brand-error;
+				}
+			}
+
+			h3 {
+				text-align: center;
+				margin-bottom: 1em;
+			}
+
+			button {
+				display: block;
+				margin: 0 auto;
+			}
 		}
 
 		.criminal-results {
