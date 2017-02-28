@@ -7,7 +7,7 @@ const CriminalRecordsUpsell = props => {
 	return (
 		<div className="criminal-upsell simple-column">
 			<Svg className="warning" svg="exclamationWhite" />
-			<h3>{criminalRecordsCount} possible criminal records available</h3>
+			<h3>{criminalRecordsCount} possible criminal record{criminalRecordsCount > 1 ? 's' : ''} available</h3>
 			<button onClick={showStandardUpsell} className="btn btn-upgrade">View Criminal Records</button>
 		</div>
 	);

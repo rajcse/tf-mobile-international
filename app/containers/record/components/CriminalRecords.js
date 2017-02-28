@@ -48,7 +48,7 @@ class CriminalRecords extends Component {
 		if(filteredCrimes.length) {
 			if(showStandardUpsell && this.state.upsellDisplay === 'inline') {
 				criminalRecordsDisplay = (<CriminalRecordsUpsell
-					criminalRecordsCount={filteredCrimes.length}
+					criminalRecordsCount={filteredCrimes.reduce((acc, val) => acc + val.length, 0)}
 					showStandardUpsell={showStandardUpsell}
 				/>);
 			} else {
