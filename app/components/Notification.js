@@ -21,7 +21,7 @@ class Notification extends React.Component {
 	componentWillMount() {
 
 		if(this.props.notice.action == 'premiumBundle') {
-			setTimeout(pubRecAPI.fetchPremiumBundleInfo(), 0);
+			pubRecAPI.fetchPremiumBundleInfo();
 		} 
 	}
 
