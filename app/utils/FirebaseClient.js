@@ -45,6 +45,7 @@ class FirebaseClient {
 				content: notification.content,
 				title: notification.title,
 				level: notification.level,
+				action: notification.action,
 				timestamp: notification['google.sent_time'] || Date.now(),
 				id: notification['google.message_id'] || uuid.v4()
 			};

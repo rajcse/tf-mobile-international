@@ -2,6 +2,7 @@ import React from 'react';
 import Svg from 'components/svg/Svg';
 import Swipeable from 'react-swipeable';
 import viewActions from 'actions/viewActions';
+import pubRecAPI from 'utils/PubRecAPI';
 
 class Notification extends React.Component {
 	constructor(props) {
@@ -15,6 +16,13 @@ class Notification extends React.Component {
 		this.swipedLeft = this.swipedLeft.bind(this);
 		this.swipingLeft = this.swipingLeft.bind(this);
 		this.swipedRight = this.swipedRight.bind(this);
+	}
+
+	componentWillMount() {
+
+		if(this.props.notice.action == 'premiumBundle') {
+			pubRecAPI.fetchPremiumBundleInfo();
+		} 
 	}
 
 	swipedLeft() {
@@ -47,31 +55,32 @@ class Notification extends React.Component {
 		};
 
 		return (
-			<Swipeable
-				onSwipingLeft={this.swipingLeft}
-				onSwipedLeft={this.swipedLeft}
-				onSwipedRight={this.swipedRight} >
-				<div className="notice" style={style}>
-					<div className={`notice-level ${notice.level}`}>
-						{ notice.level === 'error' ?
-							<Svg svg="noticeExclamation" />
-						: null }
+			!notice.action &&
+				<Swipeable
+					onSwipingLeft={this.swipingLeft}
+					onSwipedLeft={this.swipedLeft}
+					onSwipedRight={this.swipedRight} >
+					<div className="notice" style={style}>
+						<div className={`notice-level ${notice.level}`}>
+							{ notice.level === 'error' ?
+								<Svg svg="noticeExclamation" />
+							: null }
 
-						{ notice.level === 'success' ?
-							<Svg svg="noticeCheck" />
-						: null }
+							{ notice.level === 'success' ?
+								<Svg svg="noticeCheck" />
+							: null }
 
-						{ notice.level === 'info' ?
-							<Svg svg="noticeInfo" />
-						: null }
+							{ notice.level === 'info' ?
+								<Svg svg="noticeInfo" />
+							: null }
+						</div>
+
+						<div className="notice-text">
+							<h3>{notice.title}</h3>
+							<p>{notice.content}</p>
+						</div>
 					</div>
-
-					<div className="notice-text">
-						<h3>{notice.title}</h3>
-						<p>{notice.content}</p>
-					</div>
-				</div>
-			</Swipeable>
+				</Swipeable>
 		);
 	}
 }
