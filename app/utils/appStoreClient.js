@@ -178,7 +178,7 @@ class AppStoreClient {
 		});
 
 		window.store.register({
-			id: 'person_report_0_99',
+			id: 'person_report_4_99',
 			alias: constants.productTypes.STANDARD_PERSON_REPORT_IAP,
 			type: window.store.CONSUMABLE
 		});
