@@ -107,7 +107,7 @@ class Location extends Component {
 					? null
 					: <div className="content content-full">
 						<div className="location-details">
-							<p>To view registered Sex Offenders and their crimess for this area, tap below.</p>
+							<p>To view registered Sex Offenders and their crimes for this area, tap below.</p>
 						</div>
 						{ location.sex_offenders_count ?
 							<div className="location-actions">
