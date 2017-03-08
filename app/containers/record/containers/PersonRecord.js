@@ -74,7 +74,7 @@ class PersonRecord extends Component {
 	}
 
 	showStandardUpsell() {
-		if (this.state.upsell == 'standard') {
+		if (this.state.upsell == 'premium') {
 			viewActions.showPremiumUpsell(this.props.record);
 		} else {
 			viewActions.showStandardUpsell(this.props.record);
