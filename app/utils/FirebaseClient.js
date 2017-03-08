@@ -16,6 +16,7 @@ class FirebaseClient {
 			welcome_message1: 'Congratulations! Your account has been succesfully created and you now have access to one of the most powerful people search apps available.',
 			welcome_message2: 'Your account includes unlimited FREE Person Reports, and a complimentary bundle of 10 Phone Number lookups and 10 Email Address lookups. Enjoy!',
 			criminal_upsell: 'details',
+			standard_upsell: 'default',
 			premium_prompt: ''
 		};
 	}
