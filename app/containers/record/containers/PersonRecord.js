@@ -49,7 +49,7 @@ class PersonRecord extends Component {
 		this.showStandardUpsell = this.showStandardUpsell.bind(this);
 
 		this.state = {
-			standardUpsell: 'default'
+			upsell: 'standard'
 		};
 	}
 
@@ -60,12 +60,12 @@ class PersonRecord extends Component {
 			setTimeout(pubRecAPI.fetchPremiumUpsellInfo(this.props.record, true), 3000);
 		}
 
-		firebaseClient.getConfigValue('standard_upsell')
+		firebaseClient.getConfigValue('upsell')
 			.then(response => {
 				this.setState({
-					standardUpsell: response
+					upsell: response
 				});
-				firebaseClient.setUserProperty('standard_upsell', response);
+				firebaseClient.setUserProperty('upsell', response);
 			});
 	}
 
@@ -74,7 +74,7 @@ class PersonRecord extends Component {
 	}
 
 	showStandardUpsell() {
-		if (this.state.standardUpsell == 'onlyPremium') {
+		if (this.state.upsell == 'standard') {
 			viewActions.showPremiumUpsell(this.props.record);
 		} else {
 			viewActions.showStandardUpsell(this.props.record);
