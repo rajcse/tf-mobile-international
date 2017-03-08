@@ -46,7 +46,7 @@ class PersonRecord extends Component {
 		super(props);
 
 		this.showPremiumUpsell = this.showPremiumUpsell.bind(this);
-		this.showStandardUpsell = this.showStandardUpsell.bind(this);
+		this.showUpsell = this.showUpsell.bind(this);
 
 		this.state = {
 			upsell: 'standard'
@@ -73,7 +73,7 @@ class PersonRecord extends Component {
 		viewActions.showPremiumUpsell(this.props.record);
 	}
 
-	showStandardUpsell() {
+	showUpsell() {
 		if (this.state.upsell == 'premium') {
 			viewActions.showPremiumUpsell(this.props.record);
 		} else {
@@ -169,7 +169,7 @@ class PersonRecord extends Component {
 						name={record.reportData.names[0].first}
 						filteredCrimes={record.reportData.filteredCriminalRecords}
 						openCrime={openCrime}
-						showStandardUpsell={isLite && this.showStandardUpsell}
+						showStandardUpsell={isLite && this.showUpsell}
 					/>
 
 					{ !_.isEmpty(record.reportData.sources) &&
