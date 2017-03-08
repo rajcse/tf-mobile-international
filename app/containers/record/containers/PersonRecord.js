@@ -5,6 +5,7 @@ import moment from 'moment';
 import { RouteTransition } from 'react-router-transition';
 import Header from 'components/Header';
 import pubRecAPI from 'utils/PubRecAPI';
+import firebaseClient from 'utils/firebaseClient';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -40,13 +41,16 @@ import UccFilings from '../components/Uccfilings';
 import viewActions from 'actions/viewActions';
 import StudentRecords from '../components/StudentRecords';
 
-
 class PersonRecord extends Component {
 	constructor(props) {
 		super(props);
 
 		this.showPremiumUpsell = this.showPremiumUpsell.bind(this);
-		this.showStandardUpsell = this.showStandardUpsell.bind(this);
+		this.showUpsell = this.showUpsell.bind(this);
+
+		this.state = {
+			upsell: 'standard'
+		};
 	}
 
 	componentWillMount() {
@@ -55,15 +59,27 @@ class PersonRecord extends Component {
 			&& !this.props.appState.userSeenTimedUpsell) { 
 			setTimeout(pubRecAPI.fetchPremiumUpsellInfo(this.props.record, true), 3000);
 		}
+
+		firebaseClient.getConfigValue('upsell')
+			.then(response => {
+				this.setState({
+					upsell: response
+				});
+				firebaseClient.setUserProperty('upsell', response);
+			});
 	}
 
 	showPremiumUpsell() {
 		viewActions.showPremiumUpsell(this.props.record);
 	}
 
-	showStandardUpsell() {
-		viewActions.showStandardUpsell(this.props.record);
-		viewActions.showPremiumUpsell(this.props.record);
+	showUpsell() {
+		if (this.state.upsell == 'premium') {
+			viewActions.showPremiumUpsell(this.props.record);
+		} else {
+			viewActions.showStandardUpsell(this.props.record);
+			viewActions.showPremiumUpsell(this.props.record);
+		}
 	}
 
 	render() {
@@ -153,7 +169,7 @@ class PersonRecord extends Component {
 						name={record.reportData.names[0].first}
 						filteredCrimes={record.reportData.filteredCriminalRecords}
 						openCrime={openCrime}
-						showStandardUpsell={isLite && this.showStandardUpsell}
+						showStandardUpsell={isLite && this.showUpsell}
 					/>
 
 					{ !_.isEmpty(record.reportData.sources) &&
