@@ -106,15 +106,17 @@ class Location extends Component {
 				{_.isUndefined(openLocation)
 					? null
 					: <div className="content content-full">
-						<div className="location-details">
-							<p>To view registered Sex Offenders and their crimes for this area, tap below.</p>
-						</div>
 						{ location.sex_offenders_count ?
-							<div className="location-actions">
-								<button onClick={ () => {
-									location.getLocationDetails(location);
-									openLocation(location.key);
-								} } className="btn-link with-arrow down">View <strong>{location.sex_offenders_count}</strong> Sex Offender{location.sex_offenders_count > 1 ? 's' : ''} </button>
+							<div>
+								<div className="location-details">
+									<p>To view registered Sex Offenders and their crimes for this area, tap below.</p>
+								</div>
+								<div className="location-actions">
+									<button onClick={ () => {
+										location.getLocationDetails(location);
+										openLocation(location.key);
+									} } className="btn-link with-arrow down">View <strong>{location.sex_offenders_count}</strong> Sex Offender{location.sex_offenders_count > 1 ? 's' : ''} </button>
+								</div>
 							</div>
 						: null }
 					</div>

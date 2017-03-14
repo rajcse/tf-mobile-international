@@ -1403,11 +1403,44 @@ li {
 }
 
 #location {
+
+	> .loader {
+			width: 30px;
+			display: block;
+			padding-bottom: 1em;
+			margin: 0 auto;
+		}
+
 	div {
 		&:last-child {
 			hr {
 				display: none;
 			}
+		}
+	}
+
+	.location-upsell {
+		padding-bottom: 1em;
+
+		.warning {
+			display: block;
+			margin: 0 auto 1em;
+			height: 60px;
+			width: 60px;
+
+			.cls-1 {
+				fill: @brand-error;
+			}
+		}
+
+		h3 {
+			text-align: center;
+			margin-bottom: 1em;
+		}
+
+		button {
+			display: block;
+			margin: 0 auto;
 		}
 	}
 }

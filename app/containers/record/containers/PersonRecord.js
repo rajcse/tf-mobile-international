@@ -163,6 +163,7 @@ class PersonRecord extends Component {
 						locations={record.reportData.locations}
 						openLocation={openLocation}
 						isPremium={isPremium}
+						showPremiumUpsell={isLite && this.showPremiumUpsell}
 					/>
 
 					<CriminalRecords

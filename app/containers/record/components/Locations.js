@@ -4,6 +4,8 @@ import viewActions from 'actions/viewActions';
 import _ from 'lodash';
 import uuid from 'uuid';
 
+import PreviousLocationsUpsell from './PreviousLocationsUpsell';
+
 // Return a closure to pass to each location row
 function getLocationDetails(pointer) {
 	return () => (viewActions.fetchLocationTeaser(pointer));
@@ -13,7 +15,8 @@ const Locations = (props) => {
 	let {
 		locations,
 		isPremium,
-		openLocation
+		openLocation,
+		showPremiumUpsell
 	} = props;
 
 	locations = locations.map((location) => (
@@ -33,16 +36,37 @@ const Locations = (props) => {
 				<h4>Addresses</h4>
 			</div>
 
-			{ locations.map((location) => (
+			{ showPremiumUpsell ?
+
 				<div key={uuid.v4()}>
 					<Location
-						key={location.key}
-						location={location}
+						key={locations[0].key}
+						location={locations[0]}
 						openLocation={openLocation}
 					/>
 					<hr/>
+
+					{ (locations.length > 1) &&
+						<PreviousLocationsUpsell
+							previousLocationsCount={locations.length - 1 }
+							showPremiumUpsell={showPremiumUpsell}
+						/>
+					}
+
 				</div>
-			)) }
+
+			:
+				locations.map((location) => (
+					<div key={uuid.v4()}>
+						<Location
+							key={location.key}
+							location={location}
+							openLocation={openLocation}
+						/>
+						<hr/>
+					</div>
+				))
+			}
 		</section>
 	);
 };
@@ -50,7 +74,8 @@ const Locations = (props) => {
 Locations.propTypes = {
 	locations: React.PropTypes.array.isRequired,
 	isPremium: React.PropTypes.bool,
-	openLocation: React.PropTypes.func
+	openLocation: React.PropTypes.func,
+	showPremiumUpsell: React.PropTypes.func
 };
 
 export default Locations;
