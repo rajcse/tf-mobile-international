@@ -125,6 +125,7 @@ const CorporateFilings = (props) => {
 							<h3>Business Contacts</h3>
 							{_.map(corporateFiling.business_contacts, (contact) => {
 								let name = _.get(contact, 'names[0].display', null);
+								let businessName = _.get(contact, 'business_name', null);
 								let title = _.get(contact, 'title', null);
 								let address = _.get(contact, 'locations[0].address.display', null);
 
@@ -134,6 +135,13 @@ const CorporateFilings = (props) => {
 											<SimpleRow
 												content={name}
 												title="Name"
+											/> : null
+										}
+
+										{ businessName ?
+											<SimpleRow
+												content={businessName}
+												title="Business Name"
 											/> : null
 										}
 
@@ -187,6 +195,83 @@ const CorporateFilings = (props) => {
 												title="Filing Date"
 											/> : null
 										}
+									</div>
+								);
+							})}
+						</div> : null
+					}
+
+					{corporateFiling.corporate_stock_issues ?
+						<div className="subgroup">
+							<h3>Stock Issuance</h3>
+							{_.map(corporateFiling.corporate_stock_issues, (issuance) => {
+								let stockClass = _.get(issuance, 'stock_class', null);
+								let dollarValue = _.get(issuance, 'dollar_value', null);
+								let authorizedQuantity = _.get(issuance, 'auth_quantity', null);
+								let issuedQuantity = _.get(issuance, 'issued_quantity', null);
+								let parValue = _.get(issuance, 'par_value', null);
+								let votingRights = _.get(issuance, 'voting_rights_flag', null);
+								let stockType = _.get(issuance, 'stock_type', null);
+								let convertibleFlag = _.get(issuance, 'convertible_flag', null);
+
+								return (
+									<div key={uuid.v4()}>
+										{ stockClass ?
+											<SimpleRow
+												content={stockClass}
+												title="Stock Class"
+											/> : null
+										}
+
+										{ dollarValue ?
+											<SimpleRow
+												content={dollarValue}
+												title="Dollar Value"
+											/> : null
+										}
+
+										{ authorizedQuantity ?
+											<SimpleRow
+												content={authorizedQuantity}
+												title="Authorized Quantity"
+											/> : null
+										}
+
+										{ issuedQuantity ?
+											<SimpleRow
+												content={issuedQuantity}
+												title="Issued Quantity"
+											/> : null
+										}
+
+										{ parValue ?
+											<SimpleRow
+												content={parValue}
+												title="Par Value"
+											/> : null
+										}
+
+										{ votingRights ?
+											<SimpleRow
+												content={votingRights}
+												title="Voting Rights"
+											/> : null
+										}
+
+										{ stockType?
+											<SimpleRow
+												content={stockType}
+												title="Stock Type"
+											/> : null
+										}
+
+										{ convertibleFlag ?
+											<SimpleRow
+												content={convertibleFlag}
+												title="Convertible"
+											/> : null
+										}
+										
 									</div>
 								);
 							})}

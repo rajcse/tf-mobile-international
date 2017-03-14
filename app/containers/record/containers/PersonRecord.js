@@ -185,7 +185,7 @@ class PersonRecord extends Component {
 					{/*               Premium Sections           */}
 					{ isPremium &&
 						<div>
-							{ !_.isEmpty(record.reportData.associates) && !_.isEmpty(record.reportData.possible_associates) &&
+							{ !_.isEmpty(record.reportData.associates) || !_.isEmpty(record.reportData.possible_associates) &&
 								<Associates
 									associates={record.reportData.associates}
 									possibleAssociates={record.reportData.possible_associates}
