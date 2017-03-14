@@ -99,7 +99,6 @@ class PersonRecord extends Component {
 
 		age = libs.calculateAge(record.reportData.dobs[0], record.reportData.dods[0]);
 		deathYear = age.deathday ? null : moment(age.deathday, 'MM/DD/YYYY').year();
-
 		return (
 			<main className={`person ${isPremium ? 'premium' : ''}`}>
 				<Header title={`${record.reportData.names[0].first}'s Report`} backButton />
@@ -185,7 +184,7 @@ class PersonRecord extends Component {
 					{/*               Premium Sections           */}
 					{ isPremium &&
 						<div>
-							{ !_.isEmpty(record.reportData.associates) && !_.isEmpty(record.reportData.possible_associates) &&
+							{ (!_.isEmpty(record.reportData.associates) || !_.isEmpty(record.reportData.possible_associates)) &&
 								<Associates
 									associates={record.reportData.associates}
 									possibleAssociates={record.reportData.possible_associates}

@@ -14,7 +14,6 @@ const Associates = (props) => {
 	} = props;
 	let content = [];
 	let allAssociates = associates.concat(possibleAssociates);
-
 	allAssociates.map((associate, i) => {
 		const dob = _.head(associate.dobs);
 		const age = _.get(dob, 'date') ? calculateAge(dob) : null;
