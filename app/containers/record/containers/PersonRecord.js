@@ -22,6 +22,7 @@ import Social from '../components/Social';
 import Licenses from '../components/Licenses';
 import Businesses from '../components/Businesses';
 import CorporateFilings from '../components/CorporateFilings';
+import Trademarks from '../components/Trademarks';
 import Assets from '../components/Assets';
 import CurrentProperties from '../components/CurrentProperties';
 import Bankruptcies from '../components/Bankruptcies';
@@ -239,6 +240,10 @@ class PersonRecord extends Component {
 
 					{ isPremium && !_.isEmpty(record.reportData.tu_corporate_filings) &&
 						<CorporateFilings corporateFilings={record.reportData.tu_corporate_filings} />
+					}
+
+					{ isPremium && !_.isEmpty(record.reportData.trademarks) &&
+						<Trademarks trademarks={record.reportData.trademarks} />
 					}
 
 					<Assets
