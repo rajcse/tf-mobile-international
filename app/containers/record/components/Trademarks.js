@@ -14,7 +14,7 @@ const Trademarks = (props) => {
 				<h2 className="title">Trademarks</h2>
 				{ trademarks.map((trademark, index) => (
 					<div className="document trademark-individual" key={index}>
-						{ _.get(trademark, 'registration_number') &&
+						{ trademark.registration_number &&
 							<div className="label label-full">
 								<h3 className="document-title">Registration Number: {trademark.registration_number}</h3>
 							</div>
@@ -220,6 +220,13 @@ const Trademarks = (props) => {
 								{ trademark.events.map((event, i) => (
 									<div className="events" key={uuid.v4()}>
 
+										{ _.get(event, 'statement_date') &&
+											<SimpleRow
+												content={`${constants.months[event.statement_date.month]} ${event.statement_date.day} ${event.statement_date.year}`}
+												title="Event Date"
+											/>
+										}
+
 										{ _.get(event, 'statement_type') &&
 											<SimpleRow
 												content={event.statement_type}
@@ -234,12 +241,7 @@ const Trademarks = (props) => {
 											/>
 										}
 
-										{ _.get(event, 'statement_date') &&
-											<SimpleRow
-												content={`${constants.months[event.statement_date.month]} ${event.statement_date.day} ${event.statement_date.year}`}
-												title="Event Date"
-											/>
-										}
+										
 
 									</div>
 								))}
@@ -291,6 +293,13 @@ const Trademarks = (props) => {
 											/>
 										}
 
+										{ _.get(statement, 'primary_classification') &&
+											<SimpleRow
+												content={statement.primary_classification}
+												title="Classification"
+											/>
+										}
+
 										{ _.get(statement, 'statement_text') &&
 											<SimpleRow
 												content={statement.statement_text}
@@ -312,11 +321,89 @@ const Trademarks = (props) => {
 											/>
 										}
 
-										{ _.get(statement, 'primary_classification') &&
+									</div>
+								))}
+							</div>
+						}
+
+						{ trademark.madrid_filings &&
+							<div className="subgroup">
+								<h3>Madrid Filings</h3>
+								{ trademark.madrid_filings.map((filing, i) => (
+									<div className="madrid-filings" key={uuid.v4()}>
+
+										{ _.get(filing, 'reference_number') &&
 											<SimpleRow
-												content={statement.primary_classification}
-												title="Classification"
+												content={filing.reference_number}
+												title="Reference Number"
 											/>
+										}
+
+										{ _.get(filing, 'filing_date') &&
+											<SimpleRow
+												content={`${constants.months[filing.filing_date.month]} ${filing.filing_date.day} ${filing.filing_date.year}`}
+												title="Filing Date"
+											/>
+										}
+
+										{ _.get(filing, 'international_registration_number') &&
+											<SimpleRow
+												content={filing.international_registration_number}
+												title="International Registration Number"
+											/>
+										}
+
+										{ _.get(filing, 'international_registration_date') &&
+											<SimpleRow
+												content={`${constants.months[filing.international_registration_date.month]} ${filing.international_registration_date.day} ${filing.international_registration_date.year}`}
+												title="International Registration Date"
+											/>
+										}
+
+										{ _.get(filing, 'international_status') &&
+											<SimpleRow
+												content={filing.international_status}
+												title="International Status"
+											/>
+										}
+
+										{ _.get(filing, 'international_status_date') &&
+											<SimpleRow
+												content={`${constants.months[filing.international_status_date.month]} ${filing.international_status_date.day} ${filing.international_status_date.year}`}
+												title="International Status Date"
+											/>
+										}
+
+										{ _.get(filing, 'international_renewal_date') &&
+											<SimpleRow
+												content={`${constants.months[filing.international_renewal_date.month]} ${filing.international_renewal_date.day} ${filing.international_renewal_date.year}`}
+												title="International Renewal Date"
+											/>
+										}
+
+										{ _.get(filing, 'events') &&
+											<div className="subgroup">
+												<h3>Event(s)</h3>
+												{_.map(filing.events, (event, i) => {
+													return(
+														<div className="events" key={uuid.v4()}>
+															{ _.get(event, 'event_date') &&
+																<SimpleRow
+																	content={`${constants.months[event.event_date.month]} ${event.event_date.day} ${event.event_date.year}`}
+																	title="Date"
+																/>
+															}
+															{ _.get(event, 'description_text') &&
+																<SimpleRow
+																	content={event.description_text}
+																	title="Description"
+																/>
+															}
+
+														</div>
+													);
+												})}
+											</div>
 										}
 
 									</div>
