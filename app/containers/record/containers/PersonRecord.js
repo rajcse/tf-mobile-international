@@ -38,6 +38,7 @@ import VoterRegistrations from '../components/VoterRegistrations';
 import Accidents from '../components/Accidents';
 import SocialSecurity from '../components/SocialSecurity';
 import UccFilings from '../components/Uccfilings';
+import UccFilingsTu from '../components/UccfilingsTu';
 
 import viewActions from 'actions/viewActions';
 import StudentRecords from '../components/StudentRecords';
@@ -288,6 +289,10 @@ class PersonRecord extends Component {
 
 							{ !_.isEmpty(record.reportData.ucc_filings) &&
 								<UccFilings uccFilings={record.reportData.ucc_filings} />
+							}
+
+							{ !_.isEmpty(record.reportData.tu_ucc_filings) &&
+								<UccFilingsTu uccFilingsTu={record.reportData.tu_ucc_filings} />
 							}
 						</div>
 					}
