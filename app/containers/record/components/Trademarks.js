@@ -4,8 +4,6 @@ import constants from 'constants/pubRecConstants';
 import SimpleRow from 'components/SimpleRow';
 import uuid from 'uuid';
 
-import * as libs from 'utils/libs';
-
 const Trademarks = (props) => {
 	let { trademarks } = props;
 	return (
