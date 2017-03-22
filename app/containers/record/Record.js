@@ -99,7 +99,11 @@ export default class Record extends Component {
 	render() {
 		if(this.state.error) {
 			return (
-				<ErrorPrompt confirmError={viewActions.clearRecordError} message="There was an error loading your report, please try again" />
+				<ErrorPrompt 
+					confirmError={this.state.error.criteria ? viewActions.goToSearch(this.state.error.criteria) : viewActions.clearRecordError} 
+					message="There was an error loading your report, please try again" 
+
+				/>
 			);
 		}
 

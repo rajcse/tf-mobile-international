@@ -181,7 +181,7 @@ export default class PubRecApp extends React.Component {
 				{this.state.search.errors &&
 					<ErrorPrompt
 						message="Report Not Found"
-						confirmError={viewActions.clearSearchError}
+						confirmError={ () => { viewActions.clearSearchError(); viewActions.goToSearch(this.state.search.errors.originalCriteria); } }
 					/>
 				}
 
