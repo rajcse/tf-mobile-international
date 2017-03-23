@@ -215,9 +215,7 @@ function _makeRequest(path, options) {
 				error.responseBody
 					.then(responseData => {
 						const criteria = responseData.errors[0].criteria;
-						// console.log(criteria);
 						setTimeout(() => serverActions.depracatedRecord(criteria));
-						//return;
 					});
 			}
 
