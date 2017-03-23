@@ -239,7 +239,7 @@ export default {
 		});
 	},
 
-	depracatedRecord(record) {
+	deprecatedRecord(record) {
 		dispatcher.dispatch({
 			actionType: constants.actions.DEPRECATED_RECORD,
 			record
