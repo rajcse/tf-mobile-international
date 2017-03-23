@@ -116,6 +116,7 @@ dispatcher.register(action => {
 				_criteria[action.criteria.type].text = action.criteria.text;
 			}
 			_searching = true;
+			_deprecatedRecord = null;
 			searchStore.emitChange();
 			break;
 
