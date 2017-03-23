@@ -82,7 +82,8 @@ export default {
 		'PURCHASE_PREMIUM_BUNDLE',
 		'RECEIVE_PREMIUM_BUNDLE',
 		'CANCEL_PREMIUM_BUNDLE',
-		'USED_PREMIUM_BUNDLE'
+		'USED_PREMIUM_BUNDLE',
+		'DEPRECATED_RECORD'
 	]),
 
 	// These must match what usage-service is expecting

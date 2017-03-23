@@ -211,6 +211,16 @@ function _makeRequest(path, options) {
 				serverActions.loggedOut();
 			}
 
+			if(error.statusCode === 410) {
+				error.responseBody
+					.then(responseData => {
+						const criteria = responseData.errors[0].criteria;
+						// console.log(criteria);
+						setTimeout(() => serverActions.depracatedRecord(criteria));
+						//return;
+					});
+			}
+
 			if(error.statusCode > 400) throw error;
 
 			// Return a default object for down the line

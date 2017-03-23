@@ -100,8 +100,8 @@ export default class Record extends Component {
 		if(this.state.error) {
 			return (
 				<ErrorPrompt 
-					confirmError={this.state.error.criteria ? viewActions.goToSearch(this.state.error.criteria) : viewActions.clearRecordError} 
-					message="There was an error loading your report, please try again" 
+					confirmError={this.props.appState.search.deprecatedRecord ? () => {viewActions.goToSearch(this.props.appState.search.deprecatedRecord) } : viewActions.clearRecordError} 
+					message={this.props.appState.search.deprecatedRecord ? JSON.stringify(this.props.appState.search.deprecatedRecord) : 'There was an error loading your report, please try again' }
 
 				/>
 			);

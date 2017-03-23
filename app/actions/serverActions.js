@@ -237,5 +237,12 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.SHOW_WELCOME_MODAL
 		});
+	},
+
+	depracatedRecord(record) {
+		dispatcher.dispatch({
+			actionType: constants.actions.DEPRECATED_RECORD,
+			record
+		});
 	}
 };
