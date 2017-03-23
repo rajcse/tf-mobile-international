@@ -98,11 +98,22 @@ export default class Record extends Component {
 
 	render() {
 		if(this.state.error) {
+
+			let message = 'There was an error loading your report, please try again.';
+
+			if(this.props.appState.search.deprecatedRecord) {
+				message = 'This record has been removed. Click here to search again. ';
+				if(this.props.appState.search.deprecatedRecord.isPremium) {
+					message = message + 'A premium record has been credited to your account for this inconvenience.';
+				} else if(!this.props.appState.search.deprecatedRecord.isLite) {
+					message = message + 'A standard record has been credited to your account for this inconvenience.';
+				}
+			}
+
 			return (
 				<ErrorPrompt 
-					confirmError={this.props.appState.search.deprecatedRecord ? () => {viewActions.goToSearch(this.props.appState.search.deprecatedRecord) } : viewActions.clearRecordError} 
-					message={this.props.appState.search.deprecatedRecord ? JSON.stringify(this.props.appState.search.deprecatedRecord) : 'There was an error loading your report, please try again' }
-
+					confirmError={this.props.appState.search.deprecatedRecord ? () => {viewActions.goToSearch(this.props.appState.search.deprecatedRecord);} : viewActions.clearRecordError} 
+					message={message}
 				/>
 			);
 		}
