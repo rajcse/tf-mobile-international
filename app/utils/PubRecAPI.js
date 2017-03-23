@@ -752,14 +752,7 @@ class PubRecAPI {
 			.then(() => this.getUsage())
 			.catch(error => {
 				console.error(error);
-				if(error.statusCode == 404) {
-					console.log(JSON.stringify(error));
-					// error.criteria = 
-					setTimeout(() => serverActions.recordRequestError(error), 0);
-
-				} else {
-					setTimeout(() => serverActions.recordRequestError(error), 0);
-				}
+				setTimeout(() => serverActions.recordRequestError(error), 0);
 			});
 	}
 
