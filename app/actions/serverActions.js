@@ -237,12 +237,5 @@ export default {
 		dispatcher.dispatch({
 			actionType: constants.actions.SHOW_WELCOME_MODAL
 		});
-	},
-
-	deprecatedRecord(record) {
-		dispatcher.dispatch({
-			actionType: constants.actions.DEPRECATED_RECORD,
-			record
-		});
 	}
 };

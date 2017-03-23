@@ -7,7 +7,6 @@ const CHANGE_EVENT = 'change';
 let _results = defaultResults(),
 	_criteria = defaultCriteria(),
 	_searching = false,
-	_deprecatedRecord = null,
 	_searchErrors = null;
 
 function defaultResults() {
@@ -58,10 +57,6 @@ class SearchStore extends EventEmitter {
 
 	getCriteria() {
 		return _criteria;
-	}
-
-	getDeprecatedRecord() {
-		return _deprecatedRecord;
 	}
 
 	isSearching() {
@@ -116,7 +111,6 @@ dispatcher.register(action => {
 				_criteria[action.criteria.type].text = action.criteria.text;
 			}
 			_searching = true;
-			_deprecatedRecord = null;
 			searchStore.emitChange();
 			break;
 
@@ -132,11 +126,6 @@ dispatcher.register(action => {
 		case constants.actions.RECEIVE_SEARCH_RESULTS:
 			_searching = false;
 			_results[action.type] = action.results;
-			searchStore.emitChange();
-			break;
-
-		case constants.actions.DEPRECATED_RECORD:
-			_deprecatedRecord = action.record;
 			searchStore.emitChange();
 			break;
 

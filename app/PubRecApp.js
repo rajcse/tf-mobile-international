@@ -40,7 +40,6 @@ export default class PubRecApp extends React.Component {
 
 		this.state = {
 			search: {
-				deprecatedRecord: searchStore.getDeprecatedRecord(),
 				results: searchStore.getAllResults(),
 				searching: searchStore.isSearching(),
 				criteria: searchStore.getCriteria(),
@@ -90,7 +89,6 @@ export default class PubRecApp extends React.Component {
 	onResultsChange() {
 		this.setState({
 			search: {
-				deprecatedRecord: searchStore.getDeprecatedRecord(),
 				results: searchStore.getAllResults(),
 				searching: searchStore.isSearching(),
 				criteria: searchStore.getCriteria(),

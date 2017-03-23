@@ -211,14 +211,6 @@ function _makeRequest(path, options) {
 				serverActions.loggedOut();
 			}
 
-			if(error.statusCode === 410) {
-				error.responseBody
-					.then(responseData => {
-						const criteria = responseData.errors[0].criteria;
-						setTimeout(() => serverActions.deprecatedRecord(criteria));
-					});
-			}
-
 			if(error.statusCode > 400) throw error;
 
 			// Return a default object for down the line
@@ -750,7 +742,19 @@ class PubRecAPI {
 			.then(() => this.getUsage())
 			.catch(error => {
 				console.error(error);
-				setTimeout(() => serverActions.recordRequestError(error), 0);
+
+				if(error.statusCode === 410) {
+					error.responseBody
+						.then(responseData => {
+
+							const criteria = responseData.errors[0].criteria;
+							error.criteria = criteria;
+							setTimeout(() => serverActions.recordRequestError(error), 0);
+
+	//						error.criteria);
+						});
+				}
+	//			setTimeout(() => serverActions.recordRequestError(error), 0);
 			});
 	}
 
