@@ -746,15 +746,13 @@ class PubRecAPI {
 				if(error.statusCode === 410) {
 					error.responseBody
 						.then(responseData => {
-
 							const criteria = responseData.errors[0].criteria;
 							error.criteria = criteria;
 							setTimeout(() => serverActions.recordRequestError(error), 0);
-
-	//						error.criteria);
 						});
+				} else {
+					setTimeout(() => serverActions.recordRequestError(error), 0);
 				}
-	//			setTimeout(() => serverActions.recordRequestError(error), 0);
 			});
 	}
 
