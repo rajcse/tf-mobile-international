@@ -102,11 +102,11 @@ export default class Record extends Component {
 			let message = 'There was an error loading your report, please try again.';
 
 			if(this.props.appState.search.deprecatedRecord) {
-				message = 'This record has been removed. Click here to search again. ';
+				message = 'We were unable to locate this report in our database. It may have been removed or taken down by request. Click OK to conduct a new search for this person.  A NEW report could be available. ';
 				if(this.props.appState.search.deprecatedRecord.isPremium) {
-					message = message + 'A premium record has been credited to your account for this inconvenience.';
+					message = message + '1 premium report has been credited to your account for the inconvenience.';
 				} else if(!this.props.appState.search.deprecatedRecord.isLite) {
-					message = message + 'A standard record has been credited to your account for this inconvenience.';
+					message = message + '1 pro report has been credited to your account for the inconvenience.';
 				}
 			}
 
