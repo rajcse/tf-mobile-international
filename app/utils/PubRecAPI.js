@@ -742,7 +742,17 @@ class PubRecAPI {
 			.then(() => this.getUsage())
 			.catch(error => {
 				console.error(error);
-				setTimeout(() => serverActions.recordRequestError(error), 0);
+
+				if(error.statusCode === 410) {
+					error.responseBody
+						.then(responseData => {
+							const criteria = responseData.errors[0].criteria;
+							error.criteria = criteria;
+							setTimeout(() => serverActions.recordRequestError(error), 0);
+						});
+				} else {
+					setTimeout(() => serverActions.recordRequestError(error), 0);
+				}
 			});
 	}
 
