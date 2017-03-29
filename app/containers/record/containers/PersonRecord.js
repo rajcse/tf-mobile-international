@@ -11,21 +11,17 @@ import firebaseClient from 'utils/firebaseClient';
 import * as libs from 'utils/libs';
 
 import RecordHeader from '../components/RecordHeader';
-import PremiumUpsellHeader from '../components/PremiumUpsellHeader';
-import PremiumUpsellFooter from '../components/PremiumUpsellFooter';
-import FeedbackFooter from '../components/FeedbackFooter';
-import CriminalRecords from '../components/CriminalRecords';
 import Personal from '../components/Personal';
 import Contact from '../components/Contact';
 import Locations from '../components/Locations';
 import Social from '../components/Social';
 import Licenses from '../components/Licenses';
-import Businesses from '../components/Businesses';
+// import Businesses from '../components/Businesses';
 import CorporateFilings from '../components/CorporateFilings';
 import Trademarks from '../components/Trademarks';
-import Assets from '../components/Assets';
+// import Assets from '../components/Assets';
 import CurrentProperties from '../components/CurrentProperties';
-import Bankruptcies from '../components/Bankruptcies';
+// import Bankruptcies from '../components/Bankruptcies';
 import LiensJudgments from '../components/LiensJudgments';
 import Liens from '../components/Liens';
 import Judgments from '../components/Judgments';
@@ -87,12 +83,10 @@ class PersonRecord extends Component {
 	render() {
 		let {
 			record,
-			openLocation,
-			openCrime
+			openLocation
 		} = this.props;
 
 		let	isPremium = _.get(record.data, 'isPremium', false),
-			isLite = _.get(record.data, 'isLite', false),
 			age = null,
 			deathYear = null,
 			location = '';
@@ -114,10 +108,6 @@ class PersonRecord extends Component {
 					atLeave={{ opacity: 0 }}
 					atActive={{ opacity: 1 }}
 				>
-					{/* Premium Upsell Sticky Header */}
-					{ !isPremium &&
-						<PremiumUpsellHeader showPremiumUpsell={this.showPremiumUpsell} />
-					}
 
 					<RecordHeader
 						name={record.reportData.names[0].display}
@@ -164,14 +154,7 @@ class PersonRecord extends Component {
 						locations={record.reportData.locations}
 						openLocation={openLocation}
 						isPremium={isPremium}
-						showPremiumUpsell={isLite && this.showPremiumUpsell}
-					/>
-
-					<CriminalRecords
-						name={record.reportData.names[0].first}
-						filteredCrimes={record.reportData.filteredCriminalRecords}
-						openCrime={openCrime}
-						showStandardUpsell={isLite && this.showUpsell}
+						showPremiumUpsell={false}
 					/>
 
 					{ !_.isEmpty(record.reportData.sources) &&
@@ -232,12 +215,12 @@ class PersonRecord extends Component {
 						<Accidents accidents={record.reportData.accidents} />
 					}
 
-					<Businesses
+					{/*<Businesses
 						businesses={record.reportData.corporate_affiliations}
 						name={record.reportData.names[0].display}
 						isPremium={isPremium}
 						showPremiumUpsell={this.showPremiumUpsell}
-					/>
+					/>*/}
 
 					{ isPremium && !_.isEmpty(record.reportData.tu_corporate_filings) &&
 						<CorporateFilings corporateFilings={record.reportData.tu_corporate_filings} />
@@ -247,23 +230,24 @@ class PersonRecord extends Component {
 						<Trademarks trademarks={record.reportData.trademarks} />
 					}
 
-					<Assets
+					{/*<Assets
 						assets={record.reportData.properties}
 						name={record.reportData.names[0].display}
 						isPremium={isPremium}
 						showPremiumUpsell={this.showPremiumUpsell}
-					/>
+					/>*/}
 
 					{ isPremium && !_.isEmpty(record.reportData.current_properties) &&
 						<CurrentProperties currentProperties={record.reportData.current_properties} />
 					}
-
+					
+					{/*
 					<Bankruptcies
 						bankruptcies={record.reportData.bankruptcies}
 						name={record.reportData.names[0].display}
 						isPremium={isPremium}
 						showPremiumUpsell={this.showPremiumUpsell}
-					/>
+					/>*/}
 
 					{ isPremium &&
 						<div>
@@ -297,19 +281,6 @@ class PersonRecord extends Component {
 						</div>
 					}
 
-					{ !isPremium &&
-						<PremiumUpsellFooter
-							showPremiumUpsell={this.showPremiumUpsell}
-							record={record}
-						/>
-					}
-
-					{
-						isPremium &&
-						<FeedbackFooter
-							record={record}
-						/>	
-					}
 				</RouteTransition>
 			</main>
 		);

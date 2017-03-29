@@ -101,16 +101,6 @@ export default class Record extends Component {
 
 			let message = 'There was an error loading your report, please try again.';
 
-			if(this.state.error.criteria) {
-				message = 'We were unable to locate this report in our database. It may have been removed or taken down by request.\
-				Click OK to conduct a new search for this person.  A NEW report could be available. ';
-				if(this.state.error.criteria.isPremium) {
-					message = message + '1 premium report credit has been added to your account for the inconvenience.';
-				} else if(!this.state.error.criteria.isLite) {
-					message = message + '1 pro report credit has been added to your account for the inconvenience.';
-				}
-			}
-
 			return (
 				<ErrorPrompt 
 					confirmError={this.state.error.criteria ? () => {viewActions.goToSearch(this.state.error.criteria); viewActions.clearRecordError; } : viewActions.clearRecordError} 

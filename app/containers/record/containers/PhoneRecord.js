@@ -6,8 +6,8 @@ import Contact from '../components/Contact';
 import Locations from '../components/Locations';
 import Social from '../components/Social';
 import RecordHeader from '../components/RecordHeader';
-import constants from 'constants/pubRecConstants';
-import SearchLink from 'components/SearchLink';
+// import constants from 'constants/pubRecConstants';
+// import SearchLink from 'components/SearchLink';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -28,7 +28,7 @@ class PhoneRecord extends Component {
 					let location = _.has(reportData,'locations[0].address.city') ?
 						`${reportData.locations[0].address.city}, ${reportData.locations[0].address.state_code}`
 						: null;
-					let state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
+					//let state = _.has(reportData,'locations[0].address.state') ? reportData.locations[0].address.state_code : 'ALL';
 
 					age = libs.calculateAge(reportData.dobs[0], reportData.dods[0]);
 
@@ -85,7 +85,7 @@ class PhoneRecord extends Component {
 								/> : null
 							}
 
-							{ _.get(reportData.names[0], 'first') ?
+							{ /*_.get(reportData.names[0], 'first') ?
 								<section id="crossSell" className="widget">
 									<SearchLink
 										criteria={{
@@ -100,7 +100,7 @@ class PhoneRecord extends Component {
 										classes="btn btn-upgrade">View Person Report
 									</SearchLink>
 								</section>
-							: null }
+							: null */}
 						</div>
 					);
 				}

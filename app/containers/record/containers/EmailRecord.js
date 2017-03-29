@@ -10,8 +10,8 @@ import Contact from '../components/Contact';
 import Locations from '../components/Locations';
 import Social from '../components/Social';
 import RecordHeader from '../components/RecordHeader';
-import constants from 'constants/pubRecConstants';
-import SearchLink from 'components/SearchLink';
+// import constants from 'constants/pubRecConstants';
+// import SearchLink from 'components/SearchLink';
 
 class EmailRecord extends Component {
 	render() {
@@ -20,8 +20,8 @@ class EmailRecord extends Component {
 			age = null,
 			deathYear = null,
 			name = '',
-			location = _.has(record.reportData,'locations[0].address.city') ? `${record.reportData.locations[0].address.city}, ${record.reportData.locations[0].address.state_code}` : null,
-			state = _.has(record.reportData,'locations[0].address.state') ? record.reportData.locations[0].address.state_code : 'ALL';
+			location = _.has(record.reportData,'locations[0].address.city') ? `${record.reportData.locations[0].address.city}, ${record.reportData.locations[0].address.state_code}` : null;
+			// state = _.has(record.reportData,'locations[0].address.state') ? record.reportData.locations[0].address.state_code : 'ALL';
 
 		age = libs.calculateAge(record.reportData.dobs[0], record.reportData.dods[0]);
 
@@ -85,7 +85,7 @@ class EmailRecord extends Component {
 						isPremium={isPremium}
 					/> : null
 				}
-				{name ?
+				{/*name ?
 					<section id="crossSell" className="widget">
 						<SearchLink
 							criteria={{
@@ -100,7 +100,7 @@ class EmailRecord extends Component {
 							classes="btn btn-upgrade">View Person Report
 						</SearchLink>
 					</section>
-				: null}
+				: null*/}
 			</main>
 		);
 	}
