@@ -4,8 +4,8 @@ import Svg from 'components/svg/Svg';
 import moment from 'moment';
 import { RouteTransition } from 'react-router-transition';
 import Header from 'components/Header';
-import pubRecAPI from 'utils/PubRecAPI';
-import firebaseClient from 'utils/firebaseClient';
+// import pubRecAPI from 'utils/PubRecAPI';
+// import firebaseClient from 'utils/firebaseClient';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -36,7 +36,7 @@ import SocialSecurity from '../components/SocialSecurity';
 import UccFilings from '../components/Uccfilings';
 import UccFilingsTu from '../components/UccfilingsTu';
 
-import viewActions from 'actions/viewActions';
+// import viewActions from 'actions/viewActions';
 import StudentRecords from '../components/StudentRecords';
 
 class PersonRecord extends Component {
@@ -52,7 +52,7 @@ class PersonRecord extends Component {
 	}
 
 	componentWillMount() {
-		if(this.props.appState.userHasRated 
+/*		if(this.props.appState.userHasRated 
 			&& !_.get(this.props.record.data, 'isPremium', false)
 			&& !this.props.appState.userSeenTimedUpsell) { 
 			setTimeout(pubRecAPI.fetchPremiumUpsellInfo(this.props.record, true), 3000);
@@ -64,20 +64,21 @@ class PersonRecord extends Component {
 					upsell: response
 				});
 				firebaseClient.setUserProperty('upsell', response);
-			});
+			});*/
 	}
 
 	showPremiumUpsell() {
-		viewActions.showPremiumUpsell(this.props.record);
+		//viewActions.showPremiumUpsell(this.props.record);
 	}
 
 	showUpsell() {
+		/*
 		if (this.state.upsell == 'premium') {
 			viewActions.showPremiumUpsell(this.props.record);
 		} else {
 			viewActions.showStandardUpsell(this.props.record);
 			viewActions.showPremiumUpsell(this.props.record);
-		}
+		}*/
 	}
 
 	render() {

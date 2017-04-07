@@ -16,7 +16,7 @@ import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
 import RatingsPrompt from 'components/RatingsPrompt';
-import Onboarding from 'components/Onboarding';
+// import Onboarding from 'components/Onboarding';
 import NotificationPrompt from 'components/NotificationPrompt';
 import firebaseClient from 'utils/firebaseClient';
 
@@ -193,9 +193,9 @@ export default class PubRecApp extends React.Component {
 				}
 
 				{ // Welcome modal that has a message set by Remote Config
-					this.state.welcomeModal &&
+					/*this.state.welcomeModal &&
 						<Onboarding />
-				}
+				*/}
 
 				{ !!this.state.notifications.length &&
 					<NotificationPrompt notifications={_.takeRight(this.state.notifications, 4)} />

@@ -588,6 +588,7 @@ class PubRecAPI {
 
 		return _makeRequest('/' + constants.recordEndpoints[criteria.type], {query: criteria.query, needsAuth: true})
 			.then(responseData => {
+				console.log(responseData.results);
 				setTimeout(() => serverActions.receiveSearchResults(responseData.results, criteria.type), 0);
 			})
 			.catch(error => {

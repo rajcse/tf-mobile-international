@@ -3,6 +3,7 @@ import _ from 'lodash';
 import uuid from 'uuid';
 import constants from 'constants/pubRecConstants';
 import TeaserLink from 'components/TeaserLink';
+import config from 'config';
 
 // Global Functions File
 import * as libs from 'utils/libs';
@@ -40,7 +41,9 @@ const PersonTeaserRow = (props) => {
 				<h3><span className="name">{props.names[0].first} {props.names[0].middle ? props.names[0].middle : null} {props.names[0].last}</span>
 					{ _.isNull(age.display) ? '' : <span className="age">{age.display} yr</span> }
 				</h3>
-				<h4>{ props.locations.length > 1 ? 'Locations' : 'Location' }</h4>
+				{ props.locations.length ?
+					<h4>{ props.locations.length > 1 ? 'Locations' : 'Location' }</h4>
+				: null }
 				<p className="location">{locations}</p>
 
 				{ props.related_persons.length ?
@@ -49,6 +52,13 @@ const PersonTeaserRow = (props) => {
 						<p className="location">{relatives}</p>
 					</div>
 				: null }
+
+				{ props.images &&
+					<div>
+						<h4>Blurred Image</h4>
+						<img src={ `${config.API_ROOT}/data/image/${props.images[0].thumbnail_token}` } />
+					</div>
+				}
 			</TeaserLink>
 		</li>
 	);
@@ -59,6 +69,7 @@ PersonTeaserRow.propTypes = {
 	related_persons: React.PropTypes.array,
 	dobs: React.PropTypes.array,
 	dods: React.PropTypes.array,
+	images: React.PropTypes.array,
 	names: React.PropTypes.array
 };
 

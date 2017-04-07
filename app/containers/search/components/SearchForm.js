@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import viewActions from 'actions/viewActions';
 import {STATES} from 'utils/states';
+import {COUNTRIES} from 'utils/countries';
 import PillSelector from 'components/PillSelector';
 
 function _formatPhone(phone) {
@@ -38,15 +39,18 @@ export default class SearchForm extends React.Component {
 
 		this.state = {
 			error: null,
-			fullStateNames: false
+			fullStateNames: false,
+			fullCountryNames: false
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleStateSelectorChange = this.handleStateSelectorChange.bind(this);
+		this.handleCountrySelectorChange = this.handleCountrySelectorChange.bind(this);
 		this.handlePhoneKeyPress = this.handlePhoneKeyPress.bind(this);
 		this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
 		this.doSearch = this.doSearch.bind(this);
 		this.showFullStateNames = this.showFullStateNames.bind(this);
+		this.showFullCountryNames = this.showFullCountryNames.bind(this);
 	}
 
 	handleInputChange(e) {
@@ -68,6 +72,17 @@ export default class SearchForm extends React.Component {
 		// Reset the error until they try to submit again
 		this.setState({
 			fullStateNames: false,
+			error: null
+		});
+	}
+
+	handleCountrySelectorChange(e) {
+		// Focus on button to reset state toggle
+		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
+
+		// Reset the error until they try to submit again
+		this.setState({
+			fullCountryNames: false,
 			error: null
 		});
 	}
@@ -95,6 +110,12 @@ export default class SearchForm extends React.Component {
 		});
 	}
 
+	showFullCountryNames() {
+		this.setState({
+			fullCountryNames: true
+		});
+	}
+
 	doSearch(e) {
 		e.preventDefault();
 
@@ -119,7 +140,12 @@ export default class SearchForm extends React.Component {
 				middleInitial = this.props.criteria[constants.recordTypes.PERSON].middleInitial.trim();
 				lastName = this.props.criteria[constants.recordTypes.PERSON].lastName.trim();
 				city = _.has(this.props.criteria[constants.recordTypes.PERSON],'city') ? this.props.criteria[constants.recordTypes.PERSON].city.trim() : '';
-				search.query = {firstName: firstName, middleInitial: middleInitial,lastName: lastName, state: this.props.criteria[constants.recordTypes.PERSON].state, city: city};
+				search.query = {firstName: firstName, 
+					middleInitial: middleInitial,
+					lastName: lastName,
+					state: this.props.criteria[constants.recordTypes.PERSON].state, 
+					city: city, 
+					country: this.props.criteria[constants.recordTypes.PERSON].country};
 				break;
 
 			case constants.recordTypes.PHONE:
@@ -202,6 +228,24 @@ export default class SearchForm extends React.Component {
 							{ _.map(STATES, (state, index) => {
 								return (<option key={index} value={index}>
 									{ this.state.fullStateNames ? state : index}
+								</option>);
+							}) }
+						</select>
+					</div>
+				</div>
+				<div className="row">
+					<div className="controls">
+						<label>Country</label>
+						<select
+							name="country"
+							disabled={this.props.searching}
+							defaultValue={this.props.criteria[constants.recordTypes.PERSON].country || 'ALL'}
+							onFocus={this.showFullCountryNames}
+							onChange={this.handleCountrySelectorChange}
+						>
+							{ _.map(COUNTRIES, (country, index) => {
+								return (<option key={index} value={index}>
+									{ this.state.fullCountryNames ? country : index}
 								</option>);
 							}) }
 						</select>
