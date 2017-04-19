@@ -357,7 +357,7 @@ class PubRecAPI {
 
 		return firebaseClient.getConfigValue('signup_sku')
 			.then(signupSku => {
-				if(signupSku) credentials.signupSku = signupSku;
+				//if(signupSku) credentials.signupSku = signupSku;
 
 				return _makeRequest('/register', {method: 'POST', body: credentials});
 			})
