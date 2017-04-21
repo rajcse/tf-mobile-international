@@ -1,23 +1,23 @@
 import React from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
 
-import config from 'config';
+// import config from 'config';
 import viewActions from 'actions/viewActions';
 import userStore from 'stores/userStore';
 import searchStore from 'stores/searchStore';
 
 import Navigation from 'components/Navigation';
 import Register from 'containers/register/Register';
-import FunnelFrame from 'components/FunnelFrame';
-import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
-import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
-import PremiumBundlePrompt from 'components/PremiumBundlePrompt';
-import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
-import PaymentPrompt from 'components/PaymentPrompt';
+// import FunnelFrame from 'components/FunnelFrame';
+// import PremiumUpsellPrompt from 'components/PremiumUpsellPrompt';
+// import PremiumUpsellFunnel from 'components/PremiumUpsellFunnel';
+// import PremiumBundlePrompt from 'components/PremiumBundlePrompt';
+// import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
+// import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
-import RatingsPrompt from 'components/RatingsPrompt';
+// import RatingsPrompt from 'components/RatingsPrompt';
 // import Onboarding from 'components/Onboarding';
-import NotificationPrompt from 'components/NotificationPrompt';
+// import NotificationPrompt from 'components/NotificationPrompt';
 import firebaseClient from 'utils/firebaseClient';
 
 export default class PubRecApp extends React.Component {
@@ -133,7 +133,7 @@ export default class PubRecApp extends React.Component {
 					appState: this.state
 				}) }
 
-				{ this.state.premiumBundle && !this.state.purchaseErrors && !this.state.premiumBundleUsed &&
+				{ /* {this.state.premiumBundle && !this.state.purchaseErrors && !this.state.premiumBundleUsed &&
 					<PremiumBundlePrompt
 						premiumBundle={this.state.premiumBundle}
 					/>
@@ -177,7 +177,8 @@ export default class PubRecApp extends React.Component {
 						}
 					/>
 				}
-
+				*/
+				}
 				{this.state.search.errors &&
 					<ErrorPrompt
 						message="Report Not Found"
@@ -185,6 +186,7 @@ export default class PubRecApp extends React.Component {
 					/>
 				}
 
+				{/*
 				{ // pop up the ratings modal when reports looked at is 5 and user has not rated before
 					(this.state.recordsViewed === 5 || this.state.recordsViewed === 15) && !this.state.userHasRated &&
 						<RatingsPrompt
@@ -195,12 +197,13 @@ export default class PubRecApp extends React.Component {
 				{ // Welcome modal that has a message set by Remote Config
 					/*this.state.welcomeModal &&
 						<Onboarding />
-				*/}
+				}
 
 				{ !!this.state.notifications.length &&
 					<NotificationPrompt notifications={_.takeRight(this.state.notifications, 4)} />
 				}
-
+				*/
+				}
 				<Navigation />
 			</div>
 		);
