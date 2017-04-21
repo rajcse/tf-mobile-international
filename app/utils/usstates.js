@@ -1,4 +1,4 @@
-export const STATES = {
+export const USSTATES = {
 	'ALL': 'All States',
 	'AL': 'Alabama',
 	'AK': 'Alaska',
@@ -51,24 +51,5 @@ export const STATES = {
 	'WA': 'Washington',
 	'WV': 'West Virginia',
 	'WI': 'Wisconsin',
-	'WY': 'Wyoming',
-	'AB': 'Alberta',
-	'BC': 'British Columbia',
-	'MB': 'Manitoba',
-	'NB': 'New Brunswick',
-	'NL': 'Newfoundland and Labrador',
-	'NS': 'Nova Scotia',
-	'NT': 'Northwest Territories',
-	'NU': 'Nunavut',
-	'ON': 'Ontario',
-	'PE': 'Prince Edward Island',
-	'QC': 'Quebec',
-	'SK': 'Saskatchewan',
-	'YT': 'Yukon',
-	'NSW': 'New South Wales',
-	'QLD': 'Queensland',
-	'SA': 'South Australia',
-	'TAS': 'Tasmania',
-	'VIC': 'Victoria'//,
-	//'WA': 'Western Australia'
+	'WY': 'Wyoming'
 };

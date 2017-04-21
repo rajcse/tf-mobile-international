@@ -2,7 +2,9 @@ import constants from 'constants/pubRecConstants';
 import _ from 'lodash';
 import React from 'react';
 import viewActions from 'actions/viewActions';
-import {STATES} from 'utils/states';
+import {CASTATES} from 'utils/castates';
+import {USSTATES} from 'utils/usstates';
+import {AUSTATES} from 'utils/austates';
 import {COUNTRIES} from 'utils/countries';
 import PillSelector from 'components/PillSelector';
 
@@ -40,7 +42,8 @@ export default class SearchForm extends React.Component {
 		this.state = {
 			error: null,
 			fullStateNames: false,
-			fullCountryNames: false
+			fullCountryNames: false,
+			states: null
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -80,9 +83,19 @@ export default class SearchForm extends React.Component {
 		// Focus on button to reset state toggle
 		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
 
+		let newStates;
+		if(e.target.value == 'CA'){
+			newStates = CASTATES;
+		} else if (e.target.value == 'USA'){
+			newStates = USSTATES;
+		} else if(e.target.value == 'AU'){
+			newStates = AUSTATES;
+		}
+
 		// Reset the error until they try to submit again
 		this.setState({
 			fullCountryNames: false,
+			states:newStates,
 			error: null
 		});
 	}
@@ -215,7 +228,7 @@ export default class SearchForm extends React.Component {
 							name="city"
 						/>
 					</div>
-
+					{this.state.states && 
 					<div className="controls">
 						<label>State</label>
 						<select
@@ -225,13 +238,14 @@ export default class SearchForm extends React.Component {
 							onFocus={this.showFullStateNames}
 							onChange={this.handleStateSelectorChange}
 						>
-							{ _.map(STATES, (state, index) => {
+							{ _.map(this.state.states, (state, index) => {
 								return (<option key={index} value={index}>
 									{ this.state.fullStateNames ? state : index}
 								</option>);
 							}) }
 						</select>
 					</div>
+					}
 				</div>
 				<div className="row">
 					<div className="controls">

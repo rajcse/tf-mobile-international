@@ -165,31 +165,5 @@ export default {
 		12: 'December'
 	},
 
-	reportLoaderTeasers : [
-		'Did you know that Premium Reports may contain homes that a person owns?',
-		'Did you know that every citizen of Kentucky is required by law to take a bath once a year?',
-		'Short changed Uncle Sam? Liens may show up in an upgraded premium report',
-		'Republican or democrat? Possible voter registration may be available in a premium report',
-		'Scroll through possible business associations',
-		'Possible associates — you could find people that your search subject may have shared a residential or business address with!',
-		'Are they related to a criminal? Check out relatives reports when you upgrade to a premium report!',
-		'Is that REALLY his boat? Or is it his parent’s? Find possible watercraft ownership on a premium report!',
-		'Is your blind date a Democrat? If you bleed red, you’ll want to search for their voter registration on a premium report.',
-		'Are you committed to the vegan lifestyle? Find out if your next date has a hunting license with a premium report!',
-		'How many times has she filed for bankruptcy? The debt of your fiancee will soon be yours — search for the truth with a premium report. ',
-		'What was your cringeworthy email address from middle school? Find email addresses from your past on a premium report!',
-		'How financially secure is your partner?  Bankruptcy? Judgements? Find out before you tie the knot!',
-		'How much is your bragging friend’s home REALLY worth?',
-		'Steer clear of financial losers with possible bankruptcy, lien, judgment, and foreclosure info in a premium report.',
-		'13% of Americans own their own business. Discover available business affiliations by upgrading to a premium report.',
-		'Approximately 1 out of every 144 licensed drivers in the United States have a DUI.  Do you know someone who is one of them?',
-		'Is he really a doctor?  Or just trying to score? Our premium reports reveal potential professional licenses.',
-		'Pull a premium report on your favorite politician and you could find billions in real estate holdings, relatives, and a slew of recent lawsuits.',
-		'Trying to find hidden assets in a divorce?  Premium reports may reveal a secret goldmine.',
-		'Are they a four-year graduate … or a total liar? You could find out where they really went to college with a premium report.',
-		'33% of people lie about their academic degree on resumes. Find out their real alma mater!',
-		'Who are they shacking up with? Discover related associates with a premium report!',
-		'Are you related to any jailbirds? A premium report could reveal arrest records for family and known associates. Upgrade today!',
-		'11.1 million Americans have permits to carry concealed weapons. You could find out if they have a concealed weapons permit with a premium report!'
-	]
+	reportLoaderTeasers : []
 };
