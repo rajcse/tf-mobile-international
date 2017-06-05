@@ -79,11 +79,13 @@ export default class Support extends React.Component {
 						</button>
 					</form>
 				}
+				{/*
 				<h4>Contact Us By Phone:</h4>
 				<p>
 					If you'd like to speak with one of our Member Care representatives they will be happy to assist you 24/7. Give them a call.
 				</p>
 				<a href="tel:18006998081">(800) 699-8081</a>
+				*/}
 			</div>
 		);
 	}

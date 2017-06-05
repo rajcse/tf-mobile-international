@@ -89,9 +89,10 @@ export default class Reset extends Component {
 					</Transition>
 
 					<label>Enter the email address associated with your account, and we’ll email you a link to reset your password.</label>
+					{/*
 					<p>If you no longer have access to the email account you signed up with, 
 						contact our Member Care line for help restoring your TruthFinder account access: <a href="tel:18006998081">(800) 699-8081</a></p>
-
+					*/}
 					<input
 						type="email"
 						placeholder="Email Address"

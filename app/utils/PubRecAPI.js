@@ -407,7 +407,7 @@ class PubRecAPI {
 			})
 			.catch(error => {
 				if (error.statusCode === 409) {
-					setTimeout(() => serverActions.registerFailed('The email address you entered is already in use, please try another one or call member care at (800) 699-8081'), 0);
+					setTimeout(() => serverActions.registerFailed('The email address you entered is already in use, please try another one'), 0);
 				} else {
 					setTimeout(() => serverActions.registerFailed('Unknown error occured'), 0);
 				}
