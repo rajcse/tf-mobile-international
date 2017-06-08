@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1010717001" ios-CFBundleVersion="1.7.17" id="com.truthfinder-int.app" version="1.7.17" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>TruthFinder</name>
+<widget android-versionCode="1010717001" id="com.truthfinder_int.app" ios-CFBundleVersion="1.7.17" version="1.7.17" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>TruthFinder International</name>
     <description>
         TruthFinder Background Check
     </description>
@@ -12,24 +12,6 @@
     <preference name="android-minSdkVersion" value="19" />
     <preference name="Orientation" value="portrait" />
     <preference name="deployment-target" value="8.0" />
-    <plugin name="cordova-plugin-app-version" source="npm" spec="~0.1.9" />
-    <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
-    <plugin name="cordova-plugin-device-motion" source="npm" spec="~1.2.0" />
-    <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
-    <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
-    <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
-    <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
-    <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
-    <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
-    <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-<!--     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-        <variable name="APP_ID" value="1682932698592804" />
-        <variable name="APP_NAME" value="TruthFinder" />
-    </plugin> -->
-<!--     <plugin name="cc.fovea.cordova.purchase" source="npm" spec="~6.0.0">
-        <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngvlFjgwZ4FCpLchqsogG5/lKmyYF7xEVqBKTKFAop4rjrgQ4dOcxL0qvWpZlPJlwQ1OOOwCRSmPsaJ172OmBHo4wffZTbF82z8aEt3FO4Xs4S7M8WL2yXpsRo1NEiRpKDrDi7hpBkt5ZqBsTr6KlkUMiWqSkur9QAWwF0iU/Bhy/royJdiG9R9QhgfF752cYX4rMMHNcvuF5yid9Y/MCk6m7kyo6ufCxlQRubZuY77yvm+LJDOIjwUkvDGDlAgBNmWCSkgz+QRIIjcI2/NCRgrz7iJJo6xYOyDupaLr0CdmQw5TSqvlJkl5YWUivSJKBNtXN/gewkqIAMUPNahDFwIDAQAB" />
-    </plugin> -->
-	<plugin name="cordova-plugin-firebase" spec="~0.1.18" />
     <icon src="www/img/icon.png" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -86,6 +68,17 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="~4.3.0" />
-    <engine name="android" spec="~6.1.0" />
+    <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
+    <plugin name="cordova-plugin-device" spec="~1.1.1" />
+    <plugin name="cordova-plugin-device-motion" spec="~1.2.0" />
+    <plugin name="cordova-plugin-dialogs" spec="~1.2.0" />
+    <plugin name="cordova-plugin-firebase" spec="~0.1.18" />
+    <plugin name="cordova-plugin-globalization" spec="~1.0.3" />
+    <plugin name="cordova-plugin-network-information" spec="~1.2.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
+    <plugin name="cordova-plugin-vibration" spec="~2.1.0" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.2.1" />
 </widget>
