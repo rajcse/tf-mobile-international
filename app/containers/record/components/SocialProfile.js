@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import Svg from 'components/svg/Svg';
 import config from 'config';
 
@@ -10,90 +9,106 @@ class SocialProfile extends Component {
 		super(props);
 
 		this.state = {
-			showTags: false,
-			initialCount: 5,
-			hiddenImage: false
+			hiddenImage: false,
+			expanded: false
 		};
 
-		this.showMore = this.showMore.bind(this);
-		this.showLess = this.showLess.bind(this);
+		this.handleError = this.handleError.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
-	showMore() {
-		this.setState({
-			initialCount: this.props.social.tags.length,
-			showTags: true
-		});
-	}
-
-	showLess() {
-		this.setState({
-			initialCount: 5,
-			showTags: false
-		});
-	}
-
-	// Remove photos that don't load
+	// remove photos that don't load
 	handleError() {
 		this.setState({
 			hiddenImage: true
 		});
 	}
 
+	// toggle the expanded state for the profile
+	handleClick() {
+		this.setState({
+			expanded: !this.state.expanded
+		});
+	}
+
 	render() {
-		let {
-			social
-		} = this.props;
-
-		let {
-			initialCount,
-			showTags,
-			hiddenImage
-		} = this.state;
-
-		let initialTags = _.slice(social.tags, 0, initialCount);
-		let difference = (!_.isNull(social.tags) ? social.tags.length : 0) - initialCount;
+		let { social } = this.props,
+			{ hiddenImage, expanded } = this.state,
+			hasAuxiliaryInfo = social['@origin_url'] || !_.isEmpty(social.tags); // check if we have URLs or tags
 
 		return (
-			<div className="simple-inline row">
-				<div className="inline social-thumbnail">
-					{ social.images && !hiddenImage ?
-						<img onError={this.handleError.bind(this)} src={`${config.API_ROOT}/data/image/${social.images[0].thumbnail_token}`} />
-						: <Svg svg="userAccount" style={{width: 17}} /> }
-				</div>
+			<div className={['outer row', expanded ? 'expanded' : ''].join(' ')}>
+				<div className="profile-header simple-inline row" onClick={this.handleClick}>
+					{/**
+					 * -------------------------------------------
+					 * Render a profile picture if we have one
+					 * -------------------------------------------
+					 */}
 
-				<div className="inline">
-					<p><strong>{social.name}</strong><br/>/&nbsp;
-						{ social['@origin_url'] ?
-							<Link to={social['@origin_url']}>
-								{_.has(social, 'usernames[0].content') ?
-									<span>{social.usernames[0].content}</span>
-									: <span>{social.name}</span> }
-							</Link>
-						: null }
-					</p>
-				</div>
-
-				{ !_.isEmpty(social.tags) ?
-					<div>
-						<ul className="tags">
-							{ _.map( initialTags, (tag, key) => {
-								return (<li key={key}>
-									{ _.truncate(tag.content, (
-										'length': 48
-									)) }
-								</li>);
-							}) }
-						</ul>
-						{ difference > 0 ?
-							<button onClick={this.showMore} className="btn btn-link">Show More ({difference})</button>
-						: null }
-
-						{ showTags ?
-							<button onClick={this.showLess} className="btn btn-link">Show Less</button>
-						: null }
+					<div className="inline social-thumbnail">
+						{ social.images && !hiddenImage ?
+							<img onError={this.handleError} src={`${config.API_ROOT}/data/image/${social.images[0].thumbnail_token}`} />
+							: <Svg svg="userAccount" className="generic-user-icon" /> }
 					</div>
-				: null }
+
+					{/**
+					 * -------------------------------------------
+					 * Render a username if we have one
+					 * -------------------------------------------
+					 */}
+
+					<div className="inline">
+						<p><strong>{social.name}</strong>
+							{ social['@origin_url'] && _.has(social, 'usernames[0].content') &&
+								<span><br />/<span>{social.usernames[0].content}</span></span>
+							}
+						</p>
+					</div>
+
+					{hasAuxiliaryInfo && <Svg svg="caretRight" className="caret" />}
+				</div>
+
+				{/**
+				 * -------------------------------------------
+				 * Render auxiliary information like
+				 * tags and links
+				 * -------------------------------------------
+				 */}
+
+				{ hasAuxiliaryInfo &&
+					<div className="auxiliary-info">
+						{/* Tags ------------- */}
+						{ !_.isEmpty(social.tags) &&
+							<div>
+								<div className="label">
+									<h4>Tags</h4>
+								</div>
+
+								<ul className="tags">
+									{ social.tags.map((tag, i) => {
+										if(tag.content) return <li key={i}>{_.truncate(tag.content, { length: 40 })}</li>;
+									}) }
+								</ul>
+							</div>
+						}
+
+						{/* Links ------------- */}
+						{ social['@origin_url'] &&
+							<div>
+								<div className="label">
+									<h4>Link</h4>
+								</div>
+
+								<a href={social['@origin_url']}>
+									{ _.has(social, 'usernames[0].content') ?
+										<span>{social.usernames[0].content}</span>
+										: <span>{social.name}</span>
+									}
+								</a>
+							</div>
+						}
+					</div>
+				}
 			</div>
 		);
 	}

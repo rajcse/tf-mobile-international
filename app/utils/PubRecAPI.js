@@ -326,27 +326,27 @@ class PubRecAPI {
 
 	register(credentials) {
 		// Validate full name entry
-		if(!credentials.first_name || !credentials.last_name) {
+		if(!credentials.first_name || !credentials.last_name && !credentials.facebookToken) {
 			return serverActions.registerFailed('Please enter your full name');
 		}
 
 		// Validate email and password
-		if(!credentials.email || !credentials.password) {
+		if(!credentials.email || !credentials.password && !credentials.facebookToken) {
 			return serverActions.registerFailed('Please enter your email and a password');
 		}
 
 		// Very basic email validation
-		if(!/@.+\..+/.test(credentials.email)) {
+		if(!/@.+\..+/.test(credentials.email) && !credentials.facebookToken) {
 			return serverActions.registerFailed('Please enter a valid email');
 		}
 
 		// Passwords must match
-		if(credentials.password !== credentials.confirmPassword) {
+		if(credentials.password !== credentials.confirmPassword && !credentials.facebookToken) {
 			return serverActions.registerFailed('Your passwords do not match');
 		}
 
 		// Passwords must be 6 characters
-		if(credentials.password.length < 6) {
+		if(_.get(credentials,'password.length') < 6 && !credentials.facebookToken) {
 			return serverActions.registerFailed('Your password must be at least 6 characters long');
 		}
 
@@ -417,7 +417,7 @@ class PubRecAPI {
 
 	login(credentials) {
 		// Validate credentials first
-		if(!credentials.email || !credentials.password) {
+		if(!credentials.email || !credentials.password && !credentials.facebookToken) {
 			return serverActions.loginFailed('Please enter your email and password');
 		}
 
@@ -588,7 +588,6 @@ class PubRecAPI {
 
 		return _makeRequest('/' + constants.recordEndpoints[criteria.type], {query: criteria.query, needsAuth: true})
 			.then(responseData => {
-				console.log(responseData.results);
 				setTimeout(() => serverActions.receiveSearchResults(responseData.results, criteria.type), 0);
 			})
 			.catch(error => {
@@ -623,7 +622,7 @@ class PubRecAPI {
 					return serverActions.redirectToRecord(user.id, cachedRecordId.recordId);
 				} else {
 					// This simply announces the record was created
-					return serverActions.receiveRecordId(user.id, cachedRecordId.recordId);
+					return serverActions.receiveRecordId(cachedRecordId.recordId, recordType);
 				}
 			}
 		}
@@ -649,7 +648,7 @@ class PubRecAPI {
 					setTimeout(() => serverActions.redirectToRecord(user.id, responseData.recordId), 0);
 				} else {
 					// This simply announces the record was created
-					setTimeout(() => serverActions.receiveRecordId(user.id, responseData.recordId), 0);
+					setTimeout(() => serverActions.receiveRecordId(responseData.recordId, recordType), 0);
 				}
 
 				return responseData.recordId;
