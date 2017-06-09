@@ -46,6 +46,17 @@
 	}
 }
 
+.close-icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	position: absolute;
+	top: 0px;
+	right: 0;
+	font-size: 35px;
+	font-weight: 300;
+}
+
 .walkthrough-text {
 	font-size: 13px;
 	margin: 0 0 0.5em !important;
@@ -365,6 +376,12 @@
 		flex: 1 100%;
 		border-top-left-radius: @input-border-radius;
 		border-top-right-radius: @input-border-radius;
+		position: relative;
+
+		.close-icon {
+			top: 12px;
+			right: 10px;
+		}
 	}
 
 	.sub-title {
@@ -509,6 +526,27 @@
 				li {
 					margin: 0 0 0.25em;
 				}
+			}
+		}
+	}
+
+	&.upsell {
+		h3 {
+			text-align: center;
+			&.alert {
+				color:@brand-error;
+				margin-bottom:15px;
+			}
+		}
+
+		.warning {
+			display: block;
+			margin: 0 auto 1em;
+			height: 60px;
+			width: 60px;
+
+			.cls-1 {
+				fill: @brand-error;
 			}
 		}
 	}
@@ -739,6 +777,13 @@
 			font-size: 14px;
 		}
 
+		h3 {
+			margin-bottom:15px;
+			&.alert {
+				color:@brand-error;
+			}
+		}
+
 		ul {
 			list-style: none;
 			margin-left: 20px;
@@ -754,6 +799,17 @@
 					position: absolute;
 					left: 0;
 				}
+			}
+		}
+
+		.warning {
+			display: block;
+			margin: 0 auto 1em;
+			height: 60px;
+			width: 60px;
+
+			.cls-1 {
+				fill: @brand-error;
 			}
 		}
 	}
@@ -1125,6 +1181,32 @@
 		-ms-filter: blur(10px);
 	}
 
+	.caret svg {
+		height: 12px;
+		width: 12px;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		margin-top: -6px;
+
+		path {
+			fill: @brand-blue;
+		}
+	}
+
+	.external-link {
+		height: 14px;
+		width: 14px;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		margin-top: -8px;
+
+		path {
+			fill: @brand-blue;
+		}
+	}
+
 	p {
 		margin: 0;
 	}
@@ -1133,16 +1215,25 @@
 		margin: 0;
 		padding: 0;
 
+		&.simple {
+			list-style: none;
+
+			li {
+				margin: 0 0 10px;
+				font-weight: 600;
+				line-height: 1.3em;
+			}
+		}
+
 		&.tags {
 			li {
 				display: inline-block;
 				background: #EDEDED;
 				border-radius: 3px;
 				font-size: 0.75em;
-				/* 12/16 */
 				padding: 0.25em 0.5em;
 				position: relative;
-				margin: 0.25em;
+				margin: 0.25em 0.5em 0.25em 0;
 				text-decoration: none;
 				text-overflow: ellipsis;
 				overflow: hidden;
@@ -1153,48 +1244,114 @@
 		&.links {
 			li {
 				font-weight: bold;
-				padding: 0 1.5em 0 1.5em;
+				margin: 0;
 				display: block;
 				position: relative;
+				border-bottom: 1px solid #ccc;
 
-				.link-icon {
-					width: 16px;
-					height: 8px;
-					position: absolute;
-					left: 0;
+				a {
+					display: block;
+					line-height: 2.6em;
+				}
+
+				&:last-child {
+					border: none;
 				}
 			}
 		}
 	}
 	// Social Section
 	#social {
-		.social-thumbnail {
-			border-radius: 50%;
-			overflow: hidden;
-			width: 45px;
-			height: 45px;
-			margin-bottom: 10px;
-			margin-top: 10px;
-			margin-right: 15px;
-			background: #E6E6E6;
-			padding: 0;
-			text-align: center;
+		.outer {
+			margin-bottom: 1em;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			box-sizing: border-box;
+			padding: 5px 0 5px 1.5em;
 
-			svg {
-				width: 17px;
-				position: relative;
-				top: 30%;
-			}
+			&.expanded {
+				.auxiliary-info {
+					max-height: 5000px;
+					transition: 0.15s ease-in;
+					margin: 5px 0 10px;
+					padding-top: 5px;
+					border-color: #ccc;
+				}
 
-			img {
-				width: 100%;
+				.caret svg {
+					transform: rotate(-90deg);
+				}
 			}
 		}
 
-		.tags {
-			.btn {
-				font-size: 0.75em;
-				/* 12/16 */
+		.fancy {
+			.auxiliary-info {
+				padding-right: 1em;
+				box-sizing: border-box;
+			}
+		}
+
+		.profile-header {
+			align-items: center;
+			flex-wrap: nowrap;
+
+			.social-thumbnail {
+				border-radius: 50%;
+				width: 45px;
+				height: 45px;
+				margin-bottom: 10px;
+				margin-top: 10px;
+				margin-right: 15px;
+				padding: 0;
+				text-align: center;
+
+				.generic-user-icon {
+					background: #E6E6E6;
+					width: 45px;
+					height: 45px;
+					display: block;
+					border-radius: 50%;
+
+					svg {
+						width: 17px;
+						position: relative;
+						top: 30%;
+					}
+				}
+
+				img {
+					width: 100%;
+					border-radius: 50%;
+				}
+			}
+
+			.caret svg {
+				transform: rotate(90deg);
+				transition: 0.1s linear all;
+			}
+		}
+
+		.auxiliary-info {
+			max-height: 0;
+			overflow: hidden;
+			transition: 0.15s ease-out;
+			width: 100%;
+			border-top: 1px solid transparent;
+			margin: 0;
+			padding-top: 0;
+
+			.label {
+				margin: 6px 0 0;
+			}
+
+			a {
+				font-weight: 600;
+			}
+
+			.tags {
+				.btn {
+					font-size: 0.75em;
+				}
 			}
 		}
 	}
@@ -1499,6 +1656,20 @@ li {
 		margin: 0;
 		font-weight: 600;
 	}
+
+	.premium-count {
+		opacity: 0;
+		background-color: lighten(@brand-error, 30%);
+		padding: 3px 8px;
+		margin-left: 5px;
+		border-radius: 1000px;
+		transition: background-color 150ms;
+
+		&.show {
+			opacity: 1;
+			background-color: @brand-error;
+		}
+	}
 }
 
 .btn-feedback {
@@ -1514,5 +1685,125 @@ li {
 }
 
 .yes {
-	float:right;
+	float: right;
+}
+
+/**
+ * Location record
+ */
+
+#location-record {
+	#location-map {
+		.static-map {
+			position: relative;
+
+			img {
+				max-width: 100%;
+				width: auto;
+			}
+
+			svg {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -40px;
+				margin-left: -20px;
+				z-index: 1000;
+				height: 40px;
+				width: 40px;
+			}
+		}
+
+		p {
+			margin: 0.5em 0;
+		}
+	}
+
+	#location-interactive-map {
+		position: fixed;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    margin: 0;
+	    padding: 0;
+	    z-index: 100000;
+
+		.top-controls {
+			position: relative;
+			z-index: 10;
+
+		    .title {
+		    	margin: 0;
+		    	border-radius: 0;
+		    }
+
+		    .filters {
+		    	padding: 0.8em 1em;
+		    	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+		    	position: relative;
+		    	z-index: 1;
+		    	background: #fff;
+		    }
+		}
+
+	    .card {
+			padding: 1em;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 10;
+			background: fade(#fff, 95%);
+			margin: 0.6em;
+			box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.15);
+			border-radius: 3px;
+
+			&.sex-offender {
+				background: fade(#ED5858, 95%);
+				color: #fff;
+			}
+
+			.close-icon {
+				top: 5px;
+				right: 10px;
+			}
+
+			button {
+				margin-bottom: 0;
+				background: #fff;
+
+				&:focus {
+					background: @brand-blue;
+					color: #fff;
+				}
+			}
+	    }
+
+	    #map {
+	    	height: 100%;
+	    	width: 100%;
+	    	position: absolute;
+	    	top: 0;
+
+	    	.marker {
+	    		path {
+	    			fill: #3E3E3E;
+	    		}
+
+	    		circle {
+	    			fill: @brand-blue;
+	    		}
+
+	    		&.sex-offender circle {
+					fill: #ED5858;
+	    		}
+
+	    		&.selected circle {
+					stroke: #fff;
+					stroke-width: 3px;
+	    		}
+	    	}
+	    }
+	}
 }

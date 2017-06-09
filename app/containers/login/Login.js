@@ -5,6 +5,7 @@ import viewActions from 'actions/viewActions';
 import Loader from 'components/Loader';
 import Svg from 'components/svg/Svg';
 import userStore from 'stores/userStore';
+import facebookClient from '../../utils/facebookClient';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -62,6 +63,12 @@ export default class Login extends Component {
 		});
 	}
 
+	doFacebook(e) {
+		e.preventDefault();
+
+		facebookClient.login();
+	}
+
 	handleChange(e) {
 		let change = {};
 		change[e.target.name] = e.target.value;
@@ -108,6 +115,12 @@ export default class Login extends Component {
 					</button>
 					{this.state.loggingIn ? <Loader /> : null}
 				</form>
+				<p id="facebook-login">
+					<button disabled={this.state.loggingIn} type="submit" onClick={this.doFacebook}>
+						<Svg svg="facebook" />
+						Login With Facebook
+					</button>
+				</p>
 				<p id="not-a-member">
 					<Link to="/">Create a new account!</Link>
 				</p>

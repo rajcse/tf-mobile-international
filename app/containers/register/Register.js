@@ -4,6 +4,7 @@ import Transition from 'components/Transition';
 import viewActions from 'actions/viewActions';
 import Loader from 'components/Loader';
 import Svg from 'components/svg/Svg';
+import facebookClient from '../../utils/facebookClient';
 
 export default class Register extends Component {
 	constructor(props) {
@@ -52,6 +53,12 @@ export default class Register extends Component {
 			password: this.state.password,
 			confirmPassword: this.state.confirmPassword
 		});
+	}
+
+	doFacebook(e) {
+		e.preventDefault();
+
+		facebookClient.register();
 	}
 
 	handleChange(e) {
@@ -122,6 +129,12 @@ export default class Register extends Component {
 					{this.props.registering ? <Loader /> : null}
 
 				</form>
+				<p id="facebook-login">
+					<button disabled={this.props.registering} type="submit" onClick={this.doFacebook}>
+						<Svg svg="facebook" />
+						{this.props.registering ? 'Registering...' : 'Sign Up With Facebook'}
+					</button>
+				</p>
 				<p id="already-a-member">
 					<Link to="/login">Already a member? Log in here!</Link>
 				</p>

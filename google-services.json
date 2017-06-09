@@ -1,27 +1,28 @@
+
 {
   "project_info": {
-    "project_number": "822453628267",
-    "firebase_url": "https://truthfinder-1ff0a.firebaseio.com",
-    "project_id": "truthfinder-1ff0a",
-    "storage_bucket": "truthfinder-1ff0a.appspot.com"
+    "project_number": "394009994706",
+    "firebase_url": "https://truthfinder-international.firebaseio.com",
+    "project_id": "truthfinder-international",
+    "storage_bucket": "truthfinder-international.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:822453628267:android:ee56b79706217299",
+        "mobilesdk_app_id": "1:394009994706:android:c75e4afd7db39e76",
         "android_client_info": {
-          "package_name": "com.truthfinder.app"
+          "package_name": "com.truthfinder_int.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "822453628267-p8toh0qrc4khnb9rfpl5vrn3p6qogv7g.apps.googleusercontent.com",
+          "client_id": "394009994706-h6vqr47bc3p59c9n0irphu35sc15t5gs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBCJVipdiuJQbzLbke8nOL_bzoCGMZNWeo"
+          "current_key": "AIzaSyAAamEzK5Gvk9flIDPRWGKsYANd2rIpZpk"
         }
       ],
       "services": {
