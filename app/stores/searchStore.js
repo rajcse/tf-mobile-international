@@ -30,6 +30,7 @@ function defaultCriteria() {
 		firstName: '',
 		middleInitial: '',
 		lastName: '',
+		city: '',
 		state: 'ALL'
 	};
 

@@ -14,7 +14,7 @@ export default class PillSelector extends Component {
 	render() {
 		let pillWidth = 100/this.props.items.length,
 			pills = this.props.items.map(item => (
-				<li key={this.props.name + '-' + item.value} style={{width: pillWidth + '%'}}>
+				<li key={this.props.name + '-' + item.value} style={{width: (item.width ? item.width : pillWidth) + '%'}}>
 					<input
 						checked={this.props.value === item.value}
 						type="radio"
@@ -39,7 +39,8 @@ export default class PillSelector extends Component {
 PillSelector.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string.isRequired,
-		value: PropTypes.string.isRequired
+		value: PropTypes.string.isRequired,
+		width: PropTypes.number
 	})).isRequired,
 	name: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,

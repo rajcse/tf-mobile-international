@@ -164,7 +164,7 @@ class PersonRecord extends Component {
 							accounts={record.reportData.sources}
 							links={record.reportData.urls}
 							usernames={record.reportData.usernames}
-						/>
+						/> 
 					}
 
 					{/*               Premium Sections           */}
