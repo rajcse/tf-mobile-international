@@ -58,7 +58,7 @@ export default class SearchForm extends React.Component {
 
 	handleInputChange(e) {
 		// Format the phone number
-		if(this.props.criteria.type === constants.recordTypes.PHONE) e.target.value = _formatPhone(e.target.value);
+		//if(this.props.criteria.type === constants.recordTypes.PHONE) e.target.value = _formatPhone(e.target.value);
 
 		viewActions.updateSearchCriteria({field: e.target.name, value: e.target.value});
 
@@ -109,7 +109,7 @@ export default class SearchForm extends React.Component {
 		if (!(e.which >= 48 && e.which <= 57)) return e.preventDefault();
 
 		// Ten numbers only
-		if (e.target.value.replace(/[^0-9]/g, '').length >= 10) return e.preventDefault();
+		if (e.target.value.replace(/[^0-9]/g, '').length >= 15) return e.preventDefault();
 	}
 
 	handleSearchTypeChange(searchType) {
@@ -163,7 +163,7 @@ export default class SearchForm extends React.Component {
 
 			case constants.recordTypes.PHONE:
 				phoneNumber = this.props.criteria[constants.recordTypes.PHONE].text.replace(/[^0-9]/g, '');
-				if(phoneNumber.length !== 10) return this.setState({error: true});
+				if(phoneNumber.length < 7) return this.setState({error: true});
 				search.query = {phone: phoneNumber};
 				break;
 
@@ -276,7 +276,6 @@ export default class SearchForm extends React.Component {
 					<label>{this.state.error ? <span className="error-message">Please enter a valid phone number</span> : 'Phone Number'}</label>
 					<input
 						type="tel"
-						placeholder="(555) 555-5555"
 						value={this.props.criteria[constants.recordTypes.PHONE].text}
 						onChange={this.handleInputChange}
 						onKeyPress={this.handlePhoneKeyPress}
