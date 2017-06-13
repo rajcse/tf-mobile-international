@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1010718001" id="com.truthfinder_int.app" ios-CFBundleVersion="1.7.18" version="1.7.18" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1010719001" id="com.truthfinder_int.app" ios-CFBundleVersion="1.7.19" version="1.7.19" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TruthFinder International</name>
     <description>
         TruthFinder Background Check
