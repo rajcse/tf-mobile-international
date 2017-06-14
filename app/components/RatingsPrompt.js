@@ -61,7 +61,7 @@ export default class RatingsPrompt extends Component {
 		viewActions.markUserAsRated();
 
 		//REDIRECT HERE
-		window.open('market://details?id=com.truthfinder.app', '_system');
+		window.open('market://details?id=com.truthfinder_int.app', '_system');
 
 		firebaseClient.logEvent('ratings_prompt_response', {prompt_question: this.state.message2, prompt_response: 'YES!'});
 	}

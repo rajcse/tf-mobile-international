@@ -1,5 +1,5 @@
 import React from 'react';
-// import _ from 'lodash';
+import _ from 'lodash';
 
 // import config from 'config';
 import viewActions from 'actions/viewActions';
@@ -15,9 +15,9 @@ import Register from 'containers/register/Register';
 // import StandardUpsellPrompt from 'components/StandardUpsellPrompt';
 // import PaymentPrompt from 'components/PaymentPrompt';
 import ErrorPrompt from 'components/ErrorPrompt';
-// import RatingsPrompt from 'components/RatingsPrompt';
+import RatingsPrompt from 'components/RatingsPrompt';
 // import Onboarding from 'components/Onboarding';
-// import NotificationPrompt from 'components/NotificationPrompt';
+import NotificationPrompt from 'components/NotificationPrompt';
 import firebaseClient from 'utils/firebaseClient';
 
 export default class PubRecApp extends React.Component {
@@ -186,24 +186,25 @@ export default class PubRecApp extends React.Component {
 					/>
 				}
 
-				{/*
 				{ // pop up the ratings modal when reports looked at is 5 and user has not rated before
-					(this.state.recordsViewed === 5 || this.state.recordsViewed === 15) && !this.state.userHasRated &&
+					(this.state.recordsViewed === 8 || this.state.recordsViewed === 15) && !this.state.userHasRated &&
 						<RatingsPrompt
 							message="How are you liking our app?"
 						/>
 				}
-
+				
+				{/*
 				{ // Welcome modal that has a message set by Remote Config
 					/*this.state.welcomeModal &&
 						<Onboarding />
 				}
-
+				
+				*/}
+				
 				{ !!this.state.notifications.length &&
 					<NotificationPrompt notifications={_.takeRight(this.state.notifications, 4)} />
 				}
-				*/
-				}
+				
 				<Navigation />
 			</div>
 		);

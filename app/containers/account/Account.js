@@ -124,9 +124,6 @@ export default class Support extends Component {
 
 							<dt>Email Reports</dt>
 							<dd>{emailBalance}</dd>
-
-							<dt>Premium Reports</dt>
-							<dd>{premiumBalance}</dd>
 						</dl>
 
 						{!defaultPaymentOption ?

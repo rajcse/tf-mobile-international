@@ -8,32 +8,32 @@ import {AUSTATES} from 'utils/austates';
 import {COUNTRIES} from 'utils/countries';
 import PillSelector from 'components/PillSelector';
 
-function _formatPhone(phone) {
+// function _formatPhone(phone) {
 
-	let numValue = phone.replace(/[^0-9]/g, '').substr(-10),
-		numGroups = numValue.match(/([0-9]{0,3}){1}([0-9]{0,3})?([0-9]{0,4})?/),
-		formattedPhone = '';
+// 	let numValue = phone.replace(/[^0-9]/g, '').substr(-10),
+// 		numGroups = numValue.match(/([0-9]{0,3}){1}([0-9]{0,3})?([0-9]{0,4})?/),
+// 		formattedPhone = '';
 
-	if(numGroups[1]) formattedPhone = '(' + numGroups[1];
+// 	if(numGroups[1]) formattedPhone = '(' + numGroups[1];
 
-	if(numGroups[1].length === 3 && numGroups[2]) {
-		formattedPhone += ') ';
-	}
+// 	if(numGroups[1].length === 3 && numGroups[2]) {
+// 		formattedPhone += ') ';
+// 	}
 
-	if(numGroups[2]) {
-		formattedPhone += numGroups[2];
+// 	if(numGroups[2]) {
+// 		formattedPhone += numGroups[2];
 
-		if(numGroups[2].length === 3 && numGroups[3]) {
-			formattedPhone += '-';
-		}
-	}
+// 		if(numGroups[2].length === 3 && numGroups[3]) {
+// 			formattedPhone += '-';
+// 		}
+// 	}
 
-	if(numGroups[3]) {
-		formattedPhone += numGroups[3];
-	}
+// 	if(numGroups[3]) {
+// 		formattedPhone += numGroups[3];
+// 	}
 
-	return formattedPhone;
-}
+// 	return formattedPhone;
+// }
 
 export default class SearchForm extends React.Component {
 	constructor(props) {
