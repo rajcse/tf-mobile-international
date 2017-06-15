@@ -63,7 +63,7 @@ export default class Support extends Component {
 	}
 
 	render() {
-		let premiumBalance,
+		let //premiumBalance,
 			personBalance,
 			phoneBalance,
 			emailBalance,
@@ -73,7 +73,7 @@ export default class Support extends Component {
 			personBalance = this.state.accountInfo.balances.person_report === null ? 'Unlimited' : this.state.accountInfo.balances.person_report + ' credits';
 			phoneBalance = this.state.accountInfo.balances.phone_report === null ? 'Unlimited' : this.state.accountInfo.balances.phone_report + ' credits';
 			emailBalance = this.state.accountInfo.balances.email_report === null ? 'Unlimited' : this.state.accountInfo.balances.email_report + ' credits';
-			premiumBalance = this.state.accountInfo.balances.premium_person_report === null ? 'Unlimited' : this.state.accountInfo.balances.premium_person_report + ' credits';
+			//premiumBalance = this.state.accountInfo.balances.premium_person_report === null ? 'Unlimited' : this.state.accountInfo.balances.premium_person_report + ' credits';
 
 			// There's a tiny chance this will not be present in the event of accounts service error
 			if(this.state.accountInfo.payment_options) {
@@ -86,7 +86,7 @@ export default class Support extends Component {
 			personBalance = <Loader />;
 			phoneBalance = <Loader />;
 			emailBalance = <Loader />;
-			premiumBalance = <Loader />;
+			//premiumBalance = <Loader />;
 		}
 
 		return (
